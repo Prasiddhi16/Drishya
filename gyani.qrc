@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>gyani.jpg</file>
+    </qresource>
+</RCC>
