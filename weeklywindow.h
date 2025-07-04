@@ -21,6 +21,11 @@ public:
 
 private:
     Ui::weeklyWindow *ui;
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    void windowClosed();
 };
 
 #endif // WEEKLYWINDOW_H

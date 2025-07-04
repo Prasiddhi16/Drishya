@@ -101,11 +101,13 @@ signWindow::~signWindow()
         qDebug() << "Insert successful";
         QSqlDatabase::database().commit();
         QMessageBox::information(this, "Success", "User registered successfully!");
+        this->hide();
+        wel_window = new welWindow(this);
+        wel_window->show();
     }
 
     DB_connection.close();
-    wel_window = new welWindow(this);
-    wel_window->show();
+
 }
 
 

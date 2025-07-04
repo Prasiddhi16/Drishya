@@ -36,3 +36,8 @@ revWindow::~revWindow()
 {
     delete ui;
 }
+void revWindow::closeEvent(QCloseEvent* event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
+}

@@ -21,6 +21,11 @@ public:
 
 private:
     Ui::revWindow *ui;
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    void windowClosed();
 };
 
 #endif // REVWINDOW_H

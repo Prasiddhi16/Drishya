@@ -53,7 +53,6 @@ public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
     QLabel *label_2;
-    QGridLayout *gridLayout_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -185,7 +184,7 @@ public:
         verticalLayout_6->addWidget(frame);
 
 
-        gridLayout->addLayout(verticalLayout_6, 2, 1, 1, 1);
+        gridLayout->addLayout(verticalLayout_6, 2, 0, 1, 1);
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName("verticalLayout_4");
@@ -247,7 +246,7 @@ public:
         verticalLayout_4->addWidget(pushButton_4);
 
 
-        gridLayout->addLayout(verticalLayout_4, 2, 2, 1, 1);
+        gridLayout->addLayout(verticalLayout_4, 2, 1, 1, 1);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
@@ -266,12 +265,7 @@ public:
         verticalLayout->addWidget(label_2);
 
 
-        gridLayout->addLayout(verticalLayout, 0, 1, 1, 2);
-
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName("gridLayout_3");
-
-        gridLayout->addLayout(gridLayout_3, 2, 0, 1, 1);
+        gridLayout->addLayout(verticalLayout, 0, 0, 1, 2);
 
         analysisWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(analysisWindow);

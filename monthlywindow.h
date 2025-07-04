@@ -22,6 +22,11 @@ public:
 
 private:
     Ui::monthlyWindow *ui;
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    void windowClosed();
 };
 
 #endif // MONTHLYWINDOW_H

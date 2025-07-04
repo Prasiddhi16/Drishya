@@ -54,3 +54,8 @@ monthlyWindow::~monthlyWindow()
 {
     delete ui;
 }
+void monthlyWindow::closeEvent(QCloseEvent* event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
+}

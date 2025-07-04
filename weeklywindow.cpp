@@ -52,3 +52,8 @@ weeklyWindow::~weeklyWindow()
 {
     delete ui;
 }
+void weeklyWindow::closeEvent(QCloseEvent* event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
+}

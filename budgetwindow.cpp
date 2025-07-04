@@ -6,9 +6,17 @@ budgetWindow::budgetWindow(QWidget *parent)
     , ui(new Ui::budgetWindow)
 {
     ui->setupUi(this);
+
 }
 
 budgetWindow::~budgetWindow()
 {
+
     delete ui;
+}
+
+void budgetWindow::closeEvent(QCloseEvent* event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
 }

@@ -17,6 +17,12 @@ public:
 
 private:
     Ui::budgetWindow *ui;
+
+protected:
+    void closeEvent(QCloseEvent* event) override;
+
+signals:
+    void windowClosed();
 };
 
 #endif // BUDGETWINDOW_H

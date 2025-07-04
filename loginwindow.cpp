@@ -103,82 +103,16 @@ void loginWindow::on_pushButton_clicked()
             }
 
             QMessageBox::information(this, "Login", "Login successful!");
-            homeWindow *home_window = new homeWindow(this);
+            homeWindow *home_window = new homeWindow();
             home_window->show();
-            this->close();
+            this->hide();
         } else {
             QMessageBox::warning(this, "Login Failed", "Please check your email and password.");
         }
-    }
-   /* if (UserFindCount == 1) {
-        QMessageBox::information(this, "Login", "Login successful!");
-    } else {
-        QMessageBox::warning(this, "Login Failed", "Please check your email and password.");
-    }
-void loginWindow::on_checkBox_clicked()
 
-{
-
-    QString Email = ui->lineEdit->text();
-    int UserFindCount = 0;
-    if (UserFindCount == 1) {
-        // Update keep_logged_in if checkbox is checked
-        bool keepLoggedIn = ui->checkBox->isChecked();
-
-        QSqlQuery update(DBconnection);
-        update.prep
     }
 
 
-are("UPDATE user SET keep_logged_in = :keep WHERE email = :email");
-        update.bindValue(":keep", keepLoggedIn ? 1 : 0);
-        update.bindValue(":email", Email);
-        //update.exec();
-
-        QMessageBox::information(this, "Login", "Login successful!");
-
-        // Load main window here
-        homeWindow *home_window = new homeWindow();
-        home_window->show();
-        this->close();
-    }
-
-
-}
-
-
-void loginWindow::on_checkBox_stateChanged(int state)
-{
-    if (state == Qt::Checked) {
-        qDebug() << "Checkbox is checked.";
-    } else {
-        qDebug() << "Checkbox is not checked.";
-    }
-
-    QString Email = ui->lineEdit->text();
-    int UserFindCount = 0;
-    if (UserFindCount == 1) {
-        // Update keep_logged_in if checkbox is checked
-        bool keepLoggedIn = ui->checkBox->isChecked();
-
-        QSqlQuery update(DBconnection);
-        update.prepare("UPDATE user SET keep_logged_in = :keep WHERE email = :email");
-        update.bindValue(":keep", keepLoggedIn ? 1 : 0);
-        update.bindValue(":email", Email);
-        update.exec();
-        if (!update.exec()) {
-            qDebug() << "Update failed:" << update.lastError().text();
-        }
-
-
-        QMessageBox::information(this, "Login", "Login successful!");
-
-        // Load main window here
-        homeWindow *home_window = new homeWindow();
-        home_window->show();
-        this->close();
-    }
-*/
 
 
 
