@@ -27,16 +27,17 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QSpacerItem *verticalSpacer_2;
     QPushButton *pushButton_2;
-    QLabel *label;
-    QSpacerItem *verticalSpacer_4;
-    QLabel *label_2;
+    QSpacerItem *verticalSpacer;
     QPushButton *login_win;
     QSpacerItem *verticalSpacer_5;
-    QSpacerItem *verticalSpacer;
+    QLabel *label;
     QLabel *label_3;
+    QSpacerItem *verticalSpacer_2;
+    QLabel *label_2;
+    QSpacerItem *verticalSpacer_4;
     QSpacerItem *verticalSpacer_7;
+    QSpacerItem *verticalSpacer_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -66,67 +67,76 @@ public:
         centralwidget->setObjectName("centralwidget");
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName("gridLayout");
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_2, 20, 0, 1, 3);
-
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName("pushButton_2");
 
         gridLayout->addWidget(pushButton_2, 19, 0, 1, 1);
 
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
-        gridLayout->addWidget(label, 9, 0, 1, 5);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_4, 1, 2, 1, 1);
-
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
-        QPalette palette1;
-        palette1.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Text, brush1);
-        palette1.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Text, brush1);
-        label_2->setPalette(palette1);
-        label_2->setTextFormat(Qt::TextFormat::RichText);
-
-        gridLayout->addWidget(label_2, 14, 1, 1, 3, Qt::AlignmentFlag::AlignHCenter);
+        gridLayout->addItem(verticalSpacer, 16, 0, 1, 3);
 
         login_win = new QPushButton(centralwidget);
         login_win->setObjectName("login_win");
-        QPalette palette2;
-        palette2.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Button, brush);
-        palette2.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Button, brush);
-        palette2.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Button, brush);
-        login_win->setPalette(palette2);
+        QPalette palette1;
+        palette1.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Button, brush);
+        palette1.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Button, brush);
+        palette1.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Button, brush);
+        login_win->setPalette(palette1);
 
         gridLayout->addWidget(login_win, 19, 4, 1, 1);
 
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
-        gridLayout->addItem(verticalSpacer_5, 11, 0, 1, 3);
+        gridLayout->addItem(verticalSpacer_5, 10, 1, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+        label->setStyleSheet(QString::fromUtf8("font: 50pt \"Segoe UI\";"));
 
-        gridLayout->addItem(verticalSpacer, 16, 0, 1, 3);
+        gridLayout->addWidget(label, 9, 0, 1, 5);
 
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName("label_3");
-        label_3->setMaximumSize(QSize(300, 180));
-        label_3->setBaseSize(QSize(200, 100));
-        label_3->setFrameShape(QFrame::Shape::Box);
-        label_3->setPixmap(QPixmap(QString::fromUtf8(":/aarttha.jpg")));
+        label_3->setMinimumSize(QSize(100, 180));
+        label_3->setMaximumSize(QSize(300, 230));
+        label_3->setPixmap(QPixmap(QString::fromUtf8(":/n/logo.png")));
         label_3->setScaledContents(true);
 
         gridLayout->addWidget(label_3, 12, 2, 1, 1);
 
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_2, 20, 0, 1, 3);
+
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+        QPalette palette2;
+        palette2.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Text, brush1);
+        palette2.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Text, brush1);
+        label_2->setPalette(palette2);
+        label_2->setTextFormat(Qt::TextFormat::RichText);
+
+        gridLayout->addWidget(label_2, 14, 1, 1, 3, Qt::AlignmentFlag::AlignHCenter);
+
+        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_4, 1, 2, 1, 1);
+
         verticalSpacer_7 = new QSpacerItem(20, 5, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
-        gridLayout->addItem(verticalSpacer_7, 13, 1, 1, 1);
+        gridLayout->addItem(verticalSpacer_7, 12, 1, 1, 1);
+
+        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout->addItem(verticalSpacer_3, 13, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
+        pushButton_2->raise();
+        label->raise();
+        label_2->raise();
+        login_win->raise();
+        label_3->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 889, 17));
@@ -144,10 +154,10 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "Sign-In", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; color:#000000;\">WELCOME TO</span></p><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; color:#000000;\">ARTHA-DRISHYA </span></p></body></html>", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:26pt; font-style:italic; color:#000000;\">Making Finance Your Favourite Niche!</span></p></body></html>", nullptr));
         login_win->setText(QCoreApplication::translate("MainWindow", "Log -In", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; font-style:italic; color:#000000;\">WELCOME TO</span></p><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; font-style:italic; color:#000000;\">ARTHA-DRISHYA </span></p></body></html>", nullptr));
         label_3->setText(QString());
+        label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:26pt; font-style:italic; color:#000000;\">Making Finance Your Favourite Niche!</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

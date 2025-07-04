@@ -316,6 +316,7 @@ Makefile: ../../itsdrishya.pro C:/Qt/6.9.0/mingw_64/mkspecs/win32-g++/qmake.conf
 		C:/Qt/6.9.0/mingw_64/lib/Qt6Core.prl \
 		C:/Qt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl \
 		C:/Qt/6.9.0/mingw_64/mkspecs/features/build_pass.prf \
+		../../create.qrc \
 		../../gyanibhai.qrc \
 		../../img.qrc \
 		../../mam.qrc \
@@ -568,6 +569,7 @@ C:/Qt/6.9.0/mingw_64/lib/Qt6Sql.prl:
 C:/Qt/6.9.0/mingw_64/lib/Qt6Core.prl:
 C:/Qt/6.9.0/mingw_64/lib/Qt6EntryPoint.prl:
 C:/Qt/6.9.0/mingw_64/mkspecs/features/build_pass.prf:
+../../create.qrc:
 ../../gyanibhai.qrc:
 ../../img.qrc:
 ../../mam.qrc:
