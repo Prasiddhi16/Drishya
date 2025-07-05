@@ -18,6 +18,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,11 +27,11 @@ class Ui_budgetWindow
 {
 public:
     QWidget *centralwidget;
-    QFrame *frame;
-    QFrame *frame_2;
-    QFrame *frame_3;
-    QTableView *tableView;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_2;
+    QTableView *tableView;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -49,33 +50,32 @@ public:
         budgetWindow->setPalette(palette);
         centralwidget = new QWidget(budgetWindow);
         centralwidget->setObjectName("centralwidget");
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName("verticalLayout");
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+
+        verticalLayout->addWidget(label);
+
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(40, 160, 709, 291));
-        frame->setMaximumSize(QSize(16777215, 297));
+        frame->setMaximumSize(QSize(16777215, 16777215));
         frame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
 "border-radius:15px;"));
         frame->setFrameShape(QFrame::Shape::StyledPanel);
         frame->setFrameShadow(QFrame::Shadow::Raised);
-        frame_2 = new QFrame(frame);
-        frame_2->setObjectName("frame_2");
-        frame_2->setGeometry(QRect(20, 160, 661, 80));
-        frame_2->setFrameShape(QFrame::Shape::StyledPanel);
-        frame_2->setFrameShadow(QFrame::Shadow::Raised);
-        frame_3 = new QFrame(frame);
-        frame_3->setObjectName("frame_3");
-        frame_3->setGeometry(QRect(20, 20, 671, 261));
-        frame_3->setStyleSheet(QString::fromUtf8("background-color: #D9D9D9;"));
-        frame_3->setFrameShape(QFrame::Shape::StyledPanel);
-        frame_3->setFrameShadow(QFrame::Shadow::Raised);
-        tableView = new QTableView(frame_3);
+        verticalLayout_2 = new QVBoxLayout(frame);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        tableView = new QTableView(frame);
         tableView->setObjectName("tableView");
-        tableView->setGeometry(QRect(10, 11, 651, 241));
-        tableView->setStyleSheet(QString::fromUtf8("\n"
-"background-color: rgb(185, 255, 199);"));
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(230, 50, 331, 81));
+        tableView->setStyleSheet(QString::fromUtf8("font: 9pt \"Segoe UI\";\n"
+"color:black;"));
+
+        verticalLayout_2->addWidget(tableView);
+
+
+        verticalLayout->addWidget(frame);
+
         budgetWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(budgetWindow);
         menubar->setObjectName("menubar");

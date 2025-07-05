@@ -22,7 +22,7 @@ monthlyWindow::monthlyWindow(QWidget *parent)
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Weekly Review");
+    chart->setTitle("Monthly Review");
     chart->setAnimationOptions(QChart::SeriesAnimations);
     QStringList month;
     month<<"";

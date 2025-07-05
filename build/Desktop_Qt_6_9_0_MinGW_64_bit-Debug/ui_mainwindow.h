@@ -37,7 +37,6 @@ public:
     QLabel *label_2;
     QSpacerItem *verticalSpacer_4;
     QSpacerItem *verticalSpacer_7;
-    QSpacerItem *verticalSpacer_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -70,11 +69,11 @@ public:
         pushButton_2 = new QPushButton(centralwidget);
         pushButton_2->setObjectName("pushButton_2");
 
-        gridLayout->addWidget(pushButton_2, 19, 0, 1, 1);
+        gridLayout->addWidget(pushButton_2, 18, 0, 1, 1);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
-        gridLayout->addItem(verticalSpacer, 16, 0, 1, 3);
+        gridLayout->addItem(verticalSpacer, 15, 0, 1, 3);
 
         login_win = new QPushButton(centralwidget);
         login_win->setObjectName("login_win");
@@ -84,7 +83,7 @@ public:
         palette1.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Button, brush);
         login_win->setPalette(palette1);
 
-        gridLayout->addWidget(login_win, 19, 4, 1, 1);
+        gridLayout->addWidget(login_win, 18, 4, 1, 1);
 
         verticalSpacer_5 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
@@ -107,7 +106,7 @@ public:
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
-        gridLayout->addItem(verticalSpacer_2, 20, 0, 1, 3);
+        gridLayout->addItem(verticalSpacer_2, 19, 0, 1, 3);
 
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
@@ -117,7 +116,7 @@ public:
         label_2->setPalette(palette2);
         label_2->setTextFormat(Qt::TextFormat::RichText);
 
-        gridLayout->addWidget(label_2, 14, 1, 1, 3, Qt::AlignmentFlag::AlignHCenter);
+        gridLayout->addWidget(label_2, 13, 1, 1, 3, Qt::AlignmentFlag::AlignHCenter);
 
         verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
@@ -126,10 +125,6 @@ public:
         verticalSpacer_7 = new QSpacerItem(20, 5, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
         gridLayout->addItem(verticalSpacer_7, 12, 1, 1, 1);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
-
-        gridLayout->addItem(verticalSpacer_3, 13, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         pushButton_2->raise();

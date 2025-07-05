@@ -34,7 +34,7 @@ void analysisWindow::on_pushButton_3_clicked()
 {   this->hide();
     weekly_window= new weeklyWindow(nullptr);
     connect(weekly_window, &weeklyWindow::windowClosed,this, &analysisWindow::show);
-     weekly_window->show();
+    weekly_window->show();
 
 }
 
@@ -42,7 +42,7 @@ void analysisWindow::on_pushButton_3_clicked()
 
 void analysisWindow::on_pushButton_4_clicked()
 {
-     this->hide();
+    this->hide();
     monthly_window= new monthlyWindow(this);
     connect(monthly_window, &monthlyWindow::windowClosed,this, &analysisWindow::show);
     monthly_window->show();
