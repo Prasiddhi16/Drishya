@@ -9,7 +9,6 @@ debug/revwindow.o
 debug/signwindow.o
 debug/weeklywindow.o
 debug/welwindow.o
-debug/qrc_create.o
 debug/qrc_gyanibhai.o
 debug/qrc_img.o
 debug/qrc_mam.o

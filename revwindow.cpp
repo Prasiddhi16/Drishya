@@ -17,7 +17,7 @@ revWindow::revWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
+    // Use same connection name across windows for consistency
     QString connectionName = "qt_sql_budget_connection";
     QSqlDatabase db;
 
@@ -28,19 +28,19 @@ revWindow::revWindow(QWidget *parent)
         db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/MYFINANCERECORD/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/FINANCERECORD.db");
 
         if (!db.open()) {
-            qDebug() << " DB Connection Error:" << db.lastError().text();
+            qDebug() << "DB Connection Error:" << db.lastError().text();
             return;
         }
     }
 
-
+    // Match column names with your my_expenses view: category and amount
     QSqlQuery query(db);
-    if (!query.exec("SELECT expense_category, SUM(amount) FROM readable_expenses GROUP BY expense_category")) {
+    if (!query.exec("SELECT category, SUM(amount) FROM my_expenses GROUP BY category")) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
 
-    QPieSeries *series = new QPieSeries(this); // set parent for memory safety
+    QPieSeries *series = new QPieSeries(this);
     series->setHoleSize(0.25);
 
     bool hasData = false;
@@ -55,7 +55,6 @@ revWindow::revWindow(QWidget *parent)
         qDebug() << "No data found for pie chart.";
         return;
     }
-
 
     QChart *chart = new QChart();
     chart->addSeries(series);

@@ -21,6 +21,7 @@ budgetWindow::budgetWindow(QWidget *parent)
         QSqlDatabase::removeDatabase(connectionName);
     }
 
+    // 📂 Use the same path as your main window for consistency
     db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
     db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/MYFINANCERECORD/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/FINANCERECORD.db");
 
@@ -29,9 +30,9 @@ budgetWindow::budgetWindow(QWidget *parent)
         return;
     }
 
-    // Load fresh query
+    // ✅ Make sure view matches its columns: category, amount, time
     QSqlQuery query(db);
-    if (!query.exec("SELECT amount, date, expense_category FROM readable_expenses")) {
+    if (!query.exec("SELECT amount, time, category FROM my_expenses")) {
         qDebug() << "Query failed:" << query.lastError().text();
         return;
     }
@@ -39,16 +40,16 @@ budgetWindow::budgetWindow(QWidget *parent)
     model->setQuery(query);
 
     if (model->lastError().isValid()) {
-        qDebug() << " Model error:" << model->lastError().text();
+        qDebug() << "Model error:" << model->lastError().text();
         return;
     }
 
-    // 🏷️ Rename headers
+    // 🏷️ Update header labels to match correct column order
     model->setHeaderData(0, Qt::Horizontal, "Amount ₹");
     model->setHeaderData(1, Qt::Horizontal, "Date & Time");
     model->setHeaderData(2, Qt::Horizontal, "Category");
 
-
+    // 🔍 TableView configuration
     ui->tableView->setModel(model);
     ui->tableView->setSortingEnabled(true);
     ui->tableView->resizeColumnsToContents();
@@ -58,6 +59,7 @@ budgetWindow::budgetWindow(QWidget *parent)
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
+    // Debug output for verification
     for (int row = 0; row < model->rowCount(); ++row) {
         for (int col = 0; col < model->columnCount(); ++col) {
             QString value = model->data(model->index(row, col)).toString();
