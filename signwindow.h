@@ -2,8 +2,8 @@
 #define SIGNWINDOW_H
 
 #include <QMainWindow>
-#include<QtSql>
-#include"welwindow.h"
+#include <QSqlDatabase>
+#include "welwindow.h"
 
 namespace Ui {
 class signWindow;
@@ -18,14 +18,12 @@ public:
     ~signWindow();
 
 private slots:
-
     void on_pushButton_clicked();
 
 private:
     Ui::signWindow *ui;
+    QSqlDatabase DB_connection;
     welWindow *wel_window;
-
-     QSqlDatabase DB_connection;
 };
 
 #endif // SIGNWINDOW_H

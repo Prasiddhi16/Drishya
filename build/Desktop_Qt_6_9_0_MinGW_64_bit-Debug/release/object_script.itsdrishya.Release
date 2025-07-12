@@ -9,6 +9,7 @@ release/revwindow.o
 release/signwindow.o
 release/weeklywindow.o
 release/welwindow.o
+release/qrc_finallogo.o
 release/qrc_gyanibhai.o
 release/qrc_img.o
 release/qrc_mam.o

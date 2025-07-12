@@ -97,6 +97,7 @@ public:
         lineEdit = new QLineEdit(frame);
         lineEdit->setObjectName("lineEdit");
         lineEdit->setGeometry(QRect(50, 170, 281, 20));
+        lineEdit->setStyleSheet(QString::fromUtf8("color:black;"));
         label_5 = new QLabel(frame);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(50, 210, 61, 20));
@@ -106,9 +107,11 @@ public:
         lineEdit_2 = new QLineEdit(frame);
         lineEdit_2->setObjectName("lineEdit_2");
         lineEdit_2->setGeometry(QRect(50, 240, 281, 20));
+        lineEdit_2->setStyleSheet(QString::fromUtf8("color:black;"));
         lineEdit_3 = new QLineEdit(frame);
         lineEdit_3->setObjectName("lineEdit_3");
         lineEdit_3->setGeometry(QRect(50, 310, 281, 20));
+        lineEdit_3->setStyleSheet(QString::fromUtf8("color:black;"));
         lineEdit_3->setEchoMode(QLineEdit::EchoMode::Password);
         label_6 = new QLabel(frame);
         label_6->setObjectName("label_6");

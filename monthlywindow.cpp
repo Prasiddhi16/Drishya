@@ -1,60 +1,104 @@
 #include "monthlywindow.h"
 #include "ui_monthlywindow.h"
 
-monthlyWindow::monthlyWindow(QWidget *parent)
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QtCharts>
+#include <QDate>
+#include <QCoreApplication>
+#include <QCloseEvent>
+#include <QDebug>
+
+monthlyWindow::monthlyWindow(const QString &userEmail, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::monthlyWindow)
+    , currentUserEmail(userEmail)
 {
     ui->setupUi(this);
 
+    QString connectionName = "qt_sql_monthly_connection";
+    if (QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase::removeDatabase(connectionName);
+    }
+
+    QString dbBaseName = userEmail.section('@', 0, 0);
+    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    db.setDatabaseName(dbPath);
+
+    if (!db.open()) {
+        qDebug() << "DB Open Error:" << db.lastError().text();
+        return;
+    }
+
+    QSqlQuery query(db);
+    // Format: '2025-07-19 17:33:42'
+    if (!query.exec("SELECT strftime('%m', timestamp) AS month, SUM(expense_amount) "
+                    "FROM records WHERE expense_amount > 0 GROUP BY month ORDER BY month")) {
+        qDebug() << "Query Error:" << query.lastError().text();
+        return;
+    }
+
     QBarSeries *series = new QBarSeries();
-    QBarSet *month1 = new QBarSet("Month 1");
-    month1->append(30);
-    month1->setColor(Qt::red);  // Red color for Week 1
+    QStringList monthLabels;
+    QList<QColor> barColors = {
+        Qt::red, Qt::blue, Qt::green, Qt::magenta, Qt::cyan,
+        Qt::darkYellow, Qt::darkRed, Qt::darkBlue,
+        Qt::darkGreen, Qt::darkMagenta, Qt::darkCyan, Qt::gray
+    };
 
-    QBarSet *month2 = new QBarSet("Month 2");
-    month2->append(90);
-    month2->setColor(Qt::blue);  // Blue color for Week 2
+    int i = 0;
+    while (query.next()) {
+        QString monthNum = query.value(0).toString();  // e.g. '01'
+        int value = query.value(1).toInt();
+        QStringList monthNames = {
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        };
+        QString shortMonth = monthNames.value(monthNum.toInt() - 1);
+        monthLabels << shortMonth;
 
-    // Add bar sets to the series
-    series->append(month1);
-    series->append(month2);
+        QBarSet *bar = new QBarSet(shortMonth);
+        for (int j = 0; j <= i; ++j) {
+            bar->append(j == i ? value : 0);
+        }
+
+        bar->setColor(barColors[i % barColors.size()]);
+        series->append(bar);
+        ++i;
+    }
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Monthly Review");
+    chart->setTitle("Monthly Expense Review");
     chart->setAnimationOptions(QChart::SeriesAnimations);
-    QStringList month;
-    month<<"";
 
-    QBarCategoryAxis*axisX=new QBarCategoryAxis();
-    axisX->append(month);
-    chart->addAxis(axisX,Qt::AlignBottom);
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(monthLabels);
+    chart->addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
-    QValueAxis*axisY=new QValueAxis();
-    axisY->setRange(0,100);
-    chart->addAxis(axisY,Qt::AlignLeft);
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setRange(0, 100);  // You can adjust this or compute max dynamically
+    chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);
-    chart->legend()->setVisible(true);
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-    chartView ->setVisible(true);
     setCentralWidget(chartView);
-
-
 }
-
 
 monthlyWindow::~monthlyWindow()
 {
     delete ui;
 }
-void monthlyWindow::closeEvent(QCloseEvent* event)
+
+void monthlyWindow::closeEvent(QCloseEvent *event)
 {
     emit windowClosed();
     QMainWindow::closeEvent(event);

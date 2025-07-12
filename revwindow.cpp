@@ -10,40 +10,42 @@
 #include <QPainter>
 #include <QDebug>
 #include <QCloseEvent>
+#include <QCoreApplication>
+#include <QDir>
 
-revWindow::revWindow(QWidget *parent)
+revWindow::revWindow(const QString &userEmail, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::revWindow)
+    , currentUserEmail(userEmail)
 {
     ui->setupUi(this);
 
-    // Use same connection name across windows for consistency
-    QString connectionName = "qt_sql_budget_connection";
-    QSqlDatabase db;
-
+    QString connectionName = "qt_sql_rev_connection";
     if (QSqlDatabase::contains(connectionName)) {
-        db = QSqlDatabase::database(connectionName);
-    } else {
-        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-        db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/MYFINANCERECORD/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/debug/FINANCERECORD.db");
-
-        if (!db.open()) {
-            qDebug() << "DB Connection Error:" << db.lastError().text();
-            return;
-        }
+        QSqlDatabase::removeDatabase(connectionName);
     }
 
-    // Match column names with your my_expenses view: category and amount
+    QString dbBaseName = currentUserEmail.section('@', 0, 0);
+    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    db.setDatabaseName(dbPath);
+
+    if (!db.open()) {
+        qDebug() << "DB Connection Error:" << db.lastError().text();
+        return;
+    }
+
     QSqlQuery query(db);
-    if (!query.exec("SELECT category, SUM(amount) FROM my_expenses GROUP BY category")) {
+    if (!query.exec("SELECT expense_category, SUM(expense_amount) FROM records GROUP BY expense_category")) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
 
     QPieSeries *series = new QPieSeries(this);
     series->setHoleSize(0.25);
-
     bool hasData = false;
+
     while (query.next()) {
         QString category = query.value(0).toString();
         double total = query.value(1).toDouble();

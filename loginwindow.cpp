@@ -2,6 +2,15 @@
 #include "ui_loginwindow.h"
 #include <QMessageBox>
 #include <QDebug>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QFile>
+#include <QCryptographicHash>
+#include <QFormLayout>
+#include <QPushButton>
+#include <QDialogButtonBox>
+#include "homewindow.h"
 
 loginWindow::loginWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,13 +18,13 @@ loginWindow::loginWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QString dbFilePath = "C:/Users/Lenovo/OneDrive/Documents/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Qtdata.db";
+    ui->pushButton_2->setText("Forgot Password?");
+    ui->pushButton_2->setStyleSheet("QPushButton { border: none; color: blue; background: transparent; text-decoration: underline; }");
 
+    QString dbFilePath = "C:/Users/Lenovo/OneDrive/Documents/Myunifiedproject/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/itsdrishya/unified.db";
     QFile dbFile(dbFilePath);
     if (!dbFile.exists()) {
-        QString errMsg = QString("Database file '%1' not found!").arg(dbFilePath);
-        qDebug() << errMsg;
-        QMessageBox::critical(this, "Database Error", errMsg);
+        QMessageBox::critical(this, "Database Error", QString("Database file '%1' not found!").arg(dbFilePath));
         return;
     }
 
@@ -24,96 +33,153 @@ loginWindow::loginWindow(QWidget *parent)
 
     if (DBconnection.open()) {
         qDebug() << "Database is connected.";
-        qDebug() << "Driver in use:" << DBconnection.driverName();
-
-        QStringList tables = DBconnection.tables();
-        qDebug() << "Tables in DB:" << tables;
-
-        if (!tables.contains("user")) {
-            QString errMsg = "Table 'user' not found in database!";
-            qDebug() << errMsg;
-            QMessageBox::critical(this, "Database Error", errMsg);
-            return;
-        }
     } else {
-        qDebug() << "Database not connected";
         QMessageBox::critical(this, "Database Error", "Failed to open the database.");
         return;
     }
-    QSqlQuery autoLogin(DBconnection);
-    autoLogin.prepare("SELECT email FROM user WHERE keep_logged_in = 1");
 
-    if (autoLogin.exec() && autoLogin.next()) {
-        QString rememberedUser = autoLogin.value(0).toString();
-        qDebug() << "Auto-login for:" << rememberedUser;
-
-        homeWindow *home_window = new homeWindow();
-        home_window->show();
-        this->hide();
+    if (!DBconnection.tables().contains("user")) {
+        QMessageBox::critical(this, "Database Error", "Table 'user' not found in database!");
+        return;
     }
-
 }
 
 loginWindow::~loginWindow()
 {
     delete ui;
 }
-void loginWindow::on_checkBox_stateChanged(int state)
-{
-    qDebug() << (state == Qt::Checked ? "Checkbox checked." : "Checkbox unchecked.");
 
-
-
+QString hashPassword(const QString &password) {
+    QByteArray hashed = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+    return QString(hashed.toHex());
 }
-
-
 
 void loginWindow::on_pushButton_clicked()
 {
+    QString Email = ui->lineEdit->text().trimmed();
+    QString Password = ui->lineEdit_2->text().trimmed();
+    QString hashedPassword = hashPassword(Password);
 
-        QString Email = ui->lineEdit->text();
-        QString Password = ui->lineEdit_2->text();
-        bool keepLoggedIn = ui->checkBox->isChecked();
+    ui->lineEdit->setStyleSheet(Email.isEmpty() ? "border: 1px solid red;" : "");
+    ui->lineEdit_2->setStyleSheet(Password.isEmpty() ? "border: 1px solid red;" : "");
 
-        qDebug() << "Email:" << Email << ", Password:" << Password;
-        qDebug() << "Checkbox checked?" << keepLoggedIn;
+    if (Email.isEmpty() || Password.isEmpty()) {
+        QMessageBox::warning(this, "Missing Input", "Please enter both your email and password.");
+        return;
+    }
 
-        QSqlQuery query(DBconnection);
-        query.prepare("SELECT * FROM user WHERE email = ? AND password = ?");
-        query.addBindValue(Email);
-        query.addBindValue(Password);
+    QSqlQuery query(DBconnection);
+    query.prepare("SELECT * FROM user WHERE email = ? AND password = ?");
+    query.addBindValue(Email);
+    query.addBindValue(hashedPassword);
 
-        if (!query.exec()) {
-            qDebug() << "Query error:" << query.lastError().text();
-            QMessageBox::warning(this, "Error", "Failed to execute query.");
+    if (!query.exec()) {
+        QMessageBox::warning(this, "Error", "Failed to execute query.");
+        return;
+    }
+
+    if (query.next()) {
+        QMessageBox::information(this, "Login", "Login successful!");
+        homeWindow *home_window = new homeWindow(Email, this); // ✅ Fixed
+        home_window->show();
+        this->hide();
+    } else {
+        QMessageBox::warning(this, "Login Failed", "Please check your email and password.");
+    }
+}
+
+void loginWindow::on_pushButton_2_clicked()
+{
+    QDialog dialog(this);
+    dialog.setWindowTitle("Reset Password");
+    dialog.setStyleSheet("QDialog { background-color: #f0f0f0; } QLabel, QPushButton { color: black; }");
+
+    QFormLayout *formLayout = new QFormLayout(&dialog);
+    QLineEdit *emailEdit = new QLineEdit();
+    QLineEdit *petNameEdit = new QLineEdit();
+    QLineEdit *dobEdit = new QLineEdit();
+    QLineEdit *newPasswordEdit = new QLineEdit();
+    QLineEdit *confirmPasswordEdit = new QLineEdit();
+
+    newPasswordEdit->setEchoMode(QLineEdit::Password);
+    confirmPasswordEdit->setEchoMode(QLineEdit::Password);
+    newPasswordEdit->setVisible(false);
+    confirmPasswordEdit->setVisible(false);
+
+    QPushButton *verifyButton = new QPushButton("Verify Identity");
+    verifyButton->setStyleSheet("QPushButton { color: black; border: 1px solid black; padding: 4px 12px; background-color: white; } QPushButton:hover { background-color: #e0e0e0; }");
+
+    formLayout->addRow("Email:", emailEdit);
+    formLayout->addRow("Pet Name:", petNameEdit);
+    formLayout->addRow("DOB (YYYY-MM-DD):", dobEdit);
+    formLayout->addWidget(verifyButton);
+    formLayout->addRow("New Password:", newPasswordEdit);
+    formLayout->addRow("Confirm Password:", confirmPasswordEdit);
+
+    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    buttonBox->setStyleSheet("QPushButton { color: black; border: 1px solid black; padding: 4px 12px; background-color: white; } QPushButton:hover { background-color: #e0e0e0; }");
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+    formLayout->addWidget(buttonBox);
+
+    connect(verifyButton, &QPushButton::clicked, &dialog, [&]() {
+        QString email = emailEdit->text().trimmed();
+        QString petName = petNameEdit->text().trimmed();
+        QString dob = dobEdit->text().trimmed();
+
+        if (email.isEmpty() || petName.isEmpty() || dob.isEmpty()) {
+            QMessageBox::warning(&dialog, "Missing Fields", "Please fill in all required fields.");
             return;
         }
 
-        if (query.next()) {
-            // We have a valid user. Update keep_logged_in value:
-            QSqlQuery update(DBconnection);
-            update.prepare("UPDATE user SET keep_logged_in = :keep WHERE email = :email");
-            update.bindValue(":keep", keepLoggedIn ? 1 : 0);
-            update.bindValue(":email", Email);
+        QSqlQuery query(DBconnection);
+        query.prepare("SELECT * FROM user WHERE email = ? AND dob = ? AND pet_name = ?");
+        query.addBindValue(email);
+        query.addBindValue(dob);
+        query.addBindValue(petName);
 
-            if (!update.exec()) {
-                qDebug() << "Failed to update keep_logged_in:" << update.lastError().text();
-            } else {
-                qDebug() << "keep_logged_in updated. Rows affected:" << update.numRowsAffected();
-            }
-
-            QMessageBox::information(this, "Login", "Login successful!");
-            homeWindow *home_window = new homeWindow();
-            home_window->show();
-            this->hide();
+        if (query.exec() && query.next()) {
+            QMessageBox::information(&dialog, "Verified", "Identity verified. You may enter your new password.");
+            newPasswordEdit->setVisible(true);
+            confirmPasswordEdit->setVisible(true);
+            buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
         } else {
-            QMessageBox::warning(this, "Login Failed", "Please check your email and password.");
+            QMessageBox::warning(&dialog, "Mismatch", "Security answers did not match.");
+            newPasswordEdit->setVisible(false);
+            confirmPasswordEdit->setVisible(false);
+            buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+        }
+    });
+
+    connect(buttonBox, &QDialogButtonBox::accepted, &dialog, [&]() {
+        QString email = emailEdit->text().trimmed();
+        QString newPassword = newPasswordEdit->text().trimmed();
+        QString confirmPassword = confirmPasswordEdit->text().trimmed();
+
+        if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            QMessageBox::warning(&dialog, "Missing Input", "Please enter and confirm your new password.");
+            return;
         }
 
-    }
+        if (newPassword != confirmPassword) {
+            QMessageBox::warning(&dialog, "Mismatch", "Passwords do not match.");
+            return;
+        }
 
+        QString hashedNewPassword = hashPassword(newPassword);
 
+        QSqlQuery update(DBconnection);
+        update.prepare("UPDATE user SET password = ? WHERE email = ?");
+        update.addBindValue(hashedNewPassword);
+        update.addBindValue(email);
 
+        if (update.exec()) {
+            QMessageBox::information(&dialog, "Success", "Password reset successfully.");
+            dialog.accept();
+        } else {
+            QMessageBox::warning(&dialog, "Error", "Failed to update password.");
+        }
+    });
 
-
-
+    connect(buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+    dialog.exec();
+}

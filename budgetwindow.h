@@ -2,21 +2,19 @@
 #define BUDGETWINDOW_H
 
 #include <QMainWindow>
-#include <QSqlQueryModel>
 #include <QSqlDatabase>
+#include <QSqlQueryModel>
 
-QT_BEGIN_NAMESPACE
 namespace Ui {
 class budgetWindow;
 }
-QT_END_NAMESPACE
 
 class budgetWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit budgetWindow(QWidget *parent = nullptr);
+    explicit budgetWindow(const QString &userEmail, QWidget *parent = nullptr);
     ~budgetWindow();
 
 protected:
@@ -27,8 +25,9 @@ signals:
 
 private:
     Ui::budgetWindow *ui;
-    QSqlQueryModel *model;
     QSqlDatabase db;
+    QSqlQueryModel *model;
+    QString currentUserEmail;
 };
 
 #endif // BUDGETWINDOW_H

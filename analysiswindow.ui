@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>609</height>
    </rect>
   </property>
   <property name="palette">
@@ -34,18 +34,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -72,18 +72,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -101,18 +101,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>197</red>
-        <green>193</green>
-        <blue>255</blue>
+        <red>0</red>
+        <green>0</green>
+        <blue>0</blue>
        </color>
       </brush>
      </colorrole>
@@ -162,33 +162,20 @@ background-color: rgb(197, 193, 255);</string>
 border-radius:30px;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="1">
-           <spacer name="verticalSpacer">
+          <item row="24" column="1">
+           <spacer name="horizontalSpacer_4">
             <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>40</width>
+              <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
-          <item row="19" column="2">
-           <widget class="QLabel" name="label_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;vs last week&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
+          <item row="7" column="1">
            <spacer name="horizontalSpacer_2">
             <property name="orientation">
              <enum>Qt::Orientation::Horizontal</enum>
@@ -201,20 +188,7 @@ border-radius:30px;</string>
             </property>
            </spacer>
           </item>
-          <item row="10" column="1">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="8" column="1">
+          <item row="11" column="1">
            <spacer name="verticalSpacer_4">
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
@@ -227,46 +201,7 @@ border-radius:30px;</string>
             </property>
            </spacer>
           </item>
-          <item row="19" column="1" alignment="Qt::AlignmentFlag::AlignVCenter">
-           <widget class="QLabel" name="label_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>10</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(153, 0, 0);
-border-radius:90px;</string>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;^ 12.3%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1" colspan="2">
-           <widget class="QLabel" name="label_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(243, 219, 255);</string>
-            </property>
-            <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:22pt; font-weight:700; color:#000000;&quot;&gt;NRP 120.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="3" alignment="Qt::AlignmentFlag::AlignBottom">
+          <item row="2" column="1" colspan="3">
            <widget class="QLabel" name="label_3">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -282,33 +217,7 @@ border-radius:90px;</string>
             </property>
            </widget>
           </item>
-          <item row="20" column="1">
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Orientation::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="21" column="1">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Orientation::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="1">
+          <item row="4" column="1">
            <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
@@ -321,7 +230,75 @@ border-radius:90px;</string>
             </property>
            </spacer>
           </item>
-          <item row="11" column="1">
+          <item row="25" column="1">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="14" column="3">
+           <widget class="QLabel" name="label_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#000000;&quot;&gt;vs last week&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="13" column="1">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="1" colspan="3">
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(243, 219, 255);</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:22pt; font-weight:700; color:#000000;&quot;&gt;NRP 120.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="15" column="1">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Orientation::Vertical</enum>
@@ -334,7 +311,7 @@ border-radius:90px;</string>
             </property>
            </spacer>
           </item>
-          <item row="5" column="1" colspan="2" alignment="Qt::AlignmentFlag::AlignHCenter">
+          <item row="8" column="2">
            <widget class="QPushButton" name="pushButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -344,8 +321,14 @@ border-radius:90px;</string>
             </property>
             <property name="minimumSize">
              <size>
-              <width>90</width>
-              <height>20</height>
+              <width>5</width>
+              <height>15</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>15</width>
+              <height>15</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -355,6 +338,35 @@ border-radius:20px</string>
             </property>
             <property name="text">
              <string>~</string>
+            </property>
+           </widget>
+          </item>
+          <item row="14" column="1" alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QLabel" name="label_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>10</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>70</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(153, 0, 0);
+border-radius:90px;</string>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;^ 12.3%&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -400,6 +412,12 @@ QPushButton:hover {
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>10</height>
+         </size>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {

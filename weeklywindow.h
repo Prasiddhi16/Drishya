@@ -2,10 +2,7 @@
 #define WEEKLYWINDOW_H
 
 #include <QMainWindow>
-#include<QtCore>
-#include<QtGui>
-#include<QtWidgets>
-#include<QtCharts>
+#include <QSqlDatabase>
 
 namespace Ui {
 class weeklyWindow;
@@ -16,16 +13,19 @@ class weeklyWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit weeklyWindow(QWidget *parent = nullptr);
+    explicit weeklyWindow(const QString &userEmail, QWidget *parent = nullptr);
     ~weeklyWindow();
 
-private:
-    Ui::weeklyWindow *ui;
 protected:
-    void closeEvent(QCloseEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 signals:
     void windowClosed();
+
+private:
+    Ui::weeklyWindow *ui;
+    QString currentUserEmail;
+
 };
 
 #endif // WEEKLYWINDOW_H

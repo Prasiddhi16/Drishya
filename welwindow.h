@@ -2,7 +2,7 @@
 #define WELWINDOW_H
 
 #include <QMainWindow>
-#include"analysiswindow.h"
+#include "homewindow.h"
 
 namespace Ui {
 class welWindow;
@@ -13,7 +13,7 @@ class welWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit welWindow(QWidget *parent = nullptr);
+    explicit welWindow(const QString &userEmail, QWidget *parent = nullptr);
     ~welWindow();
 
 private slots:
@@ -21,7 +21,8 @@ private slots:
 
 private:
     Ui::welWindow *ui;
-    analysisWindow *analysis_window;
+    QString currentUserEmail;
+    homeWindow *home_window;
 };
 
 #endif // WELWINDOW_H

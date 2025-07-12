@@ -161,7 +161,8 @@ public:
         lineEdit->setGeometry(QRect(50, 180, 261, 20));
         lineEdit->setStyleSheet(QString::fromUtf8("QLineedit{\n"
 "\n"
-"background:#BCCDB7;\n"
+"background:#BCCDB7\n"
+";color:black;\n"
 "}"));
         label_3 = new QLabel(frame);
         label_3->setObjectName("label_3");
@@ -246,6 +247,7 @@ public:
         lineEdit_2->setStyleSheet(QString::fromUtf8("QLineedit{\n"
 "\n"
 "background:#BCCDB7;\n"
+"color:black;\n"
 "}"));
         lineEdit_2->setEchoMode(QLineEdit::EchoMode::Password);
         checkBox = new QCheckBox(frame);

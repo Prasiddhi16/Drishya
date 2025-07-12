@@ -2,10 +2,7 @@
 #define REVWINDOW_H
 
 #include <QMainWindow>
-#include<QtCore>
-#include<QtGui>
-#include<QtWidgets>
-#include<QtCharts>
+#include <QSqlDatabase>
 
 namespace Ui {
 class revWindow;
@@ -16,16 +13,18 @@ class revWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit revWindow(QWidget *parent = nullptr);
+    explicit revWindow(const QString &userEmail, QWidget *parent = nullptr);
     ~revWindow();
 
-private:
-    Ui::revWindow *ui;
 protected:
-    void closeEvent(QCloseEvent* event) override;
+    void closeEvent(QCloseEvent *event) override;
 
 signals:
     void windowClosed();
+
+private:
+    Ui::revWindow *ui;
+    QString currentUserEmail;
 };
 
 #endif // REVWINDOW_H
