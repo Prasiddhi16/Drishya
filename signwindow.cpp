@@ -8,8 +8,8 @@
 #include <QSqlError>
 #include <QCryptographicHash>
 #include <QDate>
-#include <QDir>
 #include <QDebug>
+#include <QDir>
 
 signWindow::signWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,20 +20,43 @@ signWindow::signWindow(QWidget *parent)
     ui->lineEdit_4->setPlaceholderText("YYYY-MM-DD");
 
     DB_connection = QSqlDatabase::addDatabase("QSQLITE");
-    DB_connection.setDatabaseName("unified.db");
+    DB_connection.setDatabaseName("centralized.db");
 
     if (DB_connection.open()) {
-        QSqlQuery createTable(DB_connection);
-        createTable.exec("CREATE TABLE IF NOT EXISTS user ("
-                         "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                         "name TEXT, "
-                         "email TEXT UNIQUE, "
-                         "password TEXT, "
-                         "dob TEXT, "
-                         "pet_name TEXT)");
+        QSqlQuery query(DB_connection);
+
+        query.exec("CREATE TABLE IF NOT EXISTS user ("
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                   "name TEXT, "
+                   "email TEXT UNIQUE, "
+                   "password TEXT, "
+                   "dob TEXT, "
+                   "pet_name TEXT)");
+
+        query.exec("CREATE TABLE IF NOT EXISTS records ("
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                   "user_id INTEGER, "
+                   "income_amount REAL, income_source TEXT, income_currency TEXT, "
+                   "expense_amount REAL, expense_category TEXT, expense_currency TEXT, "
+                   "reference TEXT, review TEXT, timestamp TEXT, "
+                   "FOREIGN KEY (user_id) REFERENCES user(id))");
+
+        query.exec("CREATE TABLE IF NOT EXISTS goals ("
+                   "goal_id TEXT PRIMARY KEY, "
+                   "user_id INTEGER, "
+                   "goal_name TEXT, required_amount REAL, downpayment REAL, time_limit TEXT, "
+                   "FOREIGN KEY (user_id) REFERENCES user(id))");
+
+        query.exec("CREATE TABLE IF NOT EXISTS review ("
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                   "user_id INTEGER, savings REAL, tax REAL, "
+                   "FOREIGN KEY (user_id) REFERENCES user(id))");
+
     } else {
         qDebug() << "DB Error:" << DB_connection.lastError().text();
     }
+
+    this->showMaximized();
 }
 
 signWindow::~signWindow()
@@ -57,7 +80,7 @@ void signWindow::on_pushButton_clicked()
         box.exec();
     };
 
-    // ✅ Basic Validation
+    // Validation
     if (name.isEmpty() || email.isEmpty() || password.isEmpty() || dob.isEmpty() || petName.isEmpty()) {
         showMessage(QMessageBox::Warning, "Missing Info", "Please fill in all required fields.");
         return;
@@ -98,7 +121,8 @@ void signWindow::on_pushButton_clicked()
     QString hashedPassword = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256).toHex();
 
     QSqlQuery insertQuery(DB_connection);
-    insertQuery.prepare("INSERT INTO user(name, email, password, dob, pet_name) VALUES (:name, :email, :password, :dob, :pet)");
+    insertQuery.prepare("INSERT INTO user(name, email, password, dob, pet_name) "
+                        "VALUES (:name, :email, :password, :dob, :pet)");
     insertQuery.bindValue(":name", name);
     insertQuery.bindValue(":email", email);
     insertQuery.bindValue(":password", hashedPassword);
@@ -111,41 +135,13 @@ void signWindow::on_pushButton_clicked()
         return;
     }
 
+    int userId = insertQuery.lastInsertId().toInt();
+
     showMessage(QMessageBox::Information, "Success", "User registered successfully!");
     DB_connection.close();
 
-    // ✅ Create user-specific database
-    QString baseName = email.section('@', 0, 0);
-    QDir dir;
-    if (!dir.exists("users")) dir.mkdir("users");
-
-    QString userDbPath = "users/" + baseName + ".db";
-    QSqlDatabase userDb = QSqlDatabase::addDatabase("QSQLITE", baseName);
-    userDb.setDatabaseName(userDbPath);
-
-    if (userDb.open()) {
-        QSqlQuery query(userDb);
-        query.exec("CREATE TABLE IF NOT EXISTS records ("
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                   "income_amount REAL, income_source TEXT, income_currency TEXT, "
-                   "expense_amount REAL, expense_category TEXT, expense_currency TEXT, "
-                   "reference TEXT, review TEXT, timestamp TEXT)");
-
-        query.exec("CREATE TABLE IF NOT EXISTS goals ("
-                   "goal_id TEXT PRIMARY KEY, "
-                   "goal_name TEXT, required_amount REAL, downpayment REAL, time_limit TEXT)");
-
-        query.exec("CREATE TABLE IF NOT EXISTS review ("
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                   "u_id INTEGER, savings REAL, tax REAL)");
-
-        userDb.close();
-    } else {
-        qDebug() << "User DB Create Error:" << userDb.lastError().text();
-    }
-
-    // ✅ Proceed to welcome window
+    // Pass email + userId to welcome window
     this->hide();
-    wel_window = new welWindow(email, this);
+    wel_window = new welWindow(email, userId, this);
     wel_window->show();
 }

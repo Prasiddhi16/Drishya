@@ -21,7 +21,7 @@ loginWindow::loginWindow(QWidget *parent)
     ui->pushButton_2->setText("Forgot Password?");
     ui->pushButton_2->setStyleSheet("QPushButton { border: none; color: blue; background: transparent; text-decoration: underline; }");
 
-    QString dbFilePath = "C:/Users/Lenovo/OneDrive/Documents/Myunifiedproject/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/itsdrishya/unified.db";
+   QString dbFilePath = "C:/Users/Lenovo/OneDrive/Documents/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db";
     QFile dbFile(dbFilePath);
     if (!dbFile.exists()) {
         QMessageBox::critical(this, "Database Error", QString("Database file '%1' not found!").arg(dbFilePath));
@@ -42,6 +42,7 @@ loginWindow::loginWindow(QWidget *parent)
         QMessageBox::critical(this, "Database Error", "Table 'user' not found in database!");
         return;
     }
+     this->showMaximized();
 }
 
 loginWindow::~loginWindow()
@@ -72,6 +73,10 @@ void loginWindow::on_pushButton_clicked()
     query.prepare("SELECT * FROM user WHERE email = ? AND password = ?");
     query.addBindValue(Email);
     query.addBindValue(hashedPassword);
+    qDebug() << "Entered password:" << Password;
+    qDebug() << "Hashed password:" << hashedPassword;
+    qDebug() << "Email:" << Email;
+
 
     if (!query.exec()) {
         QMessageBox::warning(this, "Error", "Failed to execute query.");
@@ -79,8 +84,9 @@ void loginWindow::on_pushButton_clicked()
     }
 
     if (query.next()) {
+        int userId = query.value("id").toInt(); // 👈 this extracts the user ID
         QMessageBox::information(this, "Login", "Login successful!");
-        homeWindow *home_window = new homeWindow(Email, this); // ✅ Fixed
+        homeWindow *home_window = new homeWindow(Email, userId, this); // ✅ now uses the valid userId
         home_window->show();
         this->hide();
     } else {

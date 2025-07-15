@@ -13,7 +13,7 @@ class welWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit welWindow(const QString &userEmail, QWidget *parent = nullptr);
+    explicit welWindow(const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~welWindow();
 
 private slots:
@@ -22,6 +22,7 @@ private slots:
 private:
     Ui::welWindow *ui;
     QString currentUserEmail;
+    int currentUserId;
     homeWindow *home_window;
 };
 

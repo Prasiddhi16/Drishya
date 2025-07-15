@@ -2,12 +2,14 @@
 #include "ui_welwindow.h"
 #include "homewindow.h"
 
-welWindow::welWindow(const QString &userEmail, QWidget *parent)
+welWindow::welWindow(const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::welWindow)
     , currentUserEmail(userEmail)
+    , currentUserId(userId)
 {
     ui->setupUi(this);
+    this->showMaximized();
 }
 
 welWindow::~welWindow()
@@ -17,7 +19,7 @@ welWindow::~welWindow()
 
 void welWindow::on_pushButton_clicked()
 {
-    home_window = new homeWindow(currentUserEmail, this);
+    home_window = new homeWindow(currentUserEmail, currentUserId, this);
     home_window->show();
     this->hide();
 }

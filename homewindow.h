@@ -2,7 +2,7 @@
 #define HOMEWINDOW_H
 
 #include <QMainWindow>
-#include"analysiswindow.h"
+#include "analysiswindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class homeWindow; }
@@ -13,7 +13,7 @@ class homeWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit homeWindow(const QString &userEmail, QWidget *parent = nullptr);
+    explicit homeWindow(const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~homeWindow();
 
 private slots:
@@ -22,7 +22,8 @@ private slots:
 private:
     Ui::homeWindow *ui;
     QString currentUserEmail;
-    analysisWindow*analysis_window;
+    int currentUserId;
+    analysisWindow *analysis_window;
 };
 
 #endif // HOMEWINDOW_H
