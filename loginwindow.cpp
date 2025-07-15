@@ -42,6 +42,7 @@ loginWindow::loginWindow(QWidget *parent)
         QMessageBox::critical(this, "Database Error", "Table 'user' not found in database!");
         return;
     }
+     this->showMaximized();
 }
 
 loginWindow::~loginWindow()

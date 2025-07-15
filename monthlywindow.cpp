@@ -91,6 +91,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, QWidget *parent)
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     setCentralWidget(chartView);
+    this->showMaximized();
 }
 
 monthlyWindow::~monthlyWindow()

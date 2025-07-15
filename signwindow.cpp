@@ -34,6 +34,7 @@ signWindow::signWindow(QWidget *parent)
     } else {
         qDebug() << "DB Error:" << DB_connection.lastError().text();
     }
+    this->showMaximized();
 }
 
 signWindow::~signWindow()

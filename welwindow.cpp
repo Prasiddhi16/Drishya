@@ -8,6 +8,7 @@ welWindow::welWindow(const QString &userEmail, QWidget *parent)
     , currentUserEmail(userEmail)
 {
     ui->setupUi(this);
+    this->showMaximized();
 }
 
 welWindow::~welWindow()

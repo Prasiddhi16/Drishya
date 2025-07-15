@@ -67,6 +67,7 @@ revWindow::revWindow(const QString &userEmail, QWidget *parent)
     QChartView *chartView = new QChartView(chart, this);
     chartView->setRenderHint(QPainter::Antialiasing);
     setCentralWidget(chartView);
+    this->showMaximized();
 }
 
 revWindow::~revWindow()

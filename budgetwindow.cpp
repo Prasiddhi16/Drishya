@@ -68,6 +68,7 @@ budgetWindow::budgetWindow(const QString &userEmail, QWidget *parent)
     }
 
     ui->tableView->show();
+    this->showMaximized();
 }
 
 budgetWindow::~budgetWindow()
