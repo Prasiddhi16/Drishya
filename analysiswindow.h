@@ -35,7 +35,11 @@ private:
     QString currentUserEmail;
     int currentUserId;  // ✅ New member variable
 
+<<<<<<< HEAD
     homeWindow    *home_window;
+=======
+    homeWindow    *home_window;     // Safe with forward declaration
+>>>>>>> 0720217313e4c03f7e3f286607cc93392796c99c
     budgetWindow  *budget_window;
     revWindow     *rev_window;
     weeklyWindow  *weekly_window;
