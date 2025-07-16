@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
@@ -23,7 +23,8 @@ class Ui_homeWindow
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -31,16 +32,19 @@ public:
     {
         if (homeWindow->objectName().isEmpty())
             homeWindow->setObjectName("homeWindow");
-        homeWindow->resize(800, 600);
+        homeWindow->resize(961, 740);
         centralwidget = new QWidget(homeWindow);
         centralwidget->setObjectName("centralwidget");
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(66, 60, 211, 20));
+        gridLayoutWidget = new QWidget(centralwidget);
+        gridLayoutWidget->setObjectName("gridLayoutWidget");
+        gridLayoutWidget->setGeometry(QRect(0, -41, 1041, 791));
+        gridLayout = new QGridLayout(gridLayoutWidget);
+        gridLayout->setObjectName("gridLayout");
+        gridLayout->setContentsMargins(0, 0, 0, 0);
         homeWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(homeWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 17));
+        menubar->setGeometry(QRect(0, 0, 961, 17));
         homeWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(homeWindow);
         statusbar->setObjectName("statusbar");
@@ -54,7 +58,6 @@ public:
     void retranslateUi(QMainWindow *homeWindow)
     {
         homeWindow->setWindowTitle(QCoreApplication::translate("homeWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("homeWindow", "Home window", nullptr));
     } // retranslateUi
 
 };

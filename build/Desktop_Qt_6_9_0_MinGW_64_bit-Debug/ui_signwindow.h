@@ -41,6 +41,10 @@ public:
     QLineEdit *lineEdit_3;
     QLabel *label_6;
     QPushButton *pushButton;
+    QLabel *label_7;
+    QLineEdit *lineEdit_4;
+    QLineEdit *lineEdit_5;
+    QLabel *label_8;
     QLabel *label;
     QMenuBar *menubar;
     QMenu *menusignin_page;
@@ -67,7 +71,7 @@ public:
         widget->setObjectName("widget");
         frame = new QFrame(widget);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(10, 20, 371, 501));
+        frame->setGeometry(QRect(10, 0, 371, 521));
         QSizePolicy sizePolicy(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Ignored);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -121,8 +125,30 @@ public:
 ""));
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(150, 370, 61, 31));
+        pushButton->setGeometry(QRect(140, 480, 61, 31));
         pushButton->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 170, 255);\n"
+""));
+        label_7 = new QLabel(frame);
+        label_7->setObjectName("label_7");
+        label_7->setGeometry(QRect(50, 350, 251, 20));
+        label_7->setFont(font);
+        label_7->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 0);\n"
+""));
+        lineEdit_4 = new QLineEdit(frame);
+        lineEdit_4->setObjectName("lineEdit_4");
+        lineEdit_4->setGeometry(QRect(50, 380, 281, 20));
+        lineEdit_4->setStyleSheet(QString::fromUtf8("color:black;"));
+        lineEdit_4->setEchoMode(QLineEdit::EchoMode::Password);
+        lineEdit_5 = new QLineEdit(frame);
+        lineEdit_5->setObjectName("lineEdit_5");
+        lineEdit_5->setGeometry(QRect(50, 440, 281, 20));
+        lineEdit_5->setStyleSheet(QString::fromUtf8("color:black;"));
+        lineEdit_5->setEchoMode(QLineEdit::EchoMode::Password);
+        label_8 = new QLabel(frame);
+        label_8->setObjectName("label_8");
+        label_8->setGeometry(QRect(50, 410, 241, 20));
+        label_8->setFont(font);
+        label_8->setStyleSheet(QString::fromUtf8("color: rgb(0, 0, 0);\n"
 ""));
 
         horizontalLayout->addWidget(widget);
@@ -163,6 +189,8 @@ public:
         label_5->setText(QCoreApplication::translate("signWindow", "<html><head/><body><p><span style=\" font-size:14pt;\">Email:</span></p></body></html>", nullptr));
         label_6->setText(QCoreApplication::translate("signWindow", "<html><head/><body><p><span style=\" font-size:14pt;\">Password:</span></p></body></html>", nullptr));
         pushButton->setText(QCoreApplication::translate("signWindow", "Sign in", nullptr));
+        label_7->setText(QCoreApplication::translate("signWindow", "<html><head/><body><p><span style=\" font-size:14pt;\">Date Of Birth:</span></p></body></html>", nullptr));
+        label_8->setText(QCoreApplication::translate("signWindow", "<html><head/><body><p><span style=\" font-size:14pt;\">Your Pet Name:</span></p><p><br/></p></body></html>", nullptr));
         label->setText(QString());
         menusignin_page->setTitle(QCoreApplication::translate("signWindow", "signin page", nullptr));
     } // retranslateUi

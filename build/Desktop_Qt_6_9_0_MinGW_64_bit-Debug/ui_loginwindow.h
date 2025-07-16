@@ -41,8 +41,8 @@ public:
     QLabel *label_4;
     QLineEdit *lineEdit_2;
     QCheckBox *checkBox;
-    QLabel *label_5;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
     QMenuBar *menubar;
     QMenu *menuLogin_page;
     QStatusBar *statusbar;
@@ -257,38 +257,49 @@ public:
         QBrush brush4(QColor(75, 76, 86, 255));
         brush4.setStyle(Qt::BrushStyle::SolidPattern);
         palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::WindowText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Button, brush1);
         QBrush brush5(QColor(108, 88, 96, 255));
         brush5.setStyle(Qt::BrushStyle::SolidPattern);
         palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Text, brush5);
         palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::ButtonText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Base, brush1);
+        palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::Window, brush1);
         QBrush brush6(QColor(75, 76, 86, 128));
         brush6.setStyle(Qt::BrushStyle::SolidPattern);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette5.setBrush(QPalette::ColorGroup::Active, QPalette::ColorRole::PlaceholderText, brush6);
 #endif
         palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::WindowText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Button, brush1);
         palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Text, brush5);
         palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::ButtonText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Base, brush1);
+        palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::Window, brush1);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette5.setBrush(QPalette::ColorGroup::Inactive, QPalette::ColorRole::PlaceholderText, brush6);
 #endif
         palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::WindowText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Button, brush1);
         palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Text, brush4);
         palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::ButtonText, brush4);
+        palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Base, brush1);
+        palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::Window, brush1);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         palette5.setBrush(QPalette::ColorGroup::Disabled, QPalette::ColorRole::PlaceholderText, brush6);
 #endif
         checkBox->setPalette(palette5);
-        checkBox->setStyleSheet(QString::fromUtf8("color: rgb(75, 76, 86);"));
-        label_5 = new QLabel(frame);
-        label_5->setObjectName("label_5");
-        label_5->setGeometry(QRect(230, 310, 101, 20));
-        label_5->setStyleSheet(QString::fromUtf8("color: rgb(73, 73, 78);"));
+        checkBox->setStyleSheet(QString::fromUtf8("color: rgb(75, 76, 86);\n"
+"background-color: #D9D9D9;\n"
+""));
         pushButton = new QPushButton(frame);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(150, 420, 81, 31));
         pushButton->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 170, 255);\n"
 ""));
+        pushButton_2 = new QPushButton(frame);
+        pushButton_2->setObjectName("pushButton_2");
+        pushButton_2->setGeometry(QRect(225, 310, 91, 20));
+        pushButton_2->setStyleSheet(QString::fromUtf8("QPushButton { border: none; color: blue; background: transparent; text-decoration: underline; }"));
         label_2->raise();
         label->raise();
         lineEdit->raise();
@@ -296,8 +307,8 @@ public:
         label_4->raise();
         lineEdit_2->raise();
         checkBox->raise();
-        label_5->raise();
         pushButton->raise();
+        pushButton_2->raise();
 
         gridLayout->addWidget(widget_2, 0, 0, 2, 1);
 
@@ -328,8 +339,8 @@ public:
         label_3->setText(QCoreApplication::translate("loginWindow", "<html><head/><body><p align=\"center\"><br/><span style=\" font-size:14pt; color:#000000;\">Email :</span></p><p><br/></p></body></html>", nullptr));
         label_4->setText(QCoreApplication::translate("loginWindow", "<html><head/><body><p align=\"center\"><br/><span style=\" font-size:14pt; color:#000000;\">Password :</span></p><p><br/></p></body></html>", nullptr));
         checkBox->setText(QCoreApplication::translate("loginWindow", "Keep me logged in", nullptr));
-        label_5->setText(QCoreApplication::translate("loginWindow", "<html><head/><body><p>Forgot Password?</p></body></html>", nullptr));
         pushButton->setText(QCoreApplication::translate("loginWindow", "Log-In", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("loginWindow", "Forgot Password?", nullptr));
         menuLogin_page->setTitle(QCoreApplication::translate("loginWindow", "Login page", nullptr));
     } // retranslateUi
 

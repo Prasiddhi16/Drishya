@@ -5,8 +5,6 @@
 #include "revwindow.h"
 #include "weeklywindow.h"
 #include "monthlywindow.h"
-<<<<<<< HEAD
-=======
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -14,7 +12,6 @@
 #include <QPushButton>
 #include <QFont>
 #include <QSizePolicy>
->>>>>>> 0720217313e4c03f7e3f286607cc93392796c99c
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -133,11 +130,10 @@ void analysisWindow::on_pushButton_4_clicked()
 
 void analysisWindow::openHome()
 {
-<<<<<<< HEAD
+
    home_window = new homeWindow(currentUserEmail, currentUserId, this);
-=======
-    home_window = new homeWindow(currentUserEmail, this);
->>>>>>> 0720217313e4c03f7e3f286607cc93392796c99c
+
+
     home_window->show();
     this->hide();
 }

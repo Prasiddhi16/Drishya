@@ -193,7 +193,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p><span style=\" font-size:26pt; font-style:italic; color:#000000;\">Making Finance Your Favourite Niche!</span></p></body></html>", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Sign-In", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Sign-Up", nullptr));
         login_win->setText(QCoreApplication::translate("MainWindow", "Log-In", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; font-style:italic; color:#000000;\">WELCOME TO</span></p><p align=\"center\"><span style=\" font-size:72pt; font-weight:700; font-style:italic; color:#000000;\">ARTHA-DRISHYA </span></p></body></html>", nullptr));
         label_3->setText(QString());

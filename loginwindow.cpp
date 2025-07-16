@@ -10,6 +10,7 @@
 #include <QFormLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QSettings>
 #include "homewindow.h"
 
 loginWindow::loginWindow(QWidget *parent)
@@ -21,7 +22,12 @@ loginWindow::loginWindow(QWidget *parent)
     ui->pushButton_2->setText("Forgot Password?");
     ui->pushButton_2->setStyleSheet("QPushButton { border: none; color: blue; background: transparent; text-decoration: underline; }");
 
-   QString dbFilePath = "C:/Users/Lenovo/OneDrive/Documents/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db";
+    // ✅ Restore saved checkbox state
+    QSettings settings("ItsDrishya", "LoginSystem");
+    bool wasChecked = settings.value("keep_logged_in", 0).toInt() == 1;
+    ui->checkBox->setChecked(wasChecked);
+
+    QString dbFilePath = "C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db";
     QFile dbFile(dbFilePath);
     if (!dbFile.exists()) {
         QMessageBox::critical(this, "Database Error", QString("Database file '%1' not found!").arg(dbFilePath));
@@ -33,6 +39,7 @@ loginWindow::loginWindow(QWidget *parent)
 
     if (DBconnection.open()) {
         qDebug() << "Database is connected.";
+        qDebug() << "Using database:" << DBconnection.databaseName();
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to open the database.");
         return;
@@ -42,7 +49,8 @@ loginWindow::loginWindow(QWidget *parent)
         QMessageBox::critical(this, "Database Error", "Table 'user' not found in database!");
         return;
     }
-     this->showMaximized();
+
+    this->showMaximized();
 }
 
 loginWindow::~loginWindow()
@@ -77,16 +85,25 @@ void loginWindow::on_pushButton_clicked()
     qDebug() << "Hashed password:" << hashedPassword;
     qDebug() << "Email:" << Email;
 
-
     if (!query.exec()) {
         QMessageBox::warning(this, "Error", "Failed to execute query.");
         return;
     }
 
     if (query.next()) {
-        int userId = query.value("id").toInt(); // 👈 this extracts the user ID
+        int userId = query.value("id").toInt();
         QMessageBox::information(this, "Login", "Login successful!");
-        homeWindow *home_window = new homeWindow(Email, userId, this); // ✅ now uses the valid userId
+
+        // ✅ Save session if checkbox is checked
+        bool keepLoggedIn = ui->checkBox->isChecked();
+        QSettings settings("ItsDrishya", "LoginSystem");
+        settings.setValue("keep_logged_in", keepLoggedIn ? 1 : 0);
+        if (keepLoggedIn) {
+            settings.setValue("user_id", userId);
+            settings.setValue("email", Email);
+        }
+
+        homeWindow *home_window = new homeWindow(Email, userId, this);
         home_window->show();
         this->hide();
     } else {

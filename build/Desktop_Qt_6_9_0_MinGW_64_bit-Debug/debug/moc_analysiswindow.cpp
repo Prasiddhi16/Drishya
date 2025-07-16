@@ -7,31 +7,6 @@
 *****************************************************************************/
 
 #include "../../../analysiswindow.h"
-#include <QtGui/qtextcursor.h>
-#include <QtGui/qscreen.h>
-#include <QtCharts/qlineseries.h>
-#include <QtCharts/qabstractbarseries.h>
-#include <QtCharts/qvbarmodelmapper.h>
-#include <QtCharts/qboxplotseries.h>
-#include <QtCharts/qcandlestickseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qpieseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qboxplotseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qpieseries.h>
-#include <QtCharts/qpieseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qxyseries.h>
-#include <QtCharts/qxyseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qboxplotseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qpieseries.h>
-#include <QtCore/qabstractitemmodel.h>
-#include <QtCharts/qxyseries.h>
-#include <QtCore/qabstractitemmodel.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -68,7 +43,8 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         "",
         "on_pushButton_2_clicked",
         "on_pushButton_3_clicked",
-        "on_pushButton_4_clicked"
+        "on_pushButton_4_clicked",
+        "openHome"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -80,6 +56,8 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_4_clicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openHome'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -107,6 +85,7 @@ void analysisWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 1: _t->on_pushButton_2_clicked(); break;
         case 2: _t->on_pushButton_3_clicked(); break;
         case 3: _t->on_pushButton_4_clicked(); break;
+        case 4: _t->openHome(); break;
         default: ;
         }
     }
@@ -132,14 +111,14 @@ int analysisWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
