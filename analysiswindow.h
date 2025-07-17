@@ -19,8 +19,8 @@ class analysisWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit analysisWindow(const QString &userEmail, int userId, QWidget *parent = nullptr);
-    // ✅ Updated constructor
+
+    explicit analysisWindow(QString username, QString email, int userId, QWidget *parent = nullptr);
     ~analysisWindow();
 
 private slots:
@@ -32,6 +32,7 @@ private slots:
 
 private:
     Ui::analysisWindow *ui;
+     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;  // ✅ New member variable
 

@@ -6,12 +6,6 @@
 #include "weeklywindow.h"
 #include "monthlywindow.h"
 
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QFrame>
-#include <QPushButton>
-#include <QFont>
-#include <QSizePolicy>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -19,16 +13,20 @@
 #include <QPushButton>
 #include <QFont>
 #include <QSizePolicy>
-analysisWindow::analysisWindow(const QString &userEmail, int userId, QWidget *parent)
+analysisWindow::analysisWindow(QString username, QString email, int userId, QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::analysisWindow)
-    , currentUserEmail(userEmail)
+   , ui(new Ui::analysisWindow)
+    , currentUserName(username)
+    , currentUserEmail(email)
+    , currentUserId(userId)
+
+
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: #000000;"); // Dark app background
 
     // 👋 Greeting label customization
-    ui->label_2->setText("👋 Hello, " + currentUserEmail.section('@', 0, 0) + "!\nThis is what is going on with your finances:");
+    ui->label_2->setText("👋 Hello, " + currentUserName + "!\nThis is what is going on with your finances:");
     ui->label_2->setWordWrap(true);
     ui->label_2->setAlignment(Qt::AlignCenter);
     ui->label_2->setStyleSheet("font-size: 20px; color: #98FF98; font-weight: bold;");
@@ -131,7 +129,7 @@ void analysisWindow::on_pushButton_4_clicked()
 void analysisWindow::openHome()
 {
 
-   home_window = new homeWindow(currentUserEmail, currentUserId, this);
+   home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
 
 
     home_window->show();

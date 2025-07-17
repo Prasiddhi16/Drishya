@@ -1,5 +1,6 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
+#include "homewindow.h"
 #include <QMessageBox>
 #include <QDebug>
 #include <QSqlQuery>
@@ -7,11 +8,11 @@
 #include <QSqlDatabase>
 #include <QFile>
 #include <QCryptographicHash>
+#include <QSettings>
 #include <QFormLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
-#include <QSettings>
-#include "homewindow.h"
+#include <QDialog>
 
 loginWindow::loginWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +23,6 @@ loginWindow::loginWindow(QWidget *parent)
     ui->pushButton_2->setText("Forgot Password?");
     ui->pushButton_2->setStyleSheet("QPushButton { border: none; color: blue; background: transparent; text-decoration: underline; }");
 
-    // ✅ Restore saved checkbox state
     QSettings settings("ItsDrishya", "LoginSystem");
     bool wasChecked = settings.value("keep_logged_in", 0).toInt() == 1;
     ui->checkBox->setChecked(wasChecked);
@@ -37,10 +37,7 @@ loginWindow::loginWindow(QWidget *parent)
     DBconnection = QSqlDatabase::addDatabase("QSQLITE");
     DBconnection.setDatabaseName(dbFilePath);
 
-    if (DBconnection.open()) {
-        qDebug() << "Database is connected.";
-        qDebug() << "Using database:" << DBconnection.databaseName();
-    } else {
+    if (!DBconnection.open()) {
         QMessageBox::critical(this, "Database Error", "Failed to open the database.");
         return;
     }
@@ -53,8 +50,7 @@ loginWindow::loginWindow(QWidget *parent)
     this->showMaximized();
 }
 
-loginWindow::~loginWindow()
-{
+loginWindow::~loginWindow() {
     delete ui;
 }
 
@@ -81,9 +77,6 @@ void loginWindow::on_pushButton_clicked()
     query.prepare("SELECT * FROM user WHERE email = ? AND password = ?");
     query.addBindValue(Email);
     query.addBindValue(hashedPassword);
-    qDebug() << "Entered password:" << Password;
-    qDebug() << "Hashed password:" << hashedPassword;
-    qDebug() << "Email:" << Email;
 
     if (!query.exec()) {
         QMessageBox::warning(this, "Error", "Failed to execute query.");
@@ -92,18 +85,21 @@ void loginWindow::on_pushButton_clicked()
 
     if (query.next()) {
         int userId = query.value("id").toInt();
+        QString userName = query.value("name").toString();
+        QString userEmail = query.value("email").toString();
+
         QMessageBox::information(this, "Login", "Login successful!");
 
-        // ✅ Save session if checkbox is checked
         bool keepLoggedIn = ui->checkBox->isChecked();
         QSettings settings("ItsDrishya", "LoginSystem");
         settings.setValue("keep_logged_in", keepLoggedIn ? 1 : 0);
         if (keepLoggedIn) {
             settings.setValue("user_id", userId);
-            settings.setValue("email", Email);
+            settings.setValue("email", userEmail);
+            settings.setValue("user_name", userName);
         }
 
-        homeWindow *home_window = new homeWindow(Email, userId, this);
+        homeWindow *home_window = new homeWindow(userName, userEmail, userId, this);
         home_window->show();
         this->hide();
     } else {
@@ -140,7 +136,6 @@ void loginWindow::on_pushButton_2_clicked()
     formLayout->addRow("Confirm Password:", confirmPasswordEdit);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    buttonBox->setStyleSheet("QPushButton { color: black; border: 1px solid black; padding: 4px 12px; background-color: white; } QPushButton:hover { background-color: #e0e0e0; }");
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     formLayout->addWidget(buttonBox);
 

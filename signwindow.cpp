@@ -142,6 +142,6 @@ void signWindow::on_pushButton_clicked()
 
     // Pass email + userId to welcome window
     this->hide();
-    wel_window = new welWindow(email, userId, this);
+    wel_window = new welWindow(name,email, userId, this);
     wel_window->show();
 }
