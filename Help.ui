@@ -10,6 +10,52 @@
     <height>832</height>
    </rect>
   </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>19</red>
+        <green>27</green>
+        <blue>57</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>19</red>
+        <green>27</green>
+        <blue>57</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>19</red>
+        <green>27</green>
+        <blue>57</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>19</red>
+        <green>27</green>
+        <blue>57</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -17,10 +63,10 @@
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1511</width>
-      <height>791</height>
+      <x>0</x>
+      <y>0</y>
+      <width>1541</width>
+      <height>841</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -29,32 +75,38 @@
        <widget class="QWidget" name="widget_2" native="true">
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1351</width>
-          <height>171</height>
+          <x>10</x>
+          <y>-40</y>
+          <width>1551</width>
+          <height>161</height>
          </rect>
         </property>
-        <widget class="QLineEdit" name="searchlineedit">
+        <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
-           <x>530</x>
-           <y>110</y>
-           <width>431</width>
-           <height>41</height>
+           <x>-120</x>
+           <y>40</y>
+           <width>1201</width>
+           <height>101</height>
           </rect>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: white;
-padding: 10px 12px;
-font-size: 16px;
-border: none;
-border-radius: 6px;
-min-width: 300px;
+          <string notr="true">
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                                stop:0 #FF6A3D,
+                                stop:0.5 #F6E9F0,
+                                stop:1 #3D9EFF);
+
+
+
+    font-size: 28px;
+    font-weight: bold;
+    color: #1E1E1E;
+
 </string>
          </property>
-         <property name="placeholderText">
-          <string>🔍 Search</string>
+         <property name="text">
+          <string>                                                                       How can we help you?</string>
          </property>
         </widget>
        </widget>
@@ -64,10 +116,10 @@ min-width: 300px;
         </property>
         <property name="geometry">
          <rect>
-          <x>0</x>
-          <y>190</y>
-          <width>1511</width>
-          <height>581</height>
+          <x>10</x>
+          <y>120</y>
+          <width>1081</width>
+          <height>501</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -82,16 +134,22 @@ border: 1px solid #90caf9;   /* Light blue border */
 </string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1443</width>
-           <height>373</height>
+           <width>1013</width>
+           <height>301</height>
           </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>200</height>
+          </size>
          </property>
          <attribute name="label">
           <string>🔐 Account &amp; Login</string>
@@ -104,8 +162,8 @@ border: 1px solid #90caf9;   /* Light blue border */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1441</width>
-            <height>371</height>
+            <width>1181</width>
+            <height>301</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -128,7 +186,7 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and helpful insights.&lt;/p&gt;&lt;p&gt;➤How to Sign Up?&lt;/p&gt;&lt;p&gt;Tap “Sign Up,” enter your email and password, and confirm your details. &lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;Enter your pet name,date of birth or email to access your old account&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and  insights.&lt;/p&gt;&lt;p&gt;➤How to Sign Up?&lt;/p&gt;&lt;p&gt;Tap “Sign Up,” enter your email and password, and confirm your details. &lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;Enter your pet name,date of birth or email to access your old account&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::TextFormat::MarkdownText</enum>
@@ -140,8 +198,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1443</width>
-           <height>373</height>
+           <width>1013</width>
+           <height>301</height>
           </rect>
          </property>
          <attribute name="label">
@@ -152,8 +210,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1441</width>
-            <height>371</height>
+            <width>1181</width>
+            <height>301</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -176,7 +234,7 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤ What is the Record Page?&lt;/p&gt;&lt;p&gt;This is where you log every income or expense to keep your financial records up to date.&lt;/p&gt;&lt;p&gt;➤ Adding a Transaction&lt;/p&gt;&lt;p&gt;Choose income or expense, fill in amount, category, date, and reviw then tap “Add Record&amp;quot;.&lt;/p&gt;&lt;p&gt;➤ Editing the income or expenses field&lt;/p&gt;&lt;p&gt;Go to the Edit income or Edit expenses section to edit the previous values &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;➤ What is the Record Page?&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;This is where you log every income or expense to keep your financial records up to date.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;➤ Adding a Transaction&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Choose income or expense, fill in amount, category, date, and reviw then tap “Add Record&amp;quot;.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;➤ Editing the income or expenses field&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Go to the Edit income or Edit expenses section to edit the previous values &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </widget>
@@ -185,8 +243,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1443</width>
-           <height>373</height>
+           <width>1013</width>
+           <height>301</height>
           </rect>
          </property>
          <attribute name="label">
@@ -197,8 +255,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1441</width>
-            <height>371</height>
+            <width>1181</width>
+            <height>301</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -230,8 +288,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1443</width>
-           <height>373</height>
+           <width>1013</width>
+           <height>301</height>
           </rect>
          </property>
          <attribute name="label">
@@ -242,8 +300,8 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>1441</width>
-            <height>371</height>
+            <width>1191</width>
+            <height>301</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -270,34 +328,6 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
           </property>
          </widget>
         </widget>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>1921</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
-                                stop:0 #FF6A3D,
-                                stop:0.5 #F6E9F0,
-                                stop:1 #3D9EFF);
-
-
-
-    font-size: 28px;
-    font-weight: bold;
-    color: #1E1E1E;
-
-</string>
-        </property>
-        <property name="text">
-         <string>                                                                       How can we help you?</string>
-        </property>
        </widget>
       </widget>
      </item>
