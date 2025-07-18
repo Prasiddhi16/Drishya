@@ -1,11 +1,9 @@
-#include "mainwindow.h"
-
+#include "RecordWindow.h"
 #include <QApplication>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
-    MainWindow w;
+    RecordWindow w;
     w.show();
     return a.exec();
 }

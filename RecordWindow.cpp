@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "RecordWindow.h"
+#include "ui_RecordWindow.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -14,10 +14,12 @@
 #include <QLineEdit>
 #include <QDateTimeEdit>
 #include <QComboBox>
+#include <QPushButton>
 
-MainWindow::MainWindow(QWidget *parent)
+
+RecordWindow::RecordWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::RecordWindow)
 {
     ui->setupUi(this);
     this->showMaximized();
@@ -66,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // Optional: connect signals
-    // connect(buttons[2], &QPushButton::clicked, this, &MainWindow::openAnalytics);
+    // connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
 
     // Content Area (where your original UI lives)
     QWidget *contentWidget = new QWidget;
@@ -83,17 +85,18 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCentralWidget(mainCentral);
 
     // Button connections
-    connect(ui->addRecordButton, &QPushButton::clicked, this, &MainWindow::addRecord);
-    connect(ui->editIncomeButton, &QPushButton::clicked, this, &MainWindow::editIncome);
-    connect(ui->editExpenseButton, &QPushButton::clicked, this, &MainWindow::editExpense);
+    connect(ui->addRecordButton, &QPushButton::clicked, this, &RecordWindow::addRecord);
+    connect(ui->editIncomeButton, &QPushButton::clicked, this, &RecordWindow::editIncome);
+    connect(ui->editExpenseButton, &QPushButton::clicked, this, &RecordWindow::editExpense);
 }
 
 
-MainWindow::~MainWindow()
+RecordWindow::~RecordWindow()
 {
     delete ui;
 }
-void MainWindow::addRecord()
+
+void RecordWindow::addRecord()
 {
     QString incomeAmountStr = ui->incomeAmount->text().trimmed();
     QString incomeSource = ui->incomeSource->currentText().trimmed();
@@ -170,7 +173,6 @@ void MainWindow::addRecord()
         QMessageBox::critical(this, "Database Error", query.lastError().text());
     }
     else{
-
         QMessageBox msgBox(this);
         msgBox.setWindowTitle("Success");
         msgBox.setText("Record added successfully.");
@@ -200,8 +202,9 @@ void MainWindow::addRecord()
         msgBox.exec();
     }
 }
-bool MainWindow::showEditDialog(const QString& title, const QString& labelText,
-                                QString& amount, QString& sourceOrCategory, QString& timestamp)
+
+bool RecordWindow::showEditDialog(const QString& title, const QString& labelText,
+                                  QString& amount, QString& sourceOrCategory, QString& timestamp)
 {
     QDialog dialog(this);
     dialog.setWindowTitle(title);
@@ -236,9 +239,7 @@ bool MainWindow::showEditDialog(const QString& title, const QString& labelText,
     }
 )");
 
-
-
-  QFormLayout* formLayout = new QFormLayout(&dialog);
+    QFormLayout* formLayout = new QFormLayout(&dialog);
 
     QLineEdit* amountEdit = new QLineEdit(amount);
 
@@ -278,7 +279,7 @@ bool MainWindow::showEditDialog(const QString& title, const QString& labelText,
     return false;
 }
 
-void MainWindow::editIncome()
+void RecordWindow::editIncome()
 {
     QSqlQuery query("SELECT id, income_amount, income_source, timestamp "
                     "FROM records WHERE income_amount IS NOT NULL "
@@ -309,7 +310,6 @@ void MainWindow::editIncome()
         update.addBindValue(timestamp);
         update.addBindValue(id);
 
-
         if (!update.exec()) {
             QMessageBox::critical(this, "Error", "Failed to update income.");
         } else {
@@ -323,7 +323,7 @@ void MainWindow::editIncome()
     }
 }
 
-void MainWindow::editExpense()
+void RecordWindow::editExpense()
 {
     QSqlQuery query("SELECT id, expenses_amount, expenses_category, timestamp "
                     "FROM records WHERE expenses_amount IS NOT NULL "

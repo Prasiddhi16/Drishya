@@ -5,16 +5,11 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = IncomeExpenseTracker
 TEMPLATE = app
 
-SOURCES += \
-    main.cpp \
-    mainwindow.cpp
-
+SOURCES +=
+main_moduleB.cpp
+RecordWindow.cpp
 HEADERS += \
-    mainwindow.h
+    RecordWindow.h
 
 FORMS += \
-    mainwindow.ui
-
-RESOURCES += \
-    ADrecord.qrc \
-    Rphoto.qrc
+    RecordWindow.ui

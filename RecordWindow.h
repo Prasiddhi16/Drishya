@@ -1,19 +1,19 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef RECORD_WINDOW_H
+#define RECORD_WINDOW_H
 
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class RecordWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class RecordWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    RecordWindow(QWidget *parent = nullptr);
+    ~RecordWindow();
 
 private slots:
     void addRecord();
@@ -21,7 +21,7 @@ private slots:
     void editExpense();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::RecordWindow *ui;
     QString userId;
     QString userEmail;
 
@@ -30,4 +30,4 @@ private:
                         QString& amount, QString& sourceOrCategory, QString& timestamp);
 };
 
-#endif // MAINWINDOW_H
+#endif // RECORD_WINDOW_H

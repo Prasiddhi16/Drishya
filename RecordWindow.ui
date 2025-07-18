@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>RecordWindow</class>
+ <widget class="QMainWindow" name="RecordWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -612,7 +612,7 @@ color: red;
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="ADrecord.qrc">:/new/prefix1/record.png</pixmap>
+     <pixmap>:/new/prefix1/record.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -621,8 +621,6 @@ color: red;
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="ADrecord.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
