@@ -1,9 +1,0 @@
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/arthadrishya.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/install.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/arthadrishya_autogen_timestamp_deps.dir
-C:/Users/ushma/OneDrive/Documents/arthadrishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/arthadrishya_autogen.dir
