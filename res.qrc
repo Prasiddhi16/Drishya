@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>tax/taxation.png</file>
+    </qresource>
+</RCC>

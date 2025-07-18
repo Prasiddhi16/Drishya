@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/Compare_contrast.png</file>
+        <file>images/Expense_tracker.png</file>
+        <file>images/expert_insight .png</file>
+    </qresource>
+</RCC>
