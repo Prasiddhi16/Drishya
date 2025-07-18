@@ -14,7 +14,7 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 
 # === Include all project source files ===
 set(PROJECT_SOURCES
-    main.cpp
+    main_moduleA.cpp
 
     # Source and header files
     visions.cpp

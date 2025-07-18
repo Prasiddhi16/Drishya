@@ -8,17 +8,18 @@
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
-class MainWindow;
+class Visions;
 }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class Visions : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+
+    explicit Visions(QWidget *parent = nullptr);
+    ~Visions();
 
 public slots:
     void onGoalSet(const struct  GoalData &data);
@@ -38,9 +39,8 @@ private slots:
     void on_toolButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::Visions *ui;
     QVector<GoalData> goalDataList;
-
     QSqlDatabase db;
 
     // Database and data management methods

@@ -1,5 +1,5 @@
 #include "visions.h"
-#include "ui_visions.h"
+#include "ui_visions.h" // This line would typically change based on your .ui file output
 #include "insertt.h"
 #include "profile.h"
 #include "goaldata.h"
@@ -14,9 +14,9 @@
 #include<QScrollArea>
 
 
-MainWindow::MainWindow(QWidget *parent)
+Visions::Visions(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::Visions) // Changed UI class instantiation
 {
     ui->setupUi(this);
 
@@ -59,39 +59,12 @@ MainWindow::MainWindow(QWidget *parent)
     // Initialize with 6 empty GoalData objects
     goalDataList.resize(6);
 
-
-
-   /* // STEP 1: Create the scroll area
-    QScrollArea *scrollArea = new QScrollArea(this);
-    scrollArea->setWidgetResizable(true);
-    scrollArea->setFrameShape(QFrame::NoFrame);
-
-    // STEP 2: Create the container widget inside scroll area
-    QWidget *scrollContent = new QWidget();
-    QVBoxLayout *layout = new QVBoxLayout(scrollContent);
-    layout->setSpacing(15); // space between goal boxes
-
-    // STEP 3: Add your goal boxes to the layout
-    layout->addWidget(ui->groupBox_1);
-    layout->addWidget(ui->groupBox_2);
-    layout->addWidget(ui->groupBox_3);
-    layout->addWidget(ui->groupBox_4);
-    layout->addWidget(ui->groupBox_5);
-    layout->addWidget(ui->groupBox_6);
-
-    // STEP 4: Finalize layout
-    scrollContent->setLayout(layout);
-    scrollArea->setWidget(scrollContent);
-
-    // STEP 5: Add scrollArea to main layout
-    ui->gridLayoutWidget->addWidget(scrollArea); // or whatever layout your UI is using*/
-
     QList<QPushButton*> addButtons;
     addButtons << ui->add << ui->add_2 << ui->add_3
                << ui->add_4 << ui->add_5 << ui->add_6;
 
     for(QPushButton* button : addButtons) {
-        connect(button, &QPushButton::clicked, this, &MainWindow::onAddButtonClicked);
+        connect(button, &QPushButton::clicked, this, &Visions::onAddButtonClicked); // Changed class scope
     }
 
     // Pass an empty GoalData to trigger default text display
@@ -103,17 +76,17 @@ MainWindow::MainWindow(QWidget *parent)
     if (openDatabase()) {
         loadGoals();
     }
-
-
 }
 
-MainWindow::~MainWindow()
+
+Visions::~Visions()
 {
     closeDatabase();
     delete ui;
 }
 
-void MainWindow::onAddButtonClicked() {
+
+void Visions::onAddButtonClicked() {
     int slot = findNextAvailableSlot();
     if (slot == -1) {
         QMessageBox::information(this, "Limit Reached", "You have reached the maximum of 6 goals.");
@@ -121,21 +94,22 @@ void MainWindow::onAddButtonClicked() {
     }
 
     Insertt *dialog = new Insertt(this);
-    connect(dialog, &Insertt::goalSet, this, [=](const GoalData &data){
+    connect(dialog, &Insertt::goalSet, this, [=](const GoalData &data){ // Changed class scope
         handleGoalSet(slot, data);
     });
     dialog->exec();
 }
 
-void MainWindow::on_delete_1_clicked() { deleteGoal(1); }
-void MainWindow::on_delete_2_clicked() { deleteGoal(2); }
-void MainWindow::on_delete_3_clicked() { deleteGoal(3); }
-void MainWindow::on_delete_4_clicked() { deleteGoal(4); }
-void MainWindow::on_delete_5_clicked() { deleteGoal(5); }
-void MainWindow::on_delete_6_clicked() { deleteGoal(6); }
+// Changed class name in method definitions
+void Visions::on_delete_1_clicked() { deleteGoal(1); }
+void Visions::on_delete_2_clicked() { deleteGoal(2); }
+void Visions::on_delete_3_clicked() { deleteGoal(3); }
+void Visions::on_delete_4_clicked() { deleteGoal(4); }
+void Visions::on_delete_5_clicked() { deleteGoal(5); }
+void Visions::on_delete_6_clicked() { deleteGoal(6); }
 
 // A generic slot to handle goal data from any button
-void MainWindow::handleGoalSet(int goalIndex, const GoalData &data) {
+void Visions::handleGoalSet(int goalIndex, const GoalData &data) {
     if (goalIndex < 1 || goalIndex > 6) return;
 
     goalDataList[goalIndex - 1] = data;
@@ -144,7 +118,8 @@ void MainWindow::handleGoalSet(int goalIndex, const GoalData &data) {
 }
 
 //print data
-void MainWindow::updateGoalUI(int goalIndex, const GoalData &data)
+
+void Visions::updateGoalUI(int goalIndex, const GoalData &data)
 {
     if (goalIndex < 1 || goalIndex > 6) return;
 
@@ -181,15 +156,6 @@ void MainWindow::updateGoalUI(int goalIndex, const GoalData &data)
     if (data.name.isEmpty()) {
         stackedWidgets[goalIndex]->setCurrentIndex(0); // Show placeholder
         progressBars[goalIndex]->setVisible(false);
-        /*goalNameLabels[goalIndex]->clear();
-        incomeLabels[goalIndex]->clear();
-        downpaymentLabels[goalIndex]->clear();
-        remainingLabels[goalIndex]->clear();
-        monthLabels[goalIndex]->clear();
-        progressBars[goalIndex]->setValue(0);
-        progressBars[goalIndex]->setVisible(false);
-        return;
-    }*/
     }else { // Display actual goal data
         stackedWidgets[goalIndex]->setCurrentIndex(1);
         goalNameLabels[goalIndex]->setText(data.name.toUpper());
@@ -204,10 +170,7 @@ void MainWindow::updateGoalUI(int goalIndex, const GoalData &data)
 }
 
 
-// Remove the separate clearGoalUI function if you still have it,
-// as its functionality is now fully integrated into updateGoalUI.
-
-int MainWindow::findNextAvailableSlot() {
+int Visions::findNextAvailableSlot() {
     for (int i = 0; i < goalDataList.size(); ++i) {
         if (goalDataList[i].name.isEmpty()) {
             return i + 1; // Return 1-based index
@@ -217,7 +180,8 @@ int MainWindow::findNextAvailableSlot() {
 }
 
 //Database
-bool MainWindow::openDatabase() {
+// Changed class name in method definition
+bool Visions::openDatabase() {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("goals.db");
     if (!db.open()) {
@@ -227,12 +191,14 @@ bool MainWindow::openDatabase() {
     return true;
 }
 
-void MainWindow::closeDatabase() {
+// Changed class name in method definition
+void Visions::closeDatabase() {
     if (db.isOpen()) {
         db.close();
     }
 }
-void MainWindow::loadGoals() {
+// Changed class name in method definition
+void Visions::loadGoals() {
     for (int i = 1; i <= 6; ++i) {
         updateGoalUI(i, GoalData());
     }
@@ -270,7 +236,7 @@ void MainWindow::loadGoals() {
 
 }
 
-void MainWindow::saveGoal(int goalIndex, const GoalData &data) {
+void Visions::saveGoal(int goalIndex, const GoalData &data) {
     QString goalId = data.id.isEmpty() ? QUuid::createUuid().toString(QUuid::WithoutBraces) : data.id;
 
     QSqlQuery query;
@@ -287,7 +253,8 @@ void MainWindow::saveGoal(int goalIndex, const GoalData &data) {
     }
 }
 
-void MainWindow::deleteGoal(int goalIndex) {
+
+void Visions::deleteGoal(int goalIndex) {
     if (goalIndex < 1 || goalIndex > 6) return;
 
     QString goalId = goalDataList[goalIndex - 1].id;
@@ -330,11 +297,12 @@ void MainWindow::deleteGoal(int goalIndex) {
         }
     }
 }
-void MainWindow::on_toolButton_clicked()
+
+void Visions::on_toolButton_clicked()
 {
-    profile *p=new profile(this);
+    profile *p = new profile(this);
     p->setWindowFlags(Qt::Popup);
-    QPoint globalPos=ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
+    QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
     p->move(globalPos);
     p->show();
 }
