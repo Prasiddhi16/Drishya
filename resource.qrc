@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/goal2.jpg</file>
+        <file>img/real estate.jpg</file>
+        <file>img/dream car.jpg</file>
+        <file>img/dream vacation.jpg</file>
+        <file>img/emergency.jpg</file>
+        <file>img/report.png</file>
+        <file>img/details.png</file>
+        <file>img/edit.png</file>
+        <file>img/Privacy.png</file>
+        <file>img/swap.png</file>
+        <file>img/logout.png</file>
+    </qresource>
+</RCC>
