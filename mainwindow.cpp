@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->showMaximized();
-    // 🧼 Removed session-check logic; now handled in main.cpp
+
 }
 
 MainWindow::~MainWindow()
@@ -20,7 +20,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_login_win_clicked()
 {
     this->hide();
-    login_window = new loginWindow();  // No parent, allows complete independence
+    login_window = new loginWindow();
     login_window->show();
 }
 
