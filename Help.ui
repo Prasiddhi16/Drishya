@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Help</class>
+ <widget class="QMainWindow" name="Help">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -82,7 +82,7 @@ border: 1px solid #90caf9;   /* Light blue border */
 </string>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
@@ -128,7 +128,7 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and helpful insights.&lt;/p&gt;&lt;p&gt;➤How to Sign Up?&lt;/p&gt;&lt;p&gt;Tap “Sign Up,” enter your email and password, and confirm your details. Verify your email (if needed) to activate your account.&lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;....&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and helpful insights.&lt;/p&gt;&lt;p&gt;➤How to Sign Up?&lt;/p&gt;&lt;p&gt;Tap “Sign Up,” enter your email and password, and confirm your details. &lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;Enter your pet name,date of birth or email to access your old account&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::TextFormat::MarkdownText</enum>
@@ -136,6 +136,14 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
          </widget>
         </widget>
         <widget class="QWidget" name="Page2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>1443</width>
+           <height>373</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string> 💰 Transactions &amp; Records</string>
          </attribute>
@@ -168,11 +176,19 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤ What is the Record Page?&lt;/p&gt;&lt;p&gt;This is where you log every income or expense to keep your financial records up to date.&lt;/p&gt;&lt;p&gt;➤ Adding a Transaction&lt;/p&gt;&lt;p&gt;Choose income or expense, fill in amount, category, date, and reviw then tap “Add Record&amp;quot;.&lt;/p&gt;&lt;p&gt;➤ Editing or Deleting a Transaction&lt;/p&gt;&lt;p&gt;Go to the Analyze or History page, tap a transaction to edit or delete it using the pencil or trash icon.&lt;/p&gt;&lt;p&gt;➤ Managing Accounts&lt;/p&gt;&lt;p&gt;From Settings &amp;gt; Accounts, you can add your cash, bank, or credit card accounts and assign them when recording transactions&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤ What is the Record Page?&lt;/p&gt;&lt;p&gt;This is where you log every income or expense to keep your financial records up to date.&lt;/p&gt;&lt;p&gt;➤ Adding a Transaction&lt;/p&gt;&lt;p&gt;Choose income or expense, fill in amount, category, date, and reviw then tap “Add Record&amp;quot;.&lt;/p&gt;&lt;p&gt;➤ Editing the income or expenses field&lt;/p&gt;&lt;p&gt;Go to the Edit income or Edit expenses section to edit the previous values &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </widget>
         <widget class="QWidget" name="page_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>1443</width>
+           <height>373</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string> 📊 Reports &amp; Insights</string>
          </attribute>
@@ -205,7 +221,7 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤ What is the Analyze Page?&lt;/p&gt;&lt;p&gt;View summaries of your income, expenses, and net balance through easy charts and dashboards.&lt;/p&gt;&lt;p&gt;➤ Spending Breakdown by Category&lt;/p&gt;&lt;p&gt;See where your money goes with pie charts and bars showing each category’s share (e.g., Food, Rent).&lt;/p&gt;&lt;p&gt;➤ Income vs. Expense Trends&lt;/p&gt;&lt;p&gt;View your financial flow over time — monthly or yearly trends to help understand saving vs. spending.&lt;/p&gt;&lt;p&gt;➤ Budgets &amp;amp; Limits&lt;/p&gt;&lt;p&gt;Set budget limits per category and track your usage. Alerts will notify you if you’re close to overspending.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤ What is the Analyze Page?&lt;/p&gt;&lt;p&gt;View summaries of your income, expenses, and net balance through easy charts and dashboards.&lt;/p&gt;&lt;p&gt;➤ Spending Breakdown by Category&lt;/p&gt;&lt;p&gt;See where your money goes with pie charts and bars showing each category’s share (e.g., Food, Rent).&lt;/p&gt;&lt;p&gt;➤ Income vs. Expense Trends&lt;/p&gt;&lt;p&gt;View your financial flow over time — monthly or yearly trends to help understand saving vs. spending.&lt;/p&gt;&lt;p&gt;➤ Budgets &amp;amp; Limits&lt;/p&gt;&lt;p&gt;Set budget limits per category and track your usage. &lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </widget>
@@ -281,19 +297,6 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
         </property>
         <property name="text">
          <string>                                                                       How can we help you?</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="lineEdit">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>120</y>
-          <width>361</width>
-          <height>51</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>🔍 Search</string>
         </property>
        </widget>
       </widget>
