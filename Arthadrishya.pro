@@ -15,7 +15,7 @@ SOURCES += \
     finaldial.cpp \
     graph.cpp \
     history.cpp \
-    main.cpp \
+    main_moduleC.cpp \
     review.cpp \
     secdialog.cpp \
     taxdialog.cpp \
