@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1498</width>
+    <height>836</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:		#1c2833</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>40</y>
+      <width>731</width>
+      <height>781</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #E0E0E0;
+
+    
+</string>
+    </property>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>781</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+background-color: rgb(214, 208, 222);</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Income</string>
+      </attribute>
+      <widget class="QPushButton" name="editIncomeButton">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>240</y>
+         <width>231</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">   font-size:30px;
+    background-color: white;  
+    color: green;            
+    border: 1px solid #CCCCCC;
+    font-family: &quot;Consolas&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Edit income</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>150</y>
+         <width>121</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black;
+</string>
+       </property>
+       <property name="text">
+        <string>Currency  :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>141</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black;</string>
+       </property>
+       <property name="text">
+        <string> Amount :</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="incomeSource">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>80</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    font-family: &quot;Rancho&quot;;
+    font-size: 16px;
+    color: black;
+    background: white;
+    padding: 5px;
+    border: 1px solid #d0d0d0;
+}
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Salary</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Business </string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Interest</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Dividends</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Retirement Funds</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Commisions</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Others</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="incomeCurrency">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>140</y>
+         <width>181</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    font-family: &quot;Rancho&quot;;
+    font-size: 16px;
+    color: black;
+    background: white;
+    padding: 5px;
+    border: 1px solid #d0d0d0;
+}
+
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>NPR</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLineEdit" name="incomeAmount">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>30</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">   font-size:16px;
+    background-color: white;  
+    color: black;            
+    border: 1px solid #CCCCCC;
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>101</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black
+</string>
+       </property>
+       <property name="text">
+        <string>Sources :</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Expenses</string>
+      </attribute>
+      <widget class="QComboBox" name="expenseCategory">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>80</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    font-family: &quot;Rancho&quot;;
+    font-size: 16px;
+    color: black;
+    background: white;
+    padding: 5px;
+    border: 1px solid #d0d0d0;
+}</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Food</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Shopping</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Housing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Entertainment</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Transport</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Electronics</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Investment</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Others</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="expenseCurrency">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>140</y>
+         <width>151</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+    font-family: &quot;Rancho&quot;;
+    font-size: 16px;
+    color: black;
+    background: white;
+    padding: 5px;
+    border: 1px solid #d0d0d0;
+}
+
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>NPR</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QPushButton" name="editExpenseButton">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>200</y>
+         <width>231</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">   font-size:30px;
+    background-color: white;  
+    color: green;            
+    border: 1px solid #CCCCCC;
+    font-family: &quot;Consolas&quot;;</string>
+       </property>
+       <property name="text">
+        <string>Edit expenses</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black;</string>
+       </property>
+       <property name="text">
+        <string>Amount   :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>150</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black;</string>
+       </property>
+       <property name="text">
+        <string>Currency   :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>131</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-size: 22px;
+font-family: &quot;Rancho&quot;;
+color: black;
+</string>
+       </property>
+       <property name="text">
+        <string>Category    :</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="expenseAmount">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>30</y>
+         <width>141</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">
+   font-size:18px;
+    background-color: white;  
+    color: black;            
+    border: 1px solid #CCCCCC;
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>370</y>
+       <width>231</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 26px;
+font-family: &quot;Rancho&quot;;
+color: red;
+   </string>
+     </property>
+     <property name="text">
+      <string>ID/Reference No:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="referenceNumber">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>420</y>
+       <width>291</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">   font-size:18px;
+    background-color: white;  
+    color: black;            
+    border: 1px solid #CCCCCC;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>370</y>
+       <width>181</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 26px;
+font-family: &quot;Rancho&quot;;
+color: red;</string>
+     </property>
+     <property name="text">
+      <string>Review  :</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="review">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>410</y>
+       <width>281</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">   font-size:18px;
+    background-color: white;  
+    color: black;            
+    border: 1px solid #CCCCCC;
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QDateTimeEdit" name="timestamp">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>520</y>
+       <width>201</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">    background-color: white;  
+    font-size: 16px;
+    font-family: &quot;Rancho&quot;;
+    color: black;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>490</y>
+       <width>161</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size: 26px;
+font-family: &quot;Rancho&quot;;
+color: red;
+</string>
+     </property>
+     <property name="text">
+      <string>Timestamp</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addRecordButton">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>630</y>
+       <width>251</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">   font-size:30px;
+    background-color:  #B55D60;
+    
+    border: 1px solid #CCCCCC;
+    font-family: &quot;Consolas&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Add record</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>-70</x>
+      <y>40</y>
+      <width>1601</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+    background-color: #00FFFF;
+    min-height: 2px;  /* Line thickness */
+    max-height: 2px;
+    border: none;</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Orientation::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>0</y>
+      <width>261</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">    color:  red;
+    font-weight: bold;
+    font-size: 30px;
+</string>
+    </property>
+    <property name="text">
+     <string>FINANCE RECORD</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>170</y>
+      <width>771</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="ADrecord.qrc">:/new/prefix1/record.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="ADrecord.qrc"/>
+ </resources>
+ <connections/>
+</ui>
