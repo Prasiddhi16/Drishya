@@ -157,6 +157,9 @@ void loginWindow::on_pushButton_2_clicked()
 
         if (query.exec() && query.next()) {
             QMessageBox::information(&dialog, "Verified", "Identity verified. You may enter your new password.");
+            QMessageBox::information(&dialog, "Password Requirements",
+                                     "Your new password must be at least 8 characters long and contain at least 3 numbers.");
+
             newPasswordEdit->setVisible(true);
             confirmPasswordEdit->setVisible(true);
             buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
@@ -173,6 +176,11 @@ void loginWindow::on_pushButton_2_clicked()
         QString newPassword = newPasswordEdit->text().trimmed();
         QString confirmPassword = confirmPasswordEdit->text().trimmed();
 
+        if (newPassword.length() < 8 ||
+            std::count_if(newPassword.begin(), newPassword.end(), [](const QChar &ch) { return ch.isDigit(); }) < 3) {
+            QMessageBox::warning(&dialog, "Weak Password", "Password must be at least 8 characters and include at least 3 numbers.");
+            return;
+        }
         if (newPassword.isEmpty() || confirmPassword.isEmpty()) {
             QMessageBox::warning(&dialog, "Missing Input", "Please enter and confirm your new password.");
             return;

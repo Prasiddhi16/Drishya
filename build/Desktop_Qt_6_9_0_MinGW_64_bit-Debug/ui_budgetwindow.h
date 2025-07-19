@@ -54,6 +54,7 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         label = new QLabel(centralwidget);
         label->setObjectName("label");
+        label->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));
 
         verticalLayout->addWidget(label);
 
@@ -93,7 +94,7 @@ public:
     void retranslateUi(QMainWindow *budgetWindow)
     {
         budgetWindow->setWindowTitle(QCoreApplication::translate("budgetWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("budgetWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt; color:#000000;\">Expense Review</span></p></body></html>", nullptr));
+        label->setText(QCoreApplication::translate("budgetWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:36pt; color:#ffffff;\">Expense Review</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

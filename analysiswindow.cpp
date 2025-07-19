@@ -7,24 +7,6 @@
 #include "monthlywindow.h"
 #include "RecordWindow.h"
 #include "visions.h"
-#include"review.h"
-
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QFrame>
-#include <QPushButton>
-#include <QFont>
-#include <QSizePolicy>
-
-#include "analysiswindow.h"
-#include "ui_analysiswindow.h"
-#include "homewindow.h"
-#include "budgetwindow.h"
-#include "revwindow.h"
-#include "weeklywindow.h"
-#include "monthlywindow.h"
-#include "RecordWindow.h"
-#include "visions.h"
 #include "review.h"
 
 #include <QHBoxLayout>
@@ -35,6 +17,9 @@
 #include <QSizePolicy>
 #include <QTimer>
 #include <QDate>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
 
 analysisWindow::analysisWindow(QString username, QString email, int userId, QWidget *parent)
     : QMainWindow(parent)
@@ -45,6 +30,21 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: #000000;"); // Dark background
+    // ✅ Ensure persistent database connection
+    QString connectionName = "qt_sql_shared_connection";
+    QSqlDatabase db;
+
+    if (QSqlDatabase::contains(connectionName)) {
+        db = QSqlDatabase::database(connectionName);
+    } else {
+        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+    }
+
+    if (!db.open()) {
+        qDebug() << "❌ Failed to open database in analysisWindow:" << db.lastError().text();
+        return; // Prevent broken queries
+    }
 
     // 👋 Greeting
     ui->label_2->setText("👋 Hello, " + currentUserName + "!\nThis is what is going on with your finances:");
@@ -87,29 +87,26 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     setCentralWidget(centralWidget);
     this->showMaximized();
 
-    QDate today = QDate::currentDate();
-    QDate startOfWeek = today.addDays(-today.dayOfWeek() + 1); // Monday-start
-    QDate endOfWeek = startOfWeek.addDays(6);
-    QSqlQuery query;
-    query.prepare("SELECT SUM(espense_amount) FROM records WHERE timestamp >= :start AND timestamp <= :end");
-    query.bindValue(":start", startOfWeek.toString("yyyy-MM-dd"));
-    query.bindValue(":end", endOfWeek.toString("yyyy-MM-dd"));
+    // 🔄 Start expense auto-update
+    QTimer *expenseTimer = new QTimer(this);
+    connect(expenseTimer, &QTimer::timeout, this, &analysisWindow::updateWeeklyExpense);
+    expenseTimer->start(5000);
+qDebug() << "analysisWindow initialized with userId:" << currentUserId;    // refresh every 5 seconds
+    updateWeeklyExpense(); // Initial call
 
-    double weeklyExpense = 0.0;
-    if (query.exec() && query.next()) {
-        weeklyExpense = query.value(0).toDouble();
-    }
-    ui->expense_label->setText("Weekly Expense: Rs " + QString::number(weeklyExpense));
-     ui->expense_label->setStyleSheet("font-size: 20px;font-weight: bold;");
     // 📊 Percentage comparison
     double thisWeekTotal = 0.0, lastWeekTotal = 0.0;
-    QSqlQuery totalQuery;
-
-    totalQuery.exec("SELECT SUM(expense_amount) FROM records WHERE DATE(timestamp) >= DATE('now', 'weekday 0', '-6 days')");
+    QSqlQuery totalQuery(db);
+    totalQuery.prepare("SELECT SUM(expense_amount) FROM records WHERE user_id = :uid AND DATE(timestamp) >= DATE('now', 'weekday 0', '-6 days')");
+    totalQuery.bindValue(":uid", currentUserId);
+    totalQuery.exec();
     if (totalQuery.next()) thisWeekTotal = totalQuery.value(0).toDouble();
 
-    totalQuery.exec("SELECT SUM(expense_amount) FROM records WHERE DATE(timestamp) BETWEEN DATE('now', 'weekday 0', '-13 days') AND DATE('now', 'weekday 0', '-7 days')");
+    totalQuery.prepare("SELECT SUM(expense_amount) FROM records WHERE user_id = :uid AND DATE(timestamp) BETWEEN DATE('now', 'weekday 0', '-13 days') AND DATE('now', 'weekday 0', '-7 days')");
+    totalQuery.bindValue(":uid", currentUserId);
+    totalQuery.exec();
     if (totalQuery.next()) lastWeekTotal = totalQuery.value(0).toDouble();
+
 
     double percentChange = (lastWeekTotal != 0.0) ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100.0 : 0.0;
     QString arrow = percentChange > 0 ? "↑" : percentChange < 0 ? "↓" : "→";
@@ -123,6 +120,30 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
 analysisWindow::~analysisWindow()
 {
     delete ui;
+}
+
+void analysisWindow::updateWeeklyExpense()
+{QSqlQuery query;
+    qDebug() << "updateWeeklyExpense() using userId:" << currentUserId;
+    QDate today = QDate::currentDate();
+    QDate startOfWeek = today.addDays(-today.dayOfWeek() + 1); // Monday-start
+
+
+    query.prepare("SELECT IFNULL(SUM(expense_amount), 0) FROM records "
+                  "WHERE user_id= :uid AND date(timestamp) >= :start AND date(timestamp) <= :today");
+    query.bindValue(":uid", currentUserId);
+    query.bindValue(":start", startOfWeek.toString("yyyy-MM-dd"));
+    query.bindValue(":today", today.toString("yyyy-MM-dd"));
+
+    double weeklyExpense = 0.0;
+    if (query.exec() && query.next()) {
+        weeklyExpense = query.value(0).toDouble();
+    } else {
+        qDebug() << "SQL Error (weeklyExpense):" << query.lastError().text();
+    }
+
+    ui->expense_label->setText(" Weekly Expense: Rs " + QString::number(weeklyExpense));
+    ui->expense_label->setStyleSheet("font-size: 20px; font-weight: bold; color: #ffffff;");
 }
 
 void analysisWindow::on_pushButton_clicked()
@@ -159,25 +180,26 @@ void analysisWindow::on_pushButton_4_clicked()
 
 void analysisWindow::openHome()
 {
-
-   home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
-
-
+    home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
     home_window->show();
     this->hide();
 }
+
 void analysisWindow::openRecordWindow()
 {
     RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
+    connect(record_window, &RecordWindow::expenseAdded, this, &analysisWindow::updateWeeklyExpense);
     record_window->show();
     this->hide();
 }
+
 void analysisWindow::openvisions()
 {
     Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
     vision_win->show();
     this->hide();
 }
+
 void analysisWindow::openreview()
 {
     review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);

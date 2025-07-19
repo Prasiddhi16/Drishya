@@ -32,6 +32,7 @@ private slots:
     void openRecordWindow();
     void openvisions();
     void openreview();
+    void updateWeeklyExpense();
 private:
     Ui::analysisWindow *ui;
      QString currentUserName;

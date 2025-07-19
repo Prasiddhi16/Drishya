@@ -15,6 +15,8 @@ public:
 
     RecordWindow(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~RecordWindow();
+signals:
+    void expenseAdded();
 
 private slots:
     void addRecord();

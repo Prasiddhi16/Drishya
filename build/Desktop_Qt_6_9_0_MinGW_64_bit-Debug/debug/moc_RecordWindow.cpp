@@ -39,8 +39,9 @@ template <> constexpr inline auto RecordWindow::qt_create_metaobjectdata<qt_meta
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "RecordWindow",
-        "addRecord",
+        "expenseAdded",
         "",
+        "addRecord",
         "editIncome",
         "editExpense",
         "openHome",
@@ -50,20 +51,22 @@ template <> constexpr inline auto RecordWindow::qt_create_metaobjectdata<qt_meta
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'expenseAdded'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'addRecord'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'editIncome'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'editExpense'
+        // Slot 'editIncome'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openHome'
+        // Slot 'editExpense'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openAnalytics'
+        // Slot 'openHome'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openvisions'
+        // Slot 'openAnalytics'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openreview'
+        // Slot 'openvisions'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openreview'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -87,17 +90,21 @@ void RecordWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
     auto *_t = static_cast<RecordWindow *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->addRecord(); break;
-        case 1: _t->editIncome(); break;
-        case 2: _t->editExpense(); break;
-        case 3: _t->openHome(); break;
-        case 4: _t->openAnalytics(); break;
-        case 5: _t->openvisions(); break;
-        case 6: _t->openreview(); break;
+        case 0: _t->expenseAdded(); break;
+        case 1: _t->addRecord(); break;
+        case 2: _t->editIncome(); break;
+        case 3: _t->editExpense(); break;
+        case 4: _t->openHome(); break;
+        case 5: _t->openAnalytics(); break;
+        case 6: _t->openvisions(); break;
+        case 7: _t->openreview(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (RecordWindow::*)()>(_a, &RecordWindow::expenseAdded, 0))
+            return;
+    }
 }
 
 const QMetaObject *RecordWindow::metaObject() const
@@ -119,15 +126,21 @@ int RecordWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
+}
+
+// SIGNAL 0
+void RecordWindow::expenseAdded()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

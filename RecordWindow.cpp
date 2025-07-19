@@ -192,6 +192,8 @@ void RecordWindow::addRecord()
         msgBox.setWindowTitle("Success");
         msgBox.setText("Record added successfully.");
 
+
+
         msgBox.setStyleSheet(R"(
         QMessageBox {
             background-color: #2c3e50;  /* Dark navy background */
@@ -212,9 +214,11 @@ void RecordWindow::addRecord()
         QPushButton:hover {
             background-color: #d0d3d4;
         }
-)");
+)"
+                             );
 
         msgBox.exec();
+        emit expenseAdded();
     }
 }
 
