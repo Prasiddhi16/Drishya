@@ -13,10 +13,11 @@
 #include <QCoreApplication>
 #include <QDir>
 
-revWindow::revWindow(const QString &userEmail, QWidget *parent)
+revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::revWindow)
     , currentUserEmail(userEmail)
+    , currentUserId(userId)
 {
     ui->setupUi(this);
 
@@ -25,19 +26,20 @@ revWindow::revWindow(const QString &userEmail, QWidget *parent)
         QSqlDatabase::removeDatabase(connectionName);
     }
 
-    QString dbBaseName = currentUserEmail.section('@', 0, 0);
-    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(dbPath);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
 
     if (!db.open()) {
-        qDebug() << "DB Connection Error:" << db.lastError().text();
+        qDebug() << "DB Open Error:" << db.lastError().text();
         return;
     }
 
+
     QSqlQuery query(db);
-    if (!query.exec("SELECT expense_category, SUM(expense_amount) FROM records GROUP BY expense_category")) {
+    query.prepare("SELECT expense_category, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY expense_category");
+    query.bindValue(":uid", currentUserId);
+    if (!query.exec()) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
@@ -61,6 +63,7 @@ revWindow::revWindow(const QString &userEmail, QWidget *parent)
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Expense Distribution by Category");
+    chart->setAnimationOptions(QChart::AllAnimations);
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);
 

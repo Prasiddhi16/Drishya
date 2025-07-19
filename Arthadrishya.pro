@@ -1,3 +1,5 @@
+TEMPLATE = lib          # ❗ change from 'app' to 'lib'
+TARGET = Arthadrishya
 QT       += core gui sql
 QT += charts sql
 QT += sql

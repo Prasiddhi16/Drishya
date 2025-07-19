@@ -1,3 +1,6 @@
+TEMPLATE = app
+TARGET = itsdrishya
+
 QT       += core gui
 QT       += widgets sql charts
 
@@ -20,7 +23,27 @@ SOURCES += \
     revwindow.cpp \
     signwindow.cpp \
     weeklywindow.cpp \
-    welwindow.cpp
+    welwindow.cpp \
+    RecordWindow.cpp \
+    compare.cpp \
+    expense.cpp \
+    expert.cpp \
+    finaldial.cpp \
+    goaldata.cpp \
+    graph.cpp \
+    Help.cpp \
+    history.cpp \
+    historypage.cpp \
+    insertt.cpp \
+    profile.cpp \
+    review.cpp \
+    secdialog.cpp \
+    taxdialog.cpp\
+    thirddialog.cpp \
+    visions.cpp
+
+
+
 
 HEADERS += \
     analysiswindow.h \
@@ -32,7 +55,25 @@ HEADERS += \
     revwindow.h \
     signwindow.h \
     weeklywindow.h \
-    welwindow.h
+    welwindow.h \
+    RecordWindow.h \
+    compare.h \
+    expense.h \
+    expert.h \
+    finaldial.h \
+    goaldata.h \
+    graph.h \
+    Help.h \
+    history.h \
+    historypage.h \
+    insertt.h \
+    profile.h \
+    review.h \
+    secdialog.h \
+    taxdialog.h \
+    thirddialog.h \
+    visions.h
+
 
 FORMS += \
     analysiswindow.ui \
@@ -44,7 +85,24 @@ FORMS += \
     revwindow.ui \
     signwindow.ui \
     weeklywindow.ui \
-    welwindow.ui
+    welwindow.ui \
+    RecordWindow.ui \
+    compare.ui \
+    expense.ui \
+    expert.ui \
+    finaldial.ui \
+    graph.ui\
+    Help.ui\
+    history.ui\
+    historypage.ui\
+    insertt.ui\
+    profile.ui \
+    review.ui \
+    secdialog.ui \
+    taxdialog.ui\
+    thirddialog.ui\
+    visions.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -57,4 +115,7 @@ RESOURCES += \
     img.qrc \
     mam.qrc \
     moneybg.qrc \
-    welcom.qrc
+    welcom.qrc \
+    images.qrc\
+    res.qrc \
+

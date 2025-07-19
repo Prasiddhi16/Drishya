@@ -2,6 +2,9 @@
 #include "ui_homewindow.h"
 #include "analysiswindow.h"
 #include "loginwindow.h"
+#include "RecordWindow.h"
+#include "visions.h"
+#include "review.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -12,11 +15,18 @@
 #include <QSizePolicy>
 #include <QDebug>
 #include <QPainter>
-#include <QtCharts/QChartView>
-#include <QtCharts/QAreaSeries>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QChart>
 #include <QSettings>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+
+// Qt Charts (Bar Chart)
+#include <QtCharts/QChartView>
+#include <QtCharts/QChart>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QValueAxis>
 
 homeWindow::homeWindow(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
@@ -24,7 +34,7 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
     currentUserName(userName),
     currentUserEmail(userEmail),
     currentUserId(userId),
-    login_window(nullptr) // Initialize pointer to null
+    login_window(nullptr)
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: #000000;");
@@ -55,17 +65,20 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
     }
-
+    connect(buttons[1], &QPushButton::clicked, this, &homeWindow::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &homeWindow::openAnalytics);
-    connect(buttons[5], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession); // Secret logout
+    connect(buttons[3], &QPushButton::clicked, this, &homeWindow::openvisions);
+    connect(buttons[4], &QPushButton::clicked, this, &homeWindow::openreview);
+    connect(buttons[5], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
 
-    // Content Widget and rest of layout
+    // Content
     QWidget *contentWidget = new QWidget;
     contentWidget->setStyleSheet("background-color: #131b39;");
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
 
+    // Header
     QVBoxLayout *headerLayout = new QVBoxLayout;
-    headerLayout->setSpacing(6);
+    headerLayout->addSpacing(1);
     QLabel *greeting = new QLabel("👋 Hello, " + currentUserName + "!");
     greeting->setFont(QFont("Segoe UI", 13, QFont::Bold));
     greeting->setStyleSheet("color: #FFFFFF;");
@@ -75,12 +88,16 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
     motivationLabel->setStyleSheet("color: #98FF98;");
     motivationLabel->setAlignment(Qt::AlignLeft);
     headerLayout->addWidget(greeting);
+    headerLayout->setSpacing(0);
     headerLayout->addWidget(motivationLabel);
     contentLayout->addLayout(headerLayout);
     contentLayout->addSpacing(20);
 
+    // Summary Row
     QHBoxLayout *summaryRowLayout = new QHBoxLayout;
     summaryRowLayout->setSpacing(20);
+
+    // Budget Overview Frame
     QFrame *budgetFrame = new QFrame;
     budgetFrame->setStyleSheet("background-color: #E6E6FA; border-radius: 8px;");
     budgetFrame->setFixedSize(180, 100);
@@ -89,7 +106,7 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
     budgetLabel->setFont(QFont("Segoe UI", 11, QFont::Bold));
     budgetLabel->setStyleSheet("color: #2c3e50;");
     budgetLabel->setAlignment(Qt::AlignCenter);
-    QLabel *budgetAmount = new QLabel("₹ --");
+    budgetAmount = new QLabel("₹ --");
     budgetAmount->setFont(QFont("Segoe UI", 13, QFont::Bold));
     budgetAmount->setStyleSheet("color: #1abc9c;");
     budgetAmount->setAlignment(Qt::AlignCenter);
@@ -97,8 +114,10 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
     budgetLayout->addWidget(budgetAmount);
     summaryRowLayout->addWidget(budgetFrame);
 
+    // Financial Frames
     QStringList frameLabels = {"💰 Total Income", "💸 Total Expenses", "💾 Savings"};
     QStringList colors = {"#a8dadc", "#f08080", "#90ee90"};
+
     for (int i = 0; i < 3; ++i) {
         QFrame *infoFrame = new QFrame;
         infoFrame->setStyleSheet("background-color: " + colors[i] + "; border-radius: 8px;");
@@ -107,57 +126,153 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         QLabel *label = new QLabel(frameLabels[i]);
         label->setAlignment(Qt::AlignCenter);
         label->setFont(QFont("Segoe UI", 11, QFont::Bold));
+
         QLabel *amount = new QLabel("₹ --");
         amount->setAlignment(Qt::AlignCenter);
         amount->setFont(QFont("Segoe UI", 12, QFont::Bold));
+
+        if (i == 0) incomeAmount = amount;
+        else if (i == 1) expenseAmount = amount;
+        else savingsAmount = amount;
+
         frameLayout->addWidget(label);
         frameLayout->addWidget(amount);
         summaryRowLayout->addWidget(infoFrame);
     }
 
     contentLayout->addLayout(summaryRowLayout);
-    contentLayout->addStretch();
 
-    // Chart setup
-    QLineSeries *incomeSeries = new QLineSeries();
-    incomeSeries->append(0, 2000);
-    incomeSeries->append(1, 2500);
-    incomeSeries->append(2, 2700);
-    QLineSeries *expenseSeries = new QLineSeries();
-    expenseSeries->append(0, 1500);
-    expenseSeries->append(1, 1800);
-    expenseSeries->append(2, 1600);
-    QLineSeries *savingsSeries = new QLineSeries();
-    savingsSeries->append(0, 500);
-    savingsSeries->append(1, 700);
-    savingsSeries->append(2, 1100);
-    QAreaSeries *areaIncome = new QAreaSeries(incomeSeries);
-    areaIncome->setName("Income");
-    areaIncome->setBrush(QColor(168, 218, 220, 160));
-    QAreaSeries *areaExpense = new QAreaSeries(expenseSeries);
-    areaExpense->setName("Expenses");
-    areaExpense->setBrush(QColor(240, 128, 128, 160));
-    QAreaSeries *areaSavings = new QAreaSeries(savingsSeries);
-    areaSavings->setName("Savings");
-    areaSavings->setBrush(QColor(144, 238, 144, 160));
+    // Database Access
+    QString connectionName = "qt_sql_home_connection";
+    if (QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase::removeDatabase(connectionName);
+    }
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
+    if (db.open()) {
+        QSqlQuery query(db);
+        double totalIncome = 0.0;
+        double totalExpense = 0.0;
+
+        query.prepare("SELECT SUM(income_amount) FROM records WHERE user_id = :uid");
+        query.bindValue(":uid", currentUserId);
+        if (query.exec() && query.next())
+            totalIncome = query.value(0).toDouble();
+
+        query.prepare("SELECT SUM(expense_amount) FROM records WHERE user_id = :uid");
+        query.bindValue(":uid", currentUserId);
+        if (query.exec() && query.next())
+            totalExpense = query.value(0).toDouble();
+
+        incomeAmount->setText("₹ " + QString::number(totalIncome, 'f', 2));
+        expenseAmount->setText("₹ " + QString::number(totalExpense, 'f', 2));
+        savingsAmount->setText("₹ " + QString::number(totalIncome - totalExpense, 'f', 2));
+        budgetAmount->setText("₹ " + QString::number(totalIncome * 0.7, 'f', 2)); // 70% spending guideline
+    } else {
+        qDebug() << "DB Connection Failed:" << db.lastError().text();
+    }
+
+
+    QSqlQuery query(db);
+    QMap<int, double> incomeMap, expenseMap;
+
+
+    query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(income_amount) FROM records WHERE user_id = :uid GROUP BY month");
+    query.bindValue(":uid", currentUserId);
+    if (query.exec()) {
+        while (query.next()) {
+            int month = query.value(0).toInt();
+            double income = query.value(1).toDouble();
+            incomeMap[month] = income;
+        }
+    } else {
+        qDebug() << "Income month query failed:" << query.lastError();
+    }
+
+    query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY month");
+    query.bindValue(":uid", currentUserId);
+    if (query.exec()) {
+        while (query.next()) {
+            int month = query.value(0).toInt();
+            double expense = query.value(1).toDouble();
+            expenseMap[month] = expense;
+        }
+    } else {
+        qDebug() << "Expense month query failed:" << query.lastError();
+
+
+    }
+
+    // ---------------- Bar Chart Construction ----------------
+    QBarSet *incomeSet  = new QBarSet("Income");
+    QBarSet *expenseSet = new QBarSet("Expenses");
+    QBarSet *savingsSet = new QBarSet("Savings");
+
+    double minVal = 0.0; // allow negative savings
+    double maxVal = 0.0;
+
+    for (int month = 1; month <= 12; ++month) {
+        double income  = incomeMap.value(month, 0.0);
+        double expense = expenseMap.value(month, 0.0);
+        double savings = income - expense; // may be negative
+
+        *incomeSet  << income;
+        *expenseSet << expense;
+        *savingsSet << savings;
+
+        if (income  > maxVal) maxVal = income;
+        if (expense > maxVal) maxVal = expense;
+        if (savings > maxVal) maxVal = savings;
+        if (savings < minVal) minVal = savings; // track negative only
+    }
+
+    // Optional custom colors
+    incomeSet->setColor(QColor("#3498db"));  // Blue
+    expenseSet->setColor(QColor("#e74c3c")); // Red
+    savingsSet->setColor(QColor("#2ecc71")); // Green
+
+    QBarSeries *series = new QBarSeries();
+    series->append(incomeSet);
+    series->append(expenseSet);
+    series->append(savingsSet);
+   // series->setLabelsVisible(true);
+    series->setLabelsPosition(QAbstractBarSeries::LabelsOutsideEnd);
 
     QChart *chart = new QChart();
-    chart->addSeries(areaIncome);
-    chart->addSeries(areaExpense);
-    chart->addSeries(areaSavings);
+    chart->addSeries(series);
     chart->setTitle("📊 Financial Overview");
     chart->setBackgroundBrush(QBrush(QColor("#ffffff")));
     chart->setTitleBrush(QBrush(Qt::black));
     chart->legend()->setLabelBrush(QBrush(Qt::black));
     chart->legend()->setAlignment(Qt::AlignBottom);
-    chart->createDefaultAxes();
-    chart->axes(Qt::Horizontal).first()->setTitleText("Time");
-    chart->axes(Qt::Vertical).first()->setTitleText("Amount");
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    // X-axis: Months
+    QStringList categories = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    QBarCategoryAxis *axisX = new QBarCategoryAxis();
+    axisX->append(categories);
+    axisX->setTitleText("Month");
+    chart->addAxis(axisX, Qt::AlignBottom);
+    series->attachAxis(axisX);
+
+
+
+    QValueAxis *axisY = new QValueAxis();
+    axisY->setTitleText("Amount (₹)");
+    axisY->setRange(0, 50000);
+    axisY->applyNiceNumbers();
+    chart->addAxis(axisY, Qt::AlignLeft);
+    series->attachAxis(axisY);
+
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
     chartView->setFixedHeight(300);
     chartView->setStyleSheet("background: transparent;");
+
+    contentLayout->addSpacing(50);
     contentLayout->addWidget(chartView);
     contentLayout->setAlignment(chartView, Qt::AlignBottom);
 
@@ -193,4 +308,22 @@ void homeWindow::logoutAndResetSession()
     login_window = new loginWindow();
     login_window->show();
     this->close();
+}
+
+void homeWindow::openRecordWindow()
+{
+    RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
+    record_window->show();
+}
+
+void homeWindow::openvisions()
+{
+    Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
+    vision_win->show();
+}
+
+void homeWindow::openreview()
+{
+    review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
+    review_win->show();
 }

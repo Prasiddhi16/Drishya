@@ -13,7 +13,7 @@ class monthlyWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit monthlyWindow(const QString &userEmail, QWidget *parent = nullptr);
+    explicit monthlyWindow(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~monthlyWindow();
 
 protected:
@@ -25,6 +25,7 @@ signals:
 private:
     Ui::monthlyWindow *ui;
     QString currentUserEmail;
+     int currentUserId;
 };
 
 #endif // MONTHLYWINDOW_H

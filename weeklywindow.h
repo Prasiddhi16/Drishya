@@ -13,7 +13,7 @@ class weeklyWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit weeklyWindow(const QString &userEmail, QWidget *parent = nullptr);
+   explicit weeklyWindow(const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~weeklyWindow();
 
 protected:
@@ -25,6 +25,7 @@ signals:
 private:
     Ui::weeklyWindow *ui;
     QString currentUserEmail;
+    int currentUserId;
 
 };
 

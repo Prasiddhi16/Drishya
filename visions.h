@@ -1,6 +1,6 @@
 #ifndef VISIONS_H
 #define VISIONS_H
-
+class homeWindow;
 #include <QMainWindow>
 #include<QtSql>
 #include<QSqlDatabase>
@@ -18,11 +18,12 @@ class Visions : public QMainWindow
 
 public:
 
-    explicit Visions(QWidget *parent = nullptr);
+    explicit Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent);
+
     ~Visions();
 
 public slots:
-    void onGoalSet(const struct  GoalData &data);
+    //void onGoalSet(const struct  GoalData &data);
 
 private slots:
     void onAddButtonClicked();
@@ -34,14 +35,26 @@ private slots:
     void on_delete_5_clicked();
     void on_delete_6_clicked();
 
-    void handleGoalSet(int goalIndex, const GoalData &data);
+    void handleGoalSet(int goalIndex,const struct  GoalData &data );
 
     void on_toolButton_clicked();
+    void openHome();
+    void openRecordWindow();
+    void openAnalytics();
+    //void openvisions();
+    void openreview();
 
 private:
     Ui::Visions *ui;
     QVector<GoalData> goalDataList;
     QSqlDatabase db;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;  // ✅ New member variable
+
+
+    homeWindow *home_window;
+
 
     // Database and data management methods
     bool openDatabase();

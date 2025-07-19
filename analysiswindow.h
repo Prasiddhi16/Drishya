@@ -29,7 +29,9 @@ private slots:
     void on_pushButton_3_clicked(); // Weekly
     void on_pushButton_4_clicked(); // Monthly
     void openHome();
-
+    void openRecordWindow();
+    void openvisions();
+    void openreview();
 private:
     Ui::analysisWindow *ui;
      QString currentUserName;

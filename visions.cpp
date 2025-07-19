@@ -3,6 +3,10 @@
 #include "insertt.h"
 #include "profile.h"
 #include "goaldata.h"
+#include"homewindow.h"
+#include"analysiswindow.h"
+#include"RecordWindow.h"
+#include"review.h"
 #include <QPixmap>
 #include <QMessageBox>
 #include <QSqlQuery>
@@ -14,7 +18,8 @@
 #include<QScrollArea>
 
 
-Visions::Visions(QWidget *parent)
+Visions::Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
+
     : QMainWindow(parent)
     , ui(new Ui::Visions) // Changed UI class instantiation
 {
@@ -49,7 +54,11 @@ Visions::Visions(QWidget *parent)
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
     }
-
+    connect(buttons[0], &QPushButton::clicked, this, &Visions::openHome);
+    connect(buttons[1], &QPushButton::clicked, this, &Visions::openRecordWindow);
+    connect(buttons[2], &QPushButton::clicked, this, &Visions::openAnalytics);
+   // connect(buttons[3], &QPushButton::clicked, this, &Visions::openvisions);
+    connect(buttons[4], &QPushButton::clicked, this, &Visions::openreview);
     // --- Add nav and original UI to the layout ---
     mainLayout->addWidget(navPanel);
     mainLayout->addWidget(ui->centralwidget); // use existing .ui layout
@@ -76,6 +85,8 @@ Visions::Visions(QWidget *parent)
     if (openDatabase()) {
         loadGoals();
     }
+    this->showMaximized();
+
 }
 
 
@@ -183,7 +194,7 @@ int Visions::findNextAvailableSlot() {
 // Changed class name in method definition
 bool Visions::openDatabase() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("goals.db");
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
     if (!db.open()) {
         QMessageBox::critical(this, "Database Error", "Failed to open database.");
         return false;
@@ -306,3 +317,36 @@ void Visions::on_toolButton_clicked()
     p->move(globalPos);
     p->show();
 }
+void Visions::openHome()
+{
+
+    home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
+    home_window->show();
+    this->hide();
+}
+void Visions::openAnalytics()
+{
+    analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
+    analysis_window->show();
+    this->hide();
+}
+void Visions::openRecordWindow()
+{
+    RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
+    record_window->show();
+    this->hide();
+}
+void Visions::openreview()
+{
+    review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);
+    review_win->show();
+    this->hide();
+}
+
+
+
+
+
+
+
+

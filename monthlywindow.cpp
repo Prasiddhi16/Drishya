@@ -10,10 +10,12 @@
 #include <QCloseEvent>
 #include <QDebug>
 
-monthlyWindow::monthlyWindow(const QString &userEmail, QWidget *parent)
+monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::monthlyWindow)
-    , currentUserEmail(userEmail)
+    , currentUserEmail(userEmail),
+    currentUserId(userId)
+
 {
     ui->setupUi(this);
 
@@ -22,21 +24,27 @@ monthlyWindow::monthlyWindow(const QString &userEmail, QWidget *parent)
         QSqlDatabase::removeDatabase(connectionName);
     }
 
-    QString dbBaseName = userEmail.section('@', 0, 0);
-    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(dbPath);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
 
     if (!db.open()) {
         qDebug() << "DB Open Error:" << db.lastError().text();
         return;
     }
 
+
     QSqlQuery query(db);
-    // Format: '2025-07-19 17:33:42'
-    if (!query.exec("SELECT strftime('%m', timestamp) AS month, SUM(expense_amount) "
-                    "FROM records WHERE expense_amount > 0 GROUP BY month ORDER BY month")) {
+    QString sql = R"(
+    SELECT strftime('%m', timestamp) AS month, SUM(expense_amount)
+    FROM records
+    WHERE expense_amount > 0 AND user_id = :uid
+    GROUP BY month
+    ORDER BY month
+)";
+    query.prepare(sql);
+    query.bindValue(":uid", currentUserId);
+    if (!query.exec()) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
@@ -81,7 +89,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, QWidget *parent)
     series->attachAxis(axisX);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, 100);  // You can adjust this or compute max dynamically
+    axisY->setRange(0,500000);  // You can adjust this or compute max dynamically
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

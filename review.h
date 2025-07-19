@@ -1,6 +1,6 @@
 #ifndef REVIEW_H
 #define REVIEW_H
-
+class homeWindow;
 #include <QMainWindow>
 #include <expert.h>
 #include <compare.h>
@@ -18,7 +18,7 @@ class review : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit review(QWidget *parent = nullptr);
+    explicit review(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~review();
 
 private slots:
@@ -31,6 +31,11 @@ private slots:
    // void on_pushButton_clicked();
 
     void on_btnTax_clicked();
+   void openHome();
+   void openAnalytics();
+
+   void openvisions();
+   void openRecordWindow();
 
 private:
     Ui::review *ui;
@@ -40,5 +45,10 @@ private:
    class graph*Graph;
     class taxDialog *Taxdialog;
   //  historypage *History;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
+
+    homeWindow* home_window;
 };
 #endif // REVIEW_H

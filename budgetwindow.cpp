@@ -10,11 +10,14 @@
 #include <QCoreApplication>
 #include <QDir>
 
-budgetWindow::budgetWindow(const QString &userEmail, QWidget *parent)
+budgetWindow::budgetWindow (const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::budgetWindow)
+    ,currentUserEmail(userEmail),
+    currentUserId(userId)
+
+  , ui(new Ui::budgetWindow)
     , model(new QSqlQueryModel(this))
-    , currentUserEmail(userEmail)
+
 {
     ui->setupUi(this);
 
@@ -23,23 +26,24 @@ budgetWindow::budgetWindow(const QString &userEmail, QWidget *parent)
         QSqlDatabase::removeDatabase(connectionName);
     }
 
-    QString dbBaseName = userEmail.section('@', 0, 0);
-    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
-    db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(dbPath);
 
     if (!db.open()) {
-        qDebug() << "Database error:" << db.lastError().text();
+        qDebug() << "DB Open Error:" << db.lastError().text();
         return;
+
     }
 
     QSqlQuery query(db);
-    if (!query.exec("SELECT expense_amount, timestamp, expense_category FROM records")) {
+    query.prepare("SELECT expense_amount, timestamp, expense_category FROM records WHERE user_id = :uid");
+    query.bindValue(":uid", currentUserId);
+
+    if (!query.exec()) {
         qDebug() << "Query failed:" << query.lastError().text();
         return;
     }
-
     model->setQuery(query);
 
     if (model->lastError().isValid()) {

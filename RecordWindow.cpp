@@ -1,6 +1,10 @@
 #include "RecordWindow.h"
 #include "ui_RecordWindow.h"
-
+#include "visions.h"
+#include"review.h"
+#include"analysiswindow.h"
+//#include "Help.h"
+#include"homewindow.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -17,17 +21,21 @@
 #include <QPushButton>
 
 
-RecordWindow::RecordWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::RecordWindow)
+RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
+
+    : QMainWindow(parent),
+    currentUserName(userName),
+    currentUserEmail(userEmail),
+    currentUserId(userId)
 {
+    ui = new Ui::RecordWindow;
     ui->setupUi(this);
     this->showMaximized();
     ui->timestamp->setDateTime(QDateTime::currentDateTime());
 
     // Setup DB
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("records.db");
+   db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
     if (!db.open()) {
         QMessageBox::critical(this, "Error", "Could not open database.");
@@ -37,9 +45,9 @@ RecordWindow::RecordWindow(QWidget *parent)
     // Create table
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS records ("
-               "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+               "id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER ,"
                "income_amount REAL, income_source TEXT, income_currency TEXT, "
-               "expenses_amount REAL, expenses_category TEXT, expenses_currency TEXT, "
+               "expense_amount REAL, expense_category TEXT, expense_currency TEXT, "
                "reference TEXT, review TEXT, timestamp TEXT)");
 
     // Navigation Panel
@@ -66,6 +74,11 @@ RecordWindow::RecordWindow(QWidget *parent)
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
     }
+    connect(buttons[0], &QPushButton::clicked, this, &RecordWindow::openHome);
+   // connect(buttons[1], &QPushButton::clicked, this, &analysisWindow::openRecordWindow);
+    connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
+    connect(buttons[3], &QPushButton::clicked, this, &RecordWindow::openvisions);
+    connect(buttons[4], &QPushButton::clicked, this, &RecordWindow::openreview);
 
     // Optional: connect signals
     // connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
@@ -156,9 +169,11 @@ void RecordWindow::addRecord()
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO records (income_amount, income_source, income_currency, "
-                  "expenses_amount, expenses_category, expenses_currency, reference, review, timestamp) "
-                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO records (user_id, income_amount, income_source, income_currency, "
+                  "expense_amount, expense_category, expense_currency, reference, review, timestamp) "
+                  "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    query.addBindValue(currentUserId);
     query.addBindValue(incomeAmount);
     query.addBindValue(incomeSource);
     query.addBindValue(incomeCurrency);
@@ -325,8 +340,8 @@ void RecordWindow::editIncome()
 
 void RecordWindow::editExpense()
 {
-    QSqlQuery query("SELECT id, expenses_amount, expenses_category, timestamp "
-                    "FROM records WHERE expenses_amount IS NOT NULL "
+    QSqlQuery query("SELECT id, expense_amount, expense_category, timestamp "
+                    "FROM records WHERE expense_amount IS NOT NULL "
                     "ORDER BY id DESC LIMIT 1");
 
     if (!query.exec() || !query.next()) {
@@ -346,7 +361,7 @@ void RecordWindow::editExpense()
             return;
         }
         QSqlQuery update;
-        update.prepare("UPDATE records SET expenses_amount = ?, expenses_category = ?, timestamp = ? WHERE id = ?");
+        update.prepare("UPDATE records SET expense_amount = ?, expense_category = ?, timestamp = ? WHERE id = ?");
         update.addBindValue(amountDouble);
         update.addBindValue(category);
         update.addBindValue(timestamp);
@@ -363,3 +378,32 @@ void RecordWindow::editExpense()
         }
     }
 }
+    void RecordWindow::openHome()
+    {
+
+        home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
+
+
+        home_window->show();
+        this->hide();
+    }
+    void RecordWindow::openAnalytics()
+    {
+        analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
+        analysis_window->show();
+        this->hide();
+    }
+    void RecordWindow::openvisions()
+    {
+        Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
+        vision_win->show();
+        this->hide();
+    }
+    void RecordWindow::openreview()
+    {
+        review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);
+        review_win->show();
+        this->hide();
+    }
+
+

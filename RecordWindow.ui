@@ -29,13 +29,22 @@
    <string notr="true">background-color:		#1c2833</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>900</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(19, 27, 57);</string>
+   </property>
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>60</y>
       <width>731</width>
-      <height>661</height>
+      <height>731</height>
      </rect>
     </property>
     <property name="styleSheet">

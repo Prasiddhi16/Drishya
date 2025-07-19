@@ -2,6 +2,7 @@
 #define HOMEWINDOW_H
 
 #include <QMainWindow>
+#include<QLabel>
 #include "analysiswindow.h"
 class loginWindow;
 QT_BEGIN_NAMESPACE
@@ -18,13 +19,20 @@ public:
 
 private slots:
     void openAnalytics();
-void logoutAndResetSession ();   // Only Analytics wired up
+    void logoutAndResetSession ();
+    void openRecordWindow();
+    void openvisions();
+    void openreview();
 
 private:
     Ui::homeWindow *ui;
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
+    QLabel *incomeAmount;
+    QLabel *expenseAmount;
+    QLabel *savingsAmount;
+    QLabel *budgetAmount;
     analysisWindow *analysis_window;
     loginWindow* login_window = nullptr;
 };

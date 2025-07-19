@@ -8,13 +8,16 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    review w;
+    w.show();
+
 
     // Get the database connection. If it doesn't exist, add it.
     // This ensures only one connection named "MainConnection" is managed globally.
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "MainConnection");
 
     // Set the database file name to the new, corrected path.
-    db.setDatabaseName("/Users/praptidhamala/Desktop/Arthadrishya/build/Artha1.db"); // <--- UPDATED PATH
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/database.db"); // <--- UPDATED PATH
 
     // Attempt to open the database connection.
     if (!db.open()) {
@@ -28,8 +31,8 @@ int main(int argc, char *argv[])
     }
 
     // Create and show the main window.
-    review w;
-    w.show();
+    //review w;
+   // w.show();
 
     // Start the application event loop.
     return a.exec();

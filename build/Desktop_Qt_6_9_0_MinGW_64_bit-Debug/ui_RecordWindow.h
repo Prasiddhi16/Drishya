@@ -72,9 +72,11 @@ public:
         RecordWindow->setStyleSheet(QString::fromUtf8("background-color:		#1c2833"));
         centralwidget = new QWidget(RecordWindow);
         centralwidget->setObjectName("centralwidget");
+        centralwidget->setMinimumSize(QSize(0, 900));
+        centralwidget->setStyleSheet(QString::fromUtf8("background-color: rgb(19, 27, 57);"));
         widget = new QWidget(centralwidget);
         widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 60, 731, 661));
+        widget->setGeometry(QRect(0, 60, 731, 731));
         widget->setStyleSheet(QString::fromUtf8("background-color: #E0E0E0;\n"
 "\n"
 "    \n"

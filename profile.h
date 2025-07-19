@@ -16,11 +16,11 @@ public:
     ~profile();
 
 private slots:
-    void on_Editprofile_clicked();
+    //void on_Editprofile_clicked();
 
-    void on_toolButton_triggered(QAction *arg1);
+    //void on_toolButton_triggered(QAction *arg1);
 
-    void on_toolButton_clicked();
+   // void on_toolButton_clicked();
 
     void on_saveChanges_clicked();
 

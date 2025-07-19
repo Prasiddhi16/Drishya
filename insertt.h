@@ -19,7 +19,7 @@ public:
 
 private slots:
     void on_Save_clicked();
-    void onSetGoalClicked();
+    //void onSetGoalClicked();
 
 private:
     Ui::Insertt *ui;

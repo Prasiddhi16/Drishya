@@ -14,7 +14,7 @@ class budgetWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit budgetWindow(const QString &userEmail, QWidget *parent = nullptr);
+    explicit budgetWindow(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~budgetWindow();
 
 protected:
@@ -28,6 +28,7 @@ private:
     QSqlDatabase db;
     QSqlQueryModel *model;
     QString currentUserEmail;
+     int currentUserId;
 };
 
 #endif // BUDGETWINDOW_H

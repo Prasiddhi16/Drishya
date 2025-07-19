@@ -6,17 +6,39 @@
 #include <QFont>
 #include <QFrame>
 #include <QSizePolicy>
+#include <QSqlDatabase>
 #include <QMessageBox>
 #include "historypage.h"
+#include "RecordWindow.h"
+#include "visions.h"
+#include"review.h"
+#include"analysiswindow.h"
+#include"homewindow.h"
 
 
 
-review::review(QWidget *parent)
-    : QMainWindow(parent)
+review::review(const QString &userName, const QString &userEmail, int userId, QWidget *parent )
+    : QMainWindow(parent),
+    currentUserName(userName),
+    currentUserEmail(userEmail),
+    currentUserId(userId)
     , ui(new Ui::review)
 {
     ui->setupUi(this);
     this->showMaximized();
+    QString connectionName = "qt_sql_rev_connection";
+    if (QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase::removeDatabase(connectionName);
+    }
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
+
+    if (!db.open()) {
+        qDebug() << "DB Open Error:" << db.lastError().text();
+        return;
+    }
 
     QFrame *navPanel = new QFrame;
     navPanel->setFixedWidth(170);
@@ -29,7 +51,7 @@ review::review(QWidget *parent)
 
     QFont navFont("Arial", 10, QFont::Bold);
 
-    QList<QPushButton*> navButtons = {
+    QList<QPushButton*> buttons = {
         new QPushButton("🏠 Home"),
         new QPushButton("➕ Add Records"),
         new QPushButton("📈 Analytics"),
@@ -38,13 +60,19 @@ review::review(QWidget *parent)
         new QPushButton("❓ Help")
     };
 
-    for (auto btn : navButtons) {
+    for (auto btn : buttons) {
         btn->setFont(navFont);
         btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
         btn->setFixedHeight(40);
     }
+    connect(buttons[0], &QPushButton::clicked, this, &review::openHome);
+    connect(buttons[1], &QPushButton::clicked, this, &review::openRecordWindow);
+    connect(buttons[2], &QPushButton::clicked, this, &review::openAnalytics);
+    connect(buttons[3], &QPushButton::clicked, this, &review::openvisions);
+    //connect(buttons[4], &QPushButton::clicked, this, &review::openreview);
+    //  connect(buttons[5], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
 
 
     QWidget *mainContainer = new QWidget;
@@ -54,15 +82,7 @@ review::review(QWidget *parent)
     mainLayout->addWidget(ui->centralwidget);
 
     this->setCentralWidget(mainContainer);
-    // Step 3: Connect buttons to your slots
-    connect(navButtons[0], &QPushButton::clicked, this, []() {
-        QMessageBox::information(nullptr, "Home", "Home clicked");
-    });
-    connect(navButtons[1], &QPushButton::clicked, this, &review::on_btnExper_clicked);
-    connect(navButtons[2], &QPushButton::clicked, this, &review::on_btnExpense_clicked);
-    connect(navButtons[3], &QPushButton::clicked, this, &review::on_btnCompare_clicked);
-    connect(navButtons[4], &QPushButton::clicked, this, &review::on_btnTax_clicked);
-}
+};
 
 
 review::~review()
@@ -99,3 +119,30 @@ void review::on_btnTax_clicked()
     Taxdialog->show();
 }
 
+void review::openHome()
+{
+
+    home_window = new homeWindow(currentUserName,currentUserEmail, currentUserId, this);
+
+
+    home_window->show();
+    this->hide();
+}
+void review::openRecordWindow()
+{
+    RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
+    record_window->show();
+    this->hide();
+}
+void review::openvisions()
+{
+    Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
+    vision_win->show();
+    this->hide();
+}
+void review::openAnalytics()
+{
+    analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
+    analysis_window->show();
+    this->hide();
+}

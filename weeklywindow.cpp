@@ -9,11 +9,13 @@
 #include <QCoreApplication>
 #include <QDebug>
 #include <QCloseEvent>
+#include <QMap>
 
-weeklyWindow::weeklyWindow(const QString &userEmail, QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::weeklyWindow)
-    , currentUserEmail(userEmail)
+weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent)
+    : QMainWindow(parent),
+    ui(new Ui::weeklyWindow),
+    currentUserEmail(userEmail),
+    currentUserId(userId)
 {
     ui->setupUi(this);
 
@@ -22,11 +24,8 @@ weeklyWindow::weeklyWindow(const QString &userEmail, QWidget *parent)
         QSqlDatabase::removeDatabase(connectionName);
     }
 
-    QString dbBaseName = currentUserEmail.section('@', 0, 0);
-    QString dbPath = QCoreApplication::applicationDirPath() + "/users/" + dbBaseName + ".db";
-
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName(dbPath);
+    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
     if (!db.open()) {
         qDebug() << "DB Open Error:" << db.lastError().text();
@@ -34,40 +33,55 @@ weeklyWindow::weeklyWindow(const QString &userEmail, QWidget *parent)
     }
 
     QSqlQuery query(db);
-    QString sql = R"(SELECT strftime('%W', timestamp) AS week_num, SUM(expense_amount)
-                    FROM records
-                    WHERE expense_amount > 0
-                    GROUP BY week_num ORDER BY week_num)";
+    QString sql = R"(SELECT strftime('%Y-%m', timestamp) AS month_id,
+                            strftime('%W', timestamp) AS week_id,
+                            SUM(expense_amount)
+                     FROM records
+                     WHERE expense_amount > 0 AND user_id = :uid
+                     GROUP BY month_id, week_id
+                     ORDER BY month_id, week_id)";
 
-    if (!query.exec(sql)) {
+    query.prepare(sql);
+    query.bindValue(":uid", currentUserId);
+
+    if (!query.exec()) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
 
     QBarSeries *series = new QBarSeries();
-    QList<QColor> barColors = { Qt::red, Qt::blue, Qt::green, Qt::magenta, Qt::darkCyan };
+    QList<QColor> barColors = { Qt::red, Qt::blue, Qt::green, Qt::magenta, Qt::darkCyan, Qt::darkYellow };
+    QMap<QString, int> monthWeekCounter;
     QStringList weekLabels;
-    int index = 0;
+    int displayIndex = 0;
 
     while (query.next()) {
-        QString weekNum = query.value(0).toString(); // e.g. "23"
-        double total = query.value(1).toDouble();
-        QString label = QString("Week %1").arg(weekNum);
+        QString month = query.value(0).toString();
+        QString weekRaw = query.value(1).toString();
+        double total = query.value(2).toDouble();
 
+        if (!monthWeekCounter.contains(month)) {
+            monthWeekCounter[month] = 1;
+        } else {
+            monthWeekCounter[month] += 1;
+        }
+
+        int weekNumDisplay = monthWeekCounter[month];
+        QString label = QString("%1 - Week %2").arg(month).arg(weekNumDisplay);
         weekLabels << label;
+
         QBarSet *bar = new QBarSet(label);
+        for (int i = 0; i <= displayIndex; ++i)
+            bar->append(i == displayIndex ? total : 0);
 
-        for (int i = 0; i <= index; ++i)
-            bar->append(i == index ? total : 0);
-
-        bar->setColor(barColors[index % barColors.size()]);
+        bar->setColor(barColors[displayIndex % barColors.size()]);
         series->append(bar);
-        ++index;
+        ++displayIndex;
     }
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Weekly Expense Review");
+    chart->setTitle("Weekly Expense Review (Grouped by Month)");
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
@@ -76,7 +90,7 @@ weeklyWindow::weeklyWindow(const QString &userEmail, QWidget *parent)
     series->attachAxis(axisX);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, 100); // You can adjust this later
+    axisY->setRange(0, 50000);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

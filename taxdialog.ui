@@ -22,9 +22,9 @@ background-color: #131b39
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>60</y>
-     <width>291</width>
+     <width>351</width>
      <height>51</height>
     </rect>
    </property>
@@ -57,6 +57,7 @@ color:white;
        <string notr="true">QPushButton
 {
 	background-color: rgb(255, 255, 255);
+color:black;
 }
 </string>
       </property>
@@ -71,6 +72,7 @@ color:white;
        <string notr="true">QPushButton
 {
 	background-color: rgb(255, 255, 255);
+	color:black;
 }
 </string>
       </property>

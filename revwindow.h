@@ -13,7 +13,7 @@ class revWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit revWindow(const QString &userEmail, QWidget *parent = nullptr);
+    explicit revWindow(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~revWindow();
 
 protected:
@@ -25,6 +25,7 @@ signals:
 private:
     Ui::revWindow *ui;
     QString currentUserEmail;
+     int currentUserId;
 };
 
 #endif // REVWINDOW_H
