@@ -27,28 +27,30 @@ loginWindow::loginWindow(QWidget *parent)
     bool wasChecked = settings.value("keep_logged_in", 0).toInt() == 1;
     ui->checkBox->setChecked(wasChecked);
 
-    QString dbFilePath = "C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db";
-    QFile dbFile(dbFilePath);
-    if (!dbFile.exists()) {
-        QMessageBox::critical(this, "Database Error", QString("Database file '%1' not found!").arg(dbFilePath));
+    DBconnection = QSqlDatabase::addDatabase("QSQLITE", "login_connection");
+
+    QString dbFilePath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    qDebug() << "Resolved DB Path:" << dbFilePath;
+    qDebug() << "Available drivers:" << QSqlDatabase::drivers();
+
+    if (!QFile::exists(dbFilePath)) {
+        QMessageBox::critical(this, "Database Error", QString("Database file not found at: %1").arg(dbFilePath));
         return;
     }
 
-    DBconnection = QSqlDatabase::addDatabase("QSQLITE");
     DBconnection.setDatabaseName(dbFilePath);
 
     if (!DBconnection.open()) {
-        QMessageBox::critical(this, "Database Error", "Failed to open the database.");
-        return;
-    }
-
-    if (!DBconnection.tables().contains("user")) {
-        QMessageBox::critical(this, "Database Error", "Table 'user' not found in database!");
+        qDebug() << "DB open error:" << DBconnection.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to open database. Make sure it's not locked or corrupted.");
         return;
     }
 
     this->showMaximized();
 }
+
+
+
 
 loginWindow::~loginWindow() {
     delete ui;

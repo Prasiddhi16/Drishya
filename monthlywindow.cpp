@@ -7,15 +7,15 @@
 #include <QtCharts>
 #include <QDate>
 #include <QCoreApplication>
+#include <QDir>
 #include <QCloseEvent>
 #include <QDebug>
 
 monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::monthlyWindow)
-    , currentUserEmail(userEmail),
-    currentUserId(userId)
-
+    , currentUserEmail(userEmail)
+    , currentUserId(userId)
 {
     ui->setupUi(this);
 
@@ -25,27 +25,32 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
+    // ✅ Use relative path to access the DB
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
+
+    qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "DB Open Error:" << db.lastError().text();
+        qDebug() << "❌ DB Open Error:" << db.lastError().text();
         return;
     }
 
-
     QSqlQuery query(db);
     QString sql = R"(
-    SELECT strftime('%m', timestamp) AS month, SUM(expense_amount)
-    FROM records
-    WHERE expense_amount > 0 AND user_id = :uid
-    GROUP BY month
-    ORDER BY month
-)";
+        SELECT strftime('%m', timestamp) AS month, SUM(expense_amount)
+        FROM records
+        WHERE expense_amount > 0 AND user_id = :uid
+        GROUP BY month
+        ORDER BY month
+    )";
+
     query.prepare(sql);
     query.bindValue(":uid", currentUserId);
+
     if (!query.exec()) {
-        qDebug() << "Query Error:" << query.lastError().text();
+        qDebug() << "❌ Query Error:" << query.lastError().text();
         return;
     }
 
@@ -61,6 +66,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     while (query.next()) {
         QString monthNum = query.value(0).toString();  // e.g. '01'
         int value = query.value(1).toInt();
+
         QStringList monthNames = {
             "Jan", "Feb", "Mar", "Apr", "May", "Jun",
             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -89,7 +95,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     series->attachAxis(axisX);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0,500000);  // You can adjust this or compute max dynamically
+    axisY->setRange(0, 500000);  // Adjust or calculate dynamically if needed
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

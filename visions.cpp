@@ -194,7 +194,11 @@ int Visions::findNextAvailableSlot() {
 // Changed class name in method definition
 bool Visions::openDatabase() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
+
+    qDebug() << "Resolved DB Path in Visions:" << dbPath;
+
     if (!db.open()) {
         QMessageBox::critical(this, "Database Error", "Failed to open database.");
         return false;

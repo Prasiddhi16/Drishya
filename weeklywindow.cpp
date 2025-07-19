@@ -19,18 +19,23 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
 {
     ui->setupUi(this);
 
-    QString connectionName = "qt_sql_weekly_connection";
+    QString connectionName = "qt_sql_monthly_connection";
     if (QSqlDatabase::contains(connectionName)) {
         QSqlDatabase::removeDatabase(connectionName);
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
+
+    qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "DB Open Error:" << db.lastError().text();
+        qDebug() << "❌ DB Open Error:" << db.lastError().text();
         return;
     }
+
 
     QSqlQuery query(db);
     QString sql = R"(SELECT strftime('%Y-%m', timestamp) AS month_id,

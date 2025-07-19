@@ -38,13 +38,19 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
         db = QSqlDatabase::database(connectionName);
     } else {
         db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-        db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+
+        // ✅ Use relative path to db file
+        QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+        db.setDatabaseName(dbPath);
+
+        qDebug() << "Resolved DB Path in analysisWindow:" << dbPath;
     }
 
     if (!db.open()) {
         qDebug() << "❌ Failed to open database in analysisWindow:" << db.lastError().text();
-        return; // Prevent broken queries
+        return;
     }
+
 
     // 👋 Greeting
     ui->label_2->setText("👋 Hello, " + currentUserName + "!\nThis is what is going on with your finances:");
@@ -123,7 +129,8 @@ analysisWindow::~analysisWindow()
 }
 
 void analysisWindow::updateWeeklyExpense()
-{QSqlQuery query;
+{QSqlQuery query(QSqlDatabase::database("qt_sql_shared_connection"));
+
     qDebug() << "updateWeeklyExpense() using userId:" << currentUserId;
     QDate today = QDate::currentDate();
     QDate startOfWeek = today.addDays(-today.dayOfWeek() + 1); // Monday-start

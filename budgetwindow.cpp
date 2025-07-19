@@ -10,14 +10,12 @@
 #include <QCoreApplication>
 #include <QDir>
 
-budgetWindow::budgetWindow (const QString &userEmail, int userId, QWidget *parent)
-    : QMainWindow(parent)
-    ,currentUserEmail(userEmail),
-    currentUserId(userId)
-
-  , ui(new Ui::budgetWindow)
-    , model(new QSqlQueryModel(this))
-
+budgetWindow::budgetWindow(const QString &userEmail, int userId, QWidget *parent)
+    : QMainWindow(parent),
+    currentUserEmail(userEmail),
+    currentUserId(userId),
+    ui(new Ui::budgetWindow),
+    model(new QSqlQueryModel(this))
 {
     ui->setupUi(this);
 
@@ -27,27 +25,31 @@ budgetWindow::budgetWindow (const QString &userEmail, int userId, QWidget *paren
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
+    // ✅ Use relative path to the DB file
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
+
+    qDebug() << "Resolved DB Path in budgetWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "DB Open Error:" << db.lastError().text();
+        qDebug() << "❌ DB Open Error:" << db.lastError().text();
         return;
-
     }
 
-    QSqlQuery query(db);
+    QSqlQuery query(db);  // ✅ Explicitly bind the query to the correct DB connection
     query.prepare("SELECT expense_amount, timestamp, expense_category FROM records WHERE user_id = :uid");
     query.bindValue(":uid", currentUserId);
 
     if (!query.exec()) {
-        qDebug() << "Query failed:" << query.lastError().text();
+        qDebug() << "❌ Query failed:" << query.lastError().text();
         return;
     }
+
     model->setQuery(query);
 
     if (model->lastError().isValid()) {
-        qDebug() << "Model error:" << model->lastError().text();
+        qDebug() << "❌ Model error:" << model->lastError().text();
         return;
     }
 
@@ -64,6 +66,7 @@ budgetWindow::budgetWindow (const QString &userEmail, int userId, QWidget *paren
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
+    // Debug: log table data
     for (int row = 0; row < model->rowCount(); ++row) {
         for (int col = 0; col < model->columnCount(); ++col) {
             QString value = model->data(model->index(row, col)).toString();
@@ -77,9 +80,11 @@ budgetWindow::budgetWindow (const QString &userEmail, int userId, QWidget *paren
 
 budgetWindow::~budgetWindow()
 {
+    QSqlDatabase db = QSqlDatabase::database("qt_sql_budget_connection");
     if (db.isOpen()) {
         db.close();
     }
+
     delete ui;
 }
 

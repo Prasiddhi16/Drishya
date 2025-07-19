@@ -19,38 +19,63 @@
 #include <QDateTimeEdit>
 #include <QComboBox>
 #include <QPushButton>
-
+#include <QDir>
 
 RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
-
     : QMainWindow(parent),
+    ui(new Ui::RecordWindow),
     currentUserName(userName),
     currentUserEmail(userEmail),
     currentUserId(userId)
 {
-    ui = new Ui::RecordWindow;
     ui->setupUi(this);
     this->showMaximized();
     ui->timestamp->setDateTime(QDateTime::currentDateTime());
 
-    // Setup DB
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-   db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
+    // 📁 Locate DB in same folder as executable
+    QString exeDir = QCoreApplication::applicationDirPath();
+    QString dbFilePath = QDir(exeDir).absoluteFilePath("../centralized.db");
 
-    if (!db.open()) {
-        QMessageBox::critical(this, "Error", "Could not open database.");
+    qDebug() << "Executable Directory:" << exeDir;
+    qDebug() << "Resolved DB Path:" << dbFilePath;
+    qDebug() << "DB exists:" << QFile::exists(dbFilePath);
+
+    if (!QFile::exists(dbFilePath)) {
+        QMessageBox::critical(this, "Database Error",
+                              QString("Database file not found at:\n%1").arg(dbFilePath));
         return;
     }
 
-    // Create table
-    QSqlQuery query;
-    query.exec("CREATE TABLE IF NOT EXISTS records ("
-               "id INTEGER PRIMARY KEY AUTOINCREMENT,user_id INTEGER ,"
-               "income_amount REAL, income_source TEXT, income_currency TEXT, "
-               "expense_amount REAL, expense_category TEXT, expense_currency TEXT, "
-               "reference TEXT, review TEXT, timestamp TEXT)");
+    if (QSqlDatabase::contains("login_connection")) {
+        DB_connection = QSqlDatabase::database("login_connection");
+    } else {
+        DB_connection = QSqlDatabase::addDatabase("QSQLITE", "login_connection");
+        DB_connection.setDatabaseName(dbFilePath);
+    }
 
-    // Navigation Panel
+    if (!DB_connection.open()) {
+        qDebug() << "DB open error:" << DB_connection.lastError().text();
+        QMessageBox::critical(this, "Database Error",
+                              "Failed to open database. Make sure it's not locked or corrupted.\n\n"
+                                  + DB_connection.lastError().text());
+        return;
+    }
+    qDebug() << "Database opened successfully.";
+
+    // Ensure table exists
+    QSqlQuery query(DB_connection);
+
+    if (!query.exec(QStringLiteral(
+            "CREATE TABLE IF NOT EXISTS records ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, "
+            "income_amount REAL, income_source TEXT, income_currency TEXT, "
+            "expense_amount REAL, expense_category TEXT, expense_currency TEXT, "
+            "reference TEXT, review TEXT, timestamp TEXT)"
+            ))) {
+        qDebug() << "Table creation error:" << query.lastError().text();
+    }
+
+    // UI nav layout
     QFrame *navPanel = new QFrame;
     navPanel->setFixedWidth(170);
     navPanel->setStyleSheet("background-color: #ffffff;");
@@ -75,20 +100,14 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
         navLayout->addWidget(btn);
     }
     connect(buttons[0], &QPushButton::clicked, this, &RecordWindow::openHome);
-   // connect(buttons[1], &QPushButton::clicked, this, &analysisWindow::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &RecordWindow::openvisions);
     connect(buttons[4], &QPushButton::clicked, this, &RecordWindow::openreview);
 
-    // Optional: connect signals
-    // connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
-
-    // Content Area (where your original UI lives)
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
-    contentLayout->addWidget(ui->centralwidget); // this ensures your original UI stays intact
+    contentLayout->addWidget(ui->centralwidget);
 
-    // Combine into one layout
     QWidget *mainCentral = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainCentral);
     mainLayout->addWidget(navPanel);
@@ -97,12 +116,10 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
 
     this->setCentralWidget(mainCentral);
 
-    // Button connections
     connect(ui->addRecordButton, &QPushButton::clicked, this, &RecordWindow::addRecord);
     connect(ui->editIncomeButton, &QPushButton::clicked, this, &RecordWindow::editIncome);
     connect(ui->editExpenseButton, &QPushButton::clicked, this, &RecordWindow::editExpense);
 }
-
 
 RecordWindow::~RecordWindow()
 {
@@ -167,8 +184,8 @@ void RecordWindow::addRecord()
         QMessageBox::warning(this, "Invalid Amount", "Please enter valid numeric values for amounts.");
         return;
     }
+    QSqlQuery query(DB_connection);
 
-    QSqlQuery query;
     query.prepare("INSERT INTO records (user_id, income_amount, income_source, income_currency, "
                   "expense_amount, expense_category, expense_currency, reference, review, timestamp) "
                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -300,9 +317,11 @@ bool RecordWindow::showEditDialog(const QString& title, const QString& labelText
 
 void RecordWindow::editIncome()
 {
-    QSqlQuery query("SELECT id, income_amount, income_source, timestamp "
-                    "FROM records WHERE income_amount IS NOT NULL "
-                    "ORDER BY id DESC LIMIT 1");
+    QSqlQuery query(DB_connection);
+    // Prepare the query string to fetch the latest income record
+    query.prepare("SELECT id, income_amount, income_source, timestamp "
+                  "FROM records WHERE income_amount IS NOT NULL "
+                  "ORDER BY id DESC LIMIT 1");
 
     if (!query.exec() || !query.next()) {
         QMessageBox::warning(this, "No Record", "No income record found.");
@@ -322,7 +341,7 @@ void RecordWindow::editIncome()
             return;
         }
 
-        QSqlQuery update;
+        QSqlQuery update(DB_connection);
         update.prepare("UPDATE records SET income_amount = ?, income_source = ?, timestamp = ? WHERE id = ?");
         update.addBindValue(amountDouble);
         update.addBindValue(source);
@@ -330,11 +349,11 @@ void RecordWindow::editIncome()
         update.addBindValue(id);
 
         if (!update.exec()) {
-            QMessageBox::critical(this, "Error", "Failed to update income.");
+            QMessageBox::critical(this, "Error", "Failed to update income.\n" + update.lastError().text());
         } else {
             QMessageBox::information(this, "Updated", "Income updated successfully.");
 
-            // Update UI
+            // Update UI fields
             ui->incomeAmount->setText(amount);
             ui->incomeSource->setCurrentText(source);
             ui->timestamp->setDateTime(QDateTime::fromString(timestamp, "yyyy-MM-dd hh:mm:ss"));
@@ -344,14 +363,17 @@ void RecordWindow::editIncome()
 
 void RecordWindow::editExpense()
 {
-    QSqlQuery query("SELECT id, expense_amount, expense_category, timestamp "
-                    "FROM records WHERE expense_amount IS NOT NULL "
-                    "ORDER BY id DESC LIMIT 1");
+    QSqlQuery query(DB_connection);
+    // Prepare the query string to fetch the latest expense record
+    query.prepare("SELECT id, expense_amount, expense_category, timestamp "
+                  "FROM records WHERE expense_amount IS NOT NULL "
+                  "ORDER BY id DESC LIMIT 1");
 
     if (!query.exec() || !query.next()) {
         QMessageBox::warning(this, "No Record", "No expense record found.");
         return;
     }
+
     int id = query.value(0).toInt();
     QString amount = query.value(1).toString();
     QString category = query.value(2).toString();
@@ -364,24 +386,27 @@ void RecordWindow::editExpense()
             QMessageBox::warning(this, "Invalid Input", "Please enter a valid numeric amount.");
             return;
         }
-        QSqlQuery update;
+
+        QSqlQuery update(DB_connection);
         update.prepare("UPDATE records SET expense_amount = ?, expense_category = ?, timestamp = ? WHERE id = ?");
         update.addBindValue(amountDouble);
         update.addBindValue(category);
         update.addBindValue(timestamp);
         update.addBindValue(id);
+
         if (!update.exec()) {
-            QMessageBox::critical(this, "Error", "Failed to update expense.");
+            QMessageBox::critical(this, "Error", "Failed to update expense.\n" + update.lastError().text());
         } else {
             QMessageBox::information(this, "Updated", "Expense updated successfully.");
 
-            // Update UI
+            // Update UI fields
             ui->expenseAmount->setText(amount);
             ui->expenseCategory->setCurrentText(category);
             ui->timestamp->setDateTime(QDateTime::fromString(timestamp, "yyyy-MM-dd hh:mm:ss"));
         }
     }
 }
+
     void RecordWindow::openHome()
     {
 

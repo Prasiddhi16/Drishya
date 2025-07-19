@@ -20,21 +20,22 @@ revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
     , currentUserId(userId)
 {
     ui->setupUi(this);
-
-    QString connectionName = "qt_sql_rev_connection";
+    QString connectionName = "qt_sql_monthly_connection";
     if (QSqlDatabase::contains(connectionName)) {
         QSqlDatabase::removeDatabase(connectionName);
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
 
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
+
+    qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "DB Open Error:" << db.lastError().text();
+        qDebug() << "❌ DB Open Error:" << db.lastError().text();
         return;
     }
-
 
     QSqlQuery query(db);
     query.prepare("SELECT expense_category, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY expense_category");

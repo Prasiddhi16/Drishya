@@ -38,7 +38,7 @@ private slots:
    void openRecordWindow();
 
 private:
-    Ui::review *ui;
+
      class compare *Compare;
     class expert *Expert;
       //expense *Expense;
@@ -48,6 +48,7 @@ private:
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
+    Ui::review *ui;
 
     homeWindow* home_window;
 };

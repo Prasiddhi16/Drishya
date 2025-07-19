@@ -18,9 +18,21 @@ signWindow::signWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lineEdit_3->setPlaceholderText("8 characters and must contain at least 3 integers.");
     ui->lineEdit_4->setPlaceholderText("YYYY-MM-DD");
+    QString dbFilePath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    qDebug() << "Resolved DB Path:" << dbFilePath;
 
-    DB_connection = QSqlDatabase::addDatabase("QSQLITE");
-    DB_connection.setDatabaseName("centralized.db");
+    if (!QFile::exists(dbFilePath)) {
+        QMessageBox::critical(this, "Database Error", QString("Database file '%1' not found!").arg(dbFilePath));
+        return;
+    }
+
+    // Use or create named connection
+    if (QSqlDatabase::contains("login_connection")) {
+        DB_connection = QSqlDatabase::database("login_connection");
+    } else {
+        DB_connection = QSqlDatabase::addDatabase("QSQLITE", "login_connection");
+        DB_connection.setDatabaseName(dbFilePath);
+    }
 
     if (DB_connection.open()) {
         QSqlQuery query(DB_connection);

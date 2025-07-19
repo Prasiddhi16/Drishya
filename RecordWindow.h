@@ -2,6 +2,7 @@
 #define RECORD_WINDOW_H
 
 #include <QMainWindow>
+#include <QSqlDatabase>
 class homeWindow;
 QT_BEGIN_NAMESPACE
 namespace Ui { class RecordWindow; }
@@ -33,6 +34,8 @@ private:
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
+    QSqlDatabase DB_connection;
+
     homeWindow* home_window;
 
     // Dialog function for editing income/expense
