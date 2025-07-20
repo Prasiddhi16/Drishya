@@ -4,9 +4,11 @@
 #include "finaldial.h"
 #include <QMessageBox>
 
-thirdDialog::thirdDialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui_thirdDialog)  // This class is auto-generated
+thirdDialog::thirdDialog(const QString &userEmail, int userId, QWidget *parent)
+    : QDialog(parent),
+    ui(new Ui_thirdDialog),
+    currentUserEmail(userEmail),
+    currentUserId(userId)
 {
     ui->setupUi(this);
 }
@@ -19,7 +21,7 @@ thirdDialog::~thirdDialog()
 void thirdDialog::on_ryes_clicked()
 {
     if (ui->rr->isChecked() || ui->rnr->isChecked()) {
-        Finaldial = new finaldial(this); // ✅ all required arguments
+        Finaldial = new finaldial(currentUserEmail, currentUserId, this);
         Finaldial->show();
     } else {
         QMessageBox msgBox;
@@ -41,6 +43,7 @@ void thirdDialog::on_ryes_clicked()
 
 void thirdDialog::on_rno_clicked()
 {
-    secDialogInstance = new secDialog(this);
+    secDialogInstance = new secDialog(currentUserEmail, currentUserId, this);
     secDialogInstance->show();
+    hide();
 }

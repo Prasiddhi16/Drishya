@@ -11,7 +11,7 @@ class thirdDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit thirdDialog(QWidget *parent = nullptr);
+    explicit thirdDialog(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~thirdDialog();
 
 private slots:
@@ -22,6 +22,9 @@ private:
     class Ui_thirdDialog *ui;
     finaldial *Finaldial;
     secDialog *secDialogInstance;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
 };
 
 #endif // THIRDDIALOG_H

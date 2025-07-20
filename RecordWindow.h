@@ -23,6 +23,8 @@ private slots:
     void addRecord();
     void editIncome();
     void editExpense();
+    void showIncomeTable();
+     void showExpenseTable();
     void openHome();
     void openAnalytics();
 

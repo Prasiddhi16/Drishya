@@ -12,11 +12,15 @@ class finaldial : public QDialog
     Q_OBJECT
 
 public:
-    explicit finaldial(QWidget *parent = nullptr);
+    explicit finaldial(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~finaldial();
 
 private:
     Ui::finaldial *ui;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
+
 };
 
 #endif // FINALDIAL_H

@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setQuitOnLastWindowClosed(false);
+
 
     // 🌈 Global Styling: black text on white background for all input fields and dialogs
     a.setStyleSheet(

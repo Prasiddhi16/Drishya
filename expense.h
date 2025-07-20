@@ -1,4 +1,4 @@
-#ifndef EXPENSE_H
+/*#ifndef EXPENSE_H
 #define EXPENSE_H
 
 #include <QWidget>
@@ -12,7 +12,7 @@ class expense : public QWidget
     Q_OBJECT
 
 public:
-    explicit expense(QWidget *parent = nullptr);
+    explicit expense(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~expense();
 
 private slots:
@@ -21,6 +21,10 @@ private slots:
 private:
     Ui::expense *ui;
        graph *Graph;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
 };
 
 #endif // EXPENSE_H
+*/

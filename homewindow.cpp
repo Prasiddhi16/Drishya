@@ -150,7 +150,7 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
     db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
-
+    QSqlQuery query(db);
     if (db.open()) {
         QSqlQuery query(db);
         double totalIncome = 0.0;
@@ -175,7 +175,7 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
     }
 
 
-    QSqlQuery query(db);
+
     QMap<int, double> incomeMap, expenseMap;
 
 

@@ -8,7 +8,7 @@
 #include <QSqlRecord> // Include QSqlRecord
 #include <QMessageBox> // For user feedback
 
-compare::compare(QWidget *parent)
+compare::compare(const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::compare)
 {
     ui->setupUi(this);
@@ -28,7 +28,7 @@ void compare::setupChart()
 
     QSqlDatabase db = QSqlDatabase::database("MainConnection");
 
-    // --- Check Database Connection Status ---
+
     if (!db.isValid() || !db.isOpen()) {
         qDebug() << "ERROR: Database connection 'MainConnection' is not valid or not open in compare::setupChart()!";
         qDebug() << "Error: " << db.lastError().text();
