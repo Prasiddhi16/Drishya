@@ -8,6 +8,7 @@
 
 #include "../../../expert.h"
 #include <QtCore/qmetatype.h>
+#include <QtCore/QList>
 
 #include <QtCore/qtmochelpers.h>
 
@@ -39,13 +40,28 @@ template <> constexpr inline auto expert::qt_create_metaobjectdata<qt_meta_tag_Z
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "expert",
+        "connectToDatabase",
+        "",
         "loadExpertReviewPage",
-        ""
+        "generateInsight",
+        "QList<double>",
+        "values",
+        "threshold",
+        "label",
+        "clearChartLayout"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'loadExpertReviewPage'
+        // Slot 'connectToDatabase'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'loadExpertReviewPage'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'generateInsight'
+        QtMocHelpers::SlotData<QString(const QVector<double> &, double, const QString &)>(4, 2, QMC::AccessPrivate, QMetaType::QString, {{
+            { 0x80000000 | 5, 6 }, { QMetaType::Double, 7 }, { QMetaType::QString, 8 },
+        }}),
+        // Slot 'clearChartLayout'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -69,11 +85,26 @@ void expert::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     auto *_t = static_cast<expert *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->loadExpertReviewPage(); break;
+        case 0: _t->connectToDatabase(); break;
+        case 1: _t->loadExpertReviewPage(); break;
+        case 2: { QString _r = _t->generateInsight((*reinterpret_cast< std::add_pointer_t<QList<double>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 3: _t->clearChartLayout(); break;
         default: ;
         }
     }
-    (void)_a;
+    if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 2:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QList<double> >(); break;
+            }
+            break;
+        }
+    }
 }
 
 const QMetaObject *expert::metaObject() const
@@ -95,14 +126,14 @@ int expert::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
     }
     return _id;
 }

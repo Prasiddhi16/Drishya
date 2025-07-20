@@ -276,7 +276,7 @@ void RecordWindow::showIncomeTable() {
         QPushButton *editBtn = new QPushButton("Edit");
         editBtn->setStyleSheet(R"(
      QPushButton {
-background-color:#27ae60;
+background-color:#bccdb7;
 })");
 
         table->setCellWidget(row, 3, editBtn);
@@ -370,7 +370,7 @@ void RecordWindow::showExpenseTable() {
         QPushButton *editBtn = new QPushButton("Edit");
     editBtn->setStyleSheet(R"(
      QPushButton {
-background-color:green;
+background-color:#bccdb7;
 })");
 
         table->setCellWidget(row, 3, editBtn);

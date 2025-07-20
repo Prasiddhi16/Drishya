@@ -48,7 +48,7 @@ public:
     {
         if (review->objectName().isEmpty())
             review->setObjectName("review");
-        review->resize(1198, 734);
+        review->resize(1119, 734);
         review->setStyleSheet(QString::fromUtf8("\n"
 "background-color: #131b39\n"
 ""));
@@ -65,7 +65,7 @@ public:
 ""));
         gridLayoutWidget = new QWidget(centralwidget);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
-        gridLayoutWidget->setGeometry(QRect(0, 100, 1100, 551));
+        gridLayoutWidget->setGeometry(QRect(0, 100, 1081, 551));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName("gridLayout");
         gridLayout->setContentsMargins(62, 0, 0, 0);
@@ -175,7 +175,7 @@ public:
         review->setCentralWidget(centralwidget);
         menubar = new QMenuBar(review);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1198, 17));
+        menubar->setGeometry(QRect(0, 0, 1119, 17));
         review->setMenuBar(menubar);
         statusbar = new QStatusBar(review);
         statusbar->setObjectName("statusbar");
