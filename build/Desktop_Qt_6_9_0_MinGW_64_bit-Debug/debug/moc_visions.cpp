@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../visions.h"
+#include "../../../../checkkk/visions.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

@@ -48,7 +48,6 @@ release/moc_weeklywindow.o
 release/moc_welwindow.o
 release/moc_RecordWindow.o
 release/moc_compare.o
-release/moc_expense.o
 release/moc_expert.o
 release/moc_finaldial.o
 release/moc_graph.o

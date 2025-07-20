@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../finaldial.h"
+#include "../../../../checkkk/finaldial.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
