@@ -1,173 +1,183 @@
 #include "expert.h"
 #include "ui_expert.h"
 #include <QtCharts>
+#include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
-#include <cmath>
-#include <numeric>   /
-#include <QSqlRecord>
 #include <QDebug>
-#include <QMessageBox>
+#include <cmath>
+#include <numeric>
 
-expert::expert(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::expert)
+expert::expert(const QString &userEmail, int userId, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::expert),
+    m_userEmail(userEmail),
+    m_userId(userId),
+    m_userName(userEmail.section('@', 0, 0))  // Optional: Extract name from email
 {
     ui->setupUi(this);
+    connectToDatabase();
     loadExpertReviewPage();
-    connect(ui->btnRefresh, &QPushButton::clicked, this, &expert::loadExpertReviewPage);
+    this->showMaximized();
 }
 
 expert::~expert() { delete ui; }
+
+void expert::connectToDatabase()
+{
+    if (!QSqlDatabase::contains("MainConnection")) {
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "MainConnection");
+        db.setDatabaseName("centralized.db");
+        if (!db.open()) {
+            qDebug() << "❌ Database connection failed:" << db.lastError().text();
+        } else {
+            qDebug() << "✅ Database connected successfully.";
+        }
+    }
+}
 
 void expert::loadExpertReviewPage()
 {
     qDebug() << "------------------------------------------";
     qDebug() << "Entering expert::loadExpertReviewPage()";
 
-    QVector<double> incomeValues;
-    QVector<double> expenseValues;
-
     QSqlDatabase db = QSqlDatabase::database("MainConnection");
     if (!db.isValid() || !db.isOpen()) {
-        qDebug() << "ERROR: Database connection is not valid or not open in expert::loadExpertReviewPage()!";
-        qDebug() << "Error:" << db.lastError().text();
         ui->InsightBox->setText("Database connection error. Cannot load expert review.");
-
-        QLayoutItem *child;
-        while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
-            delete child->widget();
-            delete child;
-        }
+        clearChartLayout();
         return;
     }
 
+    QMap<int, double> incomeMap, expenseMap;
     QSqlQuery query(db);
-    QString recordsQueryString = "SELECT income_amount, expenses_amount FROM records"; // Fetch both
-    qDebug() << "Executing query:" << recordsQueryString;
 
-    if (query.exec(recordsQueryString)) {
-        qDebug() << "Query for income and expenses executed successfully.";
-        QSqlRecord record = query.record();
-        int incomeIndex = record.indexOf("income_amount");
-        int expensesIndex = record.indexOf("expenses_amount");
-
-        if (incomeIndex == -1 || expensesIndex == -1) {
-            qDebug() << "ERROR: 'income_amount' or 'expenses_amount' column not found in 'records' table!";
-            QStringList fieldNames;
-            for (int i = 0; i < record.count(); ++i) {
-                fieldNames << record.fieldName(i);
-            }
-            qDebug() << "Available fields in 'records' table:" << fieldNames;
-            ui->InsightBox->setText("Error: Required columns missing in records table.");
-
-            QLayoutItem *child;
-            while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
-                delete child->widget();
-                delete child;
-            }
-            return;
-        }
-
+    // 🏦 Fetch Monthly Income
+    query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(income_amount) FROM records WHERE user_id = :uid GROUP BY month");
+    query.bindValue(":uid", m_userId);
+    if (query.exec()) {
         while (query.next()) {
-            incomeValues.append(query.value(incomeIndex).toDouble());
-            expenseValues.append(query.value(expensesIndex).toDouble());
+            int month = query.value(0).toInt();
+            double income = query.value(1).toDouble();
+            incomeMap[month] = income;
         }
-
-        if (incomeValues.isEmpty() && expenseValues.isEmpty()) {
-            qDebug() << "No income or expense records found.";
-            ui->InsightBox->setText("No financial data available for analysis.");
-
-            QLayoutItem *child;
-            while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
-                delete child->widget();
-                delete child;
-            }
-            return;
-        }
-
-        QString incomeInsight = "No income data.";
-        if (!incomeValues.isEmpty()) {
-            double meanIncome = std::accumulate(incomeValues.begin(), incomeValues.end(), 0.0) / incomeValues.size();
-            double varianceIncome = 0;
-            for (double val : incomeValues) varianceIncome += (val - meanIncome) * (val - meanIncome);
-            double stddevIncome = std::sqrt(varianceIncome / incomeValues.size());
-
-            incomeInsight = (stddevIncome > 3000)
-                                ? "🔍 Income is unstable. Consider diversifying sources."
-                                : "✅ Income is stable. Keep up the good work!";
-        }
-
-        // --- Expense Analysis and Insight ---
-        QString expenseInsight = "No expense data.";
-        if (!expenseValues.isEmpty()) {
-            double meanExpense = std::accumulate(expenseValues.begin(), expenseValues.end(), 0.0) / expenseValues.size();
-            double varianceExpense = 0;
-            for (double val : expenseValues) varianceExpense += (val - meanExpense) * (val - meanExpense);
-            double stddevExpense = std::sqrt(varianceExpense / expenseValues.size());
-
-            expenseInsight = (stddevExpense > 2000)
-                                 ? "⚠️ Expenses are fluctuating. Review spending habits."
-                                 : "👍 Expenses are stable. Good control!";
-        }
-
-        ui->InsightBox->setText("Income Insight: " + incomeInsight + "\n\n" + "Expense Insight: " + expenseInsight);
-
-
-
-        QLineSeries *incomeSeries = new QLineSeries();
-        incomeSeries->setName("Income");
-        for (int i = 0; i < incomeValues.size(); ++i)
-            incomeSeries->append(i + 1, incomeValues[i]);
-
-        QLineSeries *expenseSeries = new QLineSeries();
-        expenseSeries->setName("Expenses");
-        for (int i = 0; i < expenseValues.size(); ++i)
-            expenseSeries->append(i + 1, expenseValues[i]);
-
-        QChart *chart = new QChart();
-        chart->addSeries(incomeSeries);
-        chart->addSeries(expenseSeries);
-        chart->setTitle("Financial Trends (Income vs. Expenses)");
-        chart->legend()->setVisible(true);
-        chart->legend()->setAlignment(Qt::AlignBottom);
-
-        // Configure X and Y axes
-        QValueAxis *axisX = new QValueAxis;
-        axisX->setTitleText("Record");
-        QValueAxis *axisY = new QValueAxis;
-        axisY->setTitleText("Amount");
-        chart->addAxis(axisX, Qt::AlignBottom);
-        chart->addAxis(axisY, Qt::AlignLeft);
-        incomeSeries->attachAxis(axisX);
-        incomeSeries->attachAxis(axisY);
-        expenseSeries->attachAxis(axisX);
-        expenseSeries->attachAxis(axisY);
-
-        QChartView *chartView = new QChartView(chart);
-        chartView->setRenderHint(QPainter::Antialiasing);
-
-        // Clear existing chart from layout before adding new one
-        QLayoutItem *child;
-        while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
-            delete child->widget();
-            delete child;
-        }
-
-        ui->chartLayout->addWidget(chartView);
-
     } else {
-        qDebug() << "ERROR: Query for income/expenses FAILED to execute!";
-        qDebug() << "SQL Error:" << query.lastError().text();
-        qDebug() << "Driver Error:" << query.lastError().driverText();
-        qDebug() << "Database Error:" << query.lastError().databaseText();
-        ui->InsightBox->setText("Error retrieving financial data. Check database schema and connection.");
-        // Clear existing chart if any
-        QLayoutItem *child;
-        while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
-            delete child->widget();
-            delete child;
-        }
+        qDebug() << "Income query failed:" << query.lastError();
     }
+
+    // 💸 Fetch Monthly Expenses
+    query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY month");
+    query.bindValue(":uid", m_userId);
+    if (query.exec()) {
+        while (query.next()) {
+            int month = query.value(0).toInt();
+            double expense = query.value(1).toDouble();
+            expenseMap[month] = expense;
+        }
+    } else {
+        qDebug() << "Expense query failed:" << query.lastError();
+    }
+
+    QVector<double> incomeValues, expenseValues, savingValues;
+
+    QLineSeries *incomeSeries  = new QLineSeries(); incomeSeries->setName("Income");
+    QLineSeries *expenseSeries = new QLineSeries(); expenseSeries->setName("Expenses");
+    QLineSeries *savingSeries  = new QLineSeries(); savingSeries->setName("Savings");
+
+    incomeSeries->setColor(QColor("#3498db"));   // Blue
+    expenseSeries->setColor(QColor("#e74c3c"));  // Red
+    savingSeries->setColor(QColor("#2ecc71"));   // Green
+
+    double minVal = 0.0, maxVal = 0.0;
+
+    for (int month = 1; month <= 12; ++month) {
+        double income = incomeMap.value(month, 0.0);
+        double expense = expenseMap.value(month, 0.0);
+        double savings = income - expense;
+
+        incomeValues.append(income);
+        expenseValues.append(expense);
+        savingValues.append(savings);
+
+        // Optional: incomeSeries->append(month, income);
+        expenseSeries->append(month, expense);
+        savingSeries->append(month, savings);
+
+        maxVal = std::max({maxVal, income, expense, savings});
+        if (savings < minVal) minVal = savings;
+    }
+
+    // 📋 Generate Insights
+    QString incomeInsight  = generateInsight(incomeValues, 3000, "Income");
+    QString expenseInsight = generateInsight(expenseValues, 2000, "Expenses");
+    QString savingInsight  = generateInsight(savingValues, 2500, "Savings");
+    ui->InsightBox->setText(incomeInsight + "\n\n" + expenseInsight + "\n\n" + savingInsight);
+
+    // 📊 Build Chart
+    QChart *chart = new QChart();
+    chart->addSeries(incomeSeries);
+    chart->addSeries(expenseSeries);
+    chart->addSeries(savingSeries);
+    chart->setTitle("📈 Monthly Financial Trends");
+    chart->setBackgroundBrush(QBrush(QColor("#ffffff")));
+    chart->setTitleBrush(QBrush(Qt::black));
+    chart->legend()->setLabelBrush(QBrush(Qt::black));
+    chart->legend()->setAlignment(Qt::AlignBottom);
+    chart->setAnimationOptions(QChart::SeriesAnimations);
+
+    QCategoryAxis *axisX = new QCategoryAxis;
+    axisX->setTitleText("Month");
+    QStringList monthLabels = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    for (int i = 1; i <= 12; ++i)
+        axisX->append(monthLabels[i - 1], i);
+    axisX->setRange(1, 12);
+
+    QValueAxis *axisY = new QValueAxis;
+    axisY->setTitleText("Amount (NPR)");
+    axisY->setRange(minVal < 0 ? minVal - 500 : 0, maxVal + 1000);
+    axisY->applyNiceNumbers();
+
+    chart->addAxis(axisX, Qt::AlignBottom);
+    chart->addAxis(axisY, Qt::AlignLeft);
+
+    incomeSeries->attachAxis(axisX);  incomeSeries->attachAxis(axisY);
+    expenseSeries->attachAxis(axisX); expenseSeries->attachAxis(axisY);
+    savingSeries->attachAxis(axisX);  savingSeries->attachAxis(axisY);
+
+    QChartView *chartView = new QChartView(chart);
+    chartView->setRenderHint(QPainter::Antialiasing);
+    chartView->setFixedHeight(300);
+    chartView->setStyleSheet("background: transparent");
+
+    clearChartLayout();
+    ui->chartLayout->addWidget(chartView);
+
     qDebug() << "Exiting expert::loadExpertReviewPage()";
 }
 
+QString expert::generateInsight(const QVector<double> &values, double threshold, const QString &label)
+{
+    if (values.isEmpty())
+    {return QString("No %1 data available.").arg(label);}
+    if (std::all_of(values.begin(), values.end(), [](double v) { return v == 0.0; })) {
+        return QString("ℹ️ No meaningful %1 data for the selected period.").arg(label);
+    }
+
+    double mean = std::accumulate(values.begin(), values.end(), 0.0) / values.size();
+    double variance = 0;
+    for (double val : values) variance += std::pow(val - mean, 2);
+    double stddev = std::sqrt(variance / values.size());
+
+    if (stddev > threshold) {
+        return QString("⚠️ %1 is fluctuating. Consider strategic adjustments.").arg(label);
+    } else {
+        return QString("✅ %1 appears stable and well-managed.").arg(label);
+    }
+}
+
+void expert::clearChartLayout()
+{
+    QLayoutItem *child;
+    while ((child = ui->chartLayout->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
+    }
+}

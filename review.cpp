@@ -18,7 +18,10 @@
 #include "visions.h"
 #include "analysiswindow.h"
 #include "homewindow.h"
-
+#include "expert.h"
+#include "compare.h"
+#include "graph.h"
+#include "taxDialog.h"
 
 review::review(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
@@ -36,8 +39,6 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-
-    // Use relative path for DB - adjust path according to your project structure
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
 
@@ -46,7 +47,7 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     if (!db.open()) {
         qDebug() << "DB Open Error:" << db.lastError().text();
         QMessageBox::critical(this, "Database Error", "Failed to open database.");
-        return;  // Important to stop constructor if DB doesn't open
+        return;
     }
 
     // Navigation panel
@@ -82,8 +83,6 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     connect(buttons[1], &QPushButton::clicked, this, &review::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &review::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &review::openvisions);
-    //connect(buttons[4], &QPushButton::clicked, this, &review::openreview);
-    //connect(buttons[5], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
 
     QWidget *mainContainer = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainContainer);
@@ -102,26 +101,26 @@ review::~review()
 void review::on_btnCompare_clicked()
 {
     hide();
-    Compare = new compare(this);
+    Compare = new compare(currentUserEmail, currentUserId, this);
     Compare->show();
 }
 
 void review::on_btnExper_clicked()
 {
     hide();
-    Expert = new expert(this);
+    Expert = new expert(currentUserEmail, currentUserId, this);
     Expert->show();
 }
 
 void review::on_btnExpense_clicked()
 {
-    Graph = new graph(this);
+    Graph = new graph(currentUserEmail, currentUserId, this);
     Graph->show();
 }
 
 void review::on_btnTax_clicked()
 {
-    Taxdialog = new taxDialog(this);
+    Taxdialog = new taxDialog(currentUserEmail, currentUserId, this);
     Taxdialog->show();
 }
 

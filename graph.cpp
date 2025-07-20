@@ -5,102 +5,114 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QtCharts/QChart>
-#include <QDebug> // Include for qDebug
+#include <QDebug>
+#include <QString>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDir>
+#include <QCoreApplication>
 
-// Modified constructor to accept actual data
-graph::graph(QWidget *parent, qreal income, qreal expenses, qreal savingAmount)
-    : QMainWindow(parent)
-    , ui(new Ui::graph)
+graph::graph(const QString &userEmail, int userId, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::graph)
 {
     qDebug() << "Graph: Entering constructor.";
     ui->setupUi(this);
-    this->resize(800, 600); // ADDED: Explicitly set a default size for the graph window
-    qDebug() << "Graph: setupUi completed and window resized.";
+    this->resize(800, 600);
+    qDebug() << "Graph: UI setup complete and window resized.";
 
-    qDebug() << "Graph: Constructor received data:";
-    qDebug() << "Income:" << income;
-    qDebug() << "Expenses:" << expenses;
-    qDebug() << "Saving:" << savingAmount;
-
-    // Use the actual data passed to the constructor
-    qreal totalIncome = income;
-    qreal saving = savingAmount;
-    qreal expense = expenses; // Use the passed expenses directly
-
-    // Handle cases where totalIncome might be zero or negative to avoid division by zero or nonsensical percentages
-    if (totalIncome <= 0) {
-        qDebug() << "Graph: Warning: Total income is zero or negative. Pie chart might not be meaningful.";
-        // You might want to display a message or a blank chart instead
-        totalIncome = 1; // Prevent division by zero for percentage calculation if needed, or set slices to 0
-        saving = 0;
-        expense = 0;
+    // 🔌 Connect to the database
+    QString connectionName = "qt_sql_graph_connection";
+    if (QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase::removeDatabase(connectionName);
     }
 
-    // Pie chart setup
-    QPieSeries *series = new QPieSeries();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
 
-    // Only add slices if their values are positive to avoid issues with 0 or negative values
+    qreal totalIncome = 0.0;
+    qreal totalExpense = 0.0;
+    qreal saving = 0.0;
+
+    if (!db.open()) {
+        qDebug() << "Graph: Failed to open database —" << db.lastError().text();
+    } else {
+        qDebug() << "Graph: Connected to database at:" << dbPath;
+
+        // 📊 Query to sum income and expense
+        QSqlQuery query(db);
+        query.prepare("SELECT SUM(income_amount), SUM(expense_amount) FROM records WHERE user_id= :uid");
+        query.bindValue(":uid", userId);
+
+
+        if (query.exec() && query.next()) {
+            totalIncome = query.value(0).toDouble();
+            totalExpense = query.value(1).toDouble();
+            saving = totalIncome - totalExpense;
+
+            qDebug() << "Graph: Aggregated data — Income:" << totalIncome
+                     << "Expense:" << totalExpense << "Saving:" << saving;
+        } else {
+            qDebug() << "Graph: Query failed —" << query.lastError().text();
+        }
+    }
+
+    // 🚫 Prevent charting issues with zero income
+    if (totalIncome <= 0) {
+        totalIncome = 1;
+        totalExpense = 0;
+        saving = 0;
+        qDebug() << "Graph: Adjusted invalid income to avoid empty chart.";
+    }
+
+    // 🥧 Create pie chart
+    QPieSeries *series = new QPieSeries();
     if (saving > 0) {
         series->append("Saving", saving);
-        qDebug() << "Graph: Added Saving slice:" << saving;
-    } else {
-        qDebug() << "Graph: Saving amount is zero or negative, not adding to pie chart.";
+        qDebug() << "Graph: Added saving slice:" << saving;
+    }
+    if (totalExpense > 0) {
+        series->append("Expense", totalExpense);
+        qDebug() << "Graph: Added expense slice:" << totalExpense;
     }
 
-    if (expense > 0) {
-        series->append("Expense", expense);
-        qDebug() << "Graph: Added Expense slice:" << expense;
-    } else {
-        qDebug() << "Graph: Expense amount is zero or negative, not adding to pie chart.";
-    }
-
-    // If no slices are added, add a "No Data" slice or handle appropriately
     if (series->slices().isEmpty()) {
-        qDebug() << "Graph: No positive data slices, adding 'No Data' slice.";
-        series->append("No Data", 1); // Add a small slice to show something
+        series->append("No Data", 1);
         QPieSlice *noDataSlice = series->slices().at(0);
         noDataSlice->setLabelVisible(true);
         noDataSlice->setBrush(Qt::lightGray);
         noDataSlice->setLabel("No Data");
+        qDebug() << "Graph: No valid data — Added placeholder slice.";
     } else {
-        // Optional: highlight saving slice (only if saving slice exists)
-        // Find the saving slice by its label or value if it's not always the first
         for (QPieSlice *slice : series->slices()) {
             if (slice->label() == "Saving") {
                 slice->setExploded(true);
                 slice->setLabelVisible(true);
                 slice->setPen(QPen(Qt::darkGreen, 2));
                 slice->setBrush(Qt::green);
-                qDebug() << "Graph: Highlighted Saving slice.";
+                qDebug() << "Graph: Highlighted saving slice.";
                 break;
             }
         }
     }
 
-
-    // Chart
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Income Breakdown"); // Title remains "Income Breakdown" for this pie chart
+    chart->setTitle("Income Breakdown");
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);
-
-    // Enable smooth animation
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
-    // Chart View
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-
-    // Set chart to central widget
     setCentralWidget(chartView);
-    qDebug() << "Graph: Chart set as central widget.";
-    qDebug() << "Graph: Exiting constructor.";
+
+    qDebug() << "Graph: Chart ready.";
 }
 
 graph::~graph()
 {
-    qDebug() << "Graph: Entering destructor.";
+    qDebug() << "Graph: Destructor called.";
     delete ui;
-    qDebug() << "Graph: Destructor completed.";
 }

@@ -13,7 +13,7 @@ class taxDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit taxDialog(QWidget *parent = nullptr);
+    explicit taxDialog(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~taxDialog();
 
 private slots:
@@ -23,6 +23,9 @@ private slots:
 private:
     Ui_taxDialog *ui;
     secDialog *secdialog;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
 };
 
 #endif // TAXDIALOG_H

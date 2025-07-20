@@ -14,7 +14,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -25,11 +25,12 @@ class Ui_expert
 {
 public:
     QWidget *centralwidget;
+    QWidget *verticalLayoutWidget_2;
+    QVBoxLayout *verticalLayout;
     QLabel *label;
     QLabel *InsightBox;
-    QWidget *verticalLayoutWidget;
+    QSpacerItem *horizontalSpacer;
     QVBoxLayout *chartLayout;
-    QPushButton *btnRefresh;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -37,12 +38,17 @@ public:
     {
         if (expert->objectName().isEmpty())
             expert->setObjectName("expert");
-        expert->resize(800, 600);
+        expert->resize(889, 600);
         centralwidget = new QWidget(expert);
         centralwidget->setObjectName("centralwidget");
-        label = new QLabel(centralwidget);
+        verticalLayoutWidget_2 = new QWidget(centralwidget);
+        verticalLayoutWidget_2->setObjectName("verticalLayoutWidget_2");
+        verticalLayoutWidget_2->setGeometry(QRect(60, 20, 1161, 561));
+        verticalLayout = new QVBoxLayout(verticalLayoutWidget_2);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(88, 0, 0, 0);
+        label = new QLabel(verticalLayoutWidget_2);
         label->setObjectName("label");
-        label->setGeometry(QRect(360, 10, 511, 31));
         label->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "font-size: 24px; \n"
@@ -50,32 +56,33 @@ public:
 "	font: 24pt \"Menlos\";\n"
 "allignment:center;\n"
 "}"));
-        InsightBox = new QLabel(centralwidget);
+
+        verticalLayout->addWidget(label, 0, Qt::AlignmentFlag::AlignHCenter);
+
+        InsightBox = new QLabel(verticalLayoutWidget_2);
         InsightBox->setObjectName("InsightBox");
-        InsightBox->setGeometry(QRect(20, 60, 801, 111));
         InsightBox->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "background-color: #ffffff; border-radius: 15px; border: 2px solid #cdb4db; font-size: 16px; color: #3c096c; padding: 12px;\n"
 "}"));
         InsightBox->setWordWrap(true);
-        verticalLayoutWidget = new QWidget(centralwidget);
-        verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(150, 180, 571, 311));
-        chartLayout = new QVBoxLayout(verticalLayoutWidget);
+
+        verticalLayout->addWidget(InsightBox);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        verticalLayout->addItem(horizontalSpacer);
+
+        chartLayout = new QVBoxLayout();
         chartLayout->setObjectName("chartLayout");
-        chartLayout->setContentsMargins(0, 0, 0, 0);
-        btnRefresh = new QPushButton(centralwidget);
-        btnRefresh->setObjectName("btnRefresh");
-        btnRefresh->setGeometry(QRect(380, 510, 291, 51));
-        btnRefresh->setStyleSheet(QString::fromUtf8("QPushButton\n"
-"{\n"
-"background-color: white; color: black; border-radius: 12px; padding: 8px 16px; font-weight: bold;\n"
-"	font: 18pt \"Helvetica\";\n"
-"}"));
+        chartLayout->setContentsMargins(6, -1, -1, -1);
+
+        verticalLayout->addLayout(chartLayout);
+
         expert->setCentralWidget(centralwidget);
         menubar = new QMenuBar(expert);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 17));
+        menubar->setGeometry(QRect(0, 0, 889, 17));
         expert->setMenuBar(menubar);
         statusbar = new QStatusBar(expert);
         statusbar->setObjectName("statusbar");
@@ -91,7 +98,6 @@ public:
         expert->setWindowTitle(QCoreApplication::translate("expert", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("expert", "\360\237\222\241EXPERT REVIEW", nullptr));
         InsightBox->setText(QCoreApplication::translate("expert", "\360\237\224\215 Insights will appear here...", nullptr));
-        btnRefresh->setText(QCoreApplication::translate("expert", "\360\237\224\204 Refresh Insight", nullptr));
     } // retranslateUi
 
 };

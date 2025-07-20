@@ -11,7 +11,7 @@ class secDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit secDialog(QWidget *parent = nullptr);
+    explicit secDialog(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~secDialog();
 
 private slots:
@@ -22,6 +22,9 @@ private:
     class Ui_secDialog *ui;  // Use generated class directly
     thirdDialog *thirddialog;
         taxDialog *TaxdialogInstance;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
 };
 
 #endif // SECDIALOG_H
