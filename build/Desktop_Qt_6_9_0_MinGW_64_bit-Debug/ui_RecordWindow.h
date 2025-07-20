@@ -302,9 +302,10 @@ public:
 ""));
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(740, 170, 761, 451));
+        label->setGeometry(QRect(740, 60, 761, 561));
+        label->setMinimumSize(QSize(100, 100));
         label->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/record.png")));
-        label->setScaledContents(true);
+        label->setScaledContents(false);
         RecordWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(RecordWindow);
         statusbar->setObjectName("statusbar");

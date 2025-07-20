@@ -34,6 +34,8 @@ release/qrc_moneybg.o
 release/qrc_welcom.o
 release/qrc_images.o
 release/qrc_res.o
+release/qrc_ADrecord.o
+release/qrc_qmake_qmake_immediate.o
 release/moc_analysiswindow.o
 release/moc_budgetwindow.o
 release/moc_homewindow.o
