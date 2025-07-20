@@ -1,16 +1,16 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/">
-<file alias="img/details.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/details.png</file>
-<file alias="img/dream car.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/dream car.jpg</file>
-<file alias="img/dream vacation.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/dream vacation.jpg</file>
-<file alias="img/edit.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/edit.png</file>
-<file alias="img/emergency.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/emergency.jpg</file>
-<file alias="img/goal2.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/goal2.jpg</file>
-<file alias="img/logout.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/logout.png</file>
-<file alias="img/Privacy.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/Privacy.png</file>
-<file alias="img/real estate.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/real estate.jpg</file>
-<file alias="img/report.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/report.png</file>
-<file alias="img/swap.png">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/swap.png</file>
-<file alias="img/travel.jpg">C:/Users/Lenovo/OneDrive/Desktop/checkkk/img/travel.jpg</file>
+<file alias="img/details.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/details.png</file>
+<file alias="img/dream car.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/dream car.jpg</file>
+<file alias="img/dream vacation.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/dream vacation.jpg</file>
+<file alias="img/edit.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/edit.png</file>
+<file alias="img/emergency.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/emergency.jpg</file>
+<file alias="img/goal2.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/goal2.jpg</file>
+<file alias="img/logout.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/logout.png</file>
+<file alias="img/Privacy.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/Privacy.png</file>
+<file alias="img/real estate.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/real estate.jpg</file>
+<file alias="img/report.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/report.png</file>
+<file alias="img/swap.png">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/swap.png</file>
+<file alias="img/travel.jpg">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/img/travel.jpg</file>
 </qresource>
 </RCC>
