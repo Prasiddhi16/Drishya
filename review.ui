@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1198</width>
+    <width>1119</width>
     <height>734</height>
    </rect>
   </property>
@@ -45,7 +45,7 @@ color:White;
      <rect>
       <x>0</x>
       <y>100</y>
-      <width>1100</width>
+      <width>1081</width>
       <height>551</height>
      </rect>
     </property>
@@ -62,7 +62,7 @@ color:White;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="res.qrc">
          <normaloff>:/img/tax/taxation.png</normaloff>:/img/tax/taxation.png</iconset>
        </property>
        <property name="iconSize">
@@ -99,7 +99,7 @@ QProgressBar::chunk {
         <string/>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="images.qrc">
          <normaloff>:/images/images/Expense_tracker.png</normaloff>:/images/images/Expense_tracker.png</iconset>
        </property>
        <property name="iconSize">
@@ -195,7 +195,7 @@ color:white;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="images.qrc">
          <normaloff>:/images/images/Compare_contrast.png</normaloff>:/images/images/Compare_contrast.png</iconset>
        </property>
        <property name="iconSize">
@@ -212,7 +212,7 @@ color:white;
         <string/>
        </property>
        <property name="icon">
-        <iconset>
+        <iconset resource="images.qrc">
          <normaloff>:/images/images/expert_insight .png</normaloff>:/images/images/expert_insight .png</iconset>
        </property>
        <property name="iconSize">
@@ -231,13 +231,16 @@ color:white;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1198</width>
+     <width>1119</width>
      <height>17</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

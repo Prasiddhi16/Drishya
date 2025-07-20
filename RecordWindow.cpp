@@ -32,7 +32,6 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
     this->showMaximized();
     ui->timestamp->setDateTime(QDateTime::currentDateTime());
 
-    // 📁 Locate DB in same folder as executable
     QString exeDir = QCoreApplication::applicationDirPath();
     QString dbFilePath = QDir(exeDir).absoluteFilePath("../centralized.db");
 

@@ -118,4 +118,6 @@ RESOURCES += \
     welcom.qrc \
     images.qrc\
     res.qrc \
+    ADrecord.qrc\
+    img/
 

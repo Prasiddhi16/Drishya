@@ -624,24 +624,32 @@ color: red;
     <property name="geometry">
      <rect>
       <x>740</x>
-      <y>170</y>
+      <y>60</y>
       <width>761</width>
-      <height>451</height>
+      <height>561</height>
      </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>:/new/prefix1/record.png</pixmap>
+     <pixmap resource="ADrecord.qrc">:/new/prefix1/record.png</pixmap>
     </property>
     <property name="scaledContents">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="ADrecord.qrc"/>
+ </resources>
  <connections/>
 </ui>
