@@ -62,7 +62,7 @@ public:
     QPushButton *delete_4;
     QStackedWidget *stackedWidget4;
     QWidget *page_34;
-    QWidget *gridLayoutWidget_6;
+    QGridLayout *gridLayout_31;
     QGridLayout *gridLayout_25;
     QLabel *label_8;
     QPushButton *add_4;
@@ -363,13 +363,11 @@ public:
         stackedWidget4->setObjectName("stackedWidget4");
         page_34 = new QWidget();
         page_34->setObjectName("page_34");
-        gridLayoutWidget_6 = new QWidget(page_34);
-        gridLayoutWidget_6->setObjectName("gridLayoutWidget_6");
-        gridLayoutWidget_6->setGeometry(QRect(0, 0, 441, 321));
-        gridLayout_25 = new QGridLayout(gridLayoutWidget_6);
+        gridLayout_31 = new QGridLayout(page_34);
+        gridLayout_31->setObjectName("gridLayout_31");
+        gridLayout_25 = new QGridLayout();
         gridLayout_25->setObjectName("gridLayout_25");
-        gridLayout_25->setContentsMargins(0, 0, 0, 0);
-        label_8 = new QLabel(gridLayoutWidget_6);
+        label_8 = new QLabel(page_34);
         label_8->setObjectName("label_8");
         sizePolicy.setHeightForWidth(label_8->sizePolicy().hasHeightForWidth());
         label_8->setSizePolicy(sizePolicy);
@@ -379,18 +377,21 @@ public:
 
         gridLayout_25->addWidget(label_8, 1, 0, 1, 1);
 
-        add_4 = new QPushButton(gridLayoutWidget_6);
+        add_4 = new QPushButton(page_34);
         add_4->setObjectName("add_4");
         add_4->setMinimumSize(QSize(0, 30));
 
         gridLayout_25->addWidget(add_4, 2, 0, 1, 1);
 
-        label_7 = new QLabel(gridLayoutWidget_6);
+        label_7 = new QLabel(page_34);
         label_7->setObjectName("label_7");
         label_7->setMinimumSize(QSize(0, 40));
         label_7->setWordWrap(true);
 
         gridLayout_25->addWidget(label_7, 0, 0, 1, 1);
+
+
+        gridLayout_31->addLayout(gridLayout_25, 0, 0, 1, 1);
 
         stackedWidget4->addWidget(page_34);
         page_33 = new QWidget();
