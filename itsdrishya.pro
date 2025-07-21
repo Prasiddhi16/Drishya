@@ -119,5 +119,5 @@ RESOURCES += \
     images.qrc\
     res.qrc \
     ADrecord.qrc\
-    img/
+    resource.qrc\
 

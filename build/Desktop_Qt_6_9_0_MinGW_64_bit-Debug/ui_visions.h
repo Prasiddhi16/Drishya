@@ -953,7 +953,7 @@ public:
         Visions->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Visions);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1440, 21));
+        menubar->setGeometry(QRect(0, 0, 1440, 17));
         Visions->setMenuBar(menubar);
         statusbar = new QStatusBar(Visions);
         statusbar->setObjectName("statusbar");
@@ -977,7 +977,7 @@ public:
         Visions->setWindowTitle(QCoreApplication::translate("Visions", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-family:'Arial'; font-size:24pt; font-weight:700; color:#ffffff;\">Crafting Your Visions Into Reality,</span></p><p align=\"justify\"><span style=\" font-family:'Arial'; font-size:24pt; font-weight:700; color:#ffffff;\">Slowly but Surely...</span></p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("Visions", "<html><head/><body><p align=\"center\"><span style=\" font-size:48pt; font-weight:700;\">GOALS</span></p></body></html>", nullptr));
-        toolButton->setText(QCoreApplication::translate("Visions", "...", nullptr));
+        toolButton->setText(QCoreApplication::translate("Visions", "\360\237\221\244", nullptr));
         groupBox_1->setTitle(QString());
         label_4->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:14pt;\">\342\200\234Start building the foundation</span></p><p><span style=\" font-size:14pt;\">of your dreams \342\200\224 </span></p><p><span style=\" font-size:14pt;\">one rupee at a time.\342\200\235<br/></span></p></body></html>", nullptr));
         label_3->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:20pt; font-weight:700;\">\360\237\217\241REAL ESTATE</span></p></body></html>", nullptr));

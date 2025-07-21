@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../visions.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -39,18 +40,24 @@ template <> constexpr inline auto Visions::qt_create_metaobjectdata<qt_meta_tag_
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Visions",
-        "onAddButtonClicked",
+        "onGoalSet",
         "",
+        "goalIndex",
+        "GoalData",
+        "data",
+        "onAddButtonClicked",
         "on_delete_1_clicked",
         "on_delete_2_clicked",
         "on_delete_3_clicked",
         "on_delete_4_clicked",
         "on_delete_5_clicked",
         "on_delete_6_clicked",
-        "handleGoalSet",
-        "goalIndex",
-        "GoalData",
-        "data",
+        "on_edit1_clicked",
+        "on_edit2_clicked",
+        "on_edit3_clicked",
+        "on_edit4_clicked",
+        "on_edit5_clicked",
+        "on_edit6_clicked",
         "on_toolButton_clicked",
         "openHome",
         "openRecordWindow",
@@ -59,34 +66,46 @@ template <> constexpr inline auto Visions::qt_create_metaobjectdata<qt_meta_tag_
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'onAddButtonClicked'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_1_clicked'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_2_clicked'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_3_clicked'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_4_clicked'
-        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_5_clicked'
-        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_delete_6_clicked'
-        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'handleGoalSet'
-        QtMocHelpers::SlotData<void(int, const GoalData &)>(9, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::Int, 10 }, { 0x80000000 | 11, 12 },
+        // Slot 'onGoalSet'
+        QtMocHelpers::SlotData<void(int, const GoalData &)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 3 }, { 0x80000000 | 4, 5 },
         }}),
-        // Slot 'on_toolButton_clicked'
+        // Slot 'onAddButtonClicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_1_clicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_2_clicked'
+        QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_3_clicked'
+        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_4_clicked'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_5_clicked'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_delete_6_clicked'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_edit1_clicked'
         QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openHome'
+        // Slot 'on_edit2_clicked'
         QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openRecordWindow'
+        // Slot 'on_edit3_clicked'
         QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openAnalytics'
+        // Slot 'on_edit4_clicked'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openreview'
+        // Slot 'on_edit5_clicked'
         QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_edit6_clicked'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_toolButton_clicked'
+        QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openHome'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openRecordWindow'
+        QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openAnalytics'
+        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openreview'
+        QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -110,19 +129,25 @@ void Visions::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     auto *_t = static_cast<Visions *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->onAddButtonClicked(); break;
-        case 1: _t->on_delete_1_clicked(); break;
-        case 2: _t->on_delete_2_clicked(); break;
-        case 3: _t->on_delete_3_clicked(); break;
-        case 4: _t->on_delete_4_clicked(); break;
-        case 5: _t->on_delete_5_clicked(); break;
-        case 6: _t->on_delete_6_clicked(); break;
-        case 7: _t->handleGoalSet((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<GoalData>>(_a[2]))); break;
-        case 8: _t->on_toolButton_clicked(); break;
-        case 9: _t->openHome(); break;
-        case 10: _t->openRecordWindow(); break;
-        case 11: _t->openAnalytics(); break;
-        case 12: _t->openreview(); break;
+        case 0: _t->onGoalSet((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<GoalData>>(_a[2]))); break;
+        case 1: _t->onAddButtonClicked(); break;
+        case 2: _t->on_delete_1_clicked(); break;
+        case 3: _t->on_delete_2_clicked(); break;
+        case 4: _t->on_delete_3_clicked(); break;
+        case 5: _t->on_delete_4_clicked(); break;
+        case 6: _t->on_delete_5_clicked(); break;
+        case 7: _t->on_delete_6_clicked(); break;
+        case 8: _t->on_edit1_clicked(); break;
+        case 9: _t->on_edit2_clicked(); break;
+        case 10: _t->on_edit3_clicked(); break;
+        case 11: _t->on_edit4_clicked(); break;
+        case 12: _t->on_edit5_clicked(); break;
+        case 13: _t->on_edit6_clicked(); break;
+        case 14: _t->on_toolButton_clicked(); break;
+        case 15: _t->openHome(); break;
+        case 16: _t->openRecordWindow(); break;
+        case 17: _t->openAnalytics(); break;
+        case 18: _t->openreview(); break;
         default: ;
         }
     }
@@ -147,14 +172,14 @@ int Visions::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 13)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 13;
+        _id -= 19;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 13)
+        if (_id < 19)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 13;
+        _id -= 19;
     }
     return _id;
 }

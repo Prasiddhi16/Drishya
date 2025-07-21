@@ -48,7 +48,6 @@ debug/moc_weeklywindow.o
 debug/moc_welwindow.o
 debug/moc_RecordWindow.o
 debug/moc_compare.o
-debug/moc_expense.o
 debug/moc_expert.o
 debug/moc_finaldial.o
 debug/moc_graph.o

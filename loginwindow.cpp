@@ -13,6 +13,7 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QDialog>
+#include<QToolButton>
 
 loginWindow::loginWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,24 @@ loginWindow::loginWindow(QWidget *parent)
     QSettings settings("ItsDrishya", "LoginSystem");
     bool wasChecked = settings.value("keep_logged_in", 0).toInt() == 1;
     ui->checkBox->setChecked(wasChecked);
+    QToolButton *eyeButton = new QToolButton(ui->lineEdit_2);
+    eyeButton->setText("👁");
+    eyeButton->setCursor(Qt::PointingHandCursor);
+    eyeButton->setStyleSheet("QToolButton { border: none; font-size: 14px; padding: 0px; }");
+
+    QHBoxLayout *layout = new QHBoxLayout(ui->lineEdit_2);
+    layout->addStretch();
+    layout->addWidget(eyeButton);
+    layout->setContentsMargins(0, 0, 0, 0);
+    ui->lineEdit_2->setLayout(layout);
+
+    connect(eyeButton, &QToolButton::clicked, this, [=]() {
+        ui->lineEdit_2->setEchoMode(QLineEdit::Normal);
+        QTimer::singleShot(500, this, [=]() {
+            ui->lineEdit_2->setEchoMode(QLineEdit::Password);
+        });
+    });
+
 
     DBconnection = QSqlDatabase::addDatabase("QSQLITE", "login_connection");
 
