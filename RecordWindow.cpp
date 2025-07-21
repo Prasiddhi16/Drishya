@@ -31,7 +31,17 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
     currentUserId(userId)
 {
     ui->setupUi(this);
-    this->showMaximized();
+    qApp->setStyleSheet("QDialog, QMessageBox { background-color: white; color: black; }");
+    ui->tabWidget->setCurrentIndex(0);  // Show Income tab first
+    ui->tabWidget->setStyleSheet(R"(
+    QTabBar::tab:selected {
+        color: green;     /* Active tab text color */
+    }
+    QTabBar::tab:!selected {
+        color: black;     /* Inactive tab text color */
+    }
+)");
+     this->showMaximized();
     ui->timestamp->setDateTime(QDateTime::currentDateTime());
 
     QString exeDir = QCoreApplication::applicationDirPath();
@@ -138,41 +148,63 @@ void RecordWindow::addRecord()
     QString reference = ui->referenceNumber->text().trimmed();
     QString review = ui->review->text().trimmed();
     QString timestamp = ui->timestamp->dateTime().toString("yyyy-MM-dd hh:mm:ss");
-
-    bool allFieldsFilled =
-        !incomeAmountStr.isEmpty() && !incomeSource.isEmpty() && !incomeCurrency.isEmpty() &&
-        !expenseAmountStr.isEmpty() && !expenseCategory.isEmpty() && !expenseCurrency.isEmpty() &&
-        !reference.isEmpty() && !review.isEmpty() && !timestamp.isEmpty();
-
-    bool incomeOk, expenseOk;
-    double incomeAmount = incomeAmountStr.toDouble(&incomeOk);
-    double expenseAmount = expenseAmountStr.toDouble(&expenseOk);
-
-    if (!allFieldsFilled) {
-        QMessageBox::warning(this, "Missing Data", "Please fill all income, expense, reference, review, and timestamp fields.");
+    if (reference.isEmpty() || review.isEmpty() || timestamp.isEmpty()) {
+        QMessageBox::warning(this, "Missing Data", "Please fill reference, review, and timestamp.");
         return;
     }
-    if (!incomeOk || !expenseOk) {
-        QMessageBox::warning(this, "Invalid Amount", "Please enter valid numeric values for amounts.");
-        return;
-    }
+    // Income
+    double incomeAmount = 0.0;
+    QString finalIncomeSource;
+    QString finalIncomeCurrency;
 
+    if (!incomeAmountStr.isEmpty()) {
+        bool incomeOk = false;
+        incomeAmount = incomeAmountStr.toDouble(&incomeOk);
+        if (!incomeOk) {
+            QMessageBox::warning(this, "Invalid Income", "Income amount must be a number.");
+            return;
+        }
+        finalIncomeSource = incomeSource.isEmpty() ? QString() : incomeSource;
+        finalIncomeCurrency = incomeCurrency.isEmpty() ? QString() : incomeCurrency;
+    } else {
+        // No income amount entered, ignore other income fields
+        finalIncomeSource = QString();
+        finalIncomeCurrency = QString();
+    }
+     // Expense
+    double expenseAmount = 0.0;
+    QString finalExpenseCategory;
+    QString finalExpenseCurrency;
+
+    if (!expenseAmountStr.isEmpty()) {
+        bool expenseOk = false;
+        expenseAmount = expenseAmountStr.toDouble(&expenseOk);
+        if (!expenseOk) {
+            QMessageBox::warning(this, "Invalid Expense", "Expense amount must be a number.");
+            return;
+        }
+        finalExpenseCategory = expenseCategory.isEmpty() ? QString() : expenseCategory;
+        finalExpenseCurrency = expenseCurrency.isEmpty() ? QString() : expenseCurrency;
+    } else {
+        // No expense amount entered, ignore other expense fields
+        finalExpenseCategory = QString();
+        finalExpenseCurrency = QString();
+    }
     QSqlQuery query(DB_connection);
     query.prepare("INSERT INTO records (user_id, income_amount, income_source, income_currency, "
                   "expense_amount, expense_category, expense_currency, reference, review, timestamp) "
                   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     query.addBindValue(currentUserId);
     query.addBindValue(incomeAmount);
-    query.addBindValue(incomeSource);
-    query.addBindValue(incomeCurrency);
+    query.addBindValue(finalIncomeSource);
+    query.addBindValue(finalIncomeCurrency);
     query.addBindValue(expenseAmount);
-    query.addBindValue(expenseCategory);
-    query.addBindValue(expenseCurrency);
+    query.addBindValue(finalExpenseCategory);
+    query.addBindValue(finalExpenseCurrency);
     query.addBindValue(reference);
     query.addBindValue(review);
     query.addBindValue(timestamp);
-
-    if (!query.exec()) {
+   if (!query.exec()) {
         QMessageBox::critical(this, "Database Error", query.lastError().text());
     } else {
         QMessageBox::information(this, "Success", "Record added successfully.");
@@ -229,27 +261,28 @@ void RecordWindow::editExpense() { showExpenseTable(); }
 
 void RecordWindow::showIncomeTable() {
     QDialog dialog(this);
-
+    dialog.setWindowTitle("Edit Income Entries");
     QVBoxLayout *layout = new QVBoxLayout(&dialog);
     QTableWidget *table = new QTableWidget(&dialog);
     table->setStyleSheet(R"(
-    QTableWidget {
-        background-color: white;
-        color: black;
-        gridline-color: #c0c0c0;
-    }
-    QHeaderView::section {
-        background-color: #f0f0f0;
-        color: black;
-        font-weight: bold;
-        padding: 4px;
-        border: 1px solid #dcdcdc;
-    }
-    QTableWidget QTableCornerButton::section {
-        background-color: #f0f0f0;
-        border: 1px solid #dcdcdc;
-    }
-)");
+        QTableWidget {
+            background-color: white;
+            color: black;
+            gridline-color: #c0c0c0;
+        }
+        QHeaderView::section {
+            background-color: #f0f0f0;
+            color: black;
+            font-weight: bold;
+            padding: 4px;
+            border: 1px solid #dcdcdc;
+        }
+        QTableWidget QTableCornerButton::section {
+            background-color: #f0f0f0;
+            border: 1px solid #dcdcdc;
+        }
+    )");
+
     QSqlQuery query(DB_connection);
     query.prepare("SELECT id, income_amount, income_source, timestamp FROM records WHERE income_amount IS NOT NULL AND user_id = ?");
     query.addBindValue(currentUserId);
@@ -259,27 +292,25 @@ void RecordWindow::showIncomeTable() {
         return;
     }
 
-    table->setColumnCount(4);
-    table->setHorizontalHeaderLabels({"Amount", "Source", "Timestamp", "Edit"});
-    QList<int> rowIds;
-
+    table->setColumnCount(5);
+    table->setHorizontalHeaderLabels({"Amount", "Source", "Timestamp", "Edit", "Delete"});
     int row = 0;
+
     while (query.next()) {
         table->insertRow(row);
         int recordId = query.value(0).toInt();
-        rowIds.append(recordId);
 
         table->setItem(row, 0, new QTableWidgetItem(query.value(1).toString()));
         table->setItem(row, 1, new QTableWidgetItem(query.value(2).toString()));
         table->setItem(row, 2, new QTableWidgetItem(query.value(3).toString()));
 
         QPushButton *editBtn = new QPushButton("Edit");
-        editBtn->setStyleSheet(R"(
-     QPushButton {
-background-color:#bccdb7;
-})");
-
+        editBtn->setStyleSheet("background-color:#bccdb7;");
         table->setCellWidget(row, 3, editBtn);
+
+        QPushButton *deleteBtn = new QPushButton("Delete");
+        deleteBtn->setStyleSheet("background-color:#e57373; color:white;");
+        table->setCellWidget(row, 4, deleteBtn);
 
         connect(editBtn, &QPushButton::clicked, this, [=]() {
             QString editableAmount = query.value(1).toString();
@@ -312,6 +343,21 @@ background-color:#bccdb7;
             }
         });
 
+        connect(deleteBtn, &QPushButton::clicked, this, [=]() {
+            if (QMessageBox::question(this, "Confirm Delete", "Are you sure you want to delete this income record?") == QMessageBox::Yes) {
+                QSqlQuery delQuery(DB_connection);
+                delQuery.prepare("DELETE FROM records WHERE id = ?");
+                delQuery.addBindValue(recordId);
+
+                if (!delQuery.exec()) {
+                    QMessageBox::critical(this, "Error", "Failed to delete record.\n" + delQuery.lastError().text());
+                } else {
+                    table->removeRow(row);
+                    QMessageBox::information(this, "Deleted", "Income record deleted.");
+                }
+            }
+        });
+
         row++;
     }
 
@@ -319,30 +365,29 @@ background-color:#bccdb7;
     dialog.setLayout(layout);
     dialog.exec();
 }
-
 void RecordWindow::showExpenseTable() {
     QDialog dialog(this);
     dialog.setWindowTitle("Edit Expense Entries");
     QVBoxLayout *layout = new QVBoxLayout(&dialog);
     QTableWidget *table = new QTableWidget(&dialog);
     table->setStyleSheet(R"(
-    QTableWidget {
-        background-color: white;
-        color: black;
-        gridline-color: #c0c0c0;
-    }
-    QHeaderView::section {
-        background-color: #f0f0f0;
-        color: black;
-        font-weight: bold;
-        padding: 4px;
-        border: 1px solid #dcdcdc;
-    }
-    QTableWidget QTableCornerButton::section {
-        background-color: #f0f0f0;
-        border: 1px solid #dcdcdc;
-    }
-)");
+        QTableWidget {
+            background-color: white;
+            color: black;
+            gridline-color: #c0c0c0;
+        }
+        QHeaderView::section {
+            background-color: #f0f0f0;
+            color: black;
+            font-weight: bold;
+            padding: 4px;
+            border: 1px solid #dcdcdc;
+        }
+        QTableWidget QTableCornerButton::section {
+            background-color: #f0f0f0;
+            border: 1px solid #dcdcdc;
+        }
+    )");
 
     QSqlQuery query(DB_connection);
     query.prepare("SELECT id, expense_amount, expense_category, timestamp FROM records WHERE expense_amount IS NOT NULL AND user_id = ?");
@@ -353,33 +398,27 @@ void RecordWindow::showExpenseTable() {
         return;
     }
 
-    table->setColumnCount(4);
-    table->setHorizontalHeaderLabels({"Amount", "Category", "Timestamp", "Edit"});
-    QList<int> rowIds;
-
+    table->setColumnCount(5);
+    table->setHorizontalHeaderLabels({"Amount", "Category", "Timestamp", "Edit", "Delete"});
     int row = 0;
+
     while (query.next()) {
         table->insertRow(row);
         int recordId = query.value(0).toInt();
-        rowIds.append(recordId);
-
         table->setItem(row, 0, new QTableWidgetItem(query.value(1).toString()));
         table->setItem(row, 1, new QTableWidgetItem(query.value(2).toString()));
         table->setItem(row, 2, new QTableWidgetItem(query.value(3).toString()));
 
         QPushButton *editBtn = new QPushButton("Edit");
-    editBtn->setStyleSheet(R"(
-     QPushButton {
-background-color:#bccdb7;
-})");
-
+        editBtn->setStyleSheet("background-color:#bccdb7;");
         table->setCellWidget(row, 3, editBtn);
-
+        QPushButton *deleteBtn = new QPushButton("Delete");
+        deleteBtn->setStyleSheet("background-color:#e57373; color:white;");
+        table->setCellWidget(row, 4, deleteBtn);
         connect(editBtn, &QPushButton::clicked, this, [=]() {
             QString editableAmount = query.value(1).toString();
             QString editableCategory = query.value(2).toString();
             QString editableTimestamp = query.value(3).toString();
-
             if (showEditDialog("Edit Expense", "Category", editableAmount, editableCategory, editableTimestamp)) {
                 bool valid;
                 double amountDouble = editableAmount.toDouble(&valid);
@@ -387,8 +426,7 @@ background-color:#bccdb7;
                     QMessageBox::warning(this, "Invalid Input", "Please enter a valid numeric amount.");
                     return;
                 }
-
-                QSqlQuery update(DB_connection);
+                 QSqlQuery update(DB_connection);
                 update.prepare("UPDATE records SET expense_amount = ?, expense_category = ?, timestamp = ? WHERE id = ?");
                 update.addBindValue(amountDouble);
                 update.addBindValue(editableCategory);
@@ -405,33 +443,41 @@ background-color:#bccdb7;
                 }
             }
         });
+        connect(deleteBtn, &QPushButton::clicked, this, [=]() {
+            if (QMessageBox::question(this, "Confirm Delete", "Are you sure you want to delete this expense record?") == QMessageBox::Yes) {
+                QSqlQuery delQuery(DB_connection);
+                delQuery.prepare("DELETE FROM records WHERE id = ?");
+                delQuery.addBindValue(recordId);
 
+                if (!delQuery.exec()) {
+                    QMessageBox::critical(this, "Error", "Failed to delete record.\n" + delQuery.lastError().text());
+                } else {
+                    table->removeRow(row);
+                    QMessageBox::information(this, "Deleted", "Expense record deleted.");
+                }
+            }
+        });
         row++;
     }
-
-    layout->addWidget(table);
+     layout->addWidget(table);
     dialog.setLayout(layout);
     dialog.exec();
 }
-
 void RecordWindow::openHome() {
     home_window = new homeWindow(currentUserName, currentUserEmail, currentUserId, this);
     home_window->show();
     this->hide();
 }
-
 void RecordWindow::openAnalytics() {
     analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
     analysis_window->show();
     this->hide();
 }
-
 void RecordWindow::openvisions() {
     Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
     vision_win->show();
     this->hide();
 }
-
 void RecordWindow::openreview() {
     review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();

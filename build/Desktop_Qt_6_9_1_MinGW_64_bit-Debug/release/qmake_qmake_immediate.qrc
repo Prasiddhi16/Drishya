@@ -1,16 +1,16 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource prefix="/">
-<file alias="img/details.png">C:/Users/anush/Documents/Drishya/img/details.png</file>
-<file alias="img/dream car.jpg">C:/Users/anush/Documents/Drishya/img/dream car.jpg</file>
-<file alias="img/dream vacation.jpg">C:/Users/anush/Documents/Drishya/img/dream vacation.jpg</file>
-<file alias="img/edit.png">C:/Users/anush/Documents/Drishya/img/edit.png</file>
-<file alias="img/emergency.jpg">C:/Users/anush/Documents/Drishya/img/emergency.jpg</file>
-<file alias="img/goal2.jpg">C:/Users/anush/Documents/Drishya/img/goal2.jpg</file>
-<file alias="img/logout.png">C:/Users/anush/Documents/Drishya/img/logout.png</file>
-<file alias="img/Privacy.png">C:/Users/anush/Documents/Drishya/img/Privacy.png</file>
-<file alias="img/real estate.jpg">C:/Users/anush/Documents/Drishya/img/real estate.jpg</file>
-<file alias="img/report.png">C:/Users/anush/Documents/Drishya/img/report.png</file>
-<file alias="img/swap.png">C:/Users/anush/Documents/Drishya/img/swap.png</file>
-<file alias="img/travel.jpg">C:/Users/anush/Documents/Drishya/img/travel.jpg</file>
+<file alias="img/details.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/details.png</file>
+<file alias="img/dream car.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/dream car.jpg</file>
+<file alias="img/dream vacation.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/dream vacation.jpg</file>
+<file alias="img/edit.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/edit.png</file>
+<file alias="img/emergency.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/emergency.jpg</file>
+<file alias="img/goal2.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/goal2.jpg</file>
+<file alias="img/logout.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/logout.png</file>
+<file alias="img/Privacy.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/Privacy.png</file>
+<file alias="img/real estate.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/real estate.jpg</file>
+<file alias="img/report.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/report.png</file>
+<file alias="img/swap.png">C:/Users/ushma/OneDrive/Desktop/Drishya/img/swap.png</file>
+<file alias="img/travel.jpg">C:/Users/ushma/OneDrive/Desktop/Drishya/img/travel.jpg</file>
 </qresource>
 </RCC>

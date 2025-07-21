@@ -1,36 +1,30 @@
 #include "insertt.h"
 #include "ui_insertt.h"
-#include"goaldata.h"
-#include<QPixmap>
-#include<QMessageBox>
-#include<QRegularExpression>
-#include<QRegularExpressionValidator>
-#include<QStandardPaths>
-#include<QSqlDatabase>
-#include<QSqlQuery>
-#include<QSqlError>
-#include<QDir>
-#include<QFileInfo>
-#include <QUuid>
+#include "goaldata.h" // Ensure GoalData is included
+#include <QPixmap>
+#include <QMessageBox>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+
 
 Insertt::Insertt(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Insertt)
 {
     ui->setupUi(this);
-    //adding image
+    // adding image
     QPixmap pix(":/img/img/goal2.jpg");
-    int w=ui->label_pic->width();
-    int h=ui->label_pic->height();
-    ui->label_pic->setPixmap(pix.scaled(w,h));
+    int w = ui->label_pic->width();
+    int h = ui->label_pic->height();
+    ui->label_pic->setPixmap(pix.scaled(w, h));
 
-    //adding placeholders
+    // adding placeholders
     ui->goalNameEdit->setPlaceholderText("");
-    ui->incomeEdit->setPlaceholderText("In NRs");
-    ui->downpaymentEdit->setPlaceholderText("In NRs");
-    ui->durationEdit->setPlaceholderText("In months");
+    ui->incomeEdit->setPlaceholderText("Currency used is NRs");
+    ui->downpaymentEdit->setPlaceholderText("Currency used is NRs");
+    ui->durationEdit->setPlaceholderText("Time limit should be in months");
 
-    //adding limitations to what can and cannot be written in form
+    // adding limitations to what can and cannot be written in form
     QRegularExpression rx("[A-Za-z ]+");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->goalNameEdit->setValidator(validator);
@@ -43,138 +37,76 @@ Insertt::~Insertt()
 {
     delete ui;
 }
-/*void Insertt::on_Save_clicked()
-{
-QMessageBox::information(this,"GOAL","Your goal is set.You are now one step closer to success.");*/
+
+
+void Insertt::setGoalData(const GoalData &data) {
+    currentGoalData = data; // Store the incoming data, including its ID if it's an existing goal
+
+    // Populate UI fields with the received data
+    ui->goalNameEdit->setText(data.name);
+    ui->incomeEdit->setText(QString::number(data.incomeRequired, 'f', 2)); // Format for doubles
+    ui->downpaymentEdit->setText(QString::number(data.downpayment, 'f', 2));
+    ui->durationEdit->setText(QString::number(data.duration));
+
+    // If it's an existing goal, you might want to disable editing the goal name
+    // or give a warning if they change it, as Visions uses the ID for updates.
+    // For simplicity, we'll allow name changes, but Visions will use the original ID.
+    if (!data.id.isEmpty()) {
+        ui->goalNameEdit->setReadOnly(false); // Can be set to true if name shouldn't change on edit
+
+    }
+    if (data.isEmpty()) { // It's a new goal
+        ui->goalNameEdit->clear();
+        ui->incomeEdit->clear(); // Set to empty string
+        ui->downpaymentEdit->clear();   // Set to empty string
+        ui->durationEdit->clear();     // Set to empty string
+    } else { // It's an existing goal (for editing)
+        ui->goalNameEdit->setText(data.name);
+        ui->incomeEdit->setText(QString::number(data.incomeRequired, 'f', 2));
+        ui->downpaymentEdit->setText(QString::number(data.downpayment, 'f', 2));
+        ui->durationEdit->setText(QString::number(data.duration));
+    }
+
+}
+
 void Insertt::on_Save_clicked()
 {
-    // Database path
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/goal.db";
-    QDir().mkpath(QFileInfo(path).absolutePath());
+    // 1. Input Validation
+    QString name = ui->goalNameEdit->text().trimmed();
+    bool incomeValid, downpaymentValid, durationValid;
+    double incomeRequired = ui->incomeEdit->text().toDouble(&incomeValid);
+    double downpayment = ui->downpaymentEdit->text().toDouble(&downpaymentValid);
+    int duration = ui->durationEdit->text().toInt(&durationValid);
 
-    QSqlDatabase db;
-    if (QSqlDatabase::contains("goal_connection")) {
-        db = QSqlDatabase::database("goal_connection");
-    } else {
-        db = QSqlDatabase::addDatabase("QSQLITE", "goal_connection");
-        db.setDatabaseName(path);
-    }
-
-    if (!db.open()) {
-        QMessageBox::critical(this, "Database Error", db.lastError().text());
+    if (name.isEmpty() || !incomeValid || !downpaymentValid || !durationValid) {
+        QMessageBox::warning(this, "Input Error", "Please fill all fields with valid numeric values.");
         return;
     }
 
-    // Create table if not exists
-    QSqlQuery createQuery(db);
-    QString createSql = R"(
-        CREATE TABLE IF NOT EXISTS goals (
-            goal_id TEXT PRIMARY KEY,
-            goal_name TEXT,
-            required_amount REAL,
-            downpayment REAL,
-            time_limit INTEGER
-        )
-    )";
-
-    if (!createQuery.exec(createSql)) {
-        QMessageBox::critical(this, "Database Error", "Failed to create table: " + createQuery.lastError().text());
-        db.close();
+    if (duration <= 0) {
+        QMessageBox::warning(this, "Input Error", "Duration must be greater than 0 months.");
         return;
     }
 
-    // Input
-    GoalData data;
-    data.name = ui->goalNameEdit->text();
-    data.incomeRequired = ui->incomeEdit->text().toDouble();
-    data.downpayment = ui->downpaymentEdit->text().toDouble();
-    data.duration = ui->durationEdit->text().toInt();  // Now numeric
-
-    if (data.name.isEmpty() || ui->incomeEdit->text().isEmpty() ||
-        ui->downpaymentEdit->text().isEmpty() || ui->durationEdit->text().isEmpty()) {
-        QMessageBox::warning(this, "Input Error", "Please fill all fields.");
-        db.close();
-        return;
-    }
-    // Validate downpayment amount
-    if (data.downpayment > data.incomeRequired) {
-        QMessageBox::warning(this, "Input Error", "Downpayment cannot be greater than required income.");
-        db.close();
+    if (downpayment > incomeRequired) {
+        QMessageBox::warning(this, "Input Error", "Current balance cannot be greater than target amount.");
         return;
     }
 
-    // Check if goal name already exists
-    QSqlQuery checkQuery(db);
-    checkQuery.prepare("SELECT * FROM goals WHERE goal_name = ?");
-    checkQuery.bindValue(0, data.name);
+    // 2. Create GoalData object to emit
+    // Crucially, we use the ID from currentGoalData.
+    // If currentGoalData was empty (new goal), its ID is empty, and Visions will generate a new UUID.
+    // If currentGoalData had an ID (editing existing goal), that ID is preserved.
+    GoalData dataToEmit;
+    dataToEmit.id = currentGoalData.id; // Preserve existing ID for edits
+    dataToEmit.name = name;
+    dataToEmit.incomeRequired = incomeRequired;
+    dataToEmit.downpayment = downpayment;
+    dataToEmit.duration = duration;
+    // slotIndex is managed by Visions, not set here
 
-    if (!checkQuery.exec()) {
-        QMessageBox::critical(this, "Query Error", checkQuery.lastError().text());
-        db.close();
-        return;
-    }
-
-    if (checkQuery.next()) {
-        // Prompt to edit
-        QMessageBox::StandardButton reply = QMessageBox::question(
-            this,
-            "Goal Exists",
-            "A goal with this name already exists.\nDo you want to edit the data?",
-            QMessageBox::Yes | QMessageBox::No
-            );
-
-        if (reply == QMessageBox::Yes) {
-            // Edit existing
-            QSqlQuery updateQuery(db);
-            updateQuery.prepare(R"(
-                UPDATE goals
-                SET required_amount = ?, downpayment = ?, time_limit = ?
-                WHERE goal_name = ?
-            )");
-            updateQuery.bindValue(0, data.incomeRequired);
-            updateQuery.bindValue(1, data.downpayment);
-            updateQuery.bindValue(2, data.duration);
-            updateQuery.bindValue(3, data.name);
-
-            if (!updateQuery.exec()) {
-                QMessageBox::critical(this, "Update Error", updateQuery.lastError().text());
-                db.close();
-                return;
-            }
-
-            db.close();
-            emit goalSet(data);
-            accept();
-            return;
-        } else {
-            // User chose not to edit
-            db.close();
-            return;
-        }
-    }
-
-    // Insert new goal
-    QString goalId = QUuid::createUuid().toString(QUuid::WithoutBraces);
-
-    QSqlQuery insertQuery(db);
-    insertQuery.prepare(R"(
-        INSERT INTO goals (goal_id, goal_name, required_amount, downpayment, time_limit)
-        VALUES (?, ?, ?, ?, ?)
-    )");
-    insertQuery.bindValue(0, goalId);
-    insertQuery.bindValue(1, data.name);
-    insertQuery.bindValue(2, data.incomeRequired);
-    insertQuery.bindValue(3, data.downpayment);
-    insertQuery.bindValue(4, data.duration);
-
-    if (!insertQuery.exec()) {
-        QMessageBox::critical(this, "Insert Error", insertQuery.lastError().text());
-        db.close();
-        return;
-    }
-
-    db.close();
-
-    emit goalSet(data);
-    accept();
+    // 3. Emit the signal and close the dialog
+    emit goalSet(dataToEmit);
+    QMessageBox::information(this, "Goal Set", "Your goal data has been prepared. Saving to database...");
+    accept(); // Close the dialog
 }

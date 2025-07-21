@@ -69,7 +69,8 @@ public:
         sizePolicy.setHeightForWidth(RecordWindow->sizePolicy().hasHeightForWidth());
         RecordWindow->setSizePolicy(sizePolicy);
         RecordWindow->setMinimumSize(QSize(1150, 780));
-        RecordWindow->setStyleSheet(QString::fromUtf8("background-color:		#1c2833"));
+        RecordWindow->setStyleSheet(QString::fromUtf8("background-color:		#1c2833;\n"
+"color: rgb(255, 255, 255);"));
         centralwidget = new QWidget(RecordWindow);
         centralwidget->setObjectName("centralwidget");
         centralwidget->setMinimumSize(QSize(0, 900));
@@ -84,7 +85,7 @@ public:
         tabWidget = new QTabWidget(widget);
         tabWidget->setObjectName("tabWidget");
         tabWidget->setGeometry(QRect(0, 20, 781, 271));
-        tabWidget->setStyleSheet(QString::fromUtf8("\n"
+        tabWidget->setStyleSheet(QString::fromUtf8("color:rgb(0, 0, 0);\n"
 "background-color: rgb(214, 208, 222);"));
         tab = new QWidget();
         tab->setObjectName("tab");
@@ -302,9 +303,10 @@ public:
 ""));
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(740, 170, 761, 451));
+        label->setGeometry(QRect(740, 60, 761, 561));
+        label->setMinimumSize(QSize(100, 100));
         label->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/record.png")));
-        label->setScaledContents(true);
+        label->setScaledContents(false);
         RecordWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(RecordWindow);
         statusbar->setObjectName("statusbar");

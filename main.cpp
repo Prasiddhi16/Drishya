@@ -8,15 +8,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
 
-    // 🌈 Global Styling: black text on white background for all input fields and dialogs
     a.setStyleSheet(
         "QLineEdit, QTextEdit, QLabel, QPushButton { color: black; }"
         "QLineEdit { background-color: white; }"
         "QTextEdit { background-color: #f9f9f9; }"
-        "QDialog { background-color: white; }"
-        "QDialog QWidget { background-color: transparent; }"
+        "QDialog, QMessageBox { background-color: white; color: black; }"
+        "QDialog QWidget, QMessageBox QWidget { background-color: transparent; }"
+        "QMessageBox QLabel { color: black; font-weight: bold; }"
+        "QPushButton { background-color: #e1f5e1; }" // light greenish
         );
-
     // 🔐 Check login persistence
     QSettings settings("ItsDrishya", "LoginSystem");
     int stayLoggedIn = settings.value("keep_logged_in", 0).toInt();
