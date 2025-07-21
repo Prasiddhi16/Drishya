@@ -6,7 +6,8 @@ taxDialog::taxDialog(const QString &userEmail, int userId, QWidget *parent)
     : QDialog(parent),
     ui(new Ui_taxDialog),
     currentUserEmail(userEmail),
-    currentUserId(userId)
+    currentUserId(userId),
+    isMarried(false) // default
 {
     ui->setupUi(this);
 }
@@ -18,14 +19,18 @@ taxDialog::~taxDialog()
 
 void taxDialog::on_yes_btn_clicked()
 {
-    secdialog = new secDialog(currentUserEmail, currentUserId, this);
+    isMarried = true;
+
+    secdialog = new secDialog(currentUserEmail, currentUserId, isMarried, "Unknown", this);
     secdialog->show();
     hide();
 }
 
 void taxDialog::on_no_btn_clicked()
 {
-    secdialog = new secDialog(currentUserEmail, currentUserId, this);
+    isMarried = false;
+
+    secdialog = new secDialog(currentUserEmail, currentUserId, isMarried, "Unknown", this);
     secdialog->show();
     hide();
 }

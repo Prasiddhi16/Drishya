@@ -3,13 +3,38 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+#include <QDate>
+#include <QMessageBox>
 #include <QDebug>
+#include <QDir>
+#include <QSqlRecord>
+#include <QCoreApplication>
+#include <QHeaderView>
 
-historypage::historypage(QWidget *parent)
-    : QMainWindow(parent)
+historypage::historypage(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
+    : QMainWindow(parent),
+    currentUserName(userName),
+    currentUserEmail(userEmail),
+    currentUserId(userId)
 {
     QWidget *centralWidget = new QWidget(this);
     setCentralWidget(centralWidget);
+    centralWidget->setStyleSheet("background-color: #2C3E50;");
+
+    // Setup DB connection
+    QString connectionName = "qt_sql_history_connection";
+    if (!QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+        db.setDatabaseName(dbPath);
+
+        if (!db.open()) {
+            QMessageBox::critical(this, "Database Error", "Failed to open database.");
+            return;
+        }
+    }
 
     // Create widgets
     startDateEdit = new QDateEdit(QDate::currentDate().addMonths(-1));
@@ -19,16 +44,27 @@ historypage::historypage(QWidget *parent)
     endDateEdit->setCalendarPopup(true);
 
     viewHistoryButton = new QPushButton("View History");
+    viewHistoryButton->setStyleSheet("background-color: #ADD8E6; color: black; border-radius: 5px; padding: 6px 12px;");
 
     model = new QSqlQueryModel(this);
     tableView = new QTableView(this);
     tableView->setModel(model);
+    tableView->setAlternatingRowColors(true);
+    tableView->setStyleSheet("background-color: white; color: black; alternate-background-color: #F2F2F2;");
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);  // Stretch all columns equally
+    tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+    tableView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tableView->setFrameStyle(QFrame::NoFrame);
 
-    // Layout for filter controls
+    // Filter layout
     QHBoxLayout *filterLayout = new QHBoxLayout;
-    filterLayout->addWidget(new QLabel("From:"));
+    QLabel *fromLabel = new QLabel("From:");
+    fromLabel->setStyleSheet("color: white;");
+    filterLayout->addWidget(fromLabel);
     filterLayout->addWidget(startDateEdit);
-    filterLayout->addWidget(new QLabel("To:"));
+    QLabel *toLabel = new QLabel("To:");
+    toLabel->setStyleSheet("color: white;");
+    filterLayout->addWidget(toLabel);
     filterLayout->addWidget(endDateEdit);
     filterLayout->addWidget(viewHistoryButton);
 
@@ -36,35 +72,84 @@ historypage::historypage(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
     mainLayout->addLayout(filterLayout);
     mainLayout->addWidget(tableView);
+    mainLayout->setStretch(0, 0);
+    mainLayout->setStretch(1, 1);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
 
-    // Connect button click to data loading slot
     connect(viewHistoryButton, &QPushButton::clicked, this, &historypage::loadFilteredData);
-
-    // Load initial data
-    loadFilteredData();
+    this->showMaximized();
 }
 
-historypage::~historypage()
-{
-}
+historypage::~historypage() {}
 
 void historypage::loadFilteredData()
 {
+    if (startDateEdit->date() > endDateEdit->date()) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Warning");
+        msgBox.setText("Start date cant be later than  end date!");
+        msgBox.setStyleSheet(
+            "QMessageBox { background-color: #2C3E50; color: white; }"
+            "QLabel { color: white; }"
+            "QPushButton { background-color: #ADD8E6; color: black; border-radius: 5px; padding: 6px 12px; }"
+            );
+        msgBox.exec();
+        return;
+    }
+
     QString startDate = startDateEdit->date().toString("yyyy-MM-dd");
     QString endDate = endDateEdit->date().toString("yyyy-MM-dd");
 
-    QString queryStr = QString(
-                           "SELECT id, category, amount, date FROM history "
-                           "WHERE date BETWEEN '%1' AND '%2' "
-                           "ORDER BY date DESC"
-                           ).arg(startDate, endDate);
+    QSqlDatabase db = QSqlDatabase::database("qt_sql_history_connection");
+    QSqlQuery query(db);
+    query.prepare("SELECT * FROM records WHERE user_id = :userId AND timestamp BETWEEN :start AND :end ORDER BY timestamp DESC");
+    query.bindValue(":userId", currentUserId);
+    query.bindValue(":start", startDate);
+    query.bindValue(":end", endDate);
 
-    model->setQuery(queryStr);
+    if (!query.exec()) {
+        qDebug() << "Query Error:" << query.lastError().text();
+        return;
+    }
 
-    model->setHeaderData(0, Qt::Horizontal, "ID");
-    model->setHeaderData(1, Qt::Horizontal, "Category");
-    model->setHeaderData(2, Qt::Horizontal, "Amount");
-    model->setHeaderData(3, Qt::Horizontal, "Date");
+    model->setQuery(std::move(query));
 
-    tableView->resizeColumnsToContents();
+    // Hide unwanted columns
+    int idColumn = model->record().indexOf("id");
+    int userIdColumn = model->record().indexOf("user_id");
+    int incomeCurrencyColumn = model->record().indexOf("income_currency");
+    int expenseCurrencyColumn = model->record().indexOf("expense_currency");
+
+    if (idColumn != -1) tableView->hideColumn(idColumn);
+    if (userIdColumn != -1) tableView->hideColumn(userIdColumn);
+    if (incomeCurrencyColumn != -1) tableView->hideColumn(incomeCurrencyColumn);
+    if (expenseCurrencyColumn != -1) tableView->hideColumn(expenseCurrencyColumn);
+
+    // Custom headers for visible columns
+    model->setHeaderData(2, Qt::Horizontal, "Income");
+    model->setHeaderData(3, Qt::Horizontal, "Income Category");
+    model->setHeaderData(5, Qt::Horizontal, "Expense");
+    model->setHeaderData(6, Qt::Horizontal, "Expense Category");
+    model->setHeaderData(8, Qt::Horizontal, "Bill No/Id");
+    model->setHeaderData(9, Qt::Horizontal, "Review");
+    model->setHeaderData(10, Qt::Horizontal, "Time");
+
+    if (model->rowCount() == 0) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("No Records");
+        msgBox.setText("No history found for the selected date range.");
+        msgBox.setStyleSheet(
+            "QMessageBox { background-color: #2C3E50; color: white; }"
+            "QLabel { color: white; }"
+            "QPushButton { background-color: #ADD8E6; color: black; border-radius: 5px; padding: 6px 12px; }"
+            );
+        msgBox.exec();
+
+    }
+}
+void historypage::closeEvent(QCloseEvent *event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
 }

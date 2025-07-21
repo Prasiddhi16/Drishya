@@ -14,13 +14,28 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>90</y>
+      <width>841</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QChartView" name="chartWidget" native="true"/>
+     </item>
+    </layout>
+   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>0</y>
+      <x>380</x>
+      <y>10</y>
       <width>471</width>
-      <height>51</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -35,17 +50,7 @@ margin-bottom: 10px;
 }</string>
     </property>
     <property name="text">
-     <string>⚖️ Compare: Actual vs Ideal Finance</string>
-    </property>
-   </widget>
-   <widget class="QChartView" name="chartWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>99</y>
-      <width>621</width>
-      <height>421</height>
-     </rect>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:28pt;&quot;&gt;⚖️ Compare: Actual vs Ideal Finance&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
@@ -55,7 +60,7 @@ margin-bottom: 10px;
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

@@ -181,3 +181,8 @@ void expert::clearChartLayout()
         delete child;
     }
 }
+void expert::closeEvent(QCloseEvent *event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
+}

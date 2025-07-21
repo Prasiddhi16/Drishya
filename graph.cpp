@@ -109,6 +109,7 @@ graph::graph(const QString &userEmail, int userId, QWidget *parent)
     setCentralWidget(chartView);
 
     qDebug() << "Graph: Chart ready.";
+    this->showMaximized();
 }
 
 graph::~graph()

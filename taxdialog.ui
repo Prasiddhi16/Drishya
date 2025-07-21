@@ -22,9 +22,9 @@ background-color: #131b39
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>351</width>
+     <x>50</x>
+     <y>50</y>
+     <width>421</width>
      <height>51</height>
     </rect>
    </property>
@@ -33,7 +33,7 @@ background-color: #131b39
 {
 color:white;
 	background-color: transparent;
-	font: 27pt &quot;Al Bayan&quot;;
+	font: 27pt &quot;Menlos&quot;;
 }
 </string>
    </property>
@@ -65,6 +65,19 @@ color:black;
        <string>No</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
      <widget class="QPushButton" name="yes_btn">

@@ -15,6 +15,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -26,6 +27,7 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *no_btn;
+    QSpacerItem *verticalSpacer;
     QPushButton *yes_btn;
 
     void setupUi(QDialog *taxDialog)
@@ -39,12 +41,12 @@ public:
 "}"));
         label = new QLabel(taxDialog);
         label->setObjectName("label");
-        label->setGeometry(QRect(10, 60, 351, 51));
+        label->setGeometry(QRect(50, 50, 421, 51));
         label->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "color:white;\n"
 "	background-color: transparent;\n"
-"	font: 27pt \"Al Bayan\";\n"
+"	font: 27pt \"Menlos\";\n"
 "}\n"
 ""));
         horizontalLayoutWidget = new QWidget(taxDialog);
@@ -63,6 +65,10 @@ public:
 ""));
 
         horizontalLayout->addWidget(no_btn);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        horizontalLayout->addItem(verticalSpacer);
 
         yes_btn = new QPushButton(horizontalLayoutWidget);
         yes_btn->setObjectName("yes_btn");

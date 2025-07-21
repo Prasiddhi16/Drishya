@@ -12,18 +12,26 @@ class historypage : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit historypage(QWidget *parent = nullptr);
+    explicit historypage(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~historypage();
 
 private slots:
     void loadFilteredData();
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
+signals:
+    void windowClosed();
 private:
-    QSqlQueryModel *model;
-    QTableView *tableView;
+    QString currentUserName;
+    QString currentUserEmail;
+    int currentUserId;
+
     QDateEdit *startDateEdit;
     QDateEdit *endDateEdit;
     QPushButton *viewHistoryButton;
+    QSqlQueryModel *model;
+    QTableView *tableView;
 };
 
 #endif // HISTORYPAGE_H

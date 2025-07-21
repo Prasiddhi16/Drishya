@@ -11,7 +11,11 @@ class secDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit secDialog(const QString &userEmail,int userId, QWidget *parent = nullptr);
+    explicit secDialog(const QString &userEmail,
+                       int userId,
+                       bool isMarried,
+                       const QString &employment,
+                       QWidget *parent = nullptr);
     ~secDialog();
 
 private slots:
@@ -25,6 +29,8 @@ private:
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
+    bool isMarried;
+    QString employment;
 };
 
 #endif // SECDIALOG_H

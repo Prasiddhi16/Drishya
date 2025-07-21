@@ -1,162 +1,166 @@
 #include "compare.h"
 #include "ui_compare.h"
-#include <QtCharts>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QDebug>
-#include <QSqlRecord> // Include QSqlRecord
-#include <QMessageBox> // For user feedback
+#include <QtCharts>      // For QChart, QBarSeries, QBarSet, QBarCategoryAxis, QValueAxis
+#include <QSqlDatabase>  // For QSqlDatabase
+#include <QSqlQuery>     // For QSqlQuery
+#include <QSqlError>     // For QSqlError
+#include <QSqlRecord>    // Potentially useful, though not directly used in this snippet
+#include <QMessageBox>   // For QMessageBox
+#include <algorithm>     // For std::max
+#include <QCoreApplication> // For QCoreApplication::applicationDirPath()
+#include <QDir>          // For QDir
+#include <QDebug>        // For qDebug()
 
+// Constructor: Initializes the UI and stores the user ID
 compare::compare(const QString &userEmail, int userId, QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::compare)
+    : QMainWindow(parent), ui(new Ui::compare), m_userId(userId) // Initialize m_userId here
 {
     ui->setupUi(this);
-    setupChart();
+    setupChart(); // Call to set up the chart
+    this ->showMaximized();
 }
 
-compare::~compare() { delete ui; }
+// Destructor: Cleans up the UI
+compare::~compare() {
+    delete ui;
+}
 
+// Function to set up and populate the chart with financial data
 void compare::setupChart()
 {
-    qDebug() << "------------------------------------------";
-    qDebug() << "Entering compare::setupChart()";
+    qDebug() << "Entering setupChart() for user ID:" << m_userId;
 
-    QBarSet *incomeSet = new QBarSet("Income");
-    QBarSet *expenseSet = new QBarSet("Expenses");
-    QBarSet *savingSet = new QBarSet("Saving");
-
-    QSqlDatabase db = QSqlDatabase::database("MainConnection");
-
-
-    if (!db.isValid() || !db.isOpen()) {
-        qDebug() << "ERROR: Database connection 'MainConnection' is not valid or not open in compare::setupChart()!";
-        qDebug() << "Error: " << db.lastError().text();
-        QMessageBox::critical(this, "Database Error", "Cannot access financial data. Database connection is not active.");
-        return; // Exit if the connection is not ready
+    // Ensure a clean database connection. If a connection with this name already exists, remove it.
+    const QString connectionName = "qt_sql_compare_connection";
+    if (QSqlDatabase::contains(connectionName)) {
+        QSqlDatabase::removeDatabase(connectionName);
+        qDebug() << "Removed existing database connection:" << connectionName;
     }
 
-    double totalIncome = 0, totalExpenses = 0, saving = 0;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
 
-    // --- Query 1: Get total income and expenses from 'records' table ---
-    QSqlQuery query(db);
-    QString recordsQueryString = "SELECT income_amount, expenses_amount FROM records";
-    query.prepare(recordsQueryString);
-    qDebug() << "Debug Point 2: Executing query:" << recordsQueryString;
+    // Construct the database path relative to the application's executable directory.
+    // It assumes 'centralized.db' is one level up from the executable directory.
+    QString appDirPath = QCoreApplication::applicationDirPath();
+    QString dbPath = QDir(appDirPath).absoluteFilePath("../centralized.db");
 
-    if (query.exec()) { // Check if the query executed successfully
-        qDebug() << "Debug Point 2: Query for 'records' table executed successfully.";
-        QSqlRecord record = query.record(); // Get the record object to access field information
-        int incomeIndex = record.indexOf("income_amount");
-        int expensesIndex = record.indexOf("expenses_amount");
+    qDebug() << "Attempting to open DB at:" << dbPath;
+    qDebug() << "Does DB file exist at path?" << QFile::exists(dbPath);
 
-        if (incomeIndex == -1 || expensesIndex == -1) {
-            qDebug() << "Debug Point 2: ERROR - 'income_amount' or 'expenses_amount' column not found in 'records' table!";
-            QStringList fieldNames;
-            for (int i = 0; i < record.count(); ++i) {
-                fieldNames << record.fieldName(i);
-            }
-            qDebug() << "Available fields in 'records' table:" << fieldNames;
-            QMessageBox::warning(this, "Data Error", "Required columns missing in 'records' table. Chart may be incomplete.");
+    db.setDatabaseName(dbPath);
+
+    // Try to open the database connection
+    if (!db.open()) {
+        qDebug() << "Failed to open database --" << db.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Cannot access financial data. Please ensure 'centralized.db' is in the correct directory relative to the application.");
+        return; // Exit if database cannot be opened
+    }
+    qDebug() << "Database opened successfully.";
+
+    double totalIncome = 0.0;
+    double totalExpenses = 0.0;
+    // double actualSavings = 0.0; // This variable will now be calculated, not directly from DB
+
+    // --- Retrieve Total Income and Expenses from 'records' table ---
+    {
+        QSqlQuery query(db);
+        // Prepare SQL query to sum income_amount and expense_amount for the current user
+        query.prepare("SELECT SUM(income_amount), SUM(expense_amount) FROM records WHERE user_id = :uid"); // Changed to SUM directly
+        query.bindValue(":uid", m_userId); // Bind the user ID
+
+        if (!query.exec()) {
+            qDebug() << "Income/expense query failed:" << query.lastError().text();
+            QMessageBox::critical(this, "Query Error", "Failed to retrieve income/expense data from 'records' table.");
+            db.close(); // Close database connection on error
+            return;
         }
-
-        while (query.next()) { // Iterate through results
-            if (incomeIndex != -1) {
-                totalIncome += query.value(incomeIndex).toDouble();
-            }
-            if (expensesIndex != -1) {
-                totalExpenses += query.value(expensesIndex).toDouble();
-            }
-            qDebug() << "Debug Point 2.1: Fetched income record:" << query.value(incomeIndex).toDouble()
-                     << ", expenses record:" << query.value(expensesIndex).toDouble();
+        // No loop needed if using SUM()
+        if (query.next()) {
+            totalIncome   = query.value(0).toDouble();
+            totalExpenses = query.value(1).toDouble();
         }
-        // Check if any rows were processed.
-        if (totalIncome == 0 && totalExpenses == 0 && query.isSelect()) {
-            qDebug() << "Debug Point 2: Query for 'records' executed successfully, but returned 0 rows.";
-        } else if (query.isSelect()) {
-            qDebug() << "Debug Point 2: Query for 'records' executed successfully, and rows were processed.";
-        }
-
-    } else {
-        qDebug() << "Debug Point 2.2: Query for 'records' table FAILED to execute!";
-        qDebug() << "SQL Error:" << query.lastError().text();
-        qDebug() << "Driver Error:" << query.lastError().driverText();
-        qDebug() << "Database Error:" << query.lastError().databaseText();
-        QMessageBox::critical(this, "Query Error", "Failed to retrieve income/expenses data. " + query.lastError().text());
+        qDebug() << "Calculated Total Income:" << totalIncome << ", Total Expenses:" << totalExpenses;
     }
 
-    // --- Query 2: Get saving from 'user' table ---
-    QSqlQuery userQuery(db);
-    QString userQueryString = "SELECT Saving FROM user WHERE uid = 1";
-    qDebug() << "Debug Point 3: Executing user query:" << userQueryString;
 
-    if (userQuery.exec(userQueryString)) {
-        qDebug() << "Debug Point 3: User query executed successfully.";
-        QSqlRecord userRecord = userQuery.record(); // Get the record object
-        int savingIndex = userRecord.indexOf("Saving");
-        if (savingIndex == -1) {
-            qDebug() << "Debug Point 3: ERROR - 'Saving' column not found in 'user' table!";
-            QStringList fieldNames;
-            for (int i = 0; i < userRecord.count(); ++i) {
-                fieldNames << userRecord.fieldName(i);
-            }
-            qDebug() << "Available fields in 'user' table:" << fieldNames;
-            QMessageBox::warning(this, "Data Error", "Required 'Saving' column missing in 'user' table. Saving data may be incomplete.");
-        }
+    db.close();
+    qDebug() << "Database connection closed.";
 
-        if (userQuery.next()) { // Check if there's a row to fetch
-            if (savingIndex != -1) {
-                saving = userQuery.value(savingIndex).toDouble();
-                qDebug() << "Debug Point 3.1: Fetched saving:" << saving;
-            } else {
-                qDebug() << "Debug Point 3.1: Skipping saving value fetch due to missing column.";
-            }
-        } else {
-            qDebug() << "Debug Point 3.2: User query executed successfully, but returned 0 rows (no user with uid=1 found or no 'Saving' data).";
-        }
-    } else {
-        qDebug() << "Debug Point 3.3: User query FAILED to execute!";
-        qDebug() << "SQL Error:" << userQuery.lastError().text();
-        qDebug() << "Driver Error:" << userQuery.lastError().driverText();
-        qDebug() << "Database Error:" << userQuery.lastError().databaseText();
-        QMessageBox::critical(this, "Query Error", "Failed to retrieve saving data. " + userQuery.lastError().text());
-    }
+    // --- NEW: Calculate Actual Saving as totalIncome - totalExpenses (similar to graph.cpp) ---
+    double actualSavings = totalIncome - totalExpenses;
+    // Add a check for negative savings to display 0 on the chart if desired
+    // if (actualSavings < 0) {
+    //     actualSavings = 0; // Or handle negative savings appropriately for your display
+    //     qDebug() << "Actual Savings calculated negative, setting to 0 for chart display.";
+    // }
+    qDebug() << "Calculated Actual Savings (Income - Expenses):" << actualSavings;
 
-    qDebug() << "Total income (calculated):" << totalIncome;
-    qDebug() << "Total expenses (calculated):" << totalExpenses;
-    qDebug() << "Saving (calculated):" << saving;
 
-    *incomeSet << totalIncome;
-    *expenseSet << totalExpenses;
-    *savingSet << saving;
+    // --- Calculate Ideal Saving (e.g., 30% of total income) ---
+    double idealSaving = totalIncome * 0.3; // Define your ideal saving percentage here
+    qDebug() << "Calculated Ideal Saving (30% of income):" << idealSaving;
 
+    // --- Create Bar Sets for the Chart ---
+    QBarSet *incomeSet        = new QBarSet("Income");
+    QBarSet *expenseSet       = new QBarSet("Expenses");
+    QBarSet *actualSavingSet  = new QBarSet("Actual Saving"); // This will now reflect income - expenses
+    QBarSet *idealSavingSet   = new QBarSet("Ideal Saving");
+
+    // Append the calculated values to their respective bar sets
+    *incomeSet        << totalIncome;
+    *expenseSet       << totalExpenses;
+    *actualSavingSet  << actualSavings; // NOW uses the calculated actualSavings
+    *idealSavingSet   << idealSaving;   // Use the calculated ideal saving
+
+    // Set colors for each bar set for better visual distinction
+    incomeSet->setColor(QColor("#3498DB"));      // Blue
+    expenseSet->setColor(QColor("#E74C3C"));     // Red
+    actualSavingSet->setColor(QColor("#2ECC71")); // Green
+    idealSavingSet->setColor(QColor("#F1C40F")); // Yellow
+
+    // --- Create Bar Series and Add Bar Sets ---
     QBarSeries *series = new QBarSeries();
     series->append(incomeSet);
     series->append(expenseSet);
-    series->append(savingSet);
+    series->append(actualSavingSet);
+    series->append(idealSavingSet);
 
+    // --- Create Chart and Add Series ---
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Your Financial Summary");
-    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setTitle("Compare: Financial Overview"); // Updated title
+    chart->setAnimationOptions(QChart::SeriesAnimations); // Enable animation for better user experience
 
-    QStringList categories = {"Total"};
+    // --- Configure X-Axis (Categories) ---
+    QStringList categories;
+    categories << "Total"; // A single category for all bars, showing totals
     QBarCategoryAxis *axisX = new QBarCategoryAxis();
     axisX->append(categories);
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
+    chart->addAxis(axisX, Qt::AlignBottom); // Add X-axis to the bottom of the chart
+    series->attachAxis(axisX); // Attach the series to the X-axis
 
+    // --- Configure Y-Axis (Values) ---
     QValueAxis *axisY = new QValueAxis();
-    axisY->setTitleText("Amount");
-    // Ensure range is at least 0 if all values are 0
-    double maxVal = qMax(qMax(totalIncome, totalExpenses), saving);
-    axisY->setRange(0, (maxVal > 0 ? maxVal : 1000) + 1000); // Prevent 0 range if no data
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+    // Determine the maximum value among all data points for appropriate Y-axis scaling
+    double maxVal = std::max({totalIncome, totalExpenses, actualSavings, idealSaving});
+    // Set the Y-axis range from 0 to maxVal with 15% padding for visual clarity
+    axisY->setRange(0, maxVal * 1.15);
+    axisY->setLabelFormat("%.1f"); // Format Y-axis labels to one decimal place
+    chart->addAxis(axisY, Qt::AlignLeft); // Add Y-axis to the left of the chart
+    series->attachAxis(axisY); // Attach the series to the Y-axis
 
+    // --- Configure Legend ---
+    chart->legend()->setVisible(true); // Make the legend visible
+    chart->legend()->setAlignment(Qt::AlignBottom); // Position the legend at the bottom
+
+    // --- Set the Chart to QChartView Widget ---
     ui->chartWidget->setChart(chart);
-    ui->chartWidget->setRenderHint(QPainter::Antialiasing);
+    ui->chartWidget->setRenderHint(QPainter::Antialiasing); // Enable anti-aliasing for smoother graphics
 
-    qDebug() << "Exiting compare::setupChart()";
-    qDebug() << "------------------------------------------";
+    qDebug() << "Chart display setup complete.";
+}
+void compare::closeEvent(QCloseEvent *event)
+{
+    emit windowClosed();
+    QMainWindow::closeEvent(event);
 }
