@@ -27,7 +27,7 @@ private slots:
      void showExpenseTable();
     void openHome();
     void openAnalytics();
-
+    void openhelp();
     void openvisions();
     void openreview();
 

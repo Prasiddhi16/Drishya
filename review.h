@@ -36,7 +36,7 @@ private slots:
 
    void openvisions();
    void openRecordWindow();
-
+   void openhelp();
    void on_pushButton_clicked();
 
    private:

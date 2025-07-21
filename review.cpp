@@ -18,6 +18,7 @@
 #include "visions.h"
 #include "analysiswindow.h"
 #include "homewindow.h"
+#include"Help.h"
 #include "expert.h"
 #include "compare.h"
 #include "graph.h"
@@ -147,7 +148,7 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     connect(buttons[1], &QPushButton::clicked, this, &review::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &review::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &review::openvisions);
-
+    connect(buttons[5], &QPushButton::clicked, this, &review::openhelp);
     QWidget *mainContainer = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainContainer);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -224,6 +225,11 @@ void review::openAnalytics()
     analysisWindow* analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
     analysis_window->show();
     this->hide();
+}
+void review::openhelp()
+{
+    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
 }
 
 void review::on_pushButton_clicked()

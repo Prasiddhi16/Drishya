@@ -1,9 +1,10 @@
+
 #include "RecordWindow.h"
 #include "ui_RecordWindow.h"
 #include "visions.h"
 #include "review.h"
 #include "analysiswindow.h"
-//#include "Help.h"
+#include "Help.h"
 #include "homewindow.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -113,7 +114,7 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
     connect(buttons[2], &QPushButton::clicked, this, &RecordWindow::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &RecordWindow::openvisions);
     connect(buttons[4], &QPushButton::clicked, this, &RecordWindow::openreview);
-
+    connect(buttons[5], &QPushButton::clicked, this, &RecordWindow::openhelp);
     QWidget *contentWidget = new QWidget;
     QVBoxLayout *contentLayout = new QVBoxLayout(contentWidget);
     contentLayout->addWidget(ui->centralwidget);
@@ -482,4 +483,9 @@ void RecordWindow::openreview() {
     review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
     this->hide();
+}
+void RecordWindow::openhelp()
+{
+    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
 }

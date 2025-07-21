@@ -8,6 +8,7 @@
 #include "RecordWindow.h"
 #include "visions.h"
 #include "review.h"
+#include "Help.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -74,8 +75,8 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
         QPushButton *btn = new QPushButton(label);
         btn->setFont(navFont);
         btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        btn->setMinimumHeight(40);
-        btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; border-radius: 5px; padding: 8px;");
+        btn->setMinimumHeight(20);
+        btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; border-radius: 0px; padding: 8px;");
         navLayout->addWidget(btn);
         buttons.append(btn);
     }
@@ -84,7 +85,7 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     connect(buttons[1], &QPushButton::clicked, this, &analysisWindow::openRecordWindow);
     connect(buttons[3], &QPushButton::clicked, this, &analysisWindow::openvisions);
     connect(buttons[4], &QPushButton::clicked, this, &analysisWindow::openreview);
-
+    connect(buttons[5], &QPushButton::clicked, this, &analysisWindow::openhelp);
     // 🧱 Layout setup
     QWidget *centralWidget = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
@@ -212,4 +213,9 @@ void analysisWindow::openreview()
     review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
     this->hide();
+}
+void analysisWindow::openhelp()
+{
+     Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
 }

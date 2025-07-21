@@ -61,6 +61,7 @@ private slots:
     void openAnalytics();
     //void openvisions();
     void openreview();
+    void openhelp();
 
 private:
     Ui::Visions *ui;

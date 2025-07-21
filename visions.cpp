@@ -6,7 +6,7 @@
 #include "analysiswindow.h"
 #include "RecordWindow.h"
 #include "review.h"
-
+#include"Help.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFrame>
@@ -68,7 +68,7 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
     connect(buttons[2], &QPushButton::clicked, this, &Visions::openAnalytics);
     //connect(buttons[3], &QPushButton::clicked, this, &Visions::openvisions); // Ensure "Goals" button opens this window
     connect(buttons[4], &QPushButton::clicked, this, &Visions::openreview);
-    connect(buttons[5], &QPushButton::clicked, this, &Visions::close); // Assuming Help/Logout button closes this window
+    connect(buttons[5], &QPushButton::clicked, this, &Visions::openhelp); // Assuming Help/Logout button closes this window
 
     mainLayout->addWidget(navPanel);
     mainLayout->addWidget(ui->centralwidget); // Use existing .ui layout
@@ -563,6 +563,12 @@ void Visions::openreview()
 {
     review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
+    this->hide();
+}
+void Visions::openhelp()
+{
+    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
     this->hide();
 }
 
