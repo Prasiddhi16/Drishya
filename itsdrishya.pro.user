@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<<<<<<< HEAD
-<!-- Written by QtCreator 17.0.0, 2025-07-20T17:40:58. -->
-=======
-<<<<<<< HEAD
-=======
-<!-- Written by QtCreator 16.0.2, 2025-07-20T17:27:04. -->
->>>>>>> d3e35673f4974769ad20561e128078c18b1c556e
+<!-- Written by QtCreator 17.0.0, 2025-07-21T07:52:30. -->
 <qtcreator>
->>>>>>> 1e17ff44857e3fd02e4b1b4a702b68247d8ef1ba
  <data>
   <variable>EnvironmentId</variable>
   <value type="QByteArray">{f0b03a82-4ca5-4276-bffb-f07e6dc362d6}</value>
@@ -170,11 +163,13 @@
      <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
      <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph &quot;dwarf,4096&quot; -F 250</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
-     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
+     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:</value>
+     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/anush/Documents/Drishya/itsdrishya.pro</value>
      <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
      <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
      <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/anush/Documents/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug</value>
     </valuemap>
     <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
@@ -204,28 +199,13 @@
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="PerfRecordArgsId">-e cpu-cycles --call-graph &quot;dwarf,4096&quot; -F 250</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.CustomExecutableRunConfiguration</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey"></value>
-=======
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:</value>
-<<<<<<< HEAD
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/ushma/OneDrive/Desktop/Drishya/itsdrishya.pro</value>
-=======
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/itsdrishya.pro</value>
->>>>>>> 1e17ff44857e3fd02e4b1b4a702b68247d8ef1ba
->>>>>>> d3e35673f4974769ad20561e128078c18b1c556e
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/anush/Documents/Drishya/itsdrishya.pro</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
+    <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug</value>
-=======
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug</value>
->>>>>>> 1e17ff44857e3fd02e4b1b4a702b68247d8ef1ba
->>>>>>> d3e35673f4974769ad20561e128078c18b1c556e
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/anush/Documents/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

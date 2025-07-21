@@ -10562,15 +10562,13 @@ debug/expert.o: ../../expert.cpp ../../expert.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QMenuBar \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qmenubar.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qmenu.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QPushButton \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QSpacerItem \
+		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlayoutitem.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QStatusBar \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qstatusbar.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qboxlayout.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlayout.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlayoutitem.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qgridlayout.h \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QWidget \
 		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtCharts \
