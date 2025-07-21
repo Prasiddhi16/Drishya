@@ -35,7 +35,7 @@ debug/qrc_welcom.o
 debug/qrc_images.o
 debug/qrc_res.o
 debug/qrc_ADrecord.o
-debug/qrc_qmake_qmake_immediate.o
+debug/qrc_resource.o
 debug/moc_analysiswindow.o
 debug/moc_budgetwindow.o
 debug/moc_homewindow.o

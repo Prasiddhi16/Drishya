@@ -627,7 +627,7 @@ public:
 
         retranslateUi(profile);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(profile);
