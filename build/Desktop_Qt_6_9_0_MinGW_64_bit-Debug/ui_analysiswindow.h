@@ -40,13 +40,14 @@ public:
     QFrame *frame_weekly;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout_2;
-    QLabel *label_6;
-    QLabel *expense_label;
+    QLabel *label_3;
     QSpacerItem *verticalSpacer;
+    QLabel *expense_label;
+    QPushButton *pushButton;
+    QLabel *label_6;
     QLabel *percentage_label;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton;
-    QLabel *label_3;
+    QSpacerItem *horizontalSpacer_2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -196,12 +197,17 @@ public:
         gridLayout_2->setHorizontalSpacing(1);
         gridLayout_2->setVerticalSpacing(0);
         gridLayout_2->setContentsMargins(80, 20, 0, 0);
-        label_6 = new QLabel(gridLayoutWidget);
-        label_6->setObjectName("label_6");
-        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
-        label_6->setSizePolicy(sizePolicy);
+        label_3 = new QLabel(gridLayoutWidget);
+        label_3->setObjectName("label_3");
+        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
+        label_3->setSizePolicy(sizePolicy);
+        label_3->setStyleSheet(QString::fromUtf8(""));
 
-        gridLayout_2->addWidget(label_6, 12, 1, 1, 1, Qt::AlignmentFlag::AlignHCenter);
+        gridLayout_2->addWidget(label_3, 8, 0, 1, 3);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        gridLayout_2->addItem(verticalSpacer, 10, 0, 1, 1);
 
         expense_label = new QLabel(gridLayoutWidget);
         expense_label->setObjectName("expense_label");
@@ -209,11 +215,26 @@ public:
         expense_label->setSizePolicy(sizePolicy);
         expense_label->setStyleSheet(QString::fromUtf8(""));
 
-        gridLayout_2->addWidget(expense_label, 8, 0, 1, 3, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
+        gridLayout_2->addWidget(expense_label, 9, 0, 1, 3, Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+        pushButton = new QPushButton(gridLayoutWidget);
+        pushButton->setObjectName("pushButton");
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
+        pushButton->setMinimumSize(QSize(90, 30));
+        pushButton->setMaximumSize(QSize(0, 0));
+        pushButton->setStyleSheet(QString::fromUtf8("\n"
+"background-color: rgb(85, 170, 255);\n"
+"border-radius:10px"));
 
-        gridLayout_2->addItem(verticalSpacer, 9, 0, 1, 1);
+        gridLayout_2->addWidget(pushButton, 0, 2, 1, 1);
+
+        label_6 = new QLabel(gridLayoutWidget);
+        label_6->setObjectName("label_6");
+        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
+        label_6->setSizePolicy(sizePolicy);
+
+        gridLayout_2->addWidget(label_6, 13, 1, 1, 1, Qt::AlignmentFlag::AlignHCenter);
 
         percentage_label = new QLabel(gridLayoutWidget);
         percentage_label->setObjectName("percentage_label");
@@ -224,31 +245,15 @@ public:
         percentage_label->setStyleSheet(QString::fromUtf8("background-color: rgb(153, 0, 0);\n"
 "border-radius:400;"));
 
-        gridLayout_2->addWidget(percentage_label, 12, 0, 1, 1);
+        gridLayout_2->addWidget(percentage_label, 13, 0, 1, 1);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
-        gridLayout_2->addItem(horizontalSpacer, 11, 0, 1, 1);
+        gridLayout_2->addItem(horizontalSpacer, 12, 0, 1, 1);
 
-        pushButton = new QPushButton(gridLayoutWidget);
-        pushButton->setObjectName("pushButton");
-        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy);
-        pushButton->setMinimumSize(QSize(20, 15));
-        pushButton->setMaximumSize(QSize(0, 0));
-        pushButton->setStyleSheet(QString::fromUtf8("\n"
-"background-color: rgb(85, 170, 255);\n"
-"border-radius:20px"));
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
-        gridLayout_2->addWidget(pushButton, 0, 2, 1, 1);
-
-        label_3 = new QLabel(gridLayoutWidget);
-        label_3->setObjectName("label_3");
-        sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
-        label_3->setSizePolicy(sizePolicy);
-        label_3->setStyleSheet(QString::fromUtf8(""));
-
-        gridLayout_2->addWidget(label_3, 7, 0, 1, 3);
+        gridLayout_2->addItem(horizontalSpacer_2, 7, 0, 1, 1);
 
 
         verticalLayout_6->addWidget(frame_weekly);
@@ -287,11 +292,11 @@ public:
 "<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700; color:#ffffff;\"><br /></span></p></body></html"
                         ">", nullptr));
         label_2->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p><span style=\" font-size:22pt; color:#000000;\">Hello,Your_name!</span></p><p><span style=\" font-size:14pt; color:#000000;\">This is what is going on with your finances</span></p></body></html>", nullptr));
-        label_6->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#000000;\">vs last week</span></p></body></html>", nullptr));
-        expense_label->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt; font-weight:700; color:#000000;\">NRP 120.00</span></p></body></html>", nullptr));
-        percentage_label->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">^ 12.3%</span></p></body></html>", nullptr));
-        pushButton->setText(QCoreApplication::translate("analysisWindow", "\342\206\227\357\270\217 ", nullptr));
         label_3->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700; color:#000000;\">Your Weekly Expenses</span></p><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\"><br/></span></p></body></html>", nullptr));
+        expense_label->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:20pt; font-weight:700; color:#000000;\">NRP 120.00</span></p></body></html>", nullptr));
+        pushButton->setText(QCoreApplication::translate("analysisWindow", "\342\206\227\357\270\217 View Table ", nullptr));
+        label_6->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p><span style=\" font-size:12pt; color:#000000;\">vs last week</span></p></body></html>", nullptr));
+        percentage_label->setText(QCoreApplication::translate("analysisWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">^ 12.3%</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };
