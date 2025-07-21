@@ -134,7 +134,7 @@ border: 1px solid #90caf9;   /* Light blue border */
 </string>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <property name="geometry">
@@ -186,7 +186,7 @@ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* subtle shadow effect */
 </string>
           </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and  insights.&lt;/p&gt;&lt;p&gt;➤How to Sign Up?&lt;/p&gt;&lt;p&gt;Tap “Sign Up,” enter your email and password, and confirm your details. &lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;Enter your pet name,date of birth or email to access your old account&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;➤What is Artha Drishya?&lt;/p&gt;&lt;p&gt;Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and insights.&lt;/p&gt;&lt;p&gt;➤ How to Log In?&lt;/p&gt;&lt;p&gt;Enter your registered email and password on the login screen. Tap “Login” to access your dashboard.&lt;/p&gt;&lt;p&gt;➤Forgot Password?&lt;/p&gt;&lt;p&gt;Enter your pet name,date of birth or email to access your old account&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::TextFormat::MarkdownText</enum>

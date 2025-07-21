@@ -199,7 +199,7 @@ public:
 
         retranslateUi(Help);
 
-        toolBox->setCurrentIndex(3);
+        toolBox->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Help);
@@ -209,7 +209,7 @@ public:
     {
         Help->setWindowTitle(QCoreApplication::translate("Help", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("Help", "                                                                       How can we help you?", nullptr));
-        label_2->setText(QCoreApplication::translate("Help", "<html><head/><body><p>\342\236\244What is Artha Drishya?</p><p>Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and  insights.</p><p>\342\236\244How to Sign Up?</p><p>Tap \342\200\234Sign Up,\342\200\235 enter your email and password, and confirm your details. </p><p>\342\236\244 How to Log In?</p><p>Enter your registered email and password on the login screen. Tap \342\200\234Login\342\200\235 to access your dashboard.</p><p>\342\236\244Forgot Password?</p><p>Enter your pet name,date of birth or email to access your old account</p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p></body></html>", nullptr));
+        label_2->setText(QCoreApplication::translate("Help", "<html><head/><body><p>\342\236\244What is Artha Drishya?</p><p>Track your income, expenses, and budgets in one place. Stay in control of your personal finances with simple tools and insights.</p><p>\342\236\244 How to Log In?</p><p>Enter your registered email and password on the login screen. Tap \342\200\234Login\342\200\235 to access your dashboard.</p><p>\342\236\244Forgot Password?</p><p>Enter your pet name,date of birth or email to access your old account</p><p><br/></p><p><br/></p><p><br/></p><p><br/></p><p><br/></p></body></html>", nullptr));
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("Help", "\360\237\224\220 Account & Login", nullptr));
         label_3->setText(QCoreApplication::translate("Help", "<html><head/><body><p><span style=\" font-size:12pt;\">\342\236\244 What is the Record Page?</span></p><p><span style=\" font-size:12pt;\">This is where you log every income or expense to keep your financial records up to date.</span></p><p><span style=\" font-size:12pt;\">\342\236\244 Adding a Transaction</span></p><p><span style=\" font-size:12pt;\">Choose income or expense, fill in amount, category, date, and reviw then tap \342\200\234Add Record&quot;.</span></p><p><span style=\" font-size:12pt;\">\342\236\244 Editing the income or expenses field</span></p><p><span style=\" font-size:12pt;\">Go to the Edit income or Edit expenses section to edit the previous values </span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p><p><span style=\" font-s"
                         "ize:12pt;\"><br/></span></p><p><span style=\" font-size:12pt;\"><br/></span></p></body></html>", nullptr));
