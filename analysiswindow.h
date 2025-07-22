@@ -6,6 +6,7 @@
 #include "revwindow.h"
 #include "weeklywindow.h"
 #include "monthlywindow.h"
+#include "profile.h"
 
 // Forward declaration instead of including homewindow.h
 class homeWindow;
@@ -28,6 +29,7 @@ private slots:
     void on_pushButton_2_clicked(); // Review
     void on_pushButton_3_clicked(); // Weekly
     void on_pushButton_4_clicked(); // Monthly
+    void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
     void openvisions();

@@ -25,8 +25,9 @@ private slots:
     void editExpense();
     void showIncomeTable();
      void showExpenseTable();
+    void on_toolButton_clicked();
     void openHome();
-    void openAnalytics();
+     void openAnalytics();
 
     void openvisions();
     void openreview();

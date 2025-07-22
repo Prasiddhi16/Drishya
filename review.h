@@ -29,6 +29,7 @@ private slots:
    void on_btnExpense_clicked();
 
    // void on_pushButton_clicked();
+   void on_toolButton_clicked();
 
     void on_btnTax_clicked();
    void openHome();

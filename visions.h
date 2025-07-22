@@ -8,8 +8,8 @@
 #include <QVector>
 #include <QUuid> // Needed for UUID generation for goal_id
 
-#include "goaldata.h"
-
+#include "GoalData.h"
+#include "profile.h"
 // Include headers for UI widgets used in member function declarations
 #include <QProgressBar>
 #include <QStackedWidget>
@@ -98,3 +98,4 @@ private:
 };
 
 #endif // VISIONS_H
+

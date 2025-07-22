@@ -43,6 +43,7 @@ template <> constexpr inline auto review::qt_create_metaobjectdata<qt_meta_tag_Z
         "",
         "on_btnExper_clicked",
         "on_btnExpense_clicked",
+        "on_toolButton_clicked",
         "on_btnTax_clicked",
         "openHome",
         "openAnalytics",
@@ -57,16 +58,18 @@ template <> constexpr inline auto review::qt_create_metaobjectdata<qt_meta_tag_Z
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_btnExpense_clicked'
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'on_btnTax_clicked'
+        // Slot 'on_toolButton_clicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openHome'
+        // Slot 'on_btnTax_clicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openAnalytics'
+        // Slot 'openHome'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openvisions'
+        // Slot 'openAnalytics'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openRecordWindow'
+        // Slot 'openvisions'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openRecordWindow'
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -93,11 +96,12 @@ void review::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 0: _t->on_btnCompare_clicked(); break;
         case 1: _t->on_btnExper_clicked(); break;
         case 2: _t->on_btnExpense_clicked(); break;
-        case 3: _t->on_btnTax_clicked(); break;
-        case 4: _t->openHome(); break;
-        case 5: _t->openAnalytics(); break;
-        case 6: _t->openvisions(); break;
-        case 7: _t->openRecordWindow(); break;
+        case 3: _t->on_toolButton_clicked(); break;
+        case 4: _t->on_btnTax_clicked(); break;
+        case 5: _t->openHome(); break;
+        case 6: _t->openAnalytics(); break;
+        case 7: _t->openvisions(); break;
+        case 8: _t->openRecordWindow(); break;
         default: ;
         }
     }
@@ -123,14 +127,14 @@ int review::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 9;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 9)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 8;
+        _id -= 9;
     }
     return _id;
 }

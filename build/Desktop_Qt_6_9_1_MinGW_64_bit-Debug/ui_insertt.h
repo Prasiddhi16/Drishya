@@ -53,8 +53,9 @@ public:
     {
         if (Insertt->objectName().isEmpty())
             Insertt->setObjectName("Insertt");
-        Insertt->resize(614, 296);
-        Insertt->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 219);"));
+        Insertt->resize(614, 305);
+        Insertt->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 219);\n"
+"color: rgb(0, 0, 0);"));
         gridLayout_3 = new QGridLayout(Insertt);
         gridLayout_3->setObjectName("gridLayout_3");
         gridLayout_3->setContentsMargins(-1, 20, -1, 4);
@@ -124,8 +125,8 @@ public:
         groupBox->setObjectName("groupBox");
         groupBox->setStyleSheet(QString::fromUtf8("font: 600 14pt \"Segoe UI\";\n"
 "background-color: rgb(221, 193, 255);\n"
-"radius:6px\n"
-""));
+"radius:6px;\n"
+"color: rgb(0, 0, 0);"));
         formLayout = new QFormLayout(groupBox);
         formLayout->setObjectName("formLayout");
         formLayout->setContentsMargins(-1, 15, -1, 19);
@@ -195,7 +196,7 @@ public:
         groupBox->setTitle(QCoreApplication::translate("Insertt", "Vision", nullptr));
         label->setText(QCoreApplication::translate("Insertt", "Name of your goal:", nullptr));
         goalNameEdit->setText(QString());
-        label_2->setText(QCoreApplication::translate("Insertt", "Income required:", nullptr));
+        label_2->setText(QCoreApplication::translate("Insertt", "Target amount:", nullptr));
         label_3->setText(QCoreApplication::translate("Insertt", "Downpayment:", nullptr));
         label_4->setText(QCoreApplication::translate("Insertt", "<html><head/><body><p>Time limit:</p></body></html>", nullptr));
     } // retranslateUi

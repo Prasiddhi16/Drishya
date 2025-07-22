@@ -331,6 +331,7 @@ debug/qrc_resource.cpp: ../../resource.qrc \
 		../../img/emergency.jpg \
 		../../img/goal2.jpg \
 		../../img/edit.png \
+		../../img/profileicon.png \
 		../../img/Privacy.png
 	C:\Qt\6.9.1\mingw_64\bin\rcc.exe -name resource --no-zstd ..\..\resource.qrc -o debug\qrc_resource.cpp
 
@@ -4718,14 +4719,10 @@ debug/moc_insertt.cpp: ../../insertt.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
 		../../goaldata.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\insertt.h -o debug\moc_insertt.cpp
@@ -4929,6 +4926,20 @@ debug/moc_profile.cpp: ../../profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\profile.h -o debug\moc_profile.cpp
@@ -6123,6 +6134,16 @@ debug/moc_visions.cpp: ../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlversion.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\visions.h -o debug\moc_visions.cpp
@@ -6877,6 +6898,12 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlresult.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlversion.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
 		../../review.h \
 		../../expert.h \
 		../../compare.h \
@@ -7558,6 +7585,12 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		../../RecordWindow.h \
 		../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
 		../../review.h \
 		../../expert.h \
 		../../compare.h \
@@ -8038,7 +8071,9 @@ debug/loginwindow.o: ../../loginwindow.cpp ../../loginwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qformlayout.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLayout \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDialogButtonBox \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDialog
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDialog \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QToolButton \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtoolbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\loginwindow.o ..\..\loginwindow.cpp
 
 debug/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
@@ -11379,6 +11414,12 @@ debug/RecordWindow.o: ../../RecordWindow.cpp ../../RecordWindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlresult.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlversion.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
 		../../review.h \
 		../../expert.h \
 		../../compare.h \
@@ -12309,40 +12350,6 @@ debug/expert.o: ../../expert.cpp ../../expert.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvector.h \
 		ui_expert.h \
-<<<<<<< HEAD
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtCore/QVariant \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QApplication \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QLabel \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qframe.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtGui/qpicture.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QMenuBar \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qmenubar.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qmenu.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QSpacerItem \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlayoutitem.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QStatusBar \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qstatusbar.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QVBoxLayout \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qboxlayout.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qlayout.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/qgridlayout.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtWidgets/QWidget \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtCharts \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/QSqlQuery \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qsqlquery.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/QSqlError \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtSql/qsqlerror.h \
-		../../../../Desktop/C++pp/6.9.1/mingw_64/include/QtCore/QDebug
-=======
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
@@ -12823,7 +12830,6 @@ debug/expert.o: ../../expert.cpp ../../expert.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlerror.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDebug
->>>>>>> 189757d2b0d96e0dac008edf6723d8d1422fb9b1
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\expert.o ..\..\expert.cpp
 
 debug/finaldial.o: ../../finaldial.cpp ../../finaldial.h \
@@ -13114,7 +13120,15 @@ debug/goaldata.o: ../../goaldata.cpp ../../goaldata.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qstringtokenizer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qstringbuilder.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qstringconverter.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qstringconverter_base.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qstringconverter_base.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qendian.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qfloat16.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qhashfunctions.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qmath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qalgorithms.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtformat_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\goaldata.o ..\..\goaldata.cpp
 
 debug/graph.o: ../../graph.cpp ../../graph.h \
@@ -14271,14 +14285,10 @@ debug/insertt.o: ../../insertt.cpp ../../insertt.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
 		../../goaldata.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h \
 		ui_insertt.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
@@ -14318,25 +14328,7 @@ debug/insertt.o: ../../insertt.cpp ../../insertt.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QRegularExpression \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QRegularExpressionValidator \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qvalidator.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QStandardPaths \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qstandardpaths.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquery.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlerror.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QDir \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qdir.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qdirlisting.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qfiledevice.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qdatetime.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qcalendar.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qfile.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qfileinfo.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimezone.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfo \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/quuid.h
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qvalidator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\insertt.o ..\..\insertt.cpp
 
 debug/profile.o: ../../profile.cpp ../../profile.h \
@@ -14538,6 +14530,20 @@ debug/profile.o: ../../profile.cpp ../../profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qinputmethod.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qlocale.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qguiapplication_platform.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		ui_profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
@@ -14552,15 +14558,7 @@ debug/profile.o: ../../profile.cpp ../../profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGridLayout \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLineEdit \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlineedit.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPlainTextEdit \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qplaintextedit.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtextedit.h \
@@ -14582,12 +14580,6 @@ debug/profile.o: ../../profile.cpp ../../profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QWidget \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/Qstring \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QPixmap \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqldatabase.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlglobal.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
-		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
@@ -14601,7 +14593,17 @@ debug/profile.o: ../../profile.cpp ../../profile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qfile.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qfileinfo.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimezone.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfo
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QFileInfo \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QCryptographicHash \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qcryptographichash.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMessageBox \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmessagebox.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QRegularExpression \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qregularexpression.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QDebug \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\profile.o ..\..\profile.cpp
 
 debug/review.o: ../../review.cpp ../../review.h \
@@ -15022,6 +15024,10 @@ debug/review.o: ../../review.cpp ../../review.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqltablemodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlresult.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlversion.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
 		../../revwindow.h \
@@ -16072,6 +16078,16 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlversion.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlDatabase \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QUuid \
+		../../goaldata.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		ui_visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QApplication \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qapplication.h \
@@ -16083,20 +16099,12 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGroupBox \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgroupbox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QHBoxLayout \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlabel.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMenuBar \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmenubar.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmenu.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QProgressBar \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qprogressbar.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStackedWidget \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstackedwidget.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QStatusBar \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstatusbar.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QToolButton \
@@ -16106,8 +16114,13 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		../../insertt.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QDialog \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qdialog.h \
-		../../goaldata.h \
 		../../profile.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLineEdit \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlineedit.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		../../homewindow.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
@@ -16122,7 +16135,10 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		../../expense.h \
 		../../graph.h \
 		../../taxdialog.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QPixmap \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QFrame \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QSizePolicy \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QDebug \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QMessageBox \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qmessagebox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qdialogbuttonbox.h \

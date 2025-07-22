@@ -9,6 +9,7 @@
 #include "visions.h"
 #include "review.h"
 
+
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFrame>
@@ -30,6 +31,9 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: #000000;"); // Dark background
+    QPixmap pix(":/img/img/profileicon.png");
+    ui->toolButton->setIcon(QIcon(pix));
+    ui->toolButton->setIconSize(ui->toolButton->size());
     // ✅ Ensure persistent database connection
     QString connectionName = "qt_sql_shared_connection";
     QSqlDatabase db;
@@ -212,4 +216,23 @@ void analysisWindow::openreview()
     review *review_win=new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
     this->hide();
+}
+void analysisWindow::on_toolButton_clicked()
+{
+
+    int userId = 0;
+    QString userEmail = "";
+
+
+    QSettings settings("ItsDrishya", "LoginSystem");
+    userId = settings.value("user_id").toInt();
+    userEmail = settings.value("email").toString();
+
+
+    profile *p = new profile(userId, userEmail, this);
+    p->setWindowFlags(Qt::Popup);
+    QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
+    p->move(globalPos);
+    p->show();
+
 }

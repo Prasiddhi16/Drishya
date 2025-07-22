@@ -39,31 +39,14 @@ background-color: #131b39;
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QGridLayout" name="gridLayout_15">
-        <item row="1" column="1">
+        <item row="4" column="0" colspan="2">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Crafting Your Visions Into Reality,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Slowly but Surely...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="label_2">
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 255);</string>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt; font-weight:700;&quot;&gt;GOALS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QToolButton" name="toolButton">
-          <property name="text">
-           <string>👤</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
+        <item row="5" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0">
           <property name="leftMargin">
            <number>10</number>
@@ -80,8 +63,211 @@ background-color: #131b39;
           <property name="spacing">
            <number>10</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QGroupBox" name="groupBox_1">
+          <item row="2" column="2">
+           <widget class="QGroupBox" name="groupBox_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>320</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(224, 255, 250);
+color: rgb(0, 0, 0);
+font: 11pt &quot;Segoe UI&quot;;
+border-radius:12px;
+margin top:20px,
+padding top:15px;
+
+
+
+</string>
+            </property>
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_13">
+             <item row="1" column="0">
+              <widget class="QStackedWidget" name="stackedWidget6">
+               <property name="currentIndex">
+                <number>1</number>
+               </property>
+               <widget class="QWidget" name="page_40">
+                <layout class="QGridLayout" name="gridLayout_29">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_27">
+                   <item row="2" column="0" colspan="2">
+                    <widget class="QLabel" name="label_10">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>80</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;quot;Prepare today for peace &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;of mind tomorrow.&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="label_9">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;🚨EMERGENCY FUND&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QPushButton" name="add_6">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black</string>
+                     </property>
+                     <property name="text">
+                      <string>➕ADD</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_39">
+                <layout class="QGridLayout" name="gridLayout_30">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_14">
+                   <item row="8" column="0" colspan="2">
+                    <widget class="QProgressBar" name="progressBar_6">
+                     <property name="styleSheet">
+                      <string notr="true">QProgressBar {
+    border: 2px solid #000000;
+    border-radius: 8px;
+    text-align: center;
+    height: 20px;
+color:black;
+}
+QProgressBar::chunk {
+    background-color: green;
+    width: 10px;
+}</string>
+                     </property>
+                     <property name="value">
+                      <number>24</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="2">
+                    <widget class="QLabel" name="downpaymentLabel6">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="7" column="0" colspan="2">
+                    <widget class="QLabel" name="monthLabel6">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="incomeLabel6">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="goalNameLabel6">
+                     <property name="styleSheet">
+                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
+color:rgb(0,0,0);</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="9" column="0">
+                    <widget class="QPushButton" name="edit6">
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>✏️EDIT</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0" colspan="2">
+                    <widget class="QLabel" name="remainingLabel6">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="9" column="1">
+                    <widget class="QPushButton" name="delete_6">
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>🗑️DELETE</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QGroupBox" name="groupBox_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -106,154 +292,85 @@ padding top:15px;
             <property name="title">
              <string/>
             </property>
-            <widget class="QStackedWidget" name="stackedWidget1">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>10</y>
-               <width>311</width>
-               <height>181</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(0, 0, 0);
-font: 11pt &quot;Segoe ui&quot;;
- background-color: #e0e0e0;
-border-radius:12px;
-margin top:20px,
-padding top:15px;
-
-
-
-</string>
-             </property>
-             <property name="currentIndex">
-              <number>1</number>
-             </property>
-             <widget class="QWidget" name="page_42">
-              <layout class="QGridLayout" name="gridLayout">
-               <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_22">
-                 <item row="3" column="1" colspan="2">
-                  <widget class="QLabel" name="label_4">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Start building the foundation of &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;your dreams — one rupee at a time.”&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-                   </property>
-                   <property name="wordWrap">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1" colspan="2">
-                  <widget class="QLabel" name="label_3">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">
-font: 14pt &quot;Segoe UI&quot;;</string>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;🏡REAL ESTATE&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="wordWrap">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1" colspan="2">
-                  <widget class="QPushButton" name="add">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black</string>
-                   </property>
-                   <property name="text">
-                    <string>➕ADD</string>
-                   </property>
-                  </widget>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="1" column="0">
+              <widget class="QStackedWidget" name="stackedWidget5">
+               <property name="currentIndex">
+                <number>1</number>
+               </property>
+               <widget class="QWidget" name="page_36">
+                <layout class="QGridLayout" name="gridLayout_28">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_26">
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="label_5">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;🌱PERSONAL GROWTH&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="label_6">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>80</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Invest in yourself-&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;it pays the best interest.&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="2">
+                    <widget class="QPushButton" name="add_5">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black</string>
+                     </property>
+                     <property name="text">
+                      <string>➕ADD</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="page_19">
-              <layout class="QGridLayout" name="gridLayout_4">
-               <item row="0" column="0">
-                <layout class="QGridLayout" name="gridLayout_3">
-                 <item row="1" column="0" colspan="2">
-                  <widget class="QLabel" name="incomeLabel1">
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0" colspan="2">
-                  <widget class="QLabel" name="remainingLabel1">
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0" colspan="2">
-                  <widget class="QLabel" name="goalNameLabel1">
-                   <property name="font">
-                    <font>
-                     <family>Segoe UI</family>
-                     <pointsize>14</pointsize>
-                     <italic>false</italic>
-                     <bold>true</bold>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
-color:rgb(0,0,0);</string>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="0" colspan="2">
-                  <widget class="QLabel" name="downpaymentLabel1">
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0" colspan="2">
-                  <widget class="QLabel" name="monthLabel1">
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="0" colspan="2">
-                  <widget class="QProgressBar" name="progressBar_1">
-                   <property name="styleSheet">
-                    <string notr="true">QProgressBar {
+               </widget>
+               <widget class="QWidget" name="page_35">
+                <layout class="QGridLayout" name="gridLayout_20">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_12">
+                   <item row="9" column="0" colspan="3">
+                    <widget class="QProgressBar" name="progressBar_5">
+                     <property name="styleSheet">
+                      <string notr="true">QProgressBar {
     border: 2px solid #000000;
     border-radius: 8px;
     text-align: center;
@@ -264,44 +381,310 @@ QProgressBar::chunk {
     background-color: green;
     width: 10px;
 }</string>
-                   </property>
-                   <property name="value">
-                    <number>24</number>
-                   </property>
-                   <property name="textVisible">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="0">
-                  <widget class="QPushButton" name="edit1">
-                   <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
-                   </property>
-                   <property name="text">
-                    <string>✏️EDIT</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QPushButton" name="delete_1">
-                   <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black;
-background-color: rgb(255, 255, 255);
-border-radius:6px;</string>
-                   </property>
-                   <property name="text">
-                    <string>🗑️DELETE</string>
-                   </property>
-                  </widget>
+                     </property>
+                     <property name="value">
+                      <number>24</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="3">
+                    <widget class="QLabel" name="incomeLabel5">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="3" column="0" colspan="3">
+                    <widget class="QLabel" name="downpaymentLabel5">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0" colspan="3">
+                    <widget class="QLabel" name="remainingLabel5">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="3">
+                    <widget class="QLabel" name="goalNameLabel5">
+                     <property name="styleSheet">
+                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
+color:rgb(0,0,0);</string>
+                     </property>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0" rowspan="2" colspan="3">
+                    <widget class="QLabel" name="monthLabel5">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="10" column="1">
+                    <widget class="QPushButton" name="edit5">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>✏️EDIT</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="10" column="2">
+                    <widget class="QPushButton" name="delete_5">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>🗑️DELETE</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
-               </item>
-              </layout>
-             </widget>
-            </widget>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QGroupBox" name="groupBox_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>320</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(224, 255, 250);
+color: rgb(0, 0, 0);
+font: 11pt &quot;Segoe UI&quot;;
+border-radius:12px;
+margin top:20px,
+padding top:15px;
+
+
+
+</string>
+            </property>
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="0">
+              <widget class="QStackedWidget" name="stackedWidget2">
+               <property name="currentIndex">
+                <number>1</number>
+               </property>
+               <widget class="QWidget" name="page_20">
+                <layout class="QGridLayout" name="gridLayout_7">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_23">
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="label_11">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>80</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Fuel your journey — set your goal, &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;drive your dream.”&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="label_12">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;🚗 CAR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" rowspan="2" colspan="2">
+                    <widget class="QPushButton" name="add_2">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black</string>
+                     </property>
+                     <property name="text">
+                      <string>➕ADD</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_27">
+                <layout class="QGridLayout" name="gridLayout_16">
+                 <item row="0" column="0">
+                  <layout class="QGridLayout" name="gridLayout_21">
+                   <item row="3" column="0" colspan="2">
+                    <widget class="QLabel" name="remainingLabel2">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="4" column="0" colspan="2">
+                    <widget class="QLabel" name="monthLabel2">
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="1">
+                    <widget class="QPushButton" name="delete_2">
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>🗑️DELETE</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="6" column="0">
+                    <widget class="QPushButton" name="edit2">
+                     <property name="styleSheet">
+                      <string notr="true">border: 0.5px solid black;
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
+                     </property>
+                     <property name="text">
+                      <string>✏️EDIT</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0" colspan="2">
+                    <widget class="QProgressBar" name="progressBar_2">
+                     <property name="styleSheet">
+                      <string notr="true">QProgressBar {
+    border: 2px solid #000000;
+    border-radius: 8px;
+    text-align: center;
+    height: 20px;
+color:black;
+}
+QProgressBar::chunk {
+    background-color: green;
+    width: 10px;
+}</string>
+                     </property>
+                     <property name="value">
+                      <number>24</number>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="2" column="0" colspan="2">
+                    <widget class="QLabel" name="downpaymentLabel2">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="1" column="0" colspan="2">
+                    <widget class="QLabel" name="incomeLabel2">
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0" colspan="2">
+                    <widget class="QLabel" name="goalNameLabel2">
+                     <property name="styleSheet">
+                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
+color:rgb(0,0,0);</string>
+                     </property>
+                     <property name="text">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item row="0" column="2">
@@ -335,7 +718,7 @@ padding top:15px;
              <item row="1" column="0" colspan="2">
               <widget class="QStackedWidget" name="stackedWidget3">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_28">
                 <layout class="QGridLayout" name="gridLayout_17">
@@ -375,7 +758,7 @@ padding top:15px;
                       </size>
                      </property>
                      <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;✈️ VACATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;✈️ VACATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="wordWrap">
                       <bool>true</bool>
@@ -441,8 +824,10 @@ color:rgb(0,0,0);</string>
                     <widget class="QPushButton" name="edit3">
                      <property name="styleSheet">
                       <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
                      </property>
                      <property name="text">
                       <string>✏️EDIT</string>
@@ -467,8 +852,13 @@ background-color: rgb(85, 170, 255);</string>
                     <widget class="QPushButton" name="delete_3">
                      <property name="styleSheet">
                       <string notr="true">border: 0.5px solid black;
-background-color: rgb(241, 22, 62);
-border-radius:6px;</string>
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
                      </property>
                      <property name="text">
                       <string>🗑️DELETE</string>
@@ -579,7 +969,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       </size>
                      </property>
                      <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;🎓 EDUCATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;🎓 EDUCATION&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="wordWrap">
                       <bool>true</bool>
@@ -614,8 +1004,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
                     <widget class="QPushButton" name="edit4">
                      <property name="styleSheet">
                       <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
                      </property>
                      <property name="text">
                       <string>✏️EDIT</string>
@@ -646,8 +1038,13 @@ QProgressBar::chunk {
                     <widget class="QPushButton" name="delete_4">
                      <property name="styleSheet">
                       <string notr="true">border: 0.5px solid black;
-background-color: #f08080;
-border-radius:6px;</string>
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
                      </property>
                      <property name="text">
                       <string>🗑️DELETE</string>
@@ -702,204 +1099,8 @@ color:rgb(0,0,0);</string>
             </layout>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QGroupBox" name="groupBox_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>320</width>
-              <height>200</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(224, 255, 250);
-color: rgb(0, 0, 0);
-font: 11pt &quot;Segoe UI&quot;;
-border-radius:12px;
-margin top:20px,
-padding top:15px;
-
-
-
-</string>
-            </property>
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_13">
-             <item row="1" column="0">
-              <widget class="QStackedWidget" name="stackedWidget6">
-               <property name="currentIndex">
-                <number>1</number>
-               </property>
-               <widget class="QWidget" name="page_40">
-                <layout class="QGridLayout" name="gridLayout_29">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_27">
-                   <item row="2" column="0" colspan="2">
-                    <widget class="QLabel" name="label_10">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>80</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;&amp;quot;Prepare today for peace &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;of mind tomorrow.&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="label_9">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;🚨EMERGENCY FUND&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="0" colspan="2">
-                    <widget class="QPushButton" name="add_6">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>30</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
-                     </property>
-                     <property name="text">
-                      <string>➕ADD</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="page_39">
-                <layout class="QGridLayout" name="gridLayout_30">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_14">
-                   <item row="6" column="0" colspan="2">
-                    <widget class="QProgressBar" name="progressBar_6">
-                     <property name="styleSheet">
-                      <string notr="true">QProgressBar {
-    border: 2px solid #000000;
-    border-radius: 8px;
-    text-align: center;
-    height: 20px;
-color:black;
-}
-QProgressBar::chunk {
-    background-color: green;
-    width: 10px;
-}</string>
-                     </property>
-                     <property name="value">
-                      <number>24</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="5" column="0" colspan="2">
-                    <widget class="QLabel" name="monthLabel6">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0" colspan="2">
-                    <widget class="QLabel" name="goalNameLabel6">
-                     <property name="styleSheet">
-                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
-color:rgb(0,0,0);</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0" colspan="2">
-                    <widget class="QLabel" name="downpaymentLabel6">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="incomeLabel6">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="3" column="0" colspan="2">
-                    <widget class="QLabel" name="remainingLabel6">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="7" column="0">
-                    <widget class="QPushButton" name="edit6">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>✏️EDIT</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="7" column="1">
-                    <widget class="QPushButton" name="delete_6">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-background-color: rgb(241, 22, 62);
-border-radius:6px;</string>
-                     </property>
-                     <property name="text">
-                      <string>🗑️DELETE</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QGroupBox" name="groupBox_5">
+          <item row="0" column="0">
+           <widget class="QGroupBox" name="groupBox_1">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -924,191 +1125,19 @@ padding top:15px;
             <property name="title">
              <string/>
             </property>
-            <layout class="QGridLayout" name="gridLayout_6">
-             <item row="1" column="0">
-              <widget class="QStackedWidget" name="stackedWidget5">
-               <property name="currentIndex">
-                <number>1</number>
-               </property>
-               <widget class="QWidget" name="page_36">
-                <layout class="QGridLayout" name="gridLayout_28">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_26">
-                   <item row="0" column="0" colspan="2">
-                    <widget class="QLabel" name="label_5">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;🌱PERSONAL GROWTH&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="label_6">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>80</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Invest in yourself!&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0" colspan="2">
-                    <widget class="QPushButton" name="add_5">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>30</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
-                     </property>
-                     <property name="text">
-                      <string>➕ADD</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-               <widget class="QWidget" name="page_35">
-                <layout class="QGridLayout" name="gridLayout_20">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_12">
-                   <item row="3" column="0" colspan="3">
-                    <widget class="QLabel" name="downpaymentLabel5">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0" colspan="3">
-                    <widget class="QLabel" name="incomeLabel5">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="0" colspan="3">
-                    <widget class="QLabel" name="remainingLabel5">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0" colspan="3">
-                    <widget class="QLabel" name="goalNameLabel5">
-                     <property name="styleSheet">
-                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
-color:rgb(0,0,0);</string>
-                     </property>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="6" column="0" colspan="3">
-                    <widget class="QLabel" name="monthLabel5">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="11" column="2">
-                    <widget class="QPushButton" name="delete_5">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-background-color: rgb(241, 22, 62);
-border-radius:6px;</string>
-                     </property>
-                     <property name="text">
-                      <string>🗑️DELETE</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="9" column="0" colspan="3">
-                    <widget class="QProgressBar" name="progressBar_5">
-                     <property name="styleSheet">
-                      <string notr="true">QProgressBar {
-    border: 2px solid #000000;
-    border-radius: 8px;
-    text-align: center;
-    height: 20px;
-color:black;
-}
-QProgressBar::chunk {
-    background-color: green;
-    width: 10px;
-}</string>
-                     </property>
-                     <property name="value">
-                      <number>24</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="11" column="0">
-                    <widget class="QPushButton" name="edit5">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>✏️EDIT</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>320</width>
-              <height>200</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(224, 255, 250);
-color: rgb(0, 0, 0);
-font: 11pt &quot;Segoe UI&quot;;
+            <widget class="QStackedWidget" name="stackedWidget1">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>10</y>
+               <width>311</width>
+               <height>181</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(0, 0, 0);
+font: 11pt &quot;Segoe ui&quot;;
+ background-color: #e0e0e0;
 border-radius:12px;
 margin top:20px,
 padding top:15px;
@@ -1116,130 +1145,135 @@ padding top:15px;
 
 
 </string>
-            </property>
-            <property name="title">
-             <string/>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0">
-              <widget class="QStackedWidget" name="stackedWidget2">
-               <property name="currentIndex">
-                <number>1</number>
-               </property>
-               <widget class="QWidget" name="page_20">
-                <layout class="QGridLayout" name="gridLayout_7">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_23">
-                   <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="label_11">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>80</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Fuel your journey — set your goal, &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;drive your dream.”&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0" colspan="2">
-                    <widget class="QLabel" name="label_12">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;🚗 CAR&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0" rowspan="2" colspan="2">
-                    <widget class="QPushButton" name="add_2">
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>30</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
-                     </property>
-                     <property name="text">
-                      <string>➕ADD</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+             </property>
+             <property name="currentIndex">
+              <number>1</number>
+             </property>
+             <widget class="QWidget" name="page_42">
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="gridLayout_22">
+                 <item row="3" column="1" colspan="2">
+                  <widget class="QLabel" name="label_4">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;“Start building the foundation of &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;your dreams.&amp;quot;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1" colspan="2">
+                  <widget class="QLabel" name="label_3">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">
+font: 16pt &quot;Segoe UI&quot;;</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;🏡REAL ESTATE&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1" colspan="2">
+                  <widget class="QPushButton" name="add">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border: 0.5px solid black;
+border-radius:20px;</string>
+                   </property>
+                   <property name="text">
+                    <string>➕ADD</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
-               </widget>
-               <widget class="QWidget" name="page_27">
-                <layout class="QGridLayout" name="gridLayout_16">
-                 <item row="0" column="0">
-                  <layout class="QGridLayout" name="gridLayout_21">
-                   <item row="3" column="0" colspan="2">
-                    <widget class="QLabel" name="remainingLabel2">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="4" column="0" colspan="2">
-                    <widget class="QLabel" name="monthLabel2">
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="6" column="1">
-                    <widget class="QPushButton" name="delete_2">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-background-color: rgb(241, 22, 62);
-border-radius:6px;</string>
-                     </property>
-                     <property name="text">
-                      <string>🗑️DELETE</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="6" column="0">
-                    <widget class="QPushButton" name="edit2">
-                     <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black;
-border-radius:6px;
-background-color: rgb(85, 170, 255);</string>
-                     </property>
-                     <property name="text">
-                      <string>✏️EDIT</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="5" column="0" colspan="2">
-                    <widget class="QProgressBar" name="progressBar_2">
-                     <property name="styleSheet">
-                      <string notr="true">QProgressBar {
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="page_19">
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <layout class="QGridLayout" name="gridLayout_3">
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QLabel" name="incomeLabel1">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QLabel" name="remainingLabel1">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QLabel" name="goalNameLabel1">
+                   <property name="font">
+                    <font>
+                     <family>Segoe UI</family>
+                     <pointsize>14</pointsize>
+                     <italic>false</italic>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
+color:rgb(0,0,0);</string>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" colspan="2">
+                  <widget class="QLabel" name="downpaymentLabel1">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0" colspan="2">
+                  <widget class="QLabel" name="monthLabel1">
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="6" column="0" colspan="2">
+                  <widget class="QProgressBar" name="progressBar_1">
+                   <property name="styleSheet">
+                    <string notr="true">QProgressBar {
     border: 2px solid #000000;
     border-radius: 8px;
     text-align: center;
@@ -1250,47 +1284,92 @@ QProgressBar::chunk {
     background-color: green;
     width: 10px;
 }</string>
-                     </property>
-                     <property name="value">
-                      <number>24</number>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0" colspan="2">
-                    <widget class="QLabel" name="downpaymentLabel2">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0" colspan="2">
-                    <widget class="QLabel" name="incomeLabel2">
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0" colspan="2">
-                    <widget class="QLabel" name="goalNameLabel2">
-                     <property name="styleSheet">
-                      <string notr="true">font: 700 14pt &quot;Segoe UI&quot;;
-color:rgb(0,0,0);</string>
-                     </property>
-                     <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                   </property>
+                   <property name="value">
+                    <number>24</number>
+                   </property>
+                   <property name="textVisible">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="0">
+                  <widget class="QPushButton" name="edit1">
+                   <property name="styleSheet">
+                    <string notr="true">border: 0.5px solid black;
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>✏️EDIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="7" column="1">
+                  <widget class="QPushButton" name="delete_1">
+                   <property name="styleSheet">
+                    <string notr="true">border: 0.5px solid black;
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>🗑️DELETE</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
-               </widget>
-              </widget>
-             </item>
-            </layout>
+               </item>
+              </layout>
+             </widget>
+            </widget>
            </widget>
           </item>
          </layout>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_2">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:48pt; font-weight:700;&quot;&gt;GOALS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QToolButton" name="toolButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+    border: none;           
+    padding: 0px;                 
+    background: #131b39;     
+    border-radius: 20px;  
+  outline: none;               
+    </string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -1304,7 +1383,7 @@ color:rgb(0,0,0);</string>
      <x>0</x>
      <y>0</y>
      <width>1440</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

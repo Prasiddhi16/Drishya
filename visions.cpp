@@ -12,6 +12,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QPushButton>
+#include<QPixmap>
 #include <QFont>
 #include <QSizePolicy>
 #include <QDebug>
@@ -25,7 +26,7 @@
 #include <QUuid> // For generating unique IDs
 
 
-Visions::Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
+    Visions::Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::Visions),
     currentUserName(userName),
@@ -75,6 +76,10 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
 
     setCentralWidget(central);
     this->showMaximized();
+
+    QPixmap pix(":/img/img/profileicon.png");
+    ui->toolButton->setIcon(QIcon(pix));
+    ui->toolButton->setIconSize(ui->toolButton->size());
 
     // Initialize with 6 empty GoalData objects
     // This ensures goalDataList has 6 elements corresponding to UI slots
@@ -240,65 +245,56 @@ void Visions::saveGoal(const GoalData &data) {
 }
 
 void Visions::deleteGoal(int goalIndex) {
-    if (goalIndex < 1 || goalIndex > 6) return;
-    if (!db.isOpen()) {
-        qWarning() << "Database not open for deleting goal!";
+    qDebug() << "--- Deleting Goal from Slot:" << goalIndex << "---";
+
+    if (goalIndex < 1 || goalIndex > 6) {
+        qWarning() << "Invalid goal index:" << goalIndex;
         return;
     }
 
-    QString goalIdToDelete = goalDataList[goalIndex - 1].id;
-
-    if (goalIdToDelete.isEmpty()) {
-        qDebug() << "No goal in slot" << goalIndex << "to delete.";
-        return; // Nothing to delete from DB if slot is already empty
+    if (!db.isOpen()) {
+        QMessageBox::critical(this, "Database Error", "Failed to open database.");
+        return;
     }
 
-    QSqlQuery deleteQuery(db); // Associate query with our db member variable
+    int listIndex = goalIndex - 1;
+    if (goalDataList[listIndex].isEmpty()) {
+        qDebug() << "Slot" << goalIndex << "is already empty.";
+        clearGoalUI(goalIndex);
+        return;
+    }
+
+    QString goalIdToDelete = goalDataList[listIndex].id;
+
+    // --- Delete from database ---
+    QSqlQuery deleteQuery(db);
     deleteQuery.prepare("DELETE FROM goals WHERE goal_id = :id AND user_id = :userId");
     deleteQuery.bindValue(":id", goalIdToDelete);
     deleteQuery.bindValue(":userId", currentUserId);
 
     if (!deleteQuery.exec()) {
-        qWarning() << "Failed to delete goal from DB:" << deleteQuery.lastError().text();
-    } else {
-        qDebug() << "Goal" << goalIdToDelete << "deleted from DB.";
-    }
-
-    // Step 1: Clear the goal from the in-memory list (removes goals at this slot)
-    goalDataList[goalIndex - 1] = GoalData();
-
-    // Step 2: Shift remaining goals in the in-memory list(fills the gap created by the deletion)
-
-    for (int i = goalIndex - 1; i < goalDataList.size() - 1; ++i) {
-        goalDataList[i] = goalDataList[i+1]; // Copy data from the next slot to the current one
-        goalDataList[i].slotIndex = i + 1; // Update slot index after shifting
-    }
-    // Clear the very last slot (it now contains a duplicate or old data from the shifted list)
-    goalDataList[goalDataList.size() - 1] = GoalData();
-
-    // Step 3: Update all UI elements based on the shifted goalDataList
-    for (int i = 0; i < goalDataList.size(); ++i) {
-        updateGoalUI(i + 1, goalDataList[i]);
-    }
-
-    // Step 4: Re-sync the database to reflect the new order (more efficient approach)
-    // Delete all current user's goals from DB, then re-insert the compacted list.
-    // This is still a "delete all and re-insert" but scoped per user and only after a deletion.
-    QSqlQuery clearUserGoalsQuery(db);
-    clearUserGoalsQuery.prepare("DELETE FROM goals WHERE user_id = :userId");
-    clearUserGoalsQuery.bindValue(":userId", currentUserId);
-    if (!clearUserGoalsQuery.exec()) {
-        qWarning() << "Failed to clear user's goals table for re-sync:" << clearUserGoalsQuery.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to delete goal.");
+        qWarning() << "DB deletion failed:" << deleteQuery.lastError().text();
         return;
     }
 
-    for (int i = 0; i < goalDataList.size(); ++i) {
-        if (!goalDataList[i].isEmpty()) { // Only save non-empty goals
-            saveGoal(goalDataList[i]); // Save the goal with its (potentially new) ID
-        }
+    // --- Shift subsequent goals up ---
+    for (int i = listIndex + 1; i < goalDataList.size(); ++i) {
+        goalDataList[i - 1] = goalDataList[i];
+        goalDataList[i - 1].slotIndex = i; // Maintain 1-based slotIndex
     }
-    qDebug() << "Database re-synced after deletion and shift.";
+
+    // Clear last slot
+    goalDataList[goalDataList.size() - 1] = GoalData();
+
+    // --- Only update UI ---
+    for (int i = 0; i < goalDataList.size(); ++i) {
+        updateGoalUI(i + 1, goalDataList[i]); // Slot index = i + 1
+    }
+
+    qDebug() << "Deleted goal from slot" << goalIndex << "and shifted remaining.";
 }
+
 
 // --- UI Slot Handlers ---
 
@@ -345,7 +341,8 @@ void Visions::editGoal(int goalIndex) {
     connect(dialog, &Insertt::goalSet, this, [this, goalIndex](const GoalData &newData){
         onGoalSet(goalIndex, newData); // When dialog returns, update this slot
     });
-    dialog->exec();
+    int result = dialog->exec();
+    qDebug() << "Dialog result: " << result;
     delete dialog;
 }
 
@@ -531,12 +528,29 @@ QStackedWidget* Visions::getStackedWidget(int index) {
 // --- Navigation methods ---
 void Visions::on_toolButton_clicked()
 {
-    profile *p = new profile(this);
+    // Assuming you have access to the logged-in user's ID and Email in your Visions class
+    // You must retrieve these from where they were stored (e.g., from login success, QSettings, or passed to Visions).
+    int userId = 0; // Replace with actual user ID
+    QString userEmail = ""; // Replace with actual user email
+
+    // If Visions received user data from LoginWindow or HomeWindow:
+    // userId = this->m_loggedInUserId; // Example of accessing a member variable
+    // userEmail = this->m_loggedInUserEmail; // Example of accessing a member variable
+
+    // If you need to retrieve from QSettings (as you did in loginWindow):
+    QSettings settings("ItsDrishya", "LoginSystem");
+    userId = settings.value("user_id").toInt();
+    userEmail = settings.value("email").toString();
+
+
+    profile *p = new profile(userId, userEmail, this);
     p->setWindowFlags(Qt::Popup);
     QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
     p->move(globalPos);
     p->show();
+
 }
+
 
 void Visions::openHome()
 {

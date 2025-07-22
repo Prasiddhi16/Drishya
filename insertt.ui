@@ -7,14 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>296</height>
+    <height>305</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 219);</string>
+   <string notr="true">background-color: rgb(255, 255, 219);
+color: rgb(0, 0, 0);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3" rowstretch="5,0,0" columnstretch="0,0">
    <property name="topMargin">
@@ -127,8 +128,8 @@
      <property name="styleSheet">
       <string notr="true">font: 600 14pt &quot;Segoe UI&quot;;
 background-color: rgb(221, 193, 255);
-radius:6px
-</string>
+radius:6px;
+color: rgb(0, 0, 0);</string>
      </property>
      <property name="title">
       <string>Vision</string>
@@ -160,7 +161,7 @@ radius:6px
          <string notr="true"/>
         </property>
         <property name="text">
-         <string>Income required:</string>
+         <string>Target amount:</string>
         </property>
        </widget>
       </item>

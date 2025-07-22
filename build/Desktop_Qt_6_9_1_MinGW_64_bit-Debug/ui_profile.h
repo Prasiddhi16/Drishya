@@ -36,7 +36,7 @@ public:
     QWidget *page;
     QVBoxLayout *verticalLayout;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label_2;
+    QLabel *hello;
     QGridLayout *gridLayout_2;
     QToolButton *toolButton_1;
     QSpacerItem *horizontalSpacer;
@@ -67,27 +67,22 @@ public:
     QSpacerItem *horizontalSpacer_6;
     QWidget *page_2;
     QGridLayout *gridLayout_8;
-    QLabel *label_20;
-    QLabel *label_18;
-    QLabel *label_15;
+    QLabel *aboutuser;
+    QLabel *emailuser;
     QLabel *label_14;
-    QLabel *label_19;
     QGridLayout *gridLayout_12;
     QLabel *label_26;
     QToolButton *backButton_1;
-    QLabel *label_21;
-    QLabel *label_13;
-    QLabel *label_25;
+    QLabel *label_15;
     QSpacerItem *verticalSpacer_3;
+    QLabel *label_20;
+    QLabel *dobuser;
+    QSpacerItem *verticalSpacer_4;
     QWidget *page_3;
     QGridLayout *gridLayout_9;
-    QSpacerItem *verticalSpacer_2;
     QFormLayout *formLayout_2;
     QLabel *label_17;
     QToolButton *backButton_2;
-    QGridLayout *gridLayout_13;
-    QLineEdit *user;
-    QLabel *label_4;
     QFormLayout *formLayout;
     QLabel *label_10;
     QLabel *label_9;
@@ -96,34 +91,39 @@ public:
     QLineEdit *new_pass;
     QLabel *label_12;
     QLineEdit *confirm_pass;
-    QSpacerItem *horizontalSpacer_7;
-    QSpacerItem *verticalSpacer;
     QPushButton *saveChanges;
     QSpacerItem *horizontalSpacer_8;
+    QSpacerItem *horizontalSpacer_7;
+    QSpacerItem *verticalSpacer;
+    QSpacerItem *verticalSpacer_2;
+    QGridLayout *gridLayout_13;
+    QLineEdit *user;
+    QLabel *label_4;
     QWidget *page_4;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout_10;
     QToolButton *backButton_3;
     QLabel *label_5;
+    QLabel *label;
     QWidget *page_5;
-    QPlainTextEdit *plainTextEdit;
-    QLabel *label_22;
+    QPlainTextEdit *reviewbox;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_11;
     QToolButton *backButton_4;
     QLabel *label_8;
-    QPushButton *pushButton;
+    QPushButton *revbutton;
 
     void setupUi(QDialog *profile)
     {
         if (profile->objectName().isEmpty())
             profile->setObjectName("profile");
-        profile->resize(392, 424);
+        profile->resize(403, 452);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(profile->sizePolicy().hasHeightForWidth());
         profile->setSizePolicy(sizePolicy);
+        profile->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);"));
         gridLayout_7 = new QGridLayout(profile);
         gridLayout_7->setObjectName("gridLayout_7");
         widget = new QWidget(profile);
@@ -150,15 +150,17 @@ public:
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName("verticalLayout_3");
-        label_2 = new QLabel(page);
-        label_2->setObjectName("label_2");
+        hello = new QLabel(page);
+        hello->setObjectName("hello");
         QSizePolicy sizePolicy2(QSizePolicy::Policy::Ignored, QSizePolicy::Policy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
-        label_2->setSizePolicy(sizePolicy2);
+        sizePolicy2.setHeightForWidth(hello->sizePolicy().hasHeightForWidth());
+        hello->setSizePolicy(sizePolicy2);
+        hello->setStyleSheet(QString::fromUtf8("font: 700 22pt \"Segoe UI\";\n"
+"qproperty-alignment: AlignCenter;"));
 
-        verticalLayout_3->addWidget(label_2);
+        verticalLayout_3->addWidget(hello);
 
 
         verticalLayout->addLayout(verticalLayout_3);
@@ -407,30 +409,29 @@ public:
         page_2->setObjectName("page_2");
         gridLayout_8 = new QGridLayout(page_2);
         gridLayout_8->setObjectName("gridLayout_8");
-        label_20 = new QLabel(page_2);
-        label_20->setObjectName("label_20");
+        aboutuser = new QLabel(page_2);
+        aboutuser->setObjectName("aboutuser");
+        aboutuser->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 6px;               \n"
+"    background-color: #ffffff;  "));
 
-        gridLayout_8->addWidget(label_20, 8, 0, 1, 2);
+        gridLayout_8->addWidget(aboutuser, 5, 0, 1, 2);
 
-        label_18 = new QLabel(page_2);
-        label_18->setObjectName("label_18");
+        emailuser = new QLabel(page_2);
+        emailuser->setObjectName("emailuser");
+        emailuser->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 6px;               \n"
+"    background-color: #ffffff;  "));
 
-        gridLayout_8->addWidget(label_18, 12, 0, 1, 2);
-
-        label_15 = new QLabel(page_2);
-        label_15->setObjectName("label_15");
-
-        gridLayout_8->addWidget(label_15, 6, 0, 1, 2);
+        gridLayout_8->addWidget(emailuser, 7, 0, 1, 2);
 
         label_14 = new QLabel(page_2);
         label_14->setObjectName("label_14");
+        label_14->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout_8->addWidget(label_14, 4, 0, 1, 2);
-
-        label_19 = new QLabel(page_2);
-        label_19->setObjectName("label_19");
-
-        gridLayout_8->addWidget(label_19, 5, 0, 1, 2);
 
         gridLayout_12 = new QGridLayout();
         gridLayout_12->setObjectName("gridLayout_12");
@@ -441,40 +442,58 @@ public:
 
         backButton_1 = new QToolButton(page_2);
         backButton_1->setObjectName("backButton_1");
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(backButton_1->sizePolicy().hasHeightForWidth());
+        backButton_1->setSizePolicy(sizePolicy5);
+        backButton_1->setStyleSheet(QString::fromUtf8("\n"
+"    border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
 
         gridLayout_12->addWidget(backButton_1, 0, 0, 1, 1);
 
 
         gridLayout_8->addLayout(gridLayout_12, 2, 0, 1, 2);
 
-        label_21 = new QLabel(page_2);
-        label_21->setObjectName("label_21");
+        label_15 = new QLabel(page_2);
+        label_15->setObjectName("label_15");
+        label_15->setStyleSheet(QString::fromUtf8(""));
 
-        gridLayout_8->addWidget(label_21, 10, 0, 1, 2);
-
-        label_13 = new QLabel(page_2);
-        label_13->setObjectName("label_13");
-
-        gridLayout_8->addWidget(label_13, 7, 0, 1, 2);
-
-        label_25 = new QLabel(page_2);
-        label_25->setObjectName("label_25");
-
-        gridLayout_8->addWidget(label_25, 11, 0, 1, 2);
+        gridLayout_8->addWidget(label_15, 6, 0, 1, 2);
 
         verticalSpacer_3 = new QSpacerItem(20, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
 
         gridLayout_8->addItem(verticalSpacer_3, 3, 0, 1, 1);
+
+        label_20 = new QLabel(page_2);
+        label_20->setObjectName("label_20");
+        label_20->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout_8->addWidget(label_20, 8, 0, 1, 2);
+
+        dobuser = new QLabel(page_2);
+        dobuser->setObjectName("dobuser");
+        dobuser->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 6px;               \n"
+"    background-color: #ffffff;  "));
+
+        gridLayout_8->addWidget(dobuser, 10, 0, 1, 2);
+
+        verticalSpacer_4 = new QSpacerItem(20, 20, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Ignored);
+
+        gridLayout_8->addItem(verticalSpacer_4, 11, 0, 1, 1);
 
         stackedWidget->addWidget(page_2);
         page_3 = new QWidget();
         page_3->setObjectName("page_3");
         gridLayout_9 = new QGridLayout(page_3);
         gridLayout_9->setObjectName("gridLayout_9");
-        verticalSpacer_2 = new QSpacerItem(20, 28, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Maximum);
-
-        gridLayout_9->addItem(verticalSpacer_2, 2, 0, 1, 1);
-
         formLayout_2 = new QFormLayout();
         formLayout_2->setObjectName("formLayout_2");
         label_17 = new QLabel(page_3);
@@ -484,30 +503,22 @@ public:
 
         backButton_2 = new QToolButton(page_3);
         backButton_2->setObjectName("backButton_2");
-        sizePolicy1.setHeightForWidth(backButton_2->sizePolicy().hasHeightForWidth());
-        backButton_2->setSizePolicy(sizePolicy1);
+        sizePolicy5.setHeightForWidth(backButton_2->sizePolicy().hasHeightForWidth());
+        backButton_2->setSizePolicy(sizePolicy5);
         backButton_2->setMinimumSize(QSize(0, 0));
         backButton_2->setMaximumSize(QSize(16777215, 16777215));
+        backButton_2->setStyleSheet(QString::fromUtf8("\n"
+"    border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
 
         formLayout_2->setWidget(0, QFormLayout::ItemRole::LabelRole, backButton_2);
 
 
         gridLayout_9->addLayout(formLayout_2, 1, 0, 1, 2);
-
-        gridLayout_13 = new QGridLayout();
-        gridLayout_13->setObjectName("gridLayout_13");
-        user = new QLineEdit(page_3);
-        user->setObjectName("user");
-
-        gridLayout_13->addWidget(user, 1, 0, 1, 1);
-
-        label_4 = new QLabel(page_3);
-        label_4->setObjectName("label_4");
-
-        gridLayout_13->addWidget(label_4, 0, 0, 1, 1);
-
-
-        gridLayout_9->addLayout(gridLayout_13, 3, 0, 1, 2);
 
         formLayout = new QFormLayout();
         formLayout->setObjectName("formLayout");
@@ -523,6 +534,10 @@ public:
 
         current_pass = new QLineEdit(page_3);
         current_pass->setObjectName("current_pass");
+        current_pass->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 2px;               \n"
+"    background-color: #ffffff;  "));
 
         formLayout->setWidget(1, QFormLayout::ItemRole::FieldRole, current_pass);
 
@@ -533,6 +548,10 @@ public:
 
         new_pass = new QLineEdit(page_3);
         new_pass->setObjectName("new_pass");
+        new_pass->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 2px;               \n"
+"    background-color: #ffffff;  "));
 
         formLayout->setWidget(2, QFormLayout::ItemRole::FieldRole, new_pass);
 
@@ -543,11 +562,30 @@ public:
 
         confirm_pass = new QLineEdit(page_3);
         confirm_pass->setObjectName("confirm_pass");
+        confirm_pass->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 2px;               \n"
+"    background-color: #ffffff;  "));
 
         formLayout->setWidget(3, QFormLayout::ItemRole::FieldRole, confirm_pass);
 
 
         gridLayout_9->addLayout(formLayout, 7, 0, 2, 2);
+
+        saveChanges = new QPushButton(page_3);
+        saveChanges->setObjectName("saveChanges");
+        saveChanges->setStyleSheet(QString::fromUtf8("background-color: rgb(161, 149, 175);\n"
+"  \n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+""));
+
+        gridLayout_9->addWidget(saveChanges, 10, 1, 1, 1);
+
+        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        gridLayout_9->addItem(horizontalSpacer_8, 4, 0, 1, 1);
 
         horizontalSpacer_7 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
@@ -557,30 +595,51 @@ public:
 
         gridLayout_9->addItem(verticalSpacer, 9, 1, 1, 1);
 
-        saveChanges = new QPushButton(page_3);
-        saveChanges->setObjectName("saveChanges");
+        verticalSpacer_2 = new QSpacerItem(20, 28, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Maximum);
 
-        gridLayout_9->addWidget(saveChanges, 10, 1, 1, 1);
+        gridLayout_9->addItem(verticalSpacer_2, 2, 0, 1, 1);
 
-        horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+        gridLayout_13 = new QGridLayout();
+        gridLayout_13->setObjectName("gridLayout_13");
+        user = new QLineEdit(page_3);
+        user->setObjectName("user");
+        user->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 2px;               \n"
+"    background-color: #ffffff;  "));
 
-        gridLayout_9->addItem(horizontalSpacer_8, 4, 0, 1, 1);
+        gridLayout_13->addWidget(user, 1, 0, 1, 1);
+
+        label_4 = new QLabel(page_3);
+        label_4->setObjectName("label_4");
+
+        gridLayout_13->addWidget(label_4, 0, 0, 1, 1);
+
+
+        gridLayout_9->addLayout(gridLayout_13, 3, 0, 1, 2);
 
         stackedWidget->addWidget(page_3);
         page_4 = new QWidget();
         page_4->setObjectName("page_4");
         gridLayoutWidget = new QWidget(page_4);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
-        gridLayoutWidget->setGeometry(QRect(0, 10, 371, 35));
+        gridLayoutWidget->setGeometry(QRect(0, 10, 351, 40));
         gridLayout_10 = new QGridLayout(gridLayoutWidget);
         gridLayout_10->setObjectName("gridLayout_10");
         gridLayout_10->setContentsMargins(0, 0, 0, 0);
         backButton_3 = new QToolButton(gridLayoutWidget);
         backButton_3->setObjectName("backButton_3");
-        sizePolicy1.setHeightForWidth(backButton_3->sizePolicy().hasHeightForWidth());
-        backButton_3->setSizePolicy(sizePolicy1);
+        sizePolicy5.setHeightForWidth(backButton_3->sizePolicy().hasHeightForWidth());
+        backButton_3->setSizePolicy(sizePolicy5);
         backButton_3->setMinimumSize(QSize(0, 0));
         backButton_3->setMaximumSize(QSize(16777215, 16777215));
+        backButton_3->setStyleSheet(QString::fromUtf8("\n"
+"    border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
 
         gridLayout_10->addWidget(backButton_3, 0, 0, 1, 1);
 
@@ -589,23 +648,36 @@ public:
 
         gridLayout_10->addWidget(label_5, 0, 1, 1, 1);
 
+        label = new QLabel(page_4);
+        label->setObjectName("label");
+        label->setGeometry(QRect(0, 65, 371, 341));
         stackedWidget->addWidget(page_4);
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
-        plainTextEdit = new QPlainTextEdit(page_5);
-        plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(0, 70, 371, 251));
-        label_22 = new QLabel(page_5);
-        label_22->setObjectName("label_22");
-        label_22->setGeometry(QRect(310, 390, 61, 31));
+        reviewbox = new QPlainTextEdit(page_5);
+        reviewbox->setObjectName("reviewbox");
+        reviewbox->setGeometry(QRect(0, 70, 361, 281));
+        reviewbox->setStyleSheet(QString::fromUtf8("border: 2px solid #000000; \n"
+"    border-radius: 8px;        \n"
+"    padding: 2px;               \n"
+"    background-color: #ffffff;  "));
         gridLayoutWidget_2 = new QWidget(page_5);
         gridLayoutWidget_2->setObjectName("gridLayoutWidget_2");
-        gridLayoutWidget_2->setGeometry(QRect(0, 10, 371, 35));
+        gridLayoutWidget_2->setGeometry(QRect(0, 10, 351, 40));
         gridLayout_11 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_11->setObjectName("gridLayout_11");
         gridLayout_11->setContentsMargins(0, 0, 0, 0);
         backButton_4 = new QToolButton(gridLayoutWidget_2);
         backButton_4->setObjectName("backButton_4");
+        sizePolicy5.setHeightForWidth(backButton_4->sizePolicy().hasHeightForWidth());
+        backButton_4->setSizePolicy(sizePolicy5);
+        backButton_4->setStyleSheet(QString::fromUtf8("\n"
+"    border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
 
         gridLayout_11->addWidget(backButton_4, 0, 0, 1, 1);
 
@@ -614,9 +686,15 @@ public:
 
         gridLayout_11->addWidget(label_8, 0, 1, 1, 1);
 
-        pushButton = new QPushButton(page_5);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(270, 330, 101, 41));
+        revbutton = new QPushButton(page_5);
+        revbutton->setObjectName("revbutton");
+        revbutton->setGeometry(QRect(260, 360, 101, 31));
+        revbutton->setStyleSheet(QString::fromUtf8("background-color: rgb(161, 149, 175);\n"
+"  \n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+""));
         stackedWidget->addWidget(page_5);
 
         verticalLayout_2->addWidget(stackedWidget);
@@ -636,7 +714,7 @@ public:
     void retranslateUi(QDialog *profile)
     {
         profile->setWindowTitle(QCoreApplication::translate("profile", "Dialog", nullptr));
-        label_2->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">HELLO USERNAME!!</p></body></html>", nullptr));
+        hello->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\">HELLO,!!</span></p></body></html>", nullptr));
         toolButton_1->setText(QCoreApplication::translate("profile", "...", nullptr));
         about->setText(QCoreApplication::translate("profile", "...", nullptr));
         about_2->setText(QCoreApplication::translate("profile", "<html><head/><body><p>About your profile</p></body></html>", nullptr));
@@ -653,30 +731,28 @@ public:
         label_6->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Switch account</p></body></html>", nullptr));
         toolButton_6->setText(QCoreApplication::translate("profile", "...", nullptr));
         label_7->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Log out</p></body></html>", nullptr));
-        label_20->setText(QCoreApplication::translate("profile", "Date joined", nullptr));
-        label_18->setText(QString());
-        label_15->setText(QCoreApplication::translate("profile", "Email", nullptr));
+        aboutuser->setText(QString());
+        emailuser->setText(QString());
         label_14->setText(QCoreApplication::translate("profile", "Username:", nullptr));
-        label_19->setText(QString());
-        label_26->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">About You</p></body></html>", nullptr));
+        label_26->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\">About You</span></p></body></html>", nullptr));
         backButton_1->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_21->setText(QString());
-        label_13->setText(QString());
-        label_25->setText(QCoreApplication::translate("profile", "TextLabel", nullptr));
-        label_17->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">Edit Your Profile</p></body></html>", nullptr));
+        label_15->setText(QCoreApplication::translate("profile", "Email:", nullptr));
+        label_20->setText(QCoreApplication::translate("profile", "Date of birth:", nullptr));
+        dobuser->setText(QString());
+        label_17->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\">Edit Your Profile</span></p></body></html>", nullptr));
         backButton_2->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_4->setText(QCoreApplication::translate("profile", "Username", nullptr));
-        label_10->setText(QCoreApplication::translate("profile", "Password", nullptr));
-        label_9->setText(QCoreApplication::translate("profile", "Current Password", nullptr));
-        label_11->setText(QCoreApplication::translate("profile", "New Password", nullptr));
-        label_12->setText(QCoreApplication::translate("profile", "Confirm Password", nullptr));
+        label_10->setText(QCoreApplication::translate("profile", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Password</span></p></body></html>", nullptr));
+        label_9->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Current Password:</p></body></html>", nullptr));
+        label_11->setText(QCoreApplication::translate("profile", "New Password:", nullptr));
+        label_12->setText(QCoreApplication::translate("profile", "Confirm Password:", nullptr));
         saveChanges->setText(QCoreApplication::translate("profile", "Save Changes", nullptr));
+        label_4->setText(QCoreApplication::translate("profile", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Username</span></p></body></html>", nullptr));
         backButton_3->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_5->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">Privacy Policy</p></body></html>", nullptr));
-        label_22->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">Send</p></body></html>", nullptr));
+        label_5->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\">Privacy Policy</span></p></body></html>", nullptr));
+        label->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Your privacy is our priority. All personal</p><p>and financial information you provide is</p><p>stored securely and used solely to deliver,</p><p>improve your experience with our finance</p><p>tracking app. We do not sell or share your </p><p>data with third parties. Your information </p><p>is encrypted and handled in accordance to </p><p>industry best practices to ensure </p><p>confidentiality and security.</p><p><br/></p><p><br/></p></body></html>", nullptr));
         backButton_4->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_8->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\">Review/Report an issue</p></body></html>", nullptr));
-        pushButton->setText(QCoreApplication::translate("profile", "Save", nullptr));
+        label_8->setText(QCoreApplication::translate("profile", "<html><head/><body><p align=\"center\"><span style=\" font-size:22pt; font-weight:700;\">Review</span></p></body></html>", nullptr));
+        revbutton->setText(QCoreApplication::translate("profile", "Send\342\236\241", nullptr));
     } // retranslateUi
 
 };
