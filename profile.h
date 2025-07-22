@@ -12,7 +12,7 @@ class profile : public QDialog
     Q_OBJECT
 
 public:
-    explicit profile(QWidget *parent = nullptr);
+    explicit profile(QString name, QString email, int userId, QWidget *parent = nullptr);
     ~profile();
 
 private slots:

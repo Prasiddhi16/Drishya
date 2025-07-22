@@ -1,12 +1,12 @@
 #include "visions.h"
 #include "ui_visions.h"
-#include "insertt.h"
+#include "insertt.h" // Assuming this is your dialog for adding/editing goals
 #include "profile.h"
 #include "homewindow.h"
 #include "analysiswindow.h"
 #include "RecordWindow.h"
 #include "review.h"
-#include"Help.h"
+#include "Help.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QFrame>
@@ -23,7 +23,8 @@
 #include <QStackedWidget>
 #include <QScrollArea>
 #include <QUuid> // For generating unique IDs
-
+#include <QDir>
+#include <QCoreApplication>
 
 Visions::Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
@@ -51,7 +52,7 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
         new QPushButton("🏠 Home"),
         new QPushButton("➕ Add Records"),
         new QPushButton("📈 Analytics"),
-        new QPushButton("🎯 Goals"),
+        new QPushButton("🎯 Goals"), // This is the button for the current Visions window
         new QPushButton("📋 Review"),
         new QPushButton("❓ Help")
     };
@@ -66,9 +67,9 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
     connect(buttons[0], &QPushButton::clicked, this, &Visions::openHome);
     connect(buttons[1], &QPushButton::clicked, this, &Visions::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &Visions::openAnalytics);
-    //connect(buttons[3], &QPushButton::clicked, this, &Visions::openvisions); // Ensure "Goals" button opens this window
+    // buttons[3] ("Goals") already points to this window, no connection needed here to re-open itself
     connect(buttons[4], &QPushButton::clicked, this, &Visions::openreview);
-    connect(buttons[5], &QPushButton::clicked, this, &Visions::openhelp); // Assuming Help/Logout button closes this window
+    connect(buttons[5], &QPushButton::clicked, this, &Visions::openhelp);
 
     mainLayout->addWidget(navPanel);
     mainLayout->addWidget(ui->centralwidget); // Use existing .ui layout
@@ -169,14 +170,19 @@ void Visions::createGoalsTable() {
 
 // Load goals for the current user
 void Visions::loadGoals() {
-    // Clear in-memory list first
+    qDebug() << "Entering loadGoals()...";
+    // Clear in-memory list first by resetting all elements to empty
     for (int i = 0; i < goalDataList.size(); ++i) {
         goalDataList[i] = GoalData(); // Reset all to empty
+        goalDataList[i].slotIndex = i + 1; // Assign correct slot index
     }
 
     QSqlQuery query(db); // Associate query with our db member variable
+    // Order by a specific column to ensure consistent loading into slots
+    // You might want to add an explicit 'slot_order' column to your DB
+    // or sort by goal_id if you want a stable order.
     query.prepare("SELECT goal_id, goal_name, required_amount, downpayment, time_limit "
-                  "FROM goals WHERE user_id = :userId ORDER BY goal_id ASC"); // Order by goal_id or a slot index if you add one
+                  "FROM goals WHERE user_id = :userId ORDER BY goal_name ASC"); // Ordered for consistent loading
     query.bindValue(":userId", currentUserId);
 
     if (!query.exec()) {
@@ -185,7 +191,7 @@ void Visions::loadGoals() {
     }
 
     int currentSlot = 0;
-    while (query.next() && currentSlot < 6) {
+    while (query.next() && currentSlot < goalDataList.size()) { // Use goalDataList.size() for clarity
         GoalData data;
         data.id = query.value("goal_id").toString();
         data.name = query.value("goal_name").toString();
@@ -194,7 +200,7 @@ void Visions::loadGoals() {
         data.duration = query.value("time_limit").toInt();
         data.slotIndex = currentSlot + 1; // Assign slot index based on load order
 
-        goalDataList[currentSlot] = data;
+        goalDataList[currentSlot] = data; // Place loaded data into the current slot
         currentSlot++;
     }
 
@@ -202,26 +208,26 @@ void Visions::loadGoals() {
     for (int i = 0; i < goalDataList.size(); ++i) {
         updateGoalUI(i + 1, goalDataList[i]);
     }
+    qDebug() << "Goals loaded and UI updated. Exiting loadGoals().";
 }
 
 // Save or Update a single goal
 void Visions::saveGoal(const GoalData &data) {
+    qDebug() << "Entering saveGoal() for ID:" << data.id;
     if (!db.isOpen()) {
         qWarning() << "Database not open for saving goal!";
+        QMessageBox::critical(this, "Database Error", "Database not open for saving goal.");
         return;
     }
 
     QSqlQuery query(db); // Associate query with our db member variable
-
-    // If data.id is empty, it's a new goal, generate a UUID
-    QString actualGoalId = data.id.isEmpty() ? QUuid::createUuid().toString(QUuid::WithoutBraces) : data.id;
 
     // INSERT OR REPLACE works if goal_id is PRIMARY KEY
     query.prepare("INSERT OR REPLACE INTO goals "
                   "(goal_id, user_id, goal_name, required_amount, downpayment, time_limit) "
                   "VALUES (:goal_id, :user_id, :goal_name, :required_amount, :downpayment, :time_limit)");
 
-    query.bindValue(":goal_id", actualGoalId);
+    query.bindValue(":goal_id", data.id); // Use the ID from the data struct
     query.bindValue(":user_id", currentUserId); // Save with current user's ID
     query.bindValue(":goal_name", data.name);
     query.bindValue(":required_amount", data.incomeRequired);
@@ -230,74 +236,73 @@ void Visions::saveGoal(const GoalData &data) {
 
     if (!query.exec()) {
         qWarning() << "Failed to save/update goal:" << query.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to save/update goal.");
     } else {
-        qDebug() << "Goal saved/updated successfully for user" << currentUserId << ":" << data.name;
-        // If it was a new goal, update the GoalData object in goalDataList with the new actualGoalId
-        // This is important for future edits/deletes to reference the correct ID.
-        // You'll need to find the GoalData in goalDataList by its slotIndex and update its ID if it was new.
-        // This might be better handled directly in onGoalSet.
+        qDebug() << "Goal saved/updated successfully for user" << currentUserId << ":" << data.name << "ID:" << data.id;
+        // After saving, reload all goals to ensure UI is consistent, especially for new goals getting IDs
+        loadGoals(); // This will also update the specific slot in UI
     }
+    qDebug() << "Exiting saveGoal().";
 }
 
+// CORRECTED deleteGoal function
 void Visions::deleteGoal(int goalIndex) {
-    if (goalIndex < 1 || goalIndex > 6) return;
+    qDebug() << "DEBUG: Entering deleteGoal for goalIndex:" << goalIndex;
+
+
     if (!db.isOpen()) {
         qWarning() << "Database not open for deleting goal!";
+        QMessageBox::critical(this, "Database Error", "Database not open for deleting goal.");
         return;
     }
 
-    QString goalIdToDelete = goalDataList[goalIndex - 1].id;
+    const int index = goalIndex - 1; // Convert to 0-based index for QList
+    QString goalIdToDelete = goalDataList[index].id;
 
     if (goalIdToDelete.isEmpty()) {
-        qDebug() << "No goal in slot" << goalIndex << "to delete.";
-        return; // Nothing to delete from DB if slot is already empty
+        qDebug() << "DEBUG: No goal in slot" << goalIndex << "to delete. UI already clear or never had a goal.";
+        // Ensure the UI for this slot is indeed cleared.
+        updateGoalUI(goalIndex, GoalData());
+        return;
     }
 
-    QSqlQuery deleteQuery(db); // Associate query with our db member variable
+    // ⭐ ADDED CONFIRMATION DIALOG HERE
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirm Deletion",
+                                  QString("Are you sure you want to delete the goal '%1'? This action cannot be undone.").arg(goalDataList[index].name),
+                                  QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::No) {
+        qDebug() << "DEBUG: Deletion cancelled by user for goal at index:" << goalIndex;
+        return; // User cancelled, do nothing
+    }
+
+    // If user confirmed, proceed with database deletion
+    QSqlQuery deleteQuery(db);
     deleteQuery.prepare("DELETE FROM goals WHERE goal_id = :id AND user_id = :userId");
     deleteQuery.bindValue(":id", goalIdToDelete);
     deleteQuery.bindValue(":userId", currentUserId);
 
     if (!deleteQuery.exec()) {
-        qWarning() << "Failed to delete goal from DB:" << deleteQuery.lastError().text();
+        qWarning() << "DEBUG: Failed to delete goal from DB:" << deleteQuery.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to delete goal from the database.");
     } else {
-        qDebug() << "Goal" << goalIdToDelete << "deleted from DB.";
+        qDebug() << "DEBUG: Goal" << goalIdToDelete << "deleted from DB successfully.";
+        // ⭐ THE SINGLE SUCCESS MESSAGE BOX
+        QMessageBox::information(this, "Goal Deleted", "Goal has been successfully deleted.");
+
+        // ⭐ THE FIX REMAINS: Don't removeAt, just reset the GoalData object in memory
+        // This preserves the list size and mapping to UI slots.
+        goalDataList[index] = GoalData(); // Set the goal data at this index to an empty state
+        goalDataList[index].slotIndex = goalIndex; // Keep the correct slot index
+
+        // After deletion, reload all goals to ensure the in-memory list and UI are in sync
+        // This will naturally fill any empty slots from the database if your load order allows it
+        // or simply update the cleared slot to its placeholder.
+        loadGoals(); // This will trigger updateGoalUI for all slots.
     }
 
-    // Step 1: Clear the goal from the in-memory list (removes goals at this slot)
-    goalDataList[goalIndex - 1] = GoalData();
-
-    // Step 2: Shift remaining goals in the in-memory list(fills the gap created by the deletion)
-
-    for (int i = goalIndex - 1; i < goalDataList.size() - 1; ++i) {
-        goalDataList[i] = goalDataList[i+1]; // Copy data from the next slot to the current one
-        goalDataList[i].slotIndex = i + 1; // Update slot index after shifting
-    }
-    // Clear the very last slot (it now contains a duplicate or old data from the shifted list)
-    goalDataList[goalDataList.size() - 1] = GoalData();
-
-    // Step 3: Update all UI elements based on the shifted goalDataList
-    for (int i = 0; i < goalDataList.size(); ++i) {
-        updateGoalUI(i + 1, goalDataList[i]);
-    }
-
-    // Step 4: Re-sync the database to reflect the new order (more efficient approach)
-    // Delete all current user's goals from DB, then re-insert the compacted list.
-    // This is still a "delete all and re-insert" but scoped per user and only after a deletion.
-    QSqlQuery clearUserGoalsQuery(db);
-    clearUserGoalsQuery.prepare("DELETE FROM goals WHERE user_id = :userId");
-    clearUserGoalsQuery.bindValue(":userId", currentUserId);
-    if (!clearUserGoalsQuery.exec()) {
-        qWarning() << "Failed to clear user's goals table for re-sync:" << clearUserGoalsQuery.lastError().text();
-        return;
-    }
-
-    for (int i = 0; i < goalDataList.size(); ++i) {
-        if (!goalDataList[i].isEmpty()) { // Only save non-empty goals
-            saveGoal(goalDataList[i]); // Save the goal with its (potentially new) ID
-        }
-    }
-    qDebug() << "Database re-synced after deletion and shift.";
+    qDebug() << "DEBUG: Exiting deleteGoal for goalIndex:" << goalIndex;
 }
 
 // --- UI Slot Handlers ---
@@ -311,11 +316,11 @@ void Visions::onAddButtonClicked() {
 
     Insertt *dialog = new Insertt(this);
     // Pass an empty GoalData to indicate it's a new goal
-    dialog->setGoalData(GoalData());
+    dialog->setGoalData(GoalData()); // Default constructor creates an empty GoalData
 
     // Use a lambda to capture 'slot' and pass it to onGoalSet
     connect(dialog, &Insertt::goalSet, this, [this, slot](const GoalData &data){
-        onGoalSet(slot, data);
+        onGoalSet(slot, data); // This 'slot' is the target for the new goal
     });
     dialog->exec();
     delete dialog; // Clean up the dialog after it closes
@@ -333,14 +338,14 @@ void Visions::on_edit6_clicked() { editGoal(6); }
 void Visions::editGoal(int goalIndex) {
     if (goalIndex < 1 || goalIndex > 6) return;
 
-    GoalData currentData = goalDataList[goalIndex - 1];
+    GoalData currentData = goalDataList[goalIndex - 1]; // Get the data for the selected slot
     if (currentData.isEmpty()) {
         QMessageBox::information(this, "No Goal", "There is no goal in this slot to edit. Use 'Add' instead.");
         return;
     }
 
     Insertt *dialog = new Insertt(this);
-    dialog->setGoalData(currentData); // Pass existing data to the dialog
+    dialog->setGoalData(currentData); // Pass existing data to the dialog for editing
 
     connect(dialog, &Insertt::goalSet, this, [this, goalIndex](const GoalData &newData){
         onGoalSet(goalIndex, newData); // When dialog returns, update this slot
@@ -352,26 +357,38 @@ void Visions::editGoal(int goalIndex) {
 
 // A generic slot to handle goal data from any button (Add or Edit)
 void Visions::onGoalSet(int goalIndex, const GoalData &data) {
-    if (goalIndex < 1 || goalIndex > 6) return;
+    if (goalIndex < 1 || goalIndex > 6) {
+        qWarning() << "Invalid goal index passed to onGoalSet:" << goalIndex;
+        return;
+    }
 
     GoalData updatedData = data; // Make a mutable copy of the data from the dialog
 
+    // If it's an existing goal being edited, ensure its original ID is maintained.
+    // If it's a new goal (i.e., data.id from dialog is empty AND the slot in goalDataList was empty),
+    // then generate a new UUID.
     if (!goalDataList[goalIndex - 1].id.isEmpty()) {
         updatedData.id = goalDataList[goalIndex - 1].id; // Keep existing ID for edits
-    } else if (updatedData.id.isEmpty()) { // Only generate new UUID if both are empty
+    } else if (updatedData.id.isEmpty()) { // Only generate new UUID if both are empty (new goal)
         updatedData.id = QUuid::createUuid().toString(QUuid::WithoutBraces);
     }
-    updatedData.slotIndex = goalIndex; // Assign slot index
+    updatedData.slotIndex = goalIndex; // Assign slot index for internal tracking
 
-    goalDataList[goalIndex - 1] = updatedData; // Update the in-memory list
-    updateGoalUI(goalIndex, updatedData);     // Update the UI for this slot
-    saveGoal(updatedData);                    // Save/update to the database
+    // Update the in-memory list first (this is important before saving to DB)
+    goalDataList[goalIndex - 1] = updatedData;
+
+    // Save/update to the database. The saveGoal function will then call loadGoals()
+    // which will refresh the entire UI to reflect the updated state from the DB.
+    saveGoal(updatedData);
 }
 
 // UI Update Helpers
 void Visions::updateGoalUI(int goalIndex, const GoalData &data)
 {
-    if (goalIndex < 1 || goalIndex > 6) return;
+    if (goalIndex < 1 || goalIndex > 6) {
+        qWarning() << "Invalid goal index for updateGoalUI:" << goalIndex;
+        return;
+    }
 
     QLabel* goalNameLabel = getGoalNameLabel(goalIndex);
     QLabel* incomeLabel = getIncomeLabel(goalIndex);
@@ -396,15 +413,18 @@ void Visions::updateGoalUI(int goalIndex, const GoalData &data)
     default: break;
     }
 
-
     if (!goalNameLabel || !incomeLabel || !downpaymentLabel || !remainingLabel || !monthLabel || !progressBar || !stackedWidget || !addButton || !editButton || !deleteButton) {
-        qWarning() << "Failed to get UI elements for goal index:" << goalIndex;
+        qWarning() << "Failed to get all UI elements for goal index:" << goalIndex;
         return;
     }
 
     if (data.isEmpty()) { // Display placeholder for empty slots
         stackedWidget->setCurrentIndex(0); // Show placeholder page
         progressBar->setVisible(false);
+        // Ensure buttons are correctly visible/hidden for empty slots
+        addButton->setVisible(true);
+        editButton->setVisible(false);
+        deleteButton->setVisible(false);
 
     } else { // Display actual goal data
         stackedWidget->setCurrentIndex(1); // Show data display page
@@ -424,9 +444,13 @@ void Visions::updateGoalUI(int goalIndex, const GoalData &data)
         double progress = (data.incomeRequired == 0) ? 0 : (data.downpayment / data.incomeRequired) * 100.0;
         progressBar->setValue(static_cast<int>(progress));
         progressBar->setVisible(true);
-
+        // Ensure buttons are correctly visible/hidden for filled slots
+        addButton->setVisible(false);
+        editButton->setVisible(true);
+        deleteButton->setVisible(true);
     }
 }
+
 // Helper to clear UI elements for a given slot (useful when a goal is deleted)
 void Visions::clearGoalUI(int goalIndex) {
     updateGoalUI(goalIndex, GoalData()); // Pass an empty GoalData to show placeholder
@@ -528,10 +552,11 @@ QStackedWidget* Visions::getStackedWidget(int index) {
     }
 }
 
+
 // --- Navigation methods ---
 void Visions::on_toolButton_clicked()
 {
-    profile *p = new profile(this);
+    profile *p = new profile(currentUserName, currentUserEmail, currentUserId, this); // Pass user info
     p->setWindowFlags(Qt::Popup);
     QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
     p->move(globalPos);
@@ -571,4 +596,3 @@ void Visions::openhelp()
     help_win->show();
     this->hide();
 }
-

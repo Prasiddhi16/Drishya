@@ -9,7 +9,8 @@
 #include<QFileInfo>
 
 
-profile::profile(QWidget *parent)
+profile::profile(QString name, QString email, int userId, QWidget *parent)
+
     : QDialog(parent), ui(new Ui::profile)
 {
     ui->setupUi(this);

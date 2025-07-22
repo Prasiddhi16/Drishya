@@ -54,6 +54,7 @@ Help::Help(QString username, QString email, int userId, QWidget *parent)
     QVBoxLayout *navLayout = new QVBoxLayout(navContainer);
     navLayout->setContentsMargins(10, 20, 10, 10);
     navLayout->setSpacing(10);
+    navLayout->setAlignment(Qt::AlignTop);
 
     QFont navFont("Segoe UI", 10, QFont::Bold);
 

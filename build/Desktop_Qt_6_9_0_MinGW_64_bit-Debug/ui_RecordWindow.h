@@ -92,7 +92,7 @@ public:
         editIncomeButton = new QPushButton(tab);
         editIncomeButton->setObjectName("editIncomeButton");
         editIncomeButton->setGeometry(QRect(260, 190, 231, 41));
-        editIncomeButton->setStyleSheet(QString::fromUtf8("   font-size:30px;\n"
+        editIncomeButton->setStyleSheet(QString::fromUtf8("   font-size:25px;\n"
 "    background-color: white;  \n"
 "    color: green;            \n"
 "    border: 1px solid #CCCCCC;\n"
@@ -197,12 +197,13 @@ public:
 ""));
         editExpenseButton = new QPushButton(tab_2);
         editExpenseButton->setObjectName("editExpenseButton");
-        editExpenseButton->setGeometry(QRect(250, 210, 231, 31));
-        editExpenseButton->setStyleSheet(QString::fromUtf8("   font-size:30px;\n"
+        editExpenseButton->setGeometry(QRect(250, 190, 231, 41));
+        editExpenseButton->setStyleSheet(QString::fromUtf8("   font-size:25px;\n"
 "    background-color: white;  \n"
 "    color: green;            \n"
 "    border: 1px solid #CCCCCC;\n"
-"    font-family: \"Consolas\";"));
+"    font-family: \"Consolas\";\n"
+""));
         label_8 = new QLabel(tab_2);
         label_8->setObjectName("label_8");
         label_8->setGeometry(QRect(10, 20, 151, 31));
@@ -314,7 +315,7 @@ public:
 
         retranslateUi(RecordWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(RecordWindow);
@@ -356,7 +357,7 @@ public:
         label_7->setText(QCoreApplication::translate("RecordWindow", " Category  :", nullptr));
         expenseAmount->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("RecordWindow", "Expenses", nullptr));
-        label_14->setText(QCoreApplication::translate("RecordWindow", "ID/Reference No:", nullptr));
+        label_14->setText(QCoreApplication::translate("RecordWindow", "ID/Bill No:", nullptr));
         referenceNumber->setText(QString());
         label_16->setText(QCoreApplication::translate("RecordWindow", "Review  :", nullptr));
         review->setText(QString());

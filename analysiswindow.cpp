@@ -116,9 +116,9 @@ qDebug() << "analysisWindow initialized with userId:" << currentUserId;    // re
 
 
     double percentChange = (lastWeekTotal != 0.0) ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100.0 : 0.0;
-    QString arrow = percentChange > 0 ? "↑" : percentChange < 0 ? "↓" : "→";
-    QString labelText = QString("%1 %2%").arg(arrow).arg(qAbs(percentChange), 0, 'f', 2);
-    QString color = percentChange > 0 ? "#ffdddd" : percentChange < 0 ? "#ddffdd" : "#f0f0f0";
+    QString arrow = percentChange > 0 ? "↑" : percentChange < 0 ? "↓" : "→";double displayPercent = qMin(qAbs(percentChange), 100.0);
+    QString labelText = QString("%1 %2%").arg(arrow).arg(displayPercent, 0, 'f', 2);
+    QString color = percentChange > 0 ? "#ffbbbb" : percentChange < 0 ? "#cceecc" : "#f0f0f0";
 
     ui->percentage_label->setText(labelText);
     ui->percentage_label->setStyleSheet(QString("background-color: %1; border-radius: 8px; padding: 4px;").arg(color));
