@@ -5,6 +5,7 @@
 #include "RecordWindow.h"
 #include "visions.h"
 #include "review.h"
+#include"Help.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -65,11 +66,12 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
     }
+    connect(buttons[0], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
     connect(buttons[1], &QPushButton::clicked, this, &homeWindow::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &homeWindow::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &homeWindow::openvisions);
     connect(buttons[4], &QPushButton::clicked, this, &homeWindow::openreview);
-    connect(buttons[5], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
+    connect(buttons[5], &QPushButton::clicked, this, &homeWindow::openhelp);
 
     // Content
     QWidget *contentWidget = new QWidget;
@@ -327,3 +329,9 @@ void homeWindow::openreview()
     review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
 }
+void homeWindow::openhelp()
+{
+    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
+}
+

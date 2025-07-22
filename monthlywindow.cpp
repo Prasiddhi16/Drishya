@@ -26,7 +26,6 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
 
-    // ✅ Use relative path to access the DB
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
 
@@ -62,22 +61,26 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
         Qt::darkGreen, Qt::darkMagenta, Qt::darkCyan, Qt::gray
     };
 
-    int i = 0;
-    while (query.next()) {
-        QString monthNum = query.value(0).toString();  // e.g. '01'
-        int value = query.value(1).toInt();
+    QStringList monthNames = {
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
 
-        QStringList monthNames = {
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-        };
+    int i = 0;
+    qreal maxExpense = 0.0;
+
+    while (query.next()) {
+        QString monthNum = query.value(0).toString();
+        qreal value = query.value(1).toDouble();
+
+        maxExpense = qMax(maxExpense, value);  // 📌 Track max expense
+
         QString shortMonth = monthNames.value(monthNum.toInt() - 1);
         monthLabels << shortMonth;
 
         QBarSet *bar = new QBarSet(shortMonth);
-        for (int j = 0; j <= i; ++j) {
+        for (int j = 0; j <= i; ++j)
             bar->append(j == i ? value : 0);
-        }
 
         bar->setColor(barColors[i % barColors.size()]);
         series->append(bar);
@@ -95,7 +98,9 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     series->attachAxis(axisX);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, 500000);  // Adjust or calculate dynamically if needed
+    axisY->setLabelFormat("Rs. %d");
+    axisY->setTitleText("Total Expense");
+    axisY->setRange(0, maxExpense + 1000);  // ✅ Dynamic max + buffer
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

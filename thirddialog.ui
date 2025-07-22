@@ -51,7 +51,7 @@ color:white;
    <property name="styleSheet">
     <string notr="true">color:white;
 
-font: 13pt &quot;Arial&quot;;</string>
+font: 13pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>Resident</string>
@@ -62,12 +62,14 @@ font: 13pt &quot;Arial&quot;;</string>
     <rect>
      <x>170</x>
      <y>180</y>
-     <width>121</width>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:white;</string>
+    <string notr="true">color:white;
+
+font: 13pt &quot;Segoe UI&quot;;</string>
    </property>
    <property name="text">
     <string>Non-Resisdent</string>

@@ -62,7 +62,8 @@ template <> constexpr inline auto Visions::qt_create_metaobjectdata<qt_meta_tag_
         "openHome",
         "openRecordWindow",
         "openAnalytics",
-        "openreview"
+        "openreview",
+        "openhelp"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -106,6 +107,8 @@ template <> constexpr inline auto Visions::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'openreview'
         QtMocHelpers::SlotData<void()>(23, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openhelp'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -148,6 +151,7 @@ void Visions::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 16: _t->openRecordWindow(); break;
         case 17: _t->openAnalytics(); break;
         case 18: _t->openreview(); break;
+        case 19: _t->openhelp(); break;
         default: ;
         }
     }
@@ -172,14 +176,14 @@ int Visions::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 19)
+        if (_id < 20)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 19;
+        _id -= 20;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 19)
+        if (_id < 20)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 19;
+        _id -= 20;
     }
     return _id;
 }

@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../checkkk/expert.h"
+#include "../../../expert.h"
 #include <QtCore/qmetatype.h>
 #include <QtCore/QList>
 
@@ -40,8 +40,9 @@ template <> constexpr inline auto expert::qt_create_metaobjectdata<qt_meta_tag_Z
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "expert",
-        "connectToDatabase",
+        "windowClosed",
         "",
+        "connectToDatabase",
         "loadExpertReviewPage",
         "generateInsight",
         "QList<double>",
@@ -52,16 +53,18 @@ template <> constexpr inline auto expert::qt_create_metaobjectdata<qt_meta_tag_Z
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'windowClosed'
+        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Slot 'connectToDatabase'
-        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'loadExpertReviewPage'
         QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'loadExpertReviewPage'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'generateInsight'
-        QtMocHelpers::SlotData<QString(const QVector<double> &, double, const QString &)>(4, 2, QMC::AccessPrivate, QMetaType::QString, {{
-            { 0x80000000 | 5, 6 }, { QMetaType::Double, 7 }, { QMetaType::QString, 8 },
+        QtMocHelpers::SlotData<QString(const QVector<double> &, double, const QString &)>(5, 2, QMC::AccessPrivate, QMetaType::QString, {{
+            { 0x80000000 | 6, 7 }, { QMetaType::Double, 8 }, { QMetaType::QString, 9 },
         }}),
         // Slot 'clearChartLayout'
-        QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -85,18 +88,19 @@ void expert::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     auto *_t = static_cast<expert *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->connectToDatabase(); break;
-        case 1: _t->loadExpertReviewPage(); break;
-        case 2: { QString _r = _t->generateInsight((*reinterpret_cast< std::add_pointer_t<QList<double>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
+        case 0: _t->windowClosed(); break;
+        case 1: _t->connectToDatabase(); break;
+        case 2: _t->loadExpertReviewPage(); break;
+        case 3: { QString _r = _t->generateInsight((*reinterpret_cast< std::add_pointer_t<QList<double>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<double>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->clearChartLayout(); break;
+        case 4: _t->clearChartLayout(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 2:
+        case 3:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -104,6 +108,10 @@ void expert::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             }
             break;
         }
+    }
+    if (_c == QMetaObject::IndexOfMethod) {
+        if (QtMocHelpers::indexOfMethod<void (expert::*)()>(_a, &expert::windowClosed, 0))
+            return;
     }
 }
 
@@ -126,15 +134,21 @@ int expert::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
+}
+
+// SIGNAL 0
+void expert::windowClosed()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

@@ -25,17 +25,15 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
 
-    qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
+    qDebug() << "Resolved DB Path in weeklyWindow:" << dbPath;
 
     if (!db.open()) {
         qDebug() << "❌ DB Open Error:" << db.lastError().text();
         return;
     }
-
 
     QSqlQuery query(db);
     QString sql = R"(SELECT strftime('%Y-%m', timestamp) AS month_id,
@@ -59,11 +57,14 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     QMap<QString, int> monthWeekCounter;
     QStringList weekLabels;
     int displayIndex = 0;
+    qreal maxExpense = 0.0;
 
     while (query.next()) {
         QString month = query.value(0).toString();
         QString weekRaw = query.value(1).toString();
         double total = query.value(2).toDouble();
+
+        maxExpense = qMax(maxExpense, total);
 
         if (!monthWeekCounter.contains(month)) {
             monthWeekCounter[month] = 1;
@@ -95,7 +96,9 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     series->attachAxis(axisX);
 
     QValueAxis *axisY = new QValueAxis();
-    axisY->setRange(0, 50000);
+    axisY->setLabelFormat("Rs. %d");
+    axisY->setTitleText("Total Expense");
+    axisY->setRange(0, maxExpense + 1000);  // 📈 Dynamic extension
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

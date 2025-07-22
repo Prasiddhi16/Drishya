@@ -27,8 +27,13 @@ private slots:
      void showExpenseTable();
     void on_toolButton_clicked();
     void openHome();
+<<<<<<< HEAD
      void openAnalytics();
 
+=======
+    void openAnalytics();
+    void openhelp();
+>>>>>>> 11f19fdf5421baf26340ecb01e142b5c4395368f
     void openvisions();
     void openreview();
 

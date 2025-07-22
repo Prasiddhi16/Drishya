@@ -21,6 +21,11 @@ private:
     QString m_userEmail;  // 👤 Stores user's email
     QString m_userName;   // 🪪 Optional: Extracted or set name
     int m_userId;         // 🔐 Unique user identifier
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
+signals:
+    void windowClosed();
 
 private slots:
     void connectToDatabase();        // Initializes MainConnection

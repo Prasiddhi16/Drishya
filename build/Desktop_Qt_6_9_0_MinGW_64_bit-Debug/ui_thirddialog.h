@@ -53,11 +53,13 @@ public:
         rr->setGeometry(QRect(170, 120, 100, 20));
         rr->setStyleSheet(QString::fromUtf8("color:white;\n"
 "\n"
-"font: 13pt \"Arial\";"));
+"font: 13pt \"Segoe UI\";"));
         rnr = new QRadioButton(thirdDialog);
         rnr->setObjectName("rnr");
-        rnr->setGeometry(QRect(170, 180, 121, 20));
-        rnr->setStyleSheet(QString::fromUtf8("color:white;"));
+        rnr->setGeometry(QRect(170, 180, 171, 20));
+        rnr->setStyleSheet(QString::fromUtf8("color:white;\n"
+"\n"
+"font: 13pt \"Segoe UI\";"));
         horizontalLayoutWidget = new QWidget(thirdDialog);
         horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
         horizontalLayoutWidget->setGeometry(QRect(60, 260, 381, 32));

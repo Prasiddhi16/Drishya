@@ -37,15 +37,17 @@ private slots:
 
    void openvisions();
    void openRecordWindow();
+   void openhelp();
+   void on_pushButton_clicked();
 
-private:
+   private:
 
      class compare *Compare;
     class expert *Expert;
       //expense *Expense;
    class graph*Graph;
     class taxDialog *Taxdialog;
-  //  historypage *History;
+   class  historypage *History;
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;

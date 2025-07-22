@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../checkkk/analysiswindow.h"
+#include "../../../analysiswindow.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -48,7 +48,8 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         "openRecordWindow",
         "openvisions",
         "openreview",
-        "updateWeeklyExpense"
+        "updateWeeklyExpense",
+        "openhelp"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -70,6 +71,8 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'updateWeeklyExpense'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openhelp'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -102,6 +105,7 @@ void analysisWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 6: _t->openvisions(); break;
         case 7: _t->openreview(); break;
         case 8: _t->updateWeeklyExpense(); break;
+        case 9: _t->openhelp(); break;
         default: ;
         }
     }
@@ -127,14 +131,14 @@ int analysisWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

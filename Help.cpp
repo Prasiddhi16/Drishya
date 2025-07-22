@@ -1,5 +1,10 @@
 #include "Help.h"
 #include "ui_Help.h"
+#include "RecordWindow.h"
+#include "visions.h"
+#include "review.h"
+#include "homewindow.h"
+#include "analysiswindow.h"
 
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -7,34 +12,60 @@
 #include <QWidget>
 #include <QFont>
 #include <QSizePolicy>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
 
-Help::Help(QWidget *parent)
+// Member variables for user context
+Help::Help(QString username, QString email, int userId, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Help)
+    , currentUserName(username)
+    , currentUserEmail(email)
+    , currentUserId(userId)
 {
     ui->setupUi(this);
 
-    // Create a container widget for nav bar
+    // ✅ Persistent DB connection
+    QString connectionName = "qt_sql_shared_connection";
+    QSqlDatabase db;
+
+    if (QSqlDatabase::contains(connectionName)) {
+        db = QSqlDatabase::database(connectionName);
+    } else {
+        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+        QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+        db.setDatabaseName(dbPath);
+        qDebug() << "Resolved DB Path in Help:" << dbPath;
+    }
+
+    if (!db.open()) {
+        qDebug() << "❌ Failed to open database in Help:" << db.lastError().text();
+        return;
+    }
+
+    // 🧭 Navigation setup
     QWidget *navContainer = new QWidget(this);
     navContainer->setStyleSheet("background-color: white;");
     navContainer->setFixedWidth(170);
 
-    // Create vertical layout for navContainer
     QVBoxLayout *navLayout = new QVBoxLayout(navContainer);
-    navLayout->setContentsMargins(0, 0, 0, 0);
+    navLayout->setContentsMargins(10, 20, 10, 10);
     navLayout->setSpacing(10);
 
     QFont navFont("Segoe UI", 10, QFont::Bold);
 
     QPushButton *dashboardBtn = new QPushButton("🏠 Home");
-    QPushButton *recordBtn    = new QPushButton("📊 Add Record");
-    QPushButton *analyticsBtn = new QPushButton("📝 Analytics");
-    QPushButton *goalsBtn     = new QPushButton("📅 Goals");
-    QPushButton *reviewyBtn   = new QPushButton("🗓 Review");
+    QPushButton *recordBtn    = new QPushButton("➕ Add Record");
+    QPushButton *analyticsBtn = new QPushButton("📈 Analytics");
+    QPushButton *goalsBtn     = new QPushButton("🎯 Goals");
+    QPushButton *reviewyBtn   = new QPushButton("📋 Review");
     QPushButton *helpBtn      = new QPushButton("❓ Help");
 
     QList<QPushButton*> buttons = { dashboardBtn, recordBtn, analyticsBtn, goalsBtn, reviewyBtn, helpBtn };
-    navLayout->addSpacing(10);
+
     for (auto btn : buttons) {
         btn->setFont(navFont);
         btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
@@ -43,7 +74,6 @@ Help::Help(QWidget *parent)
             "color: #2c3e50;"
             "background-color: #e0e0e0;"
             "border: none;"
-            "border-radius: 5px;"
             "padding: 8px;"
             );
         navLayout->addWidget(btn);
@@ -51,29 +81,59 @@ Help::Help(QWidget *parent)
 
     navLayout->addStretch();  // Push buttons to top
 
-    // Now, insert navContainer and your UI's centralwidget side by side
+    // ✅ Connect navigation actions
+    connect(dashboardBtn, &QPushButton::clicked, this, &Help::openHome);
+    connect(recordBtn,    &QPushButton::clicked, this, &Help::openRecordWindow);
+    connect(analyticsBtn, &QPushButton::clicked, this, &Help::openAnalytics);
+    connect(goalsBtn,     &QPushButton::clicked, this, &Help::openvisions);
+    connect(reviewyBtn,   &QPushButton::clicked, this, &Help::openreview);
 
-    // Create a main horizontal layout container widget
+    // Layout main content
     QWidget *mainWidget = new QWidget(this);
     QHBoxLayout *mainLayout = new QHBoxLayout(mainWidget);
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mainLayout->setSpacing(0);
 
-    // Take the original central widget from UI
     QWidget *originalCentral = ui->centralwidget;
-
-    // Important: remove original central widget from QMainWindow before reparenting
     ui->centralwidget->setParent(nullptr);
 
-    // Add navContainer and original centralwidget side by side
-    mainLayout->addWidget(navContainer, 1);        // navigation bar takes 1 part
-    mainLayout->addWidget(originalCentral, 4);     // rest for content
+    mainLayout->addWidget(navContainer, 1);
+    mainLayout->addWidget(originalCentral, 4);
 
-    // Set mainWidget as new central widget
     setCentralWidget(mainWidget);
 }
 
-Help::~Help()
-{
- delete ui;
+Help::~Help() {
+    delete ui;
+}
+
+// ✅ Navigation slot implementations
+void Help::openHome() {
+    home_window = new homeWindow(currentUserName, currentUserEmail, currentUserId, this);
+    home_window->show();
+    this->hide();
+}
+
+void Help::openRecordWindow() {
+    RecordWindow *record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
+    record_window->show();
+    this->hide();
+}
+
+void Help::openAnalytics() {
+    analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
+    analysis_window->show();
+    this->hide();
+}
+
+void Help::openvisions() {
+    Visions *vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
+    vision_win->show();
+    this->hide();
+}
+
+void Help::openreview() {
+    review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
+    review_win->show();
+    this->hide();
 }

@@ -23,6 +23,7 @@ private slots:
     void openRecordWindow();
     void openvisions();
     void openreview();
+    void openhelp();
 
 private:
     Ui::homeWindow *ui;

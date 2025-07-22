@@ -22,10 +22,10 @@ private slots:
 
 private:
     Ui_taxDialog *ui;
-    secDialog *secdialog;
-    QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
+    bool isMarried; // NEW: stores marital status
+    secDialog *secdialog;
 };
 
 #endif // TAXDIALOG_H

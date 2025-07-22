@@ -18,6 +18,7 @@
 #include "visions.h"
 #include "analysiswindow.h"
 #include "homewindow.h"
+#include"Help.h"
 #include "expert.h"
 #include "compare.h"
 #include "graph.h"
@@ -54,6 +55,70 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
         QMessageBox::critical(this, "Database Error", "Failed to open database.");
         return;
     }
+    QDate currentDate = QDate::currentDate();
+    int currentMonth = currentDate.month();
+    int currentYear = currentDate.year();
+
+    double monthlyIncome = 0.0, monthlyExpense = 0.0;
+
+    QSqlQuery query(db);
+    query.prepare("SELECT income_amount, expense_amount, timestamp FROM records WHERE user_id = :userId");
+    query.bindValue(":userId", currentUserId);
+
+    if (!query.exec()) {
+        qDebug() << "Query Error:" << query.lastError().text();
+    } else {
+        while (query.next()) {
+            double income = query.value(0).toDouble();  // First column: income_amount
+            double expense = query.value(1).toDouble(); // Second column: expense_amount
+            QDateTime dt = QDateTime::fromString(query.value(2).toString(), "yyyy-MM-dd hh:mm:ss");
+            QDate recordDate = dt.date();
+
+            if (recordDate.month() == currentMonth && recordDate.year() == currentYear) {
+                monthlyIncome += income;
+                monthlyExpense += expense;
+            }
+        }
+    }
+
+    double monthlySavings = monthlyIncome - monthlyExpense;
+    int expensePercent = (monthlyIncome > 0) ? static_cast<int>((monthlyExpense / monthlyIncome) * 100) : 0;
+    int savingsPercent = 100 - expensePercent;
+
+    QString progressStyle = R"(
+    QProgressBar {
+        border: 2px solid #cfcfcf;
+        border-radius: 8px;
+        text-align: center;
+        height: 20px;
+        color: white;
+    }
+    QProgressBar::chunk {
+        background-color:#B7B7B7;
+        width: 10px;
+    }
+)";
+
+    ui->progressExpenseBar->setStyleSheet(progressStyle);
+    ui->progressSavingsBar->setStyleSheet(progressStyle);
+
+    // Progress bars
+    ui->progressExpenseBar->setMinimum(0);
+    ui->progressExpenseBar->setMaximum(100);
+    ui->progressExpenseBar->setValue(expensePercent);
+
+  //  ui->progressExpenseBar->setStyleSheet("QProgressBar::chunk { background-color: #e74c3c; }");
+
+    ui->progressSavingsBar->setMinimum(0);
+    ui->progressSavingsBar->setMaximum(100);
+    ui->progressSavingsBar->setValue(savingsPercent);
+  //  ui->progressSavingsBar->setStyleSheet("QProgressBar::chunk { background-color: #27ae60; }");
+
+    ui->labelSavings->setText(" 🏦 Savings this month: Rs. " + QString::number(monthlySavings));
+
+    ui->labelExpense->setText(" 💵 Expense this month: Rs. " + QString::number(monthlyExpense));
+
+
 
     // Navigation panel
     QFrame *navPanel = new QFrame;
@@ -88,7 +153,7 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     connect(buttons[1], &QPushButton::clicked, this, &review::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &review::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &review::openvisions);
-
+    connect(buttons[5], &QPushButton::clicked, this, &review::openhelp);
     QWidget *mainContainer = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainContainer);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -107,13 +172,22 @@ void review::on_btnCompare_clicked()
 {
     hide();
     Compare = new compare(currentUserEmail, currentUserId, this);
+    connect(Compare, &compare::windowClosed, this, &review::showMaximized);
+
+    this->hide();
     Compare->show();
+
+
 }
 
 void review::on_btnExper_clicked()
 {
     hide();
     Expert = new expert(currentUserEmail, currentUserId, this);
+    connect(Expert, &expert::windowClosed, this, &review::showMaximized);
+
+    this->hide();
+
     Expert->show();
 }
 
@@ -126,6 +200,7 @@ void review::on_btnExpense_clicked()
 void review::on_btnTax_clicked()
 {
     Taxdialog = new taxDialog(currentUserEmail, currentUserId, this);
+
     Taxdialog->show();
 }
 
@@ -156,6 +231,7 @@ void review::openAnalytics()
     analysis_window->show();
     this->hide();
 }
+<<<<<<< HEAD
 void review::on_toolButton_clicked()
 {
 
@@ -177,3 +253,21 @@ void review::on_toolButton_clicked()
 
 
 
+=======
+void review::openhelp()
+{
+    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    help_win->show();
+}
+
+void review::on_pushButton_clicked()
+{
+    History=new historypage(currentUserName, currentUserEmail, currentUserId, this);
+    connect(History, &historypage::windowClosed, this, &review::showMaximized);
+
+    History->show();
+    this->hide();
+
+}
+
+>>>>>>> 11f19fdf5421baf26340ecb01e142b5c4395368f

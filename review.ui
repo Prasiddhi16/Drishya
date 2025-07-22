@@ -43,10 +43,10 @@ color:White;
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>100</y>
+      <x>-60</x>
+      <y>180</y>
       <width>1081</width>
-      <height>551</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -74,7 +74,7 @@ color:White;
       </widget>
      </item>
      <item row="4" column="0" colspan="2">
-      <widget class="QProgressBar" name="progressBar_2">
+      <widget class="QProgressBar" name="progressExpenseBar">
        <property name="styleSheet">
         <string notr="true">QProgressBar {
     border: 2px solid #cfcfcf;
@@ -111,7 +111,7 @@ QProgressBar::chunk {
       </widget>
      </item>
      <item row="0" column="0" colspan="2" alignment="Qt::AlignmentFlag::AlignHCenter">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="labelExpense">
        <property name="styleSheet">
         <string notr="true">QLabel
 {
@@ -128,7 +128,7 @@ alignment:centre;
       </widget>
      </item>
      <item row="4" column="2" colspan="2">
-      <widget class="QProgressBar" name="progressBar">
+      <widget class="QProgressBar" name="progressSavingsBar">
        <property name="styleSheet">
         <string notr="true">QProgressBar {
     border: 2px solid #cfcfcf;
@@ -174,7 +174,7 @@ QProgressBar::chunk {
       </spacer>
      </item>
      <item row="0" column="2" colspan="2" alignment="Qt::AlignmentFlag::AlignHCenter">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="labelSavings">
        <property name="styleSheet">
         <string notr="true">QLabel
 {
@@ -223,6 +223,24 @@ color:white;
        </property>
       </widget>
      </item>
+     <item row="5" column="1" colspan="2" alignment="Qt::AlignmentFlag::AlignHCenter">
+      <widget class="QPushButton" name="pushButton">
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(77, 155, 115);
+color:white;
+border-radius:15px;</string>
+       </property>
+       <property name="text">
+        <string>View History</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QToolButton" name="toolButton">
@@ -266,8 +284,8 @@ color:white;
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="images.qrc"/>
   <include location="res.qrc"/>
+  <include location="images.qrc"/>
  </resources>
  <connections/>
 </ui>
