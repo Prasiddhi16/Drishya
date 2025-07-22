@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../analysiswindow.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -44,6 +45,7 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         "on_pushButton_2_clicked",
         "on_pushButton_3_clicked",
         "on_pushButton_4_clicked",
+        "on_toolButton_clicked",
         "openHome",
         "openRecordWindow",
         "openvisions",
@@ -60,16 +62,18 @@ template <> constexpr inline auto analysisWindow::qt_create_metaobjectdata<qt_me
         QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_pushButton_4_clicked'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openHome'
+        // Slot 'on_toolButton_clicked'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openRecordWindow'
+        // Slot 'openHome'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openvisions'
+        // Slot 'openRecordWindow'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openreview'
+        // Slot 'openvisions'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'updateWeeklyExpense'
+        // Slot 'openreview'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'updateWeeklyExpense'
+        QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -97,11 +101,12 @@ void analysisWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 1: _t->on_pushButton_2_clicked(); break;
         case 2: _t->on_pushButton_3_clicked(); break;
         case 3: _t->on_pushButton_4_clicked(); break;
-        case 4: _t->openHome(); break;
-        case 5: _t->openRecordWindow(); break;
-        case 6: _t->openvisions(); break;
-        case 7: _t->openreview(); break;
-        case 8: _t->updateWeeklyExpense(); break;
+        case 4: _t->on_toolButton_clicked(); break;
+        case 5: _t->openHome(); break;
+        case 6: _t->openRecordWindow(); break;
+        case 7: _t->openvisions(); break;
+        case 8: _t->openreview(); break;
+        case 9: _t->updateWeeklyExpense(); break;
         default: ;
         }
     }
@@ -127,14 +132,14 @@ int analysisWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

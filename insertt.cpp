@@ -20,9 +20,9 @@ Insertt::Insertt(QWidget *parent)
 
     // adding placeholders
     ui->goalNameEdit->setPlaceholderText("");
-    ui->incomeEdit->setPlaceholderText("Currency used is NRs");
-    ui->downpaymentEdit->setPlaceholderText("Currency used is NRs");
-    ui->durationEdit->setPlaceholderText("Time limit should be in months");
+    ui->incomeEdit->setPlaceholderText("Set target amount");
+    ui->downpaymentEdit->setPlaceholderText("Specify initial amount");
+    ui->durationEdit->setPlaceholderText("Enter duration in months");
 
     // adding limitations to what can and cannot be written in form
     QRegularExpression rx("[A-Za-z ]+");
@@ -107,6 +107,13 @@ void Insertt::on_Save_clicked()
 
     // 3. Emit the signal and close the dialog
     emit goalSet(dataToEmit);
-    QMessageBox::information(this, "Goal Set", "Your goal data has been prepared. Saving to database...");
+    QMessageBox::information(this, "Goal Set", "Your goal data has been saved.");
     accept(); // Close the dialog
 }
+
+
+void Insertt::on_cancel_clicked()
+{
+    reject();
+}
+

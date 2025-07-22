@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,6 +42,7 @@ public:
     QLabel *label_3;
     QPushButton *btnCompare;
     QPushButton *btnExper;
+    QToolButton *toolButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -172,10 +174,20 @@ public:
 
         gridLayout->addWidget(btnExper, 10, 1, 2, 1);
 
+        toolButton = new QToolButton(centralwidget);
+        toolButton->setObjectName("toolButton");
+        toolButton->setGeometry(QRect(70, 20, 50, 50));
+        toolButton->setMinimumSize(QSize(50, 50));
+        toolButton->setStyleSheet(QString::fromUtf8("border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
         review->setCentralWidget(centralwidget);
         menubar = new QMenuBar(review);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1119, 17));
+        menubar->setGeometry(QRect(0, 0, 1119, 21));
         review->setMenuBar(menubar);
         statusbar = new QStatusBar(review);
         statusbar->setObjectName("statusbar");
@@ -196,6 +208,7 @@ public:
         label_3->setText(QCoreApplication::translate("review", " \360\237\217\246Monthly Saving:", nullptr));
         btnCompare->setText(QString());
         btnExper->setText(QString());
+        toolButton->setText(QCoreApplication::translate("review", "...", nullptr));
     } // retranslateUi
 
 };

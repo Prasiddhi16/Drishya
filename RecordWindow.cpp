@@ -4,7 +4,12 @@
 #include "visions.h"
 #include "review.h"
 #include "analysiswindow.h"
+<<<<<<< HEAD
+#include "profile.h"
+//#include "Help.h"
+=======
 #include "Help.h"
+>>>>>>> 11f19fdf5421baf26340ecb01e142b5c4395368f
 #include "homewindow.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -44,6 +49,10 @@ RecordWindow::RecordWindow(const QString &userName, const QString &userEmail, in
 )");
      this->showMaximized();
     ui->timestamp->setDateTime(QDateTime::currentDateTime());
+
+     QPixmap pix(":/img/img/profileicon.png");
+     ui->toolButton->setIcon(QIcon(pix));
+     ui->toolButton->setIconSize(ui->toolButton->size());
 
     QString exeDir = QCoreApplication::applicationDirPath();
     QString dbFilePath = QDir(exeDir).absoluteFilePath("../centralized.db");
@@ -484,8 +493,31 @@ void RecordWindow::openreview() {
     review_win->show();
     this->hide();
 }
+<<<<<<< HEAD
+void RecordWindow::on_toolButton_clicked()
+{
+
+    int userId = 0;
+    QString userEmail = "";
+
+    QSettings settings("ItsDrishya", "LoginSystem");
+    userId = settings.value("user_id").toInt();
+    userEmail = settings.value("email").toString();
+
+
+    profile *p = new profile(userId, userEmail, this);
+    p->setWindowFlags(Qt::Popup);
+    QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
+    p->move(globalPos);
+    p->show();
+
+}
+
+
+=======
 void RecordWindow::openhelp()
 {
     Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
     help_win->show();
 }
+>>>>>>> 11f19fdf5421baf26340ecb01e142b5c4395368f

@@ -15,7 +15,6 @@ class Insertt : public QDialog
 public:
     explicit Insertt(QWidget *parent = nullptr);
     ~Insertt();
-
     // Used by Visions to pass existing goal data for editing
     void setGoalData(const GoalData &data);
 
@@ -25,6 +24,8 @@ signals:
 
 private slots:
     void on_Save_clicked(); // This will now handle both new goal submission and edits
+
+    void on_cancel_clicked();
 
 private:
     Ui::Insertt *ui;

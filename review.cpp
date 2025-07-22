@@ -23,6 +23,7 @@
 #include "compare.h"
 #include "graph.h"
 #include "taxDialog.h"
+#include "profile.h"
 
 review::review(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
@@ -33,6 +34,10 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
 {
     ui->setupUi(this);
     this->showMaximized();
+
+    QPixmap pix(":/img/img/profileicon.png");
+    ui->toolButton->setIcon(QIcon(pix));
+    ui->toolButton->setIconSize(ui->toolButton->size());
 
     QString connectionName = "qt_sql_rev_connection";
     if (QSqlDatabase::contains(connectionName)) {
@@ -226,6 +231,29 @@ void review::openAnalytics()
     analysis_window->show();
     this->hide();
 }
+<<<<<<< HEAD
+void review::on_toolButton_clicked()
+{
+
+    int userId = 0;
+    QString userEmail = "";
+
+    QSettings settings("ItsDrishya", "LoginSystem");
+    userId = settings.value("user_id").toInt();
+    userEmail = settings.value("email").toString();
+
+
+    profile *p = new profile(userId, userEmail, this);
+    p->setWindowFlags(Qt::Popup);
+    QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
+    p->move(globalPos);
+    p->show();
+
+}
+
+
+
+=======
 void review::openhelp()
 {
     Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
@@ -242,3 +270,4 @@ void review::on_pushButton_clicked()
 
 }
 
+>>>>>>> 11f19fdf5421baf26340ecb01e142b5c4395368f
