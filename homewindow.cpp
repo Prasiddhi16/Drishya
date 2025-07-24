@@ -66,7 +66,7 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         btn->setStyleSheet("color: #2c3e50; background-color: #e0e0e0; border: none; padding: 8px;");
         navLayout->addWidget(btn);
     }
-    connect(buttons[0], &QPushButton::clicked, this, &homeWindow::logoutAndResetSession);
+
     connect(buttons[1], &QPushButton::clicked, this, &homeWindow::openRecordWindow);
     connect(buttons[2], &QPushButton::clicked, this, &homeWindow::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &homeWindow::openvisions);
@@ -301,16 +301,7 @@ void homeWindow::openAnalytics()
     analysis_window->show();
 }
 
-void homeWindow::logoutAndResetSession()
-{
-    qDebug() << "Logging out via Help button";
-    QSettings settings("YourOrganization", "YourApp");
-    settings.setValue("keepMeLoggedIn", 0);
 
-    login_window = new loginWindow();
-    login_window->show();
-    this->close();
-}
 
 void homeWindow::openRecordWindow()
 {

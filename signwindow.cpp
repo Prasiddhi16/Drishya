@@ -18,6 +18,8 @@ signWindow::signWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lineEdit_3->setPlaceholderText("8 characters and must contain at least 3 integers.");
     ui->lineEdit_4->setPlaceholderText("YYYY-MM-DD");
+    ui->lineEdit_4->setEchoMode(QLineEdit::Normal); // for DOB field
+    ui->lineEdit_5->setEchoMode(QLineEdit::Normal); // for Pet Name field
     QString dbFilePath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     qDebug() << "Resolved DB Path:" << dbFilePath;
 

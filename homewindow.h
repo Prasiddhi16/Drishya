@@ -2,9 +2,12 @@
 #define HOMEWINDOW_H
 
 #include <QMainWindow>
-#include<QLabel>
-#include "analysiswindow.h"
+#include <QLabel>
+
+// Forward declarations
 class loginWindow;
+class analysisWindow;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class homeWindow; }
 QT_END_NAMESPACE
@@ -19,7 +22,7 @@ public:
 
 private slots:
     void openAnalytics();
-    void logoutAndResetSession ();
+
     void openRecordWindow();
     void openvisions();
     void openreview();
@@ -34,8 +37,9 @@ private:
     QLabel *expenseAmount;
     QLabel *savingsAmount;
     QLabel *budgetAmount;
-    analysisWindow *analysis_window;
+
     loginWindow* login_window = nullptr;
+    analysisWindow* analysis_window = nullptr;
 };
 
 #endif // HOMEWINDOW_H

@@ -1,6 +1,5 @@
 #include "revwindow.h"
 #include "ui_revwindow.h"
-
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>

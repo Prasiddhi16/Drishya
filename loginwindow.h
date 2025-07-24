@@ -1,12 +1,12 @@
 #ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
-
 #include <QMainWindow>
 #include <QMessageBox>
-#include<QtSql/QtSql>
-#include"homewindow.h"
+#include <QtSql/QtSql>
 
+// ✅ Forward declare before using
+class homeWindow;
 
 namespace Ui {
 class loginWindow;
@@ -22,19 +22,12 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
-
-
-
-
     void on_pushButton_2_clicked();
-
 
 private:
     Ui::loginWindow *ui;
     QSqlDatabase DBconnection;
-    homeWindow *home_window;
-
+    homeWindow *home_window; // ✅ Use the forward-declared type here
 };
 
 #endif // LOGINWINDOW_H

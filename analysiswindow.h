@@ -6,6 +6,7 @@
 #include "revwindow.h"
 #include "weeklywindow.h"
 #include "monthlywindow.h"
+
 #include "profile.h"
 
 // Forward declaration instead of including homewindow.h
@@ -40,7 +41,8 @@ private:
     Ui::analysisWindow *ui;
      QString currentUserName;
     QString currentUserEmail;
-    int currentUserId;  // ✅ New member variable
+    int currentUserId;
+    // ✅ New member variable
 
 
     homeWindow    *home_window;

@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../profile.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -40,12 +41,18 @@ template <> constexpr inline auto profile::qt_create_metaobjectdata<qt_meta_tag_
     QtMocHelpers::StringRefStorage qt_stringData {
         "profile",
         "on_saveChanges_clicked",
-        ""
+        "",
+        "on_revbutton_clicked",
+        "on_logout_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'on_saveChanges_clicked'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_revbutton_clicked'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_logout_clicked'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -70,6 +77,8 @@ void profile::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->on_saveChanges_clicked(); break;
+        case 1: _t->on_revbutton_clicked(); break;
+        case 2: _t->on_logout_clicked(); break;
         default: ;
         }
     }
@@ -95,14 +104,14 @@ int profile::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 3;
     }
     return _id;
 }

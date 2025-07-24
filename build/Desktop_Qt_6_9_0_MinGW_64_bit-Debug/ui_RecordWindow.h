@@ -13,13 +13,13 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -53,9 +53,9 @@ public:
     QDateTimeEdit *timestamp;
     QLabel *label_12;
     QPushButton *addRecordButton;
-    QFrame *line;
     QLabel *label_2;
     QLabel *label;
+    QToolButton *toolButton;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *RecordWindow)
@@ -285,16 +285,6 @@ public:
 "    \n"
 "    border: 1px solid #CCCCCC;\n"
 "    font-family: \"Consolas\";"));
-        line = new QFrame(centralwidget);
-        line->setObjectName("line");
-        line->setGeometry(QRect(-70, 40, 1601, 2));
-        line->setStyleSheet(QString::fromUtf8("\n"
-"    background-color: #00FFFF;\n"
-"    min-height: 2px;  /* Line thickness */\n"
-"    max-height: 2px;\n"
-"    border: none;"));
-        line->setFrameShape(QFrame::Shape::HLine);
-        line->setFrameShadow(QFrame::Shadow::Sunken);
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(390, 0, 261, 31));
@@ -308,6 +298,21 @@ public:
         label->setMinimumSize(QSize(100, 100));
         label->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/record.png")));
         label->setScaledContents(false);
+        toolButton = new QToolButton(centralwidget);
+        toolButton->setObjectName("toolButton");
+        toolButton->setGeometry(QRect(10, 0, 50, 41));
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Ignored);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(toolButton->sizePolicy().hasHeightForWidth());
+        toolButton->setSizePolicy(sizePolicy1);
+        toolButton->setMinimumSize(QSize(30, 30));
+        toolButton->setStyleSheet(QString::fromUtf8("border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
         RecordWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(RecordWindow);
         statusbar->setObjectName("statusbar");
@@ -365,6 +370,7 @@ public:
         addRecordButton->setText(QCoreApplication::translate("RecordWindow", "Add record", nullptr));
         label_2->setText(QCoreApplication::translate("RecordWindow", "FINANCE RECORD", nullptr));
         label->setText(QString());
+        toolButton->setText(QCoreApplication::translate("RecordWindow", "...", nullptr));
     } // retranslateUi
 
 };

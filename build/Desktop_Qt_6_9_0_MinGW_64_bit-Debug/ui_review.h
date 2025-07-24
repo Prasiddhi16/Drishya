@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -42,6 +43,7 @@ public:
     QPushButton *btnCompare;
     QPushButton *btnExper;
     QPushButton *pushButton;
+    QToolButton *toolButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -182,10 +184,20 @@ public:
 
         gridLayout->addWidget(pushButton, 5, 1, 1, 2, Qt::AlignmentFlag::AlignHCenter);
 
+        toolButton = new QToolButton(centralwidget);
+        toolButton->setObjectName("toolButton");
+        toolButton->setGeometry(QRect(70, 20, 50, 50));
+        toolButton->setMinimumSize(QSize(50, 50));
+        toolButton->setStyleSheet(QString::fromUtf8("border: none;           \n"
+"    padding: 0px;                 \n"
+"    background: transparent;     \n"
+"    border-radius: 16px;  \n"
+"  outline: none;               \n"
+"    "));
         review->setCentralWidget(centralwidget);
         menubar = new QMenuBar(review);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1119, 17));
+        menubar->setGeometry(QRect(0, 0, 1119, 21));
         review->setMenuBar(menubar);
         statusbar = new QStatusBar(review);
         statusbar->setObjectName("statusbar");
@@ -207,6 +219,7 @@ public:
         btnCompare->setText(QString());
         btnExper->setText(QString());
         pushButton->setText(QCoreApplication::translate("review", "View History", nullptr));
+        toolButton->setText(QCoreApplication::translate("review", "...", nullptr));
     } // retranslateUi
 
 };

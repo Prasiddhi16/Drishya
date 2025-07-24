@@ -1,6 +1,7 @@
 #include "profile.h"
 #include "ui_profile.h"
-#include <Qstring>
+#include"loginwindow.h"
+#include <QString>
 #include <QPixmap>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -12,21 +13,15 @@
 #include <QRegularExpression>
 #include <QDebug>
 #include <QTimer> // For potential eye button functionality
+#include <algorithm> // Required for std::count_if
 
-<<<<<<< HEAD
-
-profile::profile(QString name, QString email, int userId, QWidget *parent)
-
-    : QDialog(parent), ui(new Ui::profile)
-=======
 profile::profile(int userId, const QString &userEmail, QWidget *parent)
-    : QDialog(parent), ui(new Ui::profile),
+    : QDialog(parent),
+    ui(new Ui::profile),
     m_userId(userId),
     m_userEmail(userEmail)
->>>>>>> 913c474a76b01873b64989e7d69bfd14da630a6b
 {
     ui->setupUi(this);
-
 
     // Initialize database connection for profile window
     m_db = QSqlDatabase::addDatabase("QSQLITE", "profile_connection");
@@ -59,9 +54,6 @@ profile::profile(int userId, const QString &userEmail, QWidget *parent)
     ui->toolButton_4->setIcon(QIcon(pix4));
     ui->toolButton_4->setIconSize(ui->toolButton_4->size());
 
-    QPixmap pix5(":/img/img/swap.png");
-    ui->toolButton_5->setIcon(QIcon(pix5));
-    ui->toolButton_5->setIconSize(ui->toolButton_5->size());
 
     QPixmap pix6(":/img/img/logout.png");
     ui->toolButton_6->setIcon(QIcon(pix6));
@@ -76,7 +68,6 @@ profile::profile(int userId, const QString &userEmail, QWidget *parent)
     ui->backButton_2->setArrowType(Qt::LeftArrow);
     ui->backButton_3->setArrowType(Qt::LeftArrow);
     ui->backButton_4->setArrowType(Qt::LeftArrow);
-
 
     ui->reviewbox->setPlaceholderText("Your feedback and suggestions are appreciated.Share your feedback, suggestions, or report any issues.\nThank you!");
 
@@ -147,7 +138,7 @@ void profile::loadUserData()
     if (query.exec() && query.next()) {
         // Assuming you have QLabel widgets named label_username_about, label_email_about, label_dob_about
         // on your "About You" page to display these values
-        ui->hello->setText("Hello, "+(query.value("name").toString())+"!");
+        ui->hello->setText("Hello, " + (query.value("name").toString()) + "!");
         ui->aboutuser->setText(query.value("name").toString());
         ui->emailuser->setText(query.value("email").toString());
         ui->dobuser->setText(query.value("dob").toString());
@@ -229,7 +220,7 @@ void profile::on_saveChanges_clicked()
         }
 
         if (newPassword != confirmPassword) {
-            QMessageBox::warning(this, "Mismatch", "The new password doesnot match.");
+            QMessageBox::warning(this, "Mismatch", "The new password does not match.");
             return;
         }
 
@@ -310,4 +301,20 @@ void profile::on_revbutton_clicked()
 {
     QMessageBox::information(this,"Message Received", "Thank you for the feedback!");
 }
+    void profile::on_logout_clicked()
+{
+    qDebug() << "Logging out from Profile window";
+
+    // Disable persistent login
+    QSettings settings("YourOrganization", "YourApp");
+    settings.setValue("keepMeLoggedIn", 0);
+
+    // Show login window
+    login_window = new loginWindow();
+    login_window->show();
+
+    // Close the current profile window
+    this->close();
+}
+
 

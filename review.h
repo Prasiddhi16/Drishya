@@ -7,6 +7,7 @@ class homeWindow;
 #include <expense.h>
 #include <graph.h>
 #include<taxdialog.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class review;
