@@ -1,15 +1,15 @@
 #include "compare.h"
 #include "ui_compare.h"
-#include <QtCharts>      // For QChart, QBarSeries, QBarSet, QBarCategoryAxis, QValueAxis
-#include <QSqlDatabase>  // For QSqlDatabase
-#include <QSqlQuery>     // For QSqlQuery
-#include <QSqlError>     // For QSqlError
-#include <QSqlRecord>    // Potentially useful, though not directly used in this snippet
-#include <QMessageBox>   // For QMessageBox
-#include <algorithm>     // For std::max
-#include <QCoreApplication> // For QCoreApplication::applicationDirPath()
-#include <QDir>          // For QDir
-#include <QDebug>        // For qDebug()
+#include <QtCharts>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlRecord>
+#include <QMessageBox>
+#include <algorithm>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
 
 // Constructor: Initializes the UI and stores the user ID
 compare::compare(const QString &userEmail, int userId, QWidget *parent)

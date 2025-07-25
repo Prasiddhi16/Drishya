@@ -32,7 +32,7 @@ revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
     qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "❌ DB Open Error:" << db.lastError().text();
+        qDebug() << " DB Open Error:" << db.lastError().text();
         return;
     }
 

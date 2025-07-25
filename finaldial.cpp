@@ -21,7 +21,7 @@ finaldial::finaldial(bool isMarried,
 {
     ui->setupUi(this);
 
-    // 🌿 Label styling
+
     ui->Label->setStyleSheet(
         "QLabel {"
         "  font-size: 16px;"
@@ -68,7 +68,7 @@ void finaldial::calculateTax() {
 
     db.close();
 
-    // 💰 Tax logic
+
     double taxRate;
     if (isMarried && employment == "Employed" && isResident)
         taxRate = 0.10;
@@ -98,6 +98,7 @@ void finaldial::calculateTax() {
 
 void finaldial::on_pushButton_clicked() {
     review *review_win = new review(currentUserName, currentUserEmail, userId, this);
+      this->hide();
     review_win->show();
-    this->hide();
+
 }

@@ -12,10 +12,10 @@ class thirdDialog : public QDialog
 
 public:
     explicit thirdDialog(const QString &userEmail,
-                         int userId,
-                         bool isMarried,
-                         const QString &employment,
-                         QWidget *parent = nullptr);
+    int userId,
+    bool isMarried,
+    const QString &employment,
+    QWidget *parent = nullptr);
     ~thirdDialog();
 
 private slots:

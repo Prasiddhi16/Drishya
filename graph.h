@@ -12,8 +12,7 @@ class graph : public QMainWindow
     Q_OBJECT
 
 public:
-    // Modified constructor to accept income, expenses, and saving amounts
-    // This declaration MUST match the definition in graph.cpp
+
     explicit graph(const QString &userEmail,int userId, QWidget *parent = nullptr);
     ~graph();
 

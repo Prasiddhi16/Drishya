@@ -4,8 +4,8 @@
 
 
 #include <QDialog>
-#include <QSqlDatabase> // Required for QSqlDatabase member
-#include <QLineEdit> // Required for setupPasswordEyeToggle
+#include <QSqlDatabase>
+#include <QLineEdit>
 
 namespace Ui {
 class profile;
@@ -32,14 +32,14 @@ private slots:
 
 private:
     Ui::profile *ui;
-    int m_userId;          // Stores the ID of the current user
-    QString m_userEmail;   // Stores the email of the current user (could also store username)
-    QSqlDatabase m_db;     // Member to manage the database connection for this window
+    int m_userId;
+    QString m_userEmail;
+    QSqlDatabase m_db;
  loginWindow* login_window = nullptr;
     // Helper functions
-    void loadUserData();                               // Function to load and display user data
-    QString hashPassword(const QString &password);     // Function to hash passwords
-    void setupPasswordEyeToggle(QLineEdit *lineEdit);  // Function to add the eye icon to password fields
+    void loadUserData();
+    QString hashPassword(const QString &password);
+    void setupPasswordEyeToggle(QLineEdit *lineEdit);
 };
 
 #endif // PROFILE_H

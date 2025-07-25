@@ -37,7 +37,6 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     QPixmap pix(":/img/img/profileicon.png");
     ui->toolButton->setIcon(QIcon(pix));
     ui->toolButton->setIconSize(ui->toolButton->size());
-    // ✅ Ensure persistent database connection
     QString connectionName = "qt_sql_shared_connection";
     QSqlDatabase db;
 
@@ -46,7 +45,6 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     } else {
         db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
 
-        // ✅ Use relative path to db file
         QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
         db.setDatabaseName(dbPath);
 
@@ -59,13 +57,13 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     }
 
 
-    // 👋 Greeting
+    // Greeting
     ui->label_2->setText("👋 Hello, " + currentUserName + "!\nThis is what is going on with your finances:");
     ui->label_2->setWordWrap(true);
     ui->label_2->setAlignment(Qt::AlignCenter);
     ui->label_2->setStyleSheet("font-size: 20px; color: #98FF98; font-weight: bold;");
 
-    // 🧭 Navigation panel
+    // Navigation panel
     QFrame *navPanel = new QFrame;
     navPanel->setFixedWidth(170);
     navPanel->setStyleSheet("background-color: #ffffff;");
@@ -92,7 +90,7 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     connect(buttons[3], &QPushButton::clicked, this, &analysisWindow::openvisions);
     connect(buttons[4], &QPushButton::clicked, this, &analysisWindow::openreview);
     connect(buttons[5], &QPushButton::clicked, this, &analysisWindow::openhelp);
-    // 🧱 Layout setup
+    // Layout setup
     QWidget *centralWidget = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(centralWidget);
     mainLayout->addWidget(navPanel);
@@ -100,14 +98,14 @@ analysisWindow::analysisWindow(QString username, QString email, int userId, QWid
     setCentralWidget(centralWidget);
     this->showMaximized();
 
-    // 🔄 Start expense auto-update
+    // Start expense auto-update
     QTimer *expenseTimer = new QTimer(this);
     connect(expenseTimer, &QTimer::timeout, this, &analysisWindow::updateWeeklyExpense);
     expenseTimer->start(5000);
 qDebug() << "analysisWindow initialized with userId:" << currentUserId;    // refresh every 5 seconds
     updateWeeklyExpense(); // Initial call
 
-    // 📊 Percentage comparison
+    //  Percentage comparison
     double thisWeekTotal = 0.0, lastWeekTotal = 0.0;
     QSqlQuery totalQuery(db);
     totalQuery.prepare("SELECT SUM(expense_amount) FROM records WHERE user_id = :uid AND DATE(timestamp) >= DATE('now', 'weekday 0', '-6 days')");
@@ -124,7 +122,7 @@ qDebug() << "analysisWindow initialized with userId:" << currentUserId;    // re
     double percentChange = (lastWeekTotal != 0.0) ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100.0 : 0.0;
     QString arrow = percentChange > 0 ? "↑" : percentChange < 0 ? "↓" : "→";double displayPercent = qMin(qAbs(percentChange), 100.0);
     QString labelText = QString("%1 %2%").arg(arrow).arg(displayPercent, 0, 'f', 2);
-    QString color = percentChange > 0 ? "#ffbbbb" : percentChange < 0 ? "#cceecc" : "#f0f0f0";
+    QString color = percentChange > 0 ? "#ffbbbb" : percentChange < 0 ? "#cceecc" : "#ffffff";
 
     ui->percentage_label->setText(labelText);
     ui->percentage_label->setStyleSheet(QString("background-color: %1; border-radius: 8px; padding: 4px;").arg(color));

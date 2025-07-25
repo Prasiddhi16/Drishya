@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QLabel>
 
-// Forward declarations
+
 class loginWindow;
 class analysisWindow;
 

@@ -12,8 +12,8 @@
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QDebug>
-#include <QTimer> // For potential eye button functionality
-#include <algorithm> // Required for std::count_if
+#include <QTimer>
+#include <algorithm>
 
 profile::profile(int userId, const QString &userEmail, QWidget *parent)
     : QDialog(parent),

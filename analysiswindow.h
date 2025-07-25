@@ -42,12 +42,11 @@ private:
      QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
-    // ✅ New member variable
+
 
 
     homeWindow    *home_window;
 
-    // Safe with forward declaration
 
     budgetWindow  *budget_window;
     revWindow     *rev_window;

@@ -12,7 +12,7 @@ class compare : public QMainWindow
     Q_OBJECT
 
 public:
-    // Constructor takes userEmail and userId
+
     explicit compare(const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~compare();
 protected:
@@ -23,9 +23,9 @@ signals:
 
 private:
     Ui::compare *ui;
-    int m_userId; // Renamed for clarity, stores the user ID
+    int m_userId;
 
-    void setupChart(); // Private helper function to set up the chart
+    void setupChart();
 };
 
 #endif // COMPARE_H

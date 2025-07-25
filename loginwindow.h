@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QtSql/QtSql>
 
-// ✅ Forward declare before using
+
 class homeWindow;
 
 namespace Ui {

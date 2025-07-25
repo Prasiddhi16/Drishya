@@ -44,7 +44,7 @@ private:
 
     homeWindow* home_window;
 
-    // Dialog function for editing income/expense
+
     bool showEditDialog(const QString& title, const QString& labelText,
                         QString& amount, QString& sourceOrCategory, QString& timestamp);
 };

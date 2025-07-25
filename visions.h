@@ -10,14 +10,11 @@
 
 #include "GoalData.h"
 #include "profile.h"
-// Include headers for UI widgets used in member function declarations
 #include <QProgressBar>
 #include <QStackedWidget>
 #include <QLabel>
-
-// Forward declarations for classes used only as pointers (to avoid circular includes)
 class homeWindow;
-class Insertt; // Declare Insertt class
+class Insertt;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -34,7 +31,7 @@ public:
     ~Visions();
 
 public slots:
-    void onGoalSet(int goalIndex, const GoalData &data); // GoalData is now known
+    void onGoalSet(int goalIndex, const GoalData &data);
 
 private slots:
     void onAddButtonClicked();
@@ -47,7 +44,6 @@ private slots:
     void on_delete_5_clicked();
     void on_delete_6_clicked();
 
-    // New: Edit button slots
     void on_edit1_clicked();
     void on_edit2_clicked();
     void on_edit3_clicked();
@@ -65,7 +61,7 @@ private slots:
 
 private:
     Ui::Visions *ui;
-    QVector<GoalData> goalDataList; // GoalData is now known
+    QVector<GoalData> goalDataList;
     QSqlDatabase db;
     QString currentUserName;
     QString currentUserEmail;
@@ -78,22 +74,18 @@ private:
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
-    void saveGoal(const GoalData &data); // GoalData is now known
+    void saveGoal(const GoalData &data);
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
-
-    // Helper functions for UI updates
-    void updateGoalUI(int goalIndex, const GoalData &data); // GoalData is now known
+    void updateGoalUI(int goalIndex, const GoalData &data);
     void clearGoalUI(int goalIndex);
-
-    // Utility to get UI labels/widgets based on index
     QLabel* getGoalNameLabel(int index);
     QLabel* getIncomeLabel(int index);
     QLabel* getDownpaymentLabel(int index);
     QLabel* getRemainingLabel(int index);
     QLabel* getMonthLabel(int index);
-    QProgressBar* getProgressBar(int index); // QProgressBar is now known
-    QStackedWidget* getStackedWidget(int index); // QStackedWidget is now known
+    QProgressBar* getProgressBar(int index);
+    QStackedWidget* getStackedWidget(int index);
 
     void editGoal(int goalIndex);
 };
