@@ -209,7 +209,7 @@ void review::openHome()
 {
     home_window = new homeWindow(currentUserName, currentUserEmail, currentUserId, this);
     home_window->show();
-    this->hide();
+    this->close();
 }
 
 void review::openRecordWindow()

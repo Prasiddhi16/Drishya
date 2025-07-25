@@ -307,6 +307,7 @@ void homeWindow::openAnalytics()
 {
     analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
     analysis_window->show();
+    this->hide();
 }
 
 
@@ -315,22 +316,30 @@ void homeWindow::openRecordWindow()
 {
     RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
     record_window->show();
+    this->hide();
+
 }
 
 void homeWindow::openvisions()
 {
     Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
     vision_win->show();
+    this->hide();
+
 }
 
 void homeWindow::openreview()
 {
     review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
+    this->hide();
+
 }
 void homeWindow::openhelp()
 {
     Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
     help_win->show();
+    this->hide();
+
 }
 

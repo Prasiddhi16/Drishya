@@ -23,6 +23,7 @@ public:
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::loginWindow *ui;
