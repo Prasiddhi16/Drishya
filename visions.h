@@ -25,6 +25,7 @@ class Visions;
 }
 QT_END_NAMESPACE
 
+const int MAX_GOAL_SLOTS = 6;
 class Visions : public QMainWindow
 {
     Q_OBJECT
@@ -38,23 +39,6 @@ public slots:
 
 private slots:
     void onAddButtonClicked();
-
-    // Delete button slots
-    void on_delete_1_clicked();
-    void on_delete_2_clicked();
-    void on_delete_3_clicked();
-    void on_delete_4_clicked();
-    void on_delete_5_clicked();
-    void on_delete_6_clicked();
-
-    // New: Edit button slots
-    void on_edit1_clicked();
-    void on_edit2_clicked();
-    void on_edit3_clicked();
-    void on_edit4_clicked();
-    void on_edit5_clicked();
-    void on_edit6_clicked();
-
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
@@ -65,7 +49,7 @@ private slots:
 
 private:
     Ui::Visions *ui;
-    QVector<GoalData> goalDataList; // GoalData is now known
+    QVector<GoalData> goalDataList;
     QSqlDatabase db;
     QString currentUserName;
     QString currentUserEmail;
@@ -73,12 +57,27 @@ private:
 
     homeWindow *home_window;
 
+    QList<QLabel*> goalNameLabels;
+    QList<QLabel*> incomeLabels;
+    QList<QLabel*> downpaymentLabels;
+    QList<QLabel*> remainingLabels;
+    QList<QLabel*> monthLabels;
+    QList<QProgressBar*> progressBars;
+    QList<QStackedWidget*> stackedWidgets;
+    QList<QPushButton*> addButtons;
+    QList<QPushButton*> editButtons;
+    QList<QPushButton*> deleteButtons;
+
+    // Add this method to initialize the lists above
+    void setupUIElementLists();
+
     // Database and data management methods
     bool openDatabase();
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
     void saveGoal(const GoalData &data); // GoalData is now known
+    void editGoal(int goalIndex);
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
 
@@ -92,10 +91,10 @@ private:
     QLabel* getDownpaymentLabel(int index);
     QLabel* getRemainingLabel(int index);
     QLabel* getMonthLabel(int index);
-    QProgressBar* getProgressBar(int index); // QProgressBar is now known
-    QStackedWidget* getStackedWidget(int index); // QStackedWidget is now known
+    QProgressBar* getProgressBar(int index);
+    QStackedWidget* getStackedWidget(int index);
 
-    void editGoal(int goalIndex);
+
 };
 
 #endif // VISIONS_H

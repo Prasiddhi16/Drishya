@@ -1,6 +1,6 @@
 #include "visions.h"
 #include "ui_visions.h"
-#include "insertt.h" // Assuming this is your dialog for adding/editing goals
+#include "insertt.h"
 #include "profile.h"
 #include "homewindow.h"
 #include "analysiswindow.h"
@@ -32,11 +32,22 @@
 Visions::Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::Visions),
+    goalDataList(MAX_GOAL_SLOTS),
+    db(QSqlDatabase::addDatabase("QSQLITE", "visions_db_connection")),
     currentUserName(userName),
     currentUserEmail(userEmail),
-    currentUserId(userId) // Initialize user ID
+    currentUserId(userId) // Matches currentUserId's position in .h
 {
     ui->setupUi(this);
+
+    // Call this FIRST to populate your QList<QPushButton*> and other QList<QWidget*> members
+    setupUIElementLists();
+
+    // Initialize slotIndex for each GoalData object
+    for (int i = 0; i < MAX_GOAL_SLOTS; ++i) {
+        goalDataList[i].slotIndex = i + 1;
+    }
+
     this->setStyleSheet("background-color:#131b39;");
     QWidget *central = new QWidget(this);
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
@@ -86,32 +97,26 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
 
     // Initialize with 6 empty GoalData objects
     // This ensures goalDataList has 6 elements corresponding to UI slots
-    goalDataList.resize(6);
+    const int MAX_GOAL_SLOTS = 6;
+
 
     // Connect Add buttons
-    QList<QPushButton*> addButtons;
-    addButtons << ui->add << ui->add_2 << ui->add_3
-               << ui->add_4 << ui->add_5 << ui->add_6;
-
     for(QPushButton* button : addButtons) {
         connect(button, &QPushButton::clicked, this, &Visions::onAddButtonClicked);
     }
 
-    // Connect Delete buttons
-    connect(ui->delete_1, &QPushButton::clicked, this, &Visions::on_delete_1_clicked);
-    connect(ui->delete_2, &QPushButton::clicked, this, &Visions::on_delete_2_clicked);
-    connect(ui->delete_3, &QPushButton::clicked, this, &Visions::on_delete_3_clicked);
-    connect(ui->delete_4, &QPushButton::clicked, this, &Visions::on_delete_4_clicked);
-    connect(ui->delete_5, &QPushButton::clicked, this, &Visions::on_delete_5_clicked);
-    connect(ui->delete_6, &QPushButton::clicked, this, &Visions::on_delete_6_clicked);
 
-    //Connect Edit buttons
-    connect(ui->edit1, &QPushButton::clicked, this, &Visions::on_edit1_clicked);
-    connect(ui->edit2, &QPushButton::clicked, this, &Visions::on_edit2_clicked);
-    connect(ui->edit3, &QPushButton::clicked, this, &Visions::on_edit3_clicked);
-    connect(ui->edit4, &QPushButton::clicked, this, &Visions::on_edit4_clicked);
-    connect(ui->edit5, &QPushButton::clicked, this, &Visions::on_edit5_clicked);
-    connect(ui->edit6, &QPushButton::clicked, this, &Visions::on_edit6_clicked);
+    for (int i = 0; i < MAX_GOAL_SLOTS; ++i) {
+        // Connect delete buttons using a lambda directly to deleteGoal
+        connect(deleteButtons[i], &QPushButton::clicked, this, [this, i]() {
+            deleteGoal(i + 1); // Pass 1-based index
+        });
+
+        // Connect edit buttons using a lambda directly to editGoal
+        connect(editButtons[i], &QPushButton::clicked, this, [this, i]() {
+            editGoal(i + 1); // Pass 1-based index
+        });
+    }
 
     // Database Initialization and Data Loading
     if (openDatabase()) {
@@ -120,12 +125,54 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to open database for Visions window.");
     }
+
 }
 
 Visions::~Visions()
 {
     closeDatabase();
     delete ui;
+}
+
+// visions.cpp
+
+// ... (existing includes) ...
+
+// Add this function definition
+void Visions::setupUIElementLists() {
+    // Populate QLabel lists
+    goalNameLabels << ui->goalNameLabel1 << ui->goalNameLabel2 << ui->goalNameLabel3
+                  << ui->goalNameLabel4 << ui->goalNameLabel5 << ui->goalNameLabel6;
+
+    incomeLabels << ui->incomeLabel1 << ui->incomeLabel2 << ui->incomeLabel3
+                 << ui->incomeLabel4 << ui->incomeLabel5 << ui->incomeLabel6;
+
+    downpaymentLabels << ui->downpaymentLabel1 << ui->downpaymentLabel2 << ui->downpaymentLabel3
+                      << ui->downpaymentLabel4 << ui->downpaymentLabel5 << ui->downpaymentLabel6;
+
+    remainingLabels << ui->remainingLabel1 << ui->remainingLabel2 << ui->remainingLabel3
+                    << ui->remainingLabel4 << ui->remainingLabel5 << ui->remainingLabel6;
+
+    monthLabels << ui->monthLabel1 << ui->monthLabel2 << ui->monthLabel3
+                << ui->monthLabel4 << ui->monthLabel5 << ui->monthLabel6;
+
+    // Populate QProgressBar list
+    progressBars << ui->progressBar_1 << ui->progressBar_2 << ui->progressBar_3
+                 << ui->progressBar_4 << ui->progressBar_5 << ui->progressBar_6;
+
+    // Populate QStackedWidget list
+    stackedWidgets << ui->stackedWidget1 << ui->stackedWidget2 << ui->stackedWidget3
+                   << ui->stackedWidget4 << ui->stackedWidget5 << ui->stackedWidget6;
+
+    // Populate QPushButton lists
+    addButtons << ui->add << ui->add_2 << ui->add_3
+               << ui->add_4 << ui->add_5 << ui->add_6;
+
+    editButtons << ui->edit1 << ui->edit2 << ui->edit3
+                << ui->edit4 << ui->edit5 << ui->edit6;
+
+    deleteButtons << ui->delete_1 << ui->delete_2 << ui->delete_3
+                  << ui->delete_4 << ui->delete_5 << ui->delete_6;
 }
 
 // --- Database Management ---
@@ -313,34 +360,86 @@ void Visions::deleteGoal(int goalIndex) {
 }
 
 
-// --- UI Slot Handlers ---
-
+// --- UI Slot Handlers --
 void Visions::onAddButtonClicked() {
-    int slot = findNextAvailableSlot();
-    if (slot == -1) {
-        QMessageBox::information(this, "Limit Reached", "You have reached the maximum of 6 goals.");
+    QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
+    if (!clickedButton) {
+        qWarning() << "onAddButtonClicked called by non-QPushButton sender!";
         return;
     }
 
+    int identifiedSlotIndex_0_based = -1; // This will hold the 0-based index derived from the button
+    QString specificGoalName = "";
+
+    // Determine which "Add" button was clicked and assign the corresponding 0-based slot index and specific name
+    if (clickedButton == ui->add) {
+        identifiedSlotIndex_0_based = 0;
+        specificGoalName = "🏡REAL ESTATE";
+    } else if (clickedButton == ui->add_2) {
+        identifiedSlotIndex_0_based = 1;
+        specificGoalName = "🚗CAR";
+    } else if (clickedButton == ui->add_3) {
+        identifiedSlotIndex_0_based = 2;
+        specificGoalName = "✈️VACATION";
+    } else if (clickedButton == ui->add_4) {
+        identifiedSlotIndex_0_based = 3;
+        specificGoalName = "🎓EDUCATION";
+    } else if (clickedButton == ui->add_5) {
+        identifiedSlotIndex_0_based = 4;
+        specificGoalName = "🌱PERSONAL GROWTH";
+    } else if (clickedButton == ui->add_6) {
+        identifiedSlotIndex_0_based = 5;
+        specificGoalName ="🚨EMERGENCY FUND";
+    } else {
+        // Fallback for an unknown 'Add' button, though all 6 should be covered
+        qWarning() << "Clicked Add button did not match a known slot. Attempting to find first available.";
+        identifiedSlotIndex_0_based = findNextAvailableSlot() - 1; // Convert to 0-based
+        if (identifiedSlotIndex_0_based == -1) {
+            QMessageBox::information(this, "Limit Reached", "You have reached the maximum of 6 goals.");
+            return;
+        }
+        specificGoalName = "New Goal " + QString::number(identifiedSlotIndex_0_based + 1); // Generic fallback name
+    }
+
+    // Now, check if the determined slot is already occupied
+    if (identifiedSlotIndex_0_based != -1 && !goalDataList[identifiedSlotIndex_0_based].isEmpty()) {
+        QMessageBox::information(this, "Slot Taken", "This goal slot is already taken. Please use 'Edit' or 'Delete' if you wish to change this goal.");
+        return;
+    }
+
+    // If we've reached here, either a specific slot was identified and is empty,
+    // or a generic empty slot was found.
+    if (identifiedSlotIndex_0_based == -1) {
+        // This case should ideally not be reached if findNextAvailableSlot() works correctly
+        QMessageBox::information(this, "Limit Reached", "Could not find an empty goal slot.");
+        return;
+    }
+
+
     Insertt *dialog = new Insertt(this);
-    // Pass an empty GoalData to indicate it's a new goal
-    dialog->setGoalData(GoalData()); // Default constructor creates an empty GoalData
 
-    // Use a lambda to capture 'slot' and pass it to onGoalSet
-    connect(dialog, &Insertt::goalSet, this, [this, slot](const GoalData &data){
-        onGoalSet(slot, data); // This 'slot' is the target for the new goal
+    // Create a GoalData object to pass.
+    // Set its 'name' field with the specificGoalName.
+    // Keep other fields at their default (empty) values for a new goal.
+    GoalData newGoalDefaults; // Declaration of GoalData object
+    newGoalDefaults.name = specificGoalName;
+    // The 'id' will still be empty, so Visions::onGoalSet will generate a UUID.
+    // 'incomeRequired', 'downpayment', 'duration' will be 0/empty.
+
+    dialog->setGoalData(newGoalDefaults); // Pass the GoalData with the pre-set name
+
+    // Connect the dialog's signal to your handler in Visions
+    // Pass the 1-based slot index to onGoalSet
+    connect(dialog, &Insertt::goalSet, this, [this, slotIndex_1_based = identifiedSlotIndex_0_based + 1](const GoalData &data){
+        onGoalSet(slotIndex_1_based, data);
     });
-    dialog->exec();
-    delete dialog; // Clean up the dialog after it closes
-}
 
-// Edit button handlers
-void Visions::on_edit1_clicked() { editGoal(1); }
-void Visions::on_edit2_clicked() { editGoal(2); }
-void Visions::on_edit3_clicked() { editGoal(3); }
-void Visions::on_edit4_clicked() { editGoal(4); }
-void Visions::on_edit5_clicked() { editGoal(5); }
-void Visions::on_edit6_clicked() { editGoal(6); }
+    // Show the dialog
+    dialog->exec();
+
+    // Clean up the dialog after it closes
+    delete dialog;
+}
 
 // Generic edit goal function
 void Visions::editGoal(int goalIndex) {
@@ -477,13 +576,6 @@ int Visions::findNextAvailableSlot() {
     return -1; // No empty slots
 }
 
-// Generic Delete Goal (called by on_delete_X_clicked)
-void Visions::on_delete_1_clicked() { deleteGoal(1); }
-void Visions::on_delete_2_clicked() { deleteGoal(2); }
-void Visions::on_delete_3_clicked() { deleteGoal(3); }
-void Visions::on_delete_4_clicked() { deleteGoal(4); }
-void Visions::on_delete_5_clicked() { deleteGoal(5); }
-void Visions::on_delete_6_clicked() { deleteGoal(6); }
 
 // Helper methods to get UI elements dynamically
 QLabel* Visions::getGoalNameLabel(int index) {

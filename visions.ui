@@ -39,13 +39,6 @@ background-color: #131b39;
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <layout class="QGridLayout" name="gridLayout_15">
-        <item row="4" column="0" colspan="2">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Crafting Your Visions Into Reality,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Slowly but Surely...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="0" colspan="2">
          <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0">
           <property name="leftMargin">
@@ -96,7 +89,7 @@ padding top:15px;
              <item row="1" column="0">
               <widget class="QStackedWidget" name="stackedWidget6">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_40">
                 <layout class="QGridLayout" name="gridLayout_29">
@@ -152,7 +145,19 @@ padding top:15px;
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
+                      <string notr="true">QPushButton {
+        
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+        background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                      </property>
                      <property name="text">
                       <string>➕ADD</string>
@@ -296,7 +301,7 @@ padding top:15px;
              <item row="1" column="0">
               <widget class="QStackedWidget" name="stackedWidget5">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_36">
                 <layout class="QGridLayout" name="gridLayout_28">
@@ -352,7 +357,19 @@ padding top:15px;
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
+                      <string notr="true">QPushButton {
+        
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+        background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                      </property>
                      <property name="text">
                       <string>➕ADD</string>
@@ -511,7 +528,7 @@ padding top:15px;
              <item row="0" column="0">
               <widget class="QStackedWidget" name="stackedWidget2">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_20">
                 <layout class="QGridLayout" name="gridLayout_7">
@@ -573,7 +590,19 @@ padding top:15px;
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
+                      <string notr="true">QPushButton {
+        
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+        background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                      </property>
                      <property name="text">
                       <string>➕ADD</string>
@@ -774,7 +803,19 @@ padding top:15px;
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
+                      <string notr="true">QPushButton {
+        background-color:white;
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+      background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                      </property>
                      <property name="text">
                       <string>➕ADD</string>
@@ -921,7 +962,7 @@ padding top:15px;
              <item row="1" column="0" colspan="2">
               <widget class="QStackedWidget" name="stackedWidget4">
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="page_34">
                 <layout class="QGridLayout" name="gridLayout_31">
@@ -985,7 +1026,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       </size>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">border: 0.5px solid black</string>
+                      <string notr="true">QPushButton {
+        
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+       background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                      </property>
                      <property name="text">
                       <string>➕ADD</string>
@@ -1147,7 +1200,7 @@ padding top:15px;
 </string>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="page_42">
               <layout class="QGridLayout" name="gridLayout">
@@ -1207,8 +1260,19 @@ font: 16pt &quot;Segoe UI&quot;;</string>
                     </size>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black;
-border-radius:20px;</string>
+                    <string notr="true">QPushButton {
+        
+	border: 0.5px solid black;
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+       background-color: #e74c3c;   
+        color:white;
+    }
+
+</string>
                    </property>
                    <property name="text">
                     <string>➕ADD</string>
@@ -1223,15 +1287,29 @@ border-radius:20px;</string>
               <layout class="QGridLayout" name="gridLayout_4">
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_3">
-                 <item row="1" column="0" colspan="2">
-                  <widget class="QLabel" name="incomeLabel1">
+                 <item row="7" column="0">
+                  <widget class="QPushButton" name="edit1">
+                   <property name="styleSheet">
+                    <string notr="true">border: 0.5px solid black;
+ background-color:  #3498db;
+ color:white;     
+border-radius: 8px;
+ font-weight: bold;</string>
+                   </property>
+                   <property name="text">
+                    <string>✏️EDIT</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0" colspan="2">
+                  <widget class="QLabel" name="downpaymentLabel1">
                    <property name="text">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="3" column="0" colspan="2">
-                  <widget class="QLabel" name="remainingLabel1">
+                 <item row="4" column="0" colspan="2">
+                  <widget class="QLabel" name="monthLabel1">
                    <property name="text">
                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
@@ -1256,17 +1334,20 @@ color:rgb(0,0,0);</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0" colspan="2">
-                  <widget class="QLabel" name="downpaymentLabel1">
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <item row="7" column="1">
+                  <widget class="QPushButton" name="delete_1">
+                   <property name="styleSheet">
+                    <string notr="true">border: 0.5px solid black;
+
+ background-color: #e74c3c;   
+        color:white;
+     
+        border-radius: 8px;
+        
+        font-weight: bold;</string>
                    </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0" colspan="2">
-                  <widget class="QLabel" name="monthLabel1">
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>🗑️DELETE</string>
                    </property>
                   </widget>
                  </item>
@@ -1293,34 +1374,17 @@ QProgressBar::chunk {
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="0">
-                  <widget class="QPushButton" name="edit1">
-                   <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black;
- background-color:  #3498db;
- color:white;     
-border-radius: 8px;
- font-weight: bold;</string>
-                   </property>
+                 <item row="3" column="0" colspan="2">
+                  <widget class="QLabel" name="remainingLabel1">
                    <property name="text">
-                    <string>✏️EDIT</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1">
-                  <widget class="QPushButton" name="delete_1">
-                   <property name="styleSheet">
-                    <string notr="true">border: 0.5px solid black;
-
- background-color: #e74c3c;   
-        color:white;
-     
-        border-radius: 8px;
-        
-        font-weight: bold;</string>
-                   </property>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QLabel" name="incomeLabel1">
                    <property name="text">
-                    <string>🗑️DELETE</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -1368,6 +1432,13 @@ border-radius: 8px;
           </property>
           <property name="text">
            <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Crafting Your Visions Into Reality,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;&quot;&gt;Slowly but Surely...&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>

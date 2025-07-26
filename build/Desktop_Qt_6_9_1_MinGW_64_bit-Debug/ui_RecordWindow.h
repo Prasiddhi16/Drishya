@@ -13,7 +13,6 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDateTimeEdit>
-#include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -54,7 +53,6 @@ public:
     QDateTimeEdit *timestamp;
     QLabel *label_12;
     QPushButton *addRecordButton;
-    QFrame *line;
     QLabel *label_2;
     QLabel *label;
     QToolButton *toolButton;
@@ -94,7 +92,7 @@ public:
         editIncomeButton = new QPushButton(tab);
         editIncomeButton->setObjectName("editIncomeButton");
         editIncomeButton->setGeometry(QRect(260, 190, 231, 41));
-        editIncomeButton->setStyleSheet(QString::fromUtf8("   font-size:30px;\n"
+        editIncomeButton->setStyleSheet(QString::fromUtf8("   font-size:25px;\n"
 "    background-color: white;  \n"
 "    color: green;            \n"
 "    border: 1px solid #CCCCCC;\n"
@@ -199,12 +197,13 @@ public:
 ""));
         editExpenseButton = new QPushButton(tab_2);
         editExpenseButton->setObjectName("editExpenseButton");
-        editExpenseButton->setGeometry(QRect(250, 210, 231, 31));
-        editExpenseButton->setStyleSheet(QString::fromUtf8("   font-size:30px;\n"
+        editExpenseButton->setGeometry(QRect(250, 190, 231, 41));
+        editExpenseButton->setStyleSheet(QString::fromUtf8("   font-size:25px;\n"
 "    background-color: white;  \n"
 "    color: green;            \n"
 "    border: 1px solid #CCCCCC;\n"
-"    font-family: \"Consolas\";"));
+"    font-family: \"Consolas\";\n"
+""));
         label_8 = new QLabel(tab_2);
         label_8->setObjectName("label_8");
         label_8->setGeometry(QRect(10, 20, 151, 31));
@@ -286,16 +285,6 @@ public:
 "    \n"
 "    border: 1px solid #CCCCCC;\n"
 "    font-family: \"Consolas\";"));
-        line = new QFrame(centralwidget);
-        line->setObjectName("line");
-        line->setGeometry(QRect(-70, 40, 1601, 2));
-        line->setStyleSheet(QString::fromUtf8("\n"
-"    background-color: #00FFFF;\n"
-"    min-height: 2px;  /* Line thickness */\n"
-"    max-height: 2px;\n"
-"    border: none;"));
-        line->setFrameShape(QFrame::Shape::HLine);
-        line->setFrameShadow(QFrame::Shadow::Sunken);
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(390, 0, 261, 31));
@@ -331,7 +320,7 @@ public:
 
         retranslateUi(RecordWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(RecordWindow);
@@ -373,7 +362,7 @@ public:
         label_7->setText(QCoreApplication::translate("RecordWindow", " Category  :", nullptr));
         expenseAmount->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("RecordWindow", "Expenses", nullptr));
-        label_14->setText(QCoreApplication::translate("RecordWindow", "ID/Reference No:", nullptr));
+        label_14->setText(QCoreApplication::translate("RecordWindow", "ID/Bill No:", nullptr));
         referenceNumber->setText(QString());
         label_16->setText(QCoreApplication::translate("RecordWindow", "Review  :", nullptr));
         review->setText(QString());

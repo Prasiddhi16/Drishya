@@ -42,22 +42,22 @@ template <> constexpr inline auto homeWindow::qt_create_metaobjectdata<qt_meta_t
         "homeWindow",
         "openAnalytics",
         "",
-        "logoutAndResetSession",
         "openRecordWindow",
         "openvisions",
-        "openreview"
+        "openreview",
+        "openhelp"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'openAnalytics'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'logoutAndResetSession'
-        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'openRecordWindow'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'openvisions'
-        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'openreview'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openhelp'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
@@ -83,10 +83,10 @@ void homeWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->openAnalytics(); break;
-        case 1: _t->logoutAndResetSession(); break;
-        case 2: _t->openRecordWindow(); break;
-        case 3: _t->openvisions(); break;
-        case 4: _t->openreview(); break;
+        case 1: _t->openRecordWindow(); break;
+        case 2: _t->openvisions(); break;
+        case 3: _t->openreview(); break;
+        case 4: _t->openhelp(); break;
         default: ;
         }
     }

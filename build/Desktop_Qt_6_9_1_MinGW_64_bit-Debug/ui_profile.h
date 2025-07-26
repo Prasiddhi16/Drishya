@@ -57,14 +57,10 @@ public:
     QToolButton *report;
     QToolButton *toolButton_4;
     QSpacerItem *horizontalSpacer_4;
-    QGridLayout *gridLayout_3;
-    QToolButton *toolButton_5;
-    QLabel *label_6;
-    QSpacerItem *horizontalSpacer_5;
     QGridLayout *gridLayout;
-    QToolButton *toolButton_6;
-    QLabel *label_7;
     QSpacerItem *horizontalSpacer_6;
+    QPushButton *logout;
+    QToolButton *toolButton_6;
     QWidget *page_2;
     QGridLayout *gridLayout_8;
     QLabel *aboutuser;
@@ -344,38 +340,19 @@ public:
 
         verticalLayout->addLayout(gridLayout_5);
 
-        gridLayout_3 = new QGridLayout();
-        gridLayout_3->setObjectName("gridLayout_3");
-        toolButton_5 = new QToolButton(page);
-        toolButton_5->setObjectName("toolButton_5");
-        sizePolicy3.setHeightForWidth(toolButton_5->sizePolicy().hasHeightForWidth());
-        toolButton_5->setSizePolicy(sizePolicy3);
-        toolButton_5->setMinimumSize(QSize(40, 40));
-        toolButton_5->setMaximumSize(QSize(40, 40));
-        toolButton_5->setStyleSheet(QString::fromUtf8("\n"
-"    border: none;           \n"
-"    padding: 0px;                 \n"
-"    background: transparent;     \n"
-"    border-radius: 16px;  \n"
-"  outline: none;               \n"
-"    "));
-
-        gridLayout_3->addWidget(toolButton_5, 0, 1, 1, 1);
-
-        label_6 = new QLabel(page);
-        label_6->setObjectName("label_6");
-
-        gridLayout_3->addWidget(label_6, 0, 3, 1, 1);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
-
-        gridLayout_3->addItem(horizontalSpacer_5, 0, 2, 1, 1);
-
-
-        verticalLayout->addLayout(gridLayout_3);
-
         gridLayout = new QGridLayout();
         gridLayout->setObjectName("gridLayout");
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_6, 0, 1, 1, 1);
+
+        logout = new QPushButton(page);
+        logout->setObjectName("logout");
+        logout->setStyleSheet(QString::fromUtf8("border:none;\n"
+"text-align: left;"));
+
+        gridLayout->addWidget(logout, 0, 2, 1, 1);
+
         toolButton_6 = new QToolButton(page);
         toolButton_6->setObjectName("toolButton_6");
         sizePolicy3.setHeightForWidth(toolButton_6->sizePolicy().hasHeightForWidth());
@@ -391,15 +368,6 @@ public:
 "    "));
 
         gridLayout->addWidget(toolButton_6, 0, 0, 1, 1);
-
-        label_7 = new QLabel(page);
-        label_7->setObjectName("label_7");
-
-        gridLayout->addWidget(label_7, 0, 2, 1, 1);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_6, 0, 1, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -705,7 +673,7 @@ public:
 
         retranslateUi(profile);
 
-        stackedWidget->setCurrentIndex(4);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(profile);
@@ -727,10 +695,8 @@ public:
         label_28->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Report an issue</p></body></html>", nullptr));
         report->setText(QCoreApplication::translate("profile", "...", nullptr));
         toolButton_4->setText(QCoreApplication::translate("profile", "...", nullptr));
-        toolButton_5->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_6->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Switch account</p></body></html>", nullptr));
+        logout->setText(QCoreApplication::translate("profile", "Log out", nullptr));
         toolButton_6->setText(QCoreApplication::translate("profile", "...", nullptr));
-        label_7->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Log out</p></body></html>", nullptr));
         aboutuser->setText(QString());
         emailuser->setText(QString());
         label_14->setText(QCoreApplication::translate("profile", "Username:", nullptr));

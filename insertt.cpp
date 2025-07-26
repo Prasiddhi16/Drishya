@@ -44,30 +44,14 @@ void Insertt::setGoalData(const GoalData &data) {
 
     // Populate UI fields with the received data
     ui->goalNameEdit->setText(data.name);
-    ui->incomeEdit->setText(QString::number(data.incomeRequired, 'f', 2)); // Format for doubles
-    ui->downpaymentEdit->setText(QString::number(data.downpayment, 'f', 2));
-    ui->durationEdit->setText(QString::number(data.duration));
+    // Use conditional operators to display empty string if value is 0, otherwise format the number
 
-    // If it's an existing goal, you might want to disable editing the goal name
-    // or give a warning if they change it, as Visions uses the ID for updates.
-    // For simplicity, we'll allow name changes, but Visions will use the original ID.
-    if (!data.id.isEmpty()) {
-        ui->goalNameEdit->setReadOnly(false); // Can be set to true if name shouldn't change on edit
+    ui->incomeEdit->setText(data.incomeRequired == 0.0 ? "" : QString::number(data.incomeRequired, 'f', 2));
+    ui->downpaymentEdit->setText(data.downpayment == 0.0 ? "" : QString::number(data.downpayment, 'f', 2));
+    ui->durationEdit->setText(data.duration == 0 ? "" : QString::number(data.duration));
+    ui->goalNameEdit->setReadOnly(false);// Can be set to true if name shouldn't change on edit
 
     }
-    if (data.isEmpty()) { // It's a new goal
-        ui->goalNameEdit->clear();
-        ui->incomeEdit->clear(); // Set to empty string
-        ui->downpaymentEdit->clear();   // Set to empty string
-        ui->durationEdit->clear();     // Set to empty string
-    } else { // It's an existing goal (for editing)
-        ui->goalNameEdit->setText(data.name);
-        ui->incomeEdit->setText(QString::number(data.incomeRequired, 'f', 2));
-        ui->downpaymentEdit->setText(QString::number(data.downpayment, 'f', 2));
-        ui->durationEdit->setText(QString::number(data.duration));
-    }
-
-}
 
 void Insertt::on_Save_clicked()
 {
@@ -79,7 +63,7 @@ void Insertt::on_Save_clicked()
     int duration = ui->durationEdit->text().toInt(&durationValid);
 
     if (name.isEmpty() || !incomeValid || !downpaymentValid || !durationValid) {
-        QMessageBox::warning(this, "Input Error", "Please fill all fields with valid numeric values.");
+        QMessageBox::warning(this, "Input Error", "Please fill all fields.");
         return;
     }
 
@@ -87,9 +71,13 @@ void Insertt::on_Save_clicked()
         QMessageBox::warning(this, "Input Error", "Duration must be greater than 0 months.");
         return;
     }
+    if (incomeRequired<=0) {
+        QMessageBox::warning(this, "Input Error", "Target amount must be greater than Rs.0.");
+        return;
+    }
 
-    if (downpayment > incomeRequired) {
-        QMessageBox::warning(this, "Input Error", "Current balance cannot be greater than target amount.");
+    if (downpayment >= incomeRequired) {
+        QMessageBox::warning(this, "Input Error", "Current balance cannot be greater than or equal to target amount.");
         return;
     }
 

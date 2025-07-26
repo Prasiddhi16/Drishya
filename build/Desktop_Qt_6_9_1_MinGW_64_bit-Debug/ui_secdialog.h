@@ -16,6 +16,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -30,6 +31,7 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *eno;
+    QSpacerItem *verticalSpacer;
     QPushButton *eyes;
 
     void setupUi(QDialog *secDialog)
@@ -67,6 +69,10 @@ public:
 "color:black;"));
 
         horizontalLayout->addWidget(eno);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        horizontalLayout->addItem(verticalSpacer);
 
         eyes = new QPushButton(horizontalLayoutWidget);
         eyes->setObjectName("eyes");

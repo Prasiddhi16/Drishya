@@ -34,7 +34,6 @@ public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QGridLayout *gridLayout_15;
-    QLabel *label;
     QGridLayout *gridLayout_2;
     QGroupBox *groupBox_6;
     QGridLayout *gridLayout_13;
@@ -147,16 +146,17 @@ public:
     QWidget *page_19;
     QGridLayout *gridLayout_4;
     QGridLayout *gridLayout_3;
-    QLabel *incomeLabel1;
-    QLabel *remainingLabel1;
-    QLabel *goalNameLabel1;
+    QPushButton *edit1;
     QLabel *downpaymentLabel1;
     QLabel *monthLabel1;
-    QProgressBar *progressBar_1;
-    QPushButton *edit1;
+    QLabel *goalNameLabel1;
     QPushButton *delete_1;
+    QProgressBar *progressBar_1;
+    QLabel *remainingLabel1;
+    QLabel *incomeLabel1;
     QLabel *label_2;
     QToolButton *toolButton;
+    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -183,11 +183,6 @@ public:
         horizontalLayout->setObjectName("horizontalLayout");
         gridLayout_15 = new QGridLayout();
         gridLayout_15->setObjectName("gridLayout_15");
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-
-        gridLayout_15->addWidget(label, 4, 0, 1, 2);
-
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(10);
         gridLayout_2->setObjectName("gridLayout_2");
@@ -237,7 +232,19 @@ public:
         add_6 = new QPushButton(page_40);
         add_6->setObjectName("add_6");
         add_6->setMinimumSize(QSize(0, 30));
-        add_6->setStyleSheet(QString::fromUtf8("border: 0.5px solid black"));
+        add_6->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        \n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"        background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_27->addWidget(add_6, 3, 0, 1, 2);
 
@@ -370,7 +377,19 @@ public:
         add_5 = new QPushButton(page_36);
         add_5->setObjectName("add_5");
         add_5->setMinimumSize(QSize(0, 30));
-        add_5->setStyleSheet(QString::fromUtf8("border: 0.5px solid black"));
+        add_5->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        \n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"        background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_26->addWidget(add_5, 2, 0, 1, 2);
 
@@ -518,7 +537,19 @@ public:
         add_2 = new QPushButton(page_20);
         add_2->setObjectName("add_2");
         add_2->setMinimumSize(QSize(0, 30));
-        add_2->setStyleSheet(QString::fromUtf8("border: 0.5px solid black"));
+        add_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        \n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"        background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_23->addWidget(add_2, 2, 0, 2, 2);
 
@@ -652,7 +683,19 @@ public:
         add_3 = new QPushButton(page_28);
         add_3->setObjectName("add_3");
         add_3->setMinimumSize(QSize(0, 30));
-        add_3->setStyleSheet(QString::fromUtf8("border: 0.5px solid black"));
+        add_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        background-color:white;\n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"      background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_24->addWidget(add_3, 2, 0, 1, 2);
 
@@ -788,7 +831,19 @@ public:
         add_4 = new QPushButton(page_34);
         add_4->setObjectName("add_4");
         add_4->setMinimumSize(QSize(0, 30));
-        add_4->setStyleSheet(QString::fromUtf8("border: 0.5px solid black"));
+        add_4->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        \n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"       background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_25->addWidget(add_4, 2, 0, 1, 2);
 
@@ -932,8 +987,19 @@ public:
         add = new QPushButton(page_42);
         add->setObjectName("add");
         add->setMinimumSize(QSize(0, 20));
-        add->setStyleSheet(QString::fromUtf8("border: 0.5px solid black;\n"
-"border-radius:20px;"));
+        add->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"        \n"
+"	border: 0.5px solid black;\n"
+"        border-radius: 10px;\n"
+"        padding: 6px 12px;\n"
+"        font-weight: bold;\n"
+"    }\n"
+"    QPushButton:hover {\n"
+"       background-color: #e74c3c;   \n"
+"        color:white;\n"
+"    }\n"
+"\n"
+""));
 
         gridLayout_22->addWidget(add, 4, 1, 1, 2);
 
@@ -947,15 +1013,25 @@ public:
         gridLayout_4->setObjectName("gridLayout_4");
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setObjectName("gridLayout_3");
-        incomeLabel1 = new QLabel(page_19);
-        incomeLabel1->setObjectName("incomeLabel1");
+        edit1 = new QPushButton(page_19);
+        edit1->setObjectName("edit1");
+        edit1->setStyleSheet(QString::fromUtf8("border: 0.5px solid black;\n"
+" background-color:  #3498db;\n"
+" color:white;     \n"
+"border-radius: 8px;\n"
+" font-weight: bold;"));
 
-        gridLayout_3->addWidget(incomeLabel1, 1, 0, 1, 2);
+        gridLayout_3->addWidget(edit1, 7, 0, 1, 1);
 
-        remainingLabel1 = new QLabel(page_19);
-        remainingLabel1->setObjectName("remainingLabel1");
+        downpaymentLabel1 = new QLabel(page_19);
+        downpaymentLabel1->setObjectName("downpaymentLabel1");
 
-        gridLayout_3->addWidget(remainingLabel1, 3, 0, 1, 2);
+        gridLayout_3->addWidget(downpaymentLabel1, 2, 0, 1, 2);
+
+        monthLabel1 = new QLabel(page_19);
+        monthLabel1->setObjectName("monthLabel1");
+
+        gridLayout_3->addWidget(monthLabel1, 4, 0, 1, 2);
 
         goalNameLabel1 = new QLabel(page_19);
         goalNameLabel1->setObjectName("goalNameLabel1");
@@ -970,15 +1046,18 @@ public:
 
         gridLayout_3->addWidget(goalNameLabel1, 0, 0, 1, 2);
 
-        downpaymentLabel1 = new QLabel(page_19);
-        downpaymentLabel1->setObjectName("downpaymentLabel1");
+        delete_1 = new QPushButton(page_19);
+        delete_1->setObjectName("delete_1");
+        delete_1->setStyleSheet(QString::fromUtf8("border: 0.5px solid black;\n"
+"\n"
+" background-color: #e74c3c;   \n"
+"        color:white;\n"
+"     \n"
+"        border-radius: 8px;\n"
+"        \n"
+"        font-weight: bold;"));
 
-        gridLayout_3->addWidget(downpaymentLabel1, 2, 0, 1, 2);
-
-        monthLabel1 = new QLabel(page_19);
-        monthLabel1->setObjectName("monthLabel1");
-
-        gridLayout_3->addWidget(monthLabel1, 4, 0, 1, 2);
+        gridLayout_3->addWidget(delete_1, 7, 1, 1, 1);
 
         progressBar_1 = new QProgressBar(page_19);
         progressBar_1->setObjectName("progressBar_1");
@@ -998,28 +1077,15 @@ public:
 
         gridLayout_3->addWidget(progressBar_1, 6, 0, 1, 2);
 
-        edit1 = new QPushButton(page_19);
-        edit1->setObjectName("edit1");
-        edit1->setStyleSheet(QString::fromUtf8("border: 0.5px solid black;\n"
-" background-color:  #3498db;\n"
-" color:white;     \n"
-"border-radius: 8px;\n"
-" font-weight: bold;"));
+        remainingLabel1 = new QLabel(page_19);
+        remainingLabel1->setObjectName("remainingLabel1");
 
-        gridLayout_3->addWidget(edit1, 7, 0, 1, 1);
+        gridLayout_3->addWidget(remainingLabel1, 3, 0, 1, 2);
 
-        delete_1 = new QPushButton(page_19);
-        delete_1->setObjectName("delete_1");
-        delete_1->setStyleSheet(QString::fromUtf8("border: 0.5px solid black;\n"
-"\n"
-" background-color: #e74c3c;   \n"
-"        color:white;\n"
-"     \n"
-"        border-radius: 8px;\n"
-"        \n"
-"        font-weight: bold;"));
+        incomeLabel1 = new QLabel(page_19);
+        incomeLabel1->setObjectName("incomeLabel1");
 
-        gridLayout_3->addWidget(delete_1, 7, 1, 1, 1);
+        gridLayout_3->addWidget(incomeLabel1, 1, 0, 1, 2);
 
 
         gridLayout_4->addLayout(gridLayout_3, 0, 0, 1, 1);
@@ -1055,6 +1121,11 @@ public:
 
         gridLayout_15->addWidget(toolButton, 2, 0, 1, 1);
 
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+
+        gridLayout_15->addWidget(label, 4, 0, 1, 2);
+
 
         horizontalLayout->addLayout(gridLayout_15);
 
@@ -1072,12 +1143,12 @@ public:
 
         retranslateUi(Visions);
 
-        stackedWidget6->setCurrentIndex(1);
-        stackedWidget5->setCurrentIndex(1);
-        stackedWidget2->setCurrentIndex(1);
+        stackedWidget6->setCurrentIndex(0);
+        stackedWidget5->setCurrentIndex(0);
+        stackedWidget2->setCurrentIndex(0);
         stackedWidget3->setCurrentIndex(0);
-        stackedWidget4->setCurrentIndex(1);
-        stackedWidget1->setCurrentIndex(1);
+        stackedWidget4->setCurrentIndex(0);
+        stackedWidget1->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Visions);
@@ -1086,7 +1157,6 @@ public:
     void retranslateUi(QMainWindow *Visions)
     {
         Visions->setWindowTitle(QCoreApplication::translate("Visions", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;\">Crafting Your Visions Into Reality,</span></p><p align=\"justify\"><span style=\" font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;\">Slowly but Surely...</span></p></body></html>", nullptr));
         groupBox_6->setTitle(QString());
         label_10->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:14pt;\">&quot;Prepare today for peace </span></p><p><span style=\" font-size:14pt;\">of mind tomorrow.&quot;</span></p></body></html>", nullptr));
         label_9->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:700;\">\360\237\232\250EMERGENCY FUND</span></p></body></html>", nullptr));
@@ -1154,15 +1224,16 @@ public:
         label_4->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:14pt;\">\342\200\234Start building the foundation of </span></p><p><span style=\" font-size:14pt;\">your dreams.&quot;<br/></span></p></body></html>", nullptr));
         label_3->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-size:16pt; font-weight:700;\">\360\237\217\241REAL ESTATE</span></p></body></html>", nullptr));
         add->setText(QCoreApplication::translate("Visions", "\342\236\225ADD", nullptr));
-        incomeLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
-        remainingLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
-        goalNameLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
+        edit1->setText(QCoreApplication::translate("Visions", "\342\234\217\357\270\217EDIT", nullptr));
         downpaymentLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
         monthLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
-        edit1->setText(QCoreApplication::translate("Visions", "\342\234\217\357\270\217EDIT", nullptr));
+        goalNameLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
         delete_1->setText(QCoreApplication::translate("Visions", "\360\237\227\221\357\270\217DELETE", nullptr));
+        remainingLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
+        incomeLabel1->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><br/></p></body></html>", nullptr));
         label_2->setText(QCoreApplication::translate("Visions", "<html><head/><body><p align=\"center\"><span style=\" font-size:48pt; font-weight:700;\">GOALS</span></p></body></html>", nullptr));
         toolButton->setText(QString());
+        label->setText(QCoreApplication::translate("Visions", "<html><head/><body><p><span style=\" font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;\">Crafting Your Visions Into Reality,</span></p><p align=\"justify\"><span style=\" font-family:'Arial'; font-size:22pt; font-weight:700; color:#ffffff;\">Slowly but Surely...</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

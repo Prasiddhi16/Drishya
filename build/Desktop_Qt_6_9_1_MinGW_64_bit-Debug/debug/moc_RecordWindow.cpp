@@ -49,6 +49,7 @@ template <> constexpr inline auto RecordWindow::qt_create_metaobjectdata<qt_meta
         "on_toolButton_clicked",
         "openHome",
         "openAnalytics",
+        "openhelp",
         "openvisions",
         "openreview"
     };
@@ -72,10 +73,12 @@ template <> constexpr inline auto RecordWindow::qt_create_metaobjectdata<qt_meta
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'openAnalytics'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openvisions'
+        // Slot 'openhelp'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'openreview'
+        // Slot 'openvisions'
         QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'openreview'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -108,8 +111,9 @@ void RecordWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 6: _t->on_toolButton_clicked(); break;
         case 7: _t->openHome(); break;
         case 8: _t->openAnalytics(); break;
-        case 9: _t->openvisions(); break;
-        case 10: _t->openreview(); break;
+        case 9: _t->openhelp(); break;
+        case 10: _t->openvisions(); break;
+        case 11: _t->openreview(); break;
         default: ;
         }
     }
@@ -138,14 +142,14 @@ int RecordWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 12)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }

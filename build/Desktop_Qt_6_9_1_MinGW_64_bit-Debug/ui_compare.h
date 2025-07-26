@@ -16,6 +16,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,8 +25,10 @@ class Ui_compare
 {
 public:
     QWidget *centralwidget;
-    QLabel *label;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout_2;
     QChartView *chartWidget;
+    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -36,9 +39,20 @@ public:
         compare->resize(800, 600);
         centralwidget = new QWidget(compare);
         centralwidget->setObjectName("centralwidget");
+        verticalLayoutWidget = new QWidget(centralwidget);
+        verticalLayoutWidget->setObjectName("verticalLayoutWidget");
+        verticalLayoutWidget->setGeometry(QRect(200, 90, 841, 471));
+        verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        chartWidget = new QChartView(verticalLayoutWidget);
+        chartWidget->setObjectName("chartWidget");
+
+        verticalLayout_2->addWidget(chartWidget);
+
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(150, 0, 471, 51));
+        label->setGeometry(QRect(380, 10, 471, 71));
         label->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "font-size: 24px;\n"
@@ -48,13 +62,10 @@ public:
 "	font:  \"Arial Black\";\n"
 "\n"
 "}"));
-        chartWidget = new QChartView(centralwidget);
-        chartWidget->setObjectName("chartWidget");
-        chartWidget->setGeometry(QRect(10, 99, 621, 421));
         compare->setCentralWidget(centralwidget);
         menubar = new QMenuBar(compare);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 24));
+        menubar->setGeometry(QRect(0, 0, 800, 17));
         compare->setMenuBar(menubar);
         statusbar = new QStatusBar(compare);
         statusbar->setObjectName("statusbar");
@@ -68,7 +79,7 @@ public:
     void retranslateUi(QMainWindow *compare)
     {
         compare->setWindowTitle(QCoreApplication::translate("compare", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("compare", "\342\232\226\357\270\217 Compare: Actual vs Ideal Finance", nullptr));
+        label->setText(QCoreApplication::translate("compare", "<html><head/><body><p><span style=\" font-size:28pt;\">\342\232\226\357\270\217 Compare: Actual vs Ideal Finance</span></p></body></html>", nullptr));
     } // retranslateUi
 
 };

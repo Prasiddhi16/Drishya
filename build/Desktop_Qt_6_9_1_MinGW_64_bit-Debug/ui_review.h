@@ -33,15 +33,16 @@ public:
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayout;
     QPushButton *btnTax;
-    QProgressBar *progressBar_2;
+    QProgressBar *progressExpenseBar;
     QPushButton *btnExpense;
-    QLabel *label_2;
-    QProgressBar *progressBar;
+    QLabel *labelExpense;
+    QProgressBar *progressSavingsBar;
     QSpacerItem *verticalSpacer_2;
     QSpacerItem *verticalSpacer;
-    QLabel *label_3;
+    QLabel *labelSavings;
     QPushButton *btnCompare;
     QPushButton *btnExper;
+    QPushButton *pushButton;
     QToolButton *toolButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -67,7 +68,7 @@ public:
 ""));
         gridLayoutWidget = new QWidget(centralwidget);
         gridLayoutWidget->setObjectName("gridLayoutWidget");
-        gridLayoutWidget->setGeometry(QRect(0, 100, 1081, 551));
+        gridLayoutWidget->setGeometry(QRect(-60, 180, 1081, 491));
         gridLayout = new QGridLayout(gridLayoutWidget);
         gridLayout->setObjectName("gridLayout");
         gridLayout->setContentsMargins(62, 0, 0, 0);
@@ -80,9 +81,9 @@ public:
 
         gridLayout->addWidget(btnTax, 11, 2, 1, 1);
 
-        progressBar_2 = new QProgressBar(gridLayoutWidget);
-        progressBar_2->setObjectName("progressBar_2");
-        progressBar_2->setStyleSheet(QString::fromUtf8("QProgressBar {\n"
+        progressExpenseBar = new QProgressBar(gridLayoutWidget);
+        progressExpenseBar->setObjectName("progressExpenseBar");
+        progressExpenseBar->setStyleSheet(QString::fromUtf8("QProgressBar {\n"
 "    border: 2px solid #cfcfcf;\n"
 "    border-radius: 8px;\n"
 "    text-align: center;\n"
@@ -93,9 +94,9 @@ public:
 "    background-color: pink;\n"
 "    width: 10px;\n"
 "}"));
-        progressBar_2->setValue(28);
+        progressExpenseBar->setValue(28);
 
-        gridLayout->addWidget(progressBar_2, 4, 0, 1, 2);
+        gridLayout->addWidget(progressExpenseBar, 4, 0, 1, 2);
 
         btnExpense = new QPushButton(gridLayoutWidget);
         btnExpense->setObjectName("btnExpense");
@@ -106,9 +107,9 @@ public:
 
         gridLayout->addWidget(btnExpense, 11, 3, 1, 1);
 
-        label_2 = new QLabel(gridLayoutWidget);
-        label_2->setObjectName("label_2");
-        label_2->setStyleSheet(QString::fromUtf8("QLabel\n"
+        labelExpense = new QLabel(gridLayoutWidget);
+        labelExpense->setObjectName("labelExpense");
+        labelExpense->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "\n"
 "	color:white;\n"
@@ -117,11 +118,11 @@ public:
 "}\n"
 ""));
 
-        gridLayout->addWidget(label_2, 0, 0, 1, 2, Qt::AlignmentFlag::AlignHCenter);
+        gridLayout->addWidget(labelExpense, 0, 0, 1, 2, Qt::AlignmentFlag::AlignHCenter);
 
-        progressBar = new QProgressBar(gridLayoutWidget);
-        progressBar->setObjectName("progressBar");
-        progressBar->setStyleSheet(QString::fromUtf8("QProgressBar {\n"
+        progressSavingsBar = new QProgressBar(gridLayoutWidget);
+        progressSavingsBar->setObjectName("progressSavingsBar");
+        progressSavingsBar->setStyleSheet(QString::fromUtf8("QProgressBar {\n"
 "    border: 2px solid #cfcfcf;\n"
 "    border-radius: 8px;\n"
 "    text-align: center;\n"
@@ -132,9 +133,9 @@ public:
 "    background-color: pink;\n"
 "    width: 10px;\n"
 "}"));
-        progressBar->setValue(41);
+        progressSavingsBar->setValue(41);
 
-        gridLayout->addWidget(progressBar, 4, 2, 1, 2);
+        gridLayout->addWidget(progressSavingsBar, 4, 2, 1, 2);
 
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
 
@@ -144,9 +145,9 @@ public:
 
         gridLayout->addItem(verticalSpacer, 5, 0, 1, 1);
 
-        label_3 = new QLabel(gridLayoutWidget);
-        label_3->setObjectName("label_3");
-        label_3->setStyleSheet(QString::fromUtf8("QLabel\n"
+        labelSavings = new QLabel(gridLayoutWidget);
+        labelSavings->setObjectName("labelSavings");
+        labelSavings->setStyleSheet(QString::fromUtf8("QLabel\n"
 "{\n"
 "color:white;\n"
 "	\n"
@@ -154,7 +155,7 @@ public:
 "}\n"
 ""));
 
-        gridLayout->addWidget(label_3, 0, 2, 1, 2, Qt::AlignmentFlag::AlignHCenter);
+        gridLayout->addWidget(labelSavings, 0, 2, 1, 2, Qt::AlignmentFlag::AlignHCenter);
 
         btnCompare = new QPushButton(gridLayoutWidget);
         btnCompare->setObjectName("btnCompare");
@@ -173,6 +174,15 @@ public:
         btnExper->setIconSize(QSize(200, 200));
 
         gridLayout->addWidget(btnExper, 10, 1, 2, 1);
+
+        pushButton = new QPushButton(gridLayoutWidget);
+        pushButton->setObjectName("pushButton");
+        pushButton->setMinimumSize(QSize(90, 30));
+        pushButton->setStyleSheet(QString::fromUtf8("background-color: rgb(77, 155, 115);\n"
+"color:white;\n"
+"border-radius:15px;"));
+
+        gridLayout->addWidget(pushButton, 5, 1, 1, 2, Qt::AlignmentFlag::AlignHCenter);
 
         toolButton = new QToolButton(centralwidget);
         toolButton->setObjectName("toolButton");
@@ -204,10 +214,11 @@ public:
         label->setText(QCoreApplication::translate("review", "\360\237\223\235REVIEW PAGE", nullptr));
         btnTax->setText(QString());
         btnExpense->setText(QString());
-        label_2->setText(QCoreApplication::translate("review", "  \360\237\222\265Monthly Expenses:", nullptr));
-        label_3->setText(QCoreApplication::translate("review", " \360\237\217\246Monthly Saving:", nullptr));
+        labelExpense->setText(QCoreApplication::translate("review", "  \360\237\222\265Monthly Expenses:", nullptr));
+        labelSavings->setText(QCoreApplication::translate("review", " \360\237\217\246Monthly Saving:", nullptr));
         btnCompare->setText(QString());
         btnExper->setText(QString());
+        pushButton->setText(QCoreApplication::translate("review", "View History", nullptr));
         toolButton->setText(QCoreApplication::translate("review", "...", nullptr));
     } // retranslateUi
 
