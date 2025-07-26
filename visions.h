@@ -10,14 +10,11 @@
 
 #include "GoalData.h"
 #include "profile.h"
-// Include headers for UI widgets used in member function declarations
 #include <QProgressBar>
 #include <QStackedWidget>
 #include <QLabel>
-
-// Forward declarations for classes used only as pointers (to avoid circular includes)
 class homeWindow;
-class Insertt; // Declare Insertt class
+class Insertt;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -35,10 +32,29 @@ public:
     ~Visions();
 
 public slots:
-    void onGoalSet(int goalIndex, const GoalData &data); // GoalData is now known
+    void onGoalSet(int goalIndex, const GoalData &data);
 
 private slots:
     void onAddButtonClicked();
+<<<<<<< HEAD
+=======
+
+    // Delete button slots
+    void on_delete_1_clicked();
+    void on_delete_2_clicked();
+    void on_delete_3_clicked();
+    void on_delete_4_clicked();
+    void on_delete_5_clicked();
+    void on_delete_6_clicked();
+
+    void on_edit1_clicked();
+    void on_edit2_clicked();
+    void on_edit3_clicked();
+    void on_edit4_clicked();
+    void on_edit5_clicked();
+    void on_edit6_clicked();
+
+>>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
@@ -76,16 +92,16 @@ private:
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
+<<<<<<< HEAD
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
+=======
+    void saveGoal(const GoalData &data);
+>>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
-
-    // Helper functions for UI updates
-    void updateGoalUI(int goalIndex, const GoalData &data); // GoalData is now known
+    void updateGoalUI(int goalIndex, const GoalData &data);
     void clearGoalUI(int goalIndex);
-
-    // Utility to get UI labels/widgets based on index
     QLabel* getGoalNameLabel(int index);
     QLabel* getIncomeLabel(int index);
     QLabel* getDownpaymentLabel(int index);
@@ -93,7 +109,10 @@ private:
     QLabel* getMonthLabel(int index);
     QProgressBar* getProgressBar(int index);
     QStackedWidget* getStackedWidget(int index);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
 
 };
 

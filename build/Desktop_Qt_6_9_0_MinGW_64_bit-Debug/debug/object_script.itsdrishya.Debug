@@ -11,13 +11,11 @@ debug/weeklywindow.o
 debug/welwindow.o
 debug/RecordWindow.o
 debug/compare.o
-debug/expense.o
 debug/expert.o
 debug/finaldial.o
 debug/goaldata.o
 debug/graph.o
 debug/Help.o
-debug/history.o
 debug/historypage.o
 debug/insertt.o
 debug/profile.o
@@ -52,7 +50,6 @@ debug/moc_expert.o
 debug/moc_finaldial.o
 debug/moc_graph.o
 debug/moc_Help.o
-debug/moc_history.o
 debug/moc_historypage.o
 debug/moc_insertt.o
 debug/moc_profile.o

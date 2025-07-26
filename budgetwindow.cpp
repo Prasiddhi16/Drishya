@@ -26,30 +26,30 @@ budgetWindow::budgetWindow(const QString &userEmail, int userId, QWidget *parent
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
 
-    // ✅ Use relative path to the DB file
+    // Use relative path to the DB file
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
 
     qDebug() << "Resolved DB Path in budgetWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "❌ DB Open Error:" << db.lastError().text();
+        qDebug() << " DB Open Error:" << db.lastError().text();
         return;
     }
 
-    QSqlQuery query(db);  // ✅ Explicitly bind the query to the correct DB connection
-    query.prepare("SELECT expense_amount, timestamp, expense_category FROM records WHERE user_id = :uid");
+    QSqlQuery query(db);
+    query.prepare("SELECT expense_amount, timestamp, expense_category FROM records WHERE user_id = :uid AND expense_amount>0");
     query.bindValue(":uid", currentUserId);
 
     if (!query.exec()) {
-        qDebug() << "❌ Query failed:" << query.lastError().text();
+        qDebug() << " Query failed:" << query.lastError().text();
         return;
     }
 
     model->setQuery(query);
 
     if (model->lastError().isValid()) {
-        qDebug() << "❌ Model error:" << model->lastError().text();
+        qDebug() << " Model error:" << model->lastError().text();
         return;
     }
 

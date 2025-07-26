@@ -50,7 +50,7 @@ void expert::loadExpertReviewPage()
     QMap<int, double> incomeMap, expenseMap;
     QSqlQuery query(db);
 
-    // 🏦 Fetch Monthly Income
+    // Fetch Monthly Income
     query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(income_amount) FROM records WHERE user_id = :uid GROUP BY month");
     query.bindValue(":uid", m_userId);
     if (query.exec()) {
@@ -63,7 +63,7 @@ void expert::loadExpertReviewPage()
         qDebug() << "Income query failed:" << query.lastError();
     }
 
-    // 💸 Fetch Monthly Expenses
+    // Fetch Monthly Expenses
     query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY month");
     query.bindValue(":uid", m_userId);
     if (query.exec()) {

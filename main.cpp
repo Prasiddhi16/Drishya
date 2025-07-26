@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         "QMessageBox QLabel { color: black; font-weight: bold; }"
         "QPushButton { background-color: #e1f5e1; }" // light greenish
         );
-    // 🔐 Check login persistence
+
     QSettings settings("ItsDrishya", "LoginSystem");
     int stayLoggedIn = settings.value("keep_logged_in", 0).toInt();
     int userId = settings.value("user_id", 0).toInt();

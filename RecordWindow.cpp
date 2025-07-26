@@ -294,7 +294,7 @@ void RecordWindow::showIncomeTable() {
     )");
 
     QSqlQuery query(DB_connection);
-    query.prepare("SELECT id, income_amount, income_source, timestamp FROM records WHERE income_amount IS NOT NULL AND user_id = ?");
+    query.prepare("SELECT id, income_amount, income_source, timestamp FROM records WHERE income_amount IS NOT NULL AND user_id = ? And income_amount>0");
     query.addBindValue(currentUserId);
 
     if (!query.exec()) {
@@ -400,7 +400,7 @@ void RecordWindow::showExpenseTable() {
     )");
 
     QSqlQuery query(DB_connection);
-    query.prepare("SELECT id, expense_amount, expense_category, timestamp FROM records WHERE expense_amount IS NOT NULL AND user_id = ?");
+    query.prepare("SELECT id, expense_amount, expense_category, timestamp FROM records WHERE expense_amount IS NOT NULL AND user_id = ? AND expense_amount>0");
     query.addBindValue(currentUserId);
 
     if (!query.exec()) {

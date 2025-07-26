@@ -32,7 +32,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     qDebug() << "Resolved DB Path in monthlyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "❌ DB Open Error:" << db.lastError().text();
+        qDebug() << "DB Open Error:" << db.lastError().text();
         return;
     }
 
@@ -49,7 +49,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     query.bindValue(":uid", currentUserId);
 
     if (!query.exec()) {
-        qDebug() << "❌ Query Error:" << query.lastError().text();
+        qDebug() << " Query Error:" << query.lastError().text();
         return;
     }
 
@@ -73,7 +73,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
         QString monthNum = query.value(0).toString();
         qreal value = query.value(1).toDouble();
 
-        maxExpense = qMax(maxExpense, value);  // 📌 Track max expense
+        maxExpense = qMax(maxExpense, value);
 
         QString shortMonth = monthNames.value(monthNum.toInt() - 1);
         monthLabels << shortMonth;
@@ -100,7 +100,7 @@ monthlyWindow::monthlyWindow(const QString &userEmail, int userId, QWidget *pare
     QValueAxis *axisY = new QValueAxis();
     axisY->setLabelFormat("Rs. %d");
     axisY->setTitleText("Total Expense");
-    axisY->setRange(0, maxExpense + 1000);  // ✅ Dynamic max + buffer
+    axisY->setRange(0, maxExpense + 10000);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

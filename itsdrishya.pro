@@ -26,13 +26,11 @@ SOURCES += \
     welwindow.cpp \
     RecordWindow.cpp \
     compare.cpp \
-    expense.cpp \
     expert.cpp \
     finaldial.cpp \
     goaldata.cpp \
     graph.cpp \
     Help.cpp \
-    history.cpp \
     historypage.cpp \
     insertt.cpp \
     profile.cpp \
@@ -58,13 +56,11 @@ HEADERS += \
     welwindow.h \
     RecordWindow.h \
     compare.h \
-    expense.h \
     expert.h \
     finaldial.h \
     goaldata.h \
     graph.h \
     Help.h \
-    history.h \
     historypage.h \
     insertt.h \
     profile.h \
@@ -88,12 +84,10 @@ FORMS += \
     welwindow.ui \
     RecordWindow.ui \
     compare.ui \
-    expense.ui \
     expert.ui \
     finaldial.ui \
     graph.ui\
     Help.ui\
-    history.ui\
     historypage.ui\
     insertt.ui\
     profile.ui \

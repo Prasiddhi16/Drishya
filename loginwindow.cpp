@@ -229,4 +229,10 @@ void loginWindow::on_pushButton_2_clicked()
 
     connect(buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
     dialog.exec();
+
+}
+void loginWindow::closeEvent(QCloseEvent *event)
+{
+    QMainWindow::closeEvent(event);
+    qApp->quit();
 }

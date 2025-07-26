@@ -170,7 +170,16 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
 
         incomeAmount->setText("₹ " + QString::number(totalIncome, 'f', 2));
         expenseAmount->setText("₹ " + QString::number(totalExpense, 'f', 2));
-        savingsAmount->setText("₹ " + QString::number(totalIncome - totalExpense, 'f', 2));
+        double x;
+        x=totalIncome - totalExpense;
+        if(totalIncome - totalExpense<0)
+        {
+        savingsAmount->setText("₹ " + QString::number(0, 'f', 2));
+        }
+        else
+        {
+           savingsAmount->setText("₹ " + QString::number(totalIncome - totalExpense, 'f', 2));
+        }
         budgetAmount->setText("₹ " + QString::number(totalIncome * 0.7, 'f', 2)); // 70% spending guideline
     } else {
         qDebug() << "DB Connection Failed:" << db.lastError().text();
@@ -207,19 +216,17 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
 
     }
 
-    // ---------------- Bar Chart Construction ----------------
     QBarSet *incomeSet  = new QBarSet("Income");
     QBarSet *expenseSet = new QBarSet("Expenses");
     QBarSet *savingsSet = new QBarSet("Savings");
 
-    double minVal = 0.0; // allow negative savings
+    double minVal = 0.0;
     double maxVal = 0.0;
 
     for (int month = 1; month <= 12; ++month) {
         double income  = incomeMap.value(month, 0.0);
         double expense = expenseMap.value(month, 0.0);
-        double savings = income - expense; // may be negative
-
+        double savings = income - expense;
         *incomeSet  << income;
         *expenseSet << expense;
         *savingsSet << savings;
@@ -227,13 +234,13 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         if (income  > maxVal) maxVal = income;
         if (expense > maxVal) maxVal = expense;
         if (savings > maxVal) maxVal = savings;
-        if (savings < minVal) minVal = savings; // track negative only
+        if (savings < minVal) minVal = savings;
     }
 
-    // Optional custom colors
-    incomeSet->setColor(QColor("#3498db"));  // Blue
-    expenseSet->setColor(QColor("#e74c3c")); // Red
-    savingsSet->setColor(QColor("#2ecc71")); // Green
+
+    incomeSet->setColor(QColor("#3498db"));
+    expenseSet->setColor(QColor("#e74c3c"));
+    savingsSet->setColor(QColor("#2ecc71"));
 
     QBarSeries *series = new QBarSeries();
     series->append(incomeSet);
@@ -263,7 +270,8 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
 
     QValueAxis *axisY = new QValueAxis();
     axisY->setTitleText("Amount (₹)");
-    axisY->setRange(0, 50000);
+
+    axisY->setRange(0, maxVal+10000);
     axisY->applyNiceNumbers();
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
@@ -299,6 +307,7 @@ void homeWindow::openAnalytics()
 {
     analysisWindow *analysis_window = new analysisWindow(currentUserName, currentUserEmail, currentUserId, this);
     analysis_window->show();
+    this->hide();
 }
 
 
@@ -307,22 +316,30 @@ void homeWindow::openRecordWindow()
 {
     RecordWindow* record_window = new RecordWindow(currentUserName, currentUserEmail, currentUserId, this);
     record_window->show();
+    this->hide();
+
 }
 
 void homeWindow::openvisions()
 {
     Visions* vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
     vision_win->show();
+    this->hide();
+
 }
 
 void homeWindow::openreview()
 {
     review *review_win = new review(currentUserName, currentUserEmail, currentUserId, this);
     review_win->show();
+    this->hide();
+
 }
 void homeWindow::openhelp()
 {
     Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
     help_win->show();
+    this->hide();
+
 }
 

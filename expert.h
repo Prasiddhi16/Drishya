@@ -18,9 +18,9 @@ public:
 
 private:
     Ui::expert *ui;
-    QString m_userEmail;  // 👤 Stores user's email
-    QString m_userName;   // 🪪 Optional: Extracted or set name
-    int m_userId;         // 🔐 Unique user identifier
+    QString m_userEmail;
+    QString m_userName;
+    int m_userId;
 protected:
     void closeEvent(QCloseEvent *event) override;
 
@@ -28,7 +28,7 @@ signals:
     void windowClosed();
 
 private slots:
-    void connectToDatabase();        // Initializes MainConnection
+    void connectToDatabase();
     void loadExpertReviewPage();     // Loads chart and insights
     QString generateInsight(const QVector<double> &values, double threshold, const QString &label);
     void clearChartLayout();         // Clears previous chart layout

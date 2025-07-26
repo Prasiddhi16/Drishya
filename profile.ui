@@ -421,9 +421,26 @@ qproperty-alignment: AlignCenter;</string>
             </item>
             <item row="0" column="2">
              <widget class="QPushButton" name="logout">
+<<<<<<< HEAD
               <property name="styleSheet">
                <string notr="true">border:none;
 text-align: left;</string>
+=======
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>90</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border:none;</string>
+>>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
               </property>
               <property name="text">
                <string>Log out</string>

@@ -23,7 +23,7 @@ private slots:
     void on_eno_clicked();
 
 private:
-    class Ui_secDialog *ui;  // Use generated class directly
+    class Ui_secDialog *ui;
     thirdDialog *thirddialog;
         taxDialog *TaxdialogInstance;
     QString currentUserName;

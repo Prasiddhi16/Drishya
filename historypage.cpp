@@ -36,11 +36,13 @@ historypage::historypage(const QString &userName, const QString &userEmail, int 
         }
     }
 
-    // Create widgets
+
     startDateEdit = new QDateEdit(QDate::currentDate().addMonths(-1));
+    startDateEdit->setDisplayFormat("yyyy/MM/dd");
     startDateEdit->setCalendarPopup(true);
 
     endDateEdit = new QDateEdit(QDate::currentDate());
+    endDateEdit->setDisplayFormat("yyyy/MM/dd");
     endDateEdit->setCalendarPopup(true);
 
     viewHistoryButton = new QPushButton("View History");
@@ -51,7 +53,7 @@ historypage::historypage(const QString &userName, const QString &userEmail, int 
     tableView->setModel(model);
     tableView->setAlternatingRowColors(true);
     tableView->setStyleSheet("background-color: white; color: black; alternate-background-color: #F2F2F2;");
-    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);  // Stretch all columns equally
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
     tableView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tableView->setFrameStyle(QFrame::NoFrame);

@@ -58,9 +58,9 @@ public:
     QToolButton *toolButton_4;
     QSpacerItem *horizontalSpacer_4;
     QGridLayout *gridLayout;
-    QToolButton *toolButton_6;
     QSpacerItem *horizontalSpacer_6;
     QPushButton *logout;
+    QToolButton *toolButton_6;
     QWidget *page_2;
     QGridLayout *gridLayout_8;
     QLabel *aboutuser;
@@ -342,6 +342,22 @@ public:
 
         gridLayout = new QGridLayout();
         gridLayout->setObjectName("gridLayout");
+        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer_6, 0, 1, 1, 1);
+
+        logout = new QPushButton(page);
+        logout->setObjectName("logout");
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Fixed);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(logout->sizePolicy().hasHeightForWidth());
+        logout->setSizePolicy(sizePolicy5);
+        logout->setMinimumSize(QSize(90, 0));
+        logout->setStyleSheet(QString::fromUtf8("border:none;"));
+
+        gridLayout->addWidget(logout, 0, 2, 1, 1);
+
         toolButton_6 = new QToolButton(page);
         toolButton_6->setObjectName("toolButton_6");
         sizePolicy3.setHeightForWidth(toolButton_6->sizePolicy().hasHeightForWidth());
@@ -357,16 +373,6 @@ public:
 "    "));
 
         gridLayout->addWidget(toolButton_6, 0, 0, 1, 1);
-
-        horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
-
-        gridLayout->addItem(horizontalSpacer_6, 0, 1, 1, 1);
-
-        logout = new QPushButton(page);
-        logout->setObjectName("logout");
-        logout->setStyleSheet(QString::fromUtf8("border:none;"));
-
-        gridLayout->addWidget(logout, 0, 2, 1, 1);
 
 
         verticalLayout->addLayout(gridLayout);
@@ -409,11 +415,11 @@ public:
 
         backButton_1 = new QToolButton(page_2);
         backButton_1->setObjectName("backButton_1");
-        QSizePolicy sizePolicy5(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(backButton_1->sizePolicy().hasHeightForWidth());
-        backButton_1->setSizePolicy(sizePolicy5);
+        QSizePolicy sizePolicy6(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Minimum);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(backButton_1->sizePolicy().hasHeightForWidth());
+        backButton_1->setSizePolicy(sizePolicy6);
         backButton_1->setStyleSheet(QString::fromUtf8("\n"
 "    border: none;           \n"
 "    padding: 0px;                 \n"
@@ -470,8 +476,8 @@ public:
 
         backButton_2 = new QToolButton(page_3);
         backButton_2->setObjectName("backButton_2");
-        sizePolicy5.setHeightForWidth(backButton_2->sizePolicy().hasHeightForWidth());
-        backButton_2->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(backButton_2->sizePolicy().hasHeightForWidth());
+        backButton_2->setSizePolicy(sizePolicy6);
         backButton_2->setMinimumSize(QSize(0, 0));
         backButton_2->setMaximumSize(QSize(16777215, 16777215));
         backButton_2->setStyleSheet(QString::fromUtf8("\n"
@@ -596,8 +602,8 @@ public:
         gridLayout_10->setContentsMargins(0, 0, 0, 0);
         backButton_3 = new QToolButton(gridLayoutWidget);
         backButton_3->setObjectName("backButton_3");
-        sizePolicy5.setHeightForWidth(backButton_3->sizePolicy().hasHeightForWidth());
-        backButton_3->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(backButton_3->sizePolicy().hasHeightForWidth());
+        backButton_3->setSizePolicy(sizePolicy6);
         backButton_3->setMinimumSize(QSize(0, 0));
         backButton_3->setMaximumSize(QSize(16777215, 16777215));
         backButton_3->setStyleSheet(QString::fromUtf8("\n"
@@ -636,8 +642,8 @@ public:
         gridLayout_11->setContentsMargins(0, 0, 0, 0);
         backButton_4 = new QToolButton(gridLayoutWidget_2);
         backButton_4->setObjectName("backButton_4");
-        sizePolicy5.setHeightForWidth(backButton_4->sizePolicy().hasHeightForWidth());
-        backButton_4->setSizePolicy(sizePolicy5);
+        sizePolicy6.setHeightForWidth(backButton_4->sizePolicy().hasHeightForWidth());
+        backButton_4->setSizePolicy(sizePolicy6);
         backButton_4->setStyleSheet(QString::fromUtf8("\n"
 "    border: none;           \n"
 "    padding: 0px;                 \n"
@@ -694,8 +700,8 @@ public:
         label_28->setText(QCoreApplication::translate("profile", "<html><head/><body><p>Report an issue</p></body></html>", nullptr));
         report->setText(QCoreApplication::translate("profile", "...", nullptr));
         toolButton_4->setText(QCoreApplication::translate("profile", "...", nullptr));
-        toolButton_6->setText(QCoreApplication::translate("profile", "...", nullptr));
         logout->setText(QCoreApplication::translate("profile", "Log out", nullptr));
+        toolButton_6->setText(QCoreApplication::translate("profile", "...", nullptr));
         aboutuser->setText(QString());
         emailuser->setText(QString());
         label_14->setText(QCoreApplication::translate("profile", "Username:", nullptr));

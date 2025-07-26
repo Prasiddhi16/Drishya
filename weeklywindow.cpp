@@ -31,7 +31,7 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     qDebug() << "Resolved DB Path in weeklyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << "❌ DB Open Error:" << db.lastError().text();
+        qDebug() << " DB Open Error:" << db.lastError().text();
         return;
     }
 
@@ -98,7 +98,7 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     QValueAxis *axisY = new QValueAxis();
     axisY->setLabelFormat("Rs. %d");
     axisY->setTitleText("Total Expense");
-    axisY->setRange(0, maxExpense + 1000);  // 📈 Dynamic extension
+    axisY->setRange(0, maxExpense + 10000);
     chart->addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 

@@ -12,8 +12,8 @@
 #include <QMessageBox>
 #include <QRegularExpression>
 #include <QDebug>
-#include <QTimer> // For potential eye button functionality
-#include <algorithm> // Required for std::count_if
+#include <QTimer>
+#include <algorithm>
 
 profile::profile(int userId, const QString &userEmail, QWidget *parent)
     : QDialog(parent),
@@ -305,16 +305,14 @@ void profile::on_revbutton_clicked()
 {
     qDebug() << "Logging out from Profile window";
 
-    // Disable persistent login
-    QSettings settings("YourOrganization", "YourApp");
-    settings.setValue("keepMeLoggedIn", 0);
 
-    // Show login window
+    QSettings settings("ItsDrishya", "LoginSystem");
+    settings.setValue("keep_logged_in", 0);
+
     login_window = new loginWindow();
-    login_window->show();
+   login_window->show();
+     this->close();
 
-    // Close the current profile window
-    this->close();
 }
 
 

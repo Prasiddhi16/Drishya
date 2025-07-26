@@ -4,7 +4,6 @@ class homeWindow;
 #include <QMainWindow>
 #include <expert.h>
 #include <compare.h>
-#include <expense.h>
 #include <graph.h>
 #include<taxdialog.h>
 
@@ -36,7 +35,7 @@ private slots:
    void openHome();
    void openAnalytics();
 
-   void openvisions();
+     void openvisions();
    void openRecordWindow();
    void openhelp();
    void on_pushButton_clicked();
@@ -45,10 +44,9 @@ private slots:
 
      class compare *Compare;
     class expert *Expert;
-      //expense *Expense;
-   class graph*Graph;
+    class graph*Graph;
     class taxDialog *Taxdialog;
-   class  historypage *History;
+    class  historypage *History;
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
