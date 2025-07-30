@@ -115,9 +115,9 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     ui->progressSavingsBar->setValue(savingsPercent);
   //  ui->progressSavingsBar->setStyleSheet("QProgressBar::chunk { background-color: #27ae60; }");
 
-    ui->labelSavings->setText(" 🏦 Savings this month: Rs. " + QString::number(monthlySavings));
+    ui->labelSavings->setText(" 🏦 Savings this month: Rs. " + QString::number(monthlySavings,'f',2));
 
-    ui->labelExpense->setText(" 💵 Expense this month: Rs. " + QString::number(monthlyExpense));
+    ui->labelExpense->setText(" 💵 Expense this month: Rs. " + QString::number(monthlyExpense,'f',2));
 
 
 

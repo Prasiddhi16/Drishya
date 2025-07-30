@@ -38,7 +38,7 @@ budgetWindow::budgetWindow(const QString &userEmail, int userId, QWidget *parent
     }
 
     QSqlQuery query(db);
-    query.prepare("SELECT expense_amount, timestamp, expense_category FROM records WHERE user_id = :uid AND expense_amount>0");
+   query.prepare("SELECT '₹ ' || printf(\"%.2f\", expense_amount) AS formatted_amount, timestamp, expense_category FROM records WHERE user_id = :uid AND expense_amount>0");
     query.bindValue(":uid", currentUserId);
 
     if (!query.exec()) {
