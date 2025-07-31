@@ -39,10 +39,12 @@ historypage::historypage(const QString &userName, const QString &userEmail, int 
 
     startDateEdit = new QDateEdit(QDate::currentDate().addMonths(-1));
     startDateEdit->setDisplayFormat("yyyy/MM/dd");
+    startDateEdit->setStyleSheet("color:white");
     startDateEdit->setCalendarPopup(true);
 
     endDateEdit = new QDateEdit(QDate::currentDate());
     endDateEdit->setDisplayFormat("yyyy/MM/dd");
+    endDateEdit->setStyleSheet("color:white");
     endDateEdit->setCalendarPopup(true);
 
     viewHistoryButton = new QPushButton("View History");

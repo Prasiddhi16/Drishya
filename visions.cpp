@@ -142,7 +142,7 @@ Visions::~Visions()
 void Visions::setupUIElementLists() {
     // Populate QLabel lists
     goalNameLabels << ui->goalNameLabel1 << ui->goalNameLabel2 << ui->goalNameLabel3
-                  << ui->goalNameLabel4 << ui->goalNameLabel5 << ui->goalNameLabel6;
+                   << ui->goalNameLabel4 << ui->goalNameLabel5 << ui->goalNameLabel6;
 
     incomeLabels << ui->incomeLabel1 << ui->incomeLabel2 << ui->incomeLabel3
                  << ui->incomeLabel4 << ui->incomeLabel5 << ui->incomeLabel6;

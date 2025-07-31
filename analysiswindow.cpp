@@ -154,7 +154,7 @@ void analysisWindow::updateWeeklyExpense()
         qDebug() << "SQL Error (weeklyExpense):" << query.lastError().text();
     }
 
-    ui->expense_label->setText(" Weekly Expense: Rs " + QString::number(weeklyExpense));
+    ui->expense_label->setText(" Weekly Expense: Rs " + QString::number(weeklyExpense,'f',2));
     ui->expense_label->setStyleSheet("font-size: 20px; font-weight: bold; color: #ffffff;");
 }
 
