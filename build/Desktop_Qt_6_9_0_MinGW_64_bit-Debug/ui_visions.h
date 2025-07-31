@@ -684,7 +684,7 @@ public:
         add_3->setObjectName("add_3");
         add_3->setMinimumSize(QSize(0, 30));
         add_3->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"        background-color:white;\n"
+"      \n"
 "	border: 0.5px solid black;\n"
 "        border-radius: 10px;\n"
 "        padding: 6px 12px;\n"
@@ -1135,7 +1135,7 @@ public:
         Visions->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Visions);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 1440, 21));
+        menubar->setGeometry(QRect(0, 0, 1440, 18));
         Visions->setMenuBar(menubar);
         statusbar = new QStatusBar(Visions);
         statusbar->setObjectName("statusbar");

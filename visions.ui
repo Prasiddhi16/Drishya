@@ -804,7 +804,7 @@ padding top:15px;
                      </property>
                      <property name="styleSheet">
                       <string notr="true">QPushButton {
-        background-color:white;
+      
 	border: 0.5px solid black;
         border-radius: 10px;
         padding: 6px 12px;
@@ -1454,7 +1454,7 @@ QProgressBar::chunk {
      <x>0</x>
      <y>0</y>
      <width>1440</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
   </widget>
