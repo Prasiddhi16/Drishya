@@ -36,8 +36,6 @@ public slots:
 
 private slots:
     void onAddButtonClicked();
-<<<<<<< HEAD
-=======
 
     // Delete button slots
     void on_delete_1_clicked();
@@ -53,8 +51,6 @@ private slots:
     void on_edit4_clicked();
     void on_edit5_clicked();
     void on_edit6_clicked();
-
->>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
@@ -92,12 +88,9 @@ private:
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
-<<<<<<< HEAD
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
-=======
     void saveGoal(const GoalData &data);
->>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
     void updateGoalUI(int goalIndex, const GoalData &data);
@@ -109,10 +102,6 @@ private:
     QLabel* getMonthLabel(int index);
     QProgressBar* getProgressBar(int index);
     QStackedWidget* getStackedWidget(int index);
-<<<<<<< HEAD
-
-=======
->>>>>>> 34fbc3b696b0c41d67981212828781befb8ff3e3
 
 };
 

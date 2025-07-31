@@ -11,13 +11,11 @@ release/weeklywindow.o
 release/welwindow.o
 release/RecordWindow.o
 release/compare.o
-release/expense.o
 release/expert.o
 release/finaldial.o
 release/goaldata.o
 release/graph.o
 release/Help.o
-release/history.o
 release/historypage.o
 release/insertt.o
 release/profile.o
@@ -52,7 +50,6 @@ release/moc_expert.o
 release/moc_finaldial.o
 release/moc_graph.o
 release/moc_Help.o
-release/moc_history.o
 release/moc_historypage.o
 release/moc_insertt.o
 release/moc_profile.o
