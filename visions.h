@@ -51,9 +51,19 @@ private slots:
     void on_edit3_clicked();
     void on_edit4_clicked();
     void on_edit5_clicked();
+<<<<<<< HEAD
     void on_edit6_clicked();
     void on_edit6_clicked();*/
 
+=======
+
+    void on_edit6_clicked();
+
+    void on_edit6_clicked();*/
+
+
+
+>>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
@@ -91,16 +101,23 @@ private:
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
+<<<<<<< HEAD
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
     void saveGoal(const GoalData &data);
 
+=======
+>>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
 
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
 
-    //void saveGoal(const GoalData &data);
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
     void updateGoalUI(int goalIndex, const GoalData &data);

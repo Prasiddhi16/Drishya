@@ -19,7 +19,7 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
 {
     ui->setupUi(this);
 
-    QString connectionName = "qt_sql_monthly_connection";
+    QString connectionName = "qt_sql_weekly_connection";
     if (QSqlDatabase::contains(connectionName)) {
         QSqlDatabase::removeDatabase(connectionName);
     }
@@ -31,63 +31,66 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     qDebug() << "Resolved DB Path in weeklyWindow:" << dbPath;
 
     if (!db.open()) {
-        qDebug() << " DB Open Error:" << db.lastError().text();
+        qDebug() << "DB Open Error:" << db.lastError().text();
         return;
     }
 
     QSqlQuery query(db);
-    QString sql = R"(SELECT strftime('%Y-%m', timestamp) AS month_id,
-                            strftime('%W', timestamp) AS week_id,
-                            SUM(expense_amount)
+    QString currentMonth = QDate::currentDate().toString("yyyy-MM");
+
+    QString sql = R"(SELECT timestamp,
+                            SUM(expense_amount) AS total
                      FROM records
-                     WHERE expense_amount > 0 AND user_id = :uid
-                     GROUP BY month_id, week_id
-                     ORDER BY month_id, week_id)";
+                     WHERE expense_amount > 0
+                       AND user_id = :uid
+                       AND strftime('%Y-%m', timestamp) = :month
+                     GROUP BY strftime('%Y-%m-%d', timestamp)
+                     ORDER BY timestamp)";
 
     query.prepare(sql);
     query.bindValue(":uid", currentUserId);
+    query.bindValue(":month", currentMonth);
 
     if (!query.exec()) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
     }
 
-    QBarSeries *series = new QBarSeries();
-    QList<QColor> barColors = { Qt::red, Qt::blue, Qt::green, Qt::magenta, Qt::darkCyan, Qt::darkYellow };
-    QMap<QString, int> monthWeekCounter;
-    QStringList weekLabels;
-    int displayIndex = 0;
-    qreal maxExpense = 0.0;
+    // Map week-of-month -> total expense
+    QMap<int, double> weeklyTotals;
+
+    QDate monthStart = QDate::fromString(currentMonth + "-01", "yyyy-MM-dd");
 
     while (query.next()) {
-        QString month = query.value(0).toString();
-        QString weekRaw = query.value(1).toString();
-        double total = query.value(2).toDouble();
+        QString dateStr = query.value(0).toString(); // format: yyyy-MM-dd HH:mm:ss
+        QDate recordDate = QDate::fromString(dateStr.left(10), "yyyy-MM-dd");
+        int dayOffset = monthStart.daysTo(recordDate);
+        int weekOfMonth = (dayOffset / 7) + 1;
 
+        double amount = query.value(1).toDouble();
+        weeklyTotals[weekOfMonth] += amount;
+    }
+
+    QBarSeries *series = new QBarSeries();
+    QBarSet *barSet = new QBarSet("This Month");
+    QStringList weekLabels;
+    qreal maxExpense = 0.0;
+
+    for (int week = 1; week <= weeklyTotals.lastKey(); ++week) {
+        double total = weeklyTotals.value(week, 0.0);
         maxExpense = qMax(maxExpense, total);
 
-        if (!monthWeekCounter.contains(month)) {
-            monthWeekCounter[month] = 1;
-        } else {
-            monthWeekCounter[month] += 1;
-        }
-
-        int weekNumDisplay = monthWeekCounter[month];
-        QString label = QString("%1 - Week %2").arg(month).arg(weekNumDisplay);
+        QString label = QString("Week %1").arg(week);
         weekLabels << label;
-
-        QBarSet *bar = new QBarSet(label);
-        for (int i = 0; i <= displayIndex; ++i)
-            bar->append(i == displayIndex ? total : 0);
-
-        bar->setColor(barColors[displayIndex % barColors.size()]);
-        series->append(bar);
-        ++displayIndex;
+        barSet->append(total);
     }
+
+    barSet->setColor(Qt::blue);
+    series->append(barSet);
 
     QChart *chart = new QChart();
     chart->addSeries(series);
-    chart->setTitle("Weekly Expense Review (Grouped by Month)");
+    chart->setTitle(QString("Weekly Expense – %1").arg(QDate::currentDate().toString("MMMM yyyy")));
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
     QBarCategoryAxis *axisX = new QBarCategoryAxis();

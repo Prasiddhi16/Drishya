@@ -144,17 +144,21 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
 
     contentLayout->addLayout(summaryRowLayout);
 
-    // Database Access
-    QString connectionName = "qt_sql_home_connection";
+
+    QString connectionName = "home_connection";
+
     if (QSqlDatabase::contains(connectionName)) {
         QSqlDatabase::removeDatabase(connectionName);
     }
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-    db.setDatabaseName("C:/Users/Lenovo/OneDrive/Desktop/itsdrishya/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/centralized.db");
-    QSqlQuery query(db);
-    if (db.open()) {
-        QSqlQuery query(db);
+    QSqlDatabase homeDB = QSqlDatabase::addDatabase("QSQLITE", connectionName);
+
+
+    QString dbFilePath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    homeDB.setDatabaseName(dbFilePath);
+
+    if (homeDB.open()){
+        QSqlQuery query(homeDB);
         double totalIncome = 0.0;
         double totalExpense = 0.0;
 
@@ -182,14 +186,14 @@ homeWindow::homeWindow(const QString &userName, const QString &userEmail, int us
         }
         budgetAmount->setText("₹ " + QString::number(totalIncome * 0.7, 'f', 2)); // 70% spending guideline
     } else {
-        qDebug() << "DB Connection Failed:" << db.lastError().text();
+        qDebug() << "DB Connection Failed:" << homeDB.lastError().text();
     }
 
 
 
     QMap<int, double> incomeMap, expenseMap;
 
-
+ QSqlQuery query(homeDB);
     query.prepare("SELECT strftime('%m', timestamp) AS month, SUM(income_amount) FROM records WHERE user_id = :uid GROUP BY month");
     query.bindValue(":uid", currentUserId);
     if (query.exec()) {
