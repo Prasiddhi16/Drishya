@@ -51,13 +51,9 @@ private slots:
     void on_edit3_clicked();
     void on_edit4_clicked();
     void on_edit5_clicked();
-<<<<<<< HEAD
     void on_edit6_clicked();
-=======
     void on_edit6_clicked();*/
 
-
->>>>>>> 6e718454da725a26f113c5f356fc1fcbb5b3b874
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
@@ -95,18 +91,16 @@ private:
     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
-<<<<<<< HEAD
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
     void saveGoal(const GoalData &data);
-=======
+
 
     void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
 
     //void saveGoal(const GoalData &data);
 
->>>>>>> 6e718454da725a26f113c5f356fc1fcbb5b3b874
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
     void updateGoalUI(int goalIndex, const GoalData &data);
@@ -118,13 +112,7 @@ private:
     QLabel* getMonthLabel(int index);
     QProgressBar* getProgressBar(int index);
     QStackedWidget* getStackedWidget(int index);
-<<<<<<< HEAD
-=======
 
-
-
-
->>>>>>> 6e718454da725a26f113c5f356fc1fcbb5b3b874
 
 };
 
