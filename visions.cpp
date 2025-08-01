@@ -33,10 +33,10 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
     : QMainWindow(parent),
     ui(new Ui::Visions),
     goalDataList(MAX_GOAL_SLOTS),
-    db(QSqlDatabase::addDatabase("QSQLITE", "visions_db_connection")),
+    db(QSqlDatabase::addDatabase("QSQLITE", "visions_db_connection")), // Re-add connection here
     currentUserName(userName),
     currentUserEmail(userEmail),
-    currentUserId(userId) // Matches currentUserId's position in .h
+    currentUserId(userId)
 {
     ui->setupUi(this);
 
@@ -117,15 +117,12 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
             editGoal(i + 1); // Pass 1-based index
         });
     }
-
-    // Database Initialization and Data Loading
     if (openDatabase()) {
-        createGoalsTable(); // Ensure the table exists
-        loadGoals(); // Load existing goals for the current user
+        createGoalsTable();
+        loadGoals();
     } else {
         QMessageBox::critical(this, "Database Error", "Failed to open database for Visions window.");
     }
-
 }
 
 Visions::~Visions()
@@ -134,11 +131,7 @@ Visions::~Visions()
     delete ui;
 }
 
-// visions.cpp
 
-// ... (existing includes) ...
-
-// Add this function definition
 void Visions::setupUIElementLists() {
     // Populate QLabel lists
     goalNameLabels << ui->goalNameLabel1 << ui->goalNameLabel2 << ui->goalNameLabel3
@@ -177,25 +170,18 @@ void Visions::setupUIElementLists() {
 
 // --- Database Management ---
 bool Visions::openDatabase() {
-    // It's good practice to give connections unique names if managing multiple windows/connections
-    QString connectionName = "visions_db_connection";
-    if (QSqlDatabase::contains(connectionName)) {
-        db = QSqlDatabase::database(connectionName); // Reuse existing connection
-    } else {
-        db = QSqlDatabase::addDatabase("QSQLITE", connectionName); // Create new connection
-        QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
-        db.setDatabaseName(dbPath);
-        qDebug() << "Resolved DB Path in Visions:" << dbPath;
-    }
+    QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
+    db.setDatabaseName(dbPath);
 
-    if (!db.isOpen()) { // Only try to open if it's not already open
+    if (!db.isOpen()) {
         if (!db.open()) {
-            qWarning() << "Failed to open database in Visions:" << db.lastError().text();
+            qWarning() << "Failed to open Visions database:" << db.lastError().text();
             return false;
         }
     }
     return true;
 }
+
 
 void Visions::closeDatabase() {
     if (db.isOpen()) {
@@ -221,22 +207,16 @@ void Visions::createGoalsTable() {
 }
 
 // --- Goal Data Handling ---
-
-// Load goals for the current user
 void Visions::loadGoals() {
     qDebug() << "Entering loadGoals()...";
-    // Clear in-memory list first by resetting all elements to empty
-    for (int i = 0; i < goalDataList.size(); ++i) {
-        goalDataList[i] = GoalData(); // Reset all to empty
-        goalDataList[i].slotIndex = i + 1; // Assign correct slot index
-    }
 
-    QSqlQuery query(db); // Associate query with our db member variable
-    // Order by a specific column to ensure consistent loading into slots
-    // You might want to add an explicit 'slot_order' column to your DB
-    // or sort by goal_id if you want a stable order.
+    // Clear and resize the list before loading
+    goalDataList.clear();
+    goalDataList.resize(MAX_GOAL_SLOTS);
+
+    QSqlQuery query(db);
     query.prepare("SELECT goal_id, goal_name, required_amount, downpayment, time_limit "
-                  "FROM goals WHERE user_id = :userId ORDER BY goal_name ASC"); // Ordered for consistent loading
+                  "FROM goals WHERE user_id = :userId ORDER BY goal_name ASC");
     query.bindValue(":userId", currentUserId);
 
     if (!query.exec()) {
@@ -244,62 +224,86 @@ void Visions::loadGoals() {
         return;
     }
 
+    // Now, populate the goalDataList with the results
     int currentSlot = 0;
-    while (query.next() && currentSlot < goalDataList.size()) { // Use goalDataList.size() for clarity
+    while (query.next() && currentSlot < MAX_GOAL_SLOTS) {
         GoalData data;
         data.id = query.value("goal_id").toString();
         data.name = query.value("goal_name").toString();
         data.incomeRequired = query.value("required_amount").toDouble();
         data.downpayment = query.value("downpayment").toDouble();
         data.duration = query.value("time_limit").toInt();
-        data.slotIndex = currentSlot + 1; // Assign slot index based on load order
-
-        goalDataList[currentSlot] = data; // Place loaded data into the current slot
+        data.slotIndex = currentSlot + 1;
+        goalDataList[currentSlot] = data;
         currentSlot++;
     }
 
-    // Update UI for all slots (some might remain empty if no data or less than 6 goals)
-    for (int i = 0; i < goalDataList.size(); ++i) {
+    // Update the UI for all slots, whether they were populated or not
+    for (int i = 0; i < MAX_GOAL_SLOTS; ++i) {
         updateGoalUI(i + 1, goalDataList[i]);
     }
+
     qDebug() << "Goals loaded and UI updated. Exiting loadGoals().";
 }
-
-// Save or Update a single goal
 void Visions::saveGoal(const GoalData &data) {
     qDebug() << "Entering saveGoal() for ID:" << data.id;
+
     if (!db.isOpen()) {
-        qWarning() << "Database not open for saving goal!";
         QMessageBox::critical(this, "Database Error", "Database not open for saving goal.");
         return;
     }
 
-    QSqlQuery query(db); // Associate query with our db member variable
+    // STEP 1: Attempt to UPDATE the existing record first
+    QSqlQuery updateQuery(db);
+    updateQuery.prepare("UPDATE goals SET "
+                        "goal_name = :goal_name, "
+                        "required_amount = :required_amount, "
+                        "downpayment = :downpayment, "
+                        "time_limit = :time_limit "
+                        "WHERE goal_id = :goal_id AND user_id = :user_id");
 
-    // INSERT OR REPLACE works if goal_id is PRIMARY KEY
-    query.prepare("INSERT OR REPLACE INTO goals "
-                  "(goal_id, user_id, goal_name, required_amount, downpayment, time_limit) "
-                  "VALUES (:goal_id, :user_id, :goal_name, :required_amount, :downpayment, :time_limit)");
+    updateQuery.bindValue(":goal_id", data.id);
+    updateQuery.bindValue(":user_id", currentUserId);
+    updateQuery.bindValue(":goal_name", data.name);
+    updateQuery.bindValue(":required_amount", data.incomeRequired);
+    updateQuery.bindValue(":downpayment", data.downpayment);
+    updateQuery.bindValue(":time_limit", data.duration);
 
-    query.bindValue(":goal_id", data.id); // Use the ID from the data struct
-    query.bindValue(":user_id", currentUserId); // Save with current user's ID
-    query.bindValue(":goal_name", data.name);
-    query.bindValue(":required_amount", data.incomeRequired);
-    query.bindValue(":downpayment", data.downpayment);
-    query.bindValue(":time_limit", data.duration);
-
-    if (!query.exec()) {
-        qWarning() << "Failed to save/update goal:" << query.lastError().text();
-        QMessageBox::critical(this, "Database Error", "Failed to save/update goal.");
-    } else {
-        qDebug() << "Goal saved/updated successfully for user" << currentUserId << ":" << data.name << "ID:" << data.id;
-        // After saving, reload all goals to ensure UI is consistent, especially for new goals getting IDs
-        loadGoals(); // This will also update the specific slot in UI
+    if (!updateQuery.exec()) {
+        qWarning() << "Failed to update goal:" << updateQuery.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to update existing goal.");
+        return;
     }
-    qDebug() << "Exiting saveGoal().";
+
+    // Check if any rows were affected (meaning an update happened)
+    if (updateQuery.numRowsAffected() > 0) {
+        qDebug() << "Goal updated successfully for ID:" << data.id;
+        loadGoals(); // Refresh the UI
+        return;
+    }
+
+    // STEP 2: If no rows were affected by the update, it must be a new goal. So, INSERT it.
+    QSqlQuery insertQuery(db);
+    insertQuery.prepare("INSERT INTO goals "
+                        "(goal_id, user_id, goal_name, required_amount, downpayment, time_limit) "
+                        "VALUES (:goal_id, :user_id, :goal_name, :required_amount, :downpayment, :time_limit)");
+
+    insertQuery.bindValue(":goal_id", data.id);
+    insertQuery.bindValue(":user_id", currentUserId);
+    insertQuery.bindValue(":goal_name", data.name);
+    insertQuery.bindValue(":required_amount", data.incomeRequired);
+    insertQuery.bindValue(":downpayment", data.downpayment);
+    insertQuery.bindValue(":time_limit", data.duration);
+
+    if (!insertQuery.exec()) {
+        qWarning() << "Failed to insert new goal:" << insertQuery.lastError().text();
+        QMessageBox::critical(this, "Database Error", "Failed to insert new goal.");
+    } else {
+        qDebug() << "New goal inserted successfully for ID:" << data.id;
+        loadGoals(); // Refresh the UI
+    }
 }
 
-// CORRECTED deleteGoal function
 void Visions::deleteGoal(int goalIndex) {
     qDebug() << "DEBUG: Entering deleteGoal for goalIndex:" << goalIndex;
 
@@ -461,8 +465,6 @@ void Visions::editGoal(int goalIndex) {
     qDebug() << "Dialog result: " << result;
     delete dialog;
 }
-
-
 // A generic slot to handle goal data from any button (Add or Edit)
 void Visions::onGoalSet(int goalIndex, const GoalData &data) {
     if (goalIndex < 1 || goalIndex > 6) {
@@ -470,26 +472,21 @@ void Visions::onGoalSet(int goalIndex, const GoalData &data) {
         return;
     }
 
-    GoalData updatedData = data; // Make a mutable copy of the data from the dialog
+    GoalData updatedData = data; // Get the data sent from the dialog
 
-    // If we're editing an existing goal, its ID will already be set in goalDataList[goalIndex - 1].
-    // If it's a new goal for an empty slot, the dialog might return an empty ID, so we generate one.
-    if (goalDataList[goalIndex - 1].isEmpty()) {
-        // This is a new goal being added to an empty slot, generate a new ID
+    // Check if the data from the dialog has an ID. If not, it's a new goal.
+    if (updatedData.id.isEmpty()) {
         updatedData.id = QUuid::createUuid().toString(QUuid::WithoutBraces);
-    } else {
-        // This is an existing goal being edited, ensure its original ID is maintained.
-        // The dialog *should* have returned the correct ID, but we double-check.
-        updatedData.id = goalDataList[goalIndex - 1].id;
     }
+    // If the ID is not empty, we assume it's an existing goal and use the ID from the dialog.
 
     updatedData.slotIndex = goalIndex; // Assign slot index for internal tracking
 
-    // Update the in-memory list first (this is important before saving to DB)
+    // Update the in-memory list first
     goalDataList[goalIndex - 1] = updatedData;
 
-    // Save/update to the database. The saveGoal function will then call loadGoals()
-    // which will refresh the entire UI to reflect the updated state from the DB.
+    // Save/update to the database.
+    // The saveGoal function will use the ID in updatedData to either INSERT or REPLACE.
     saveGoal(updatedData);
 }
 

@@ -5,6 +5,7 @@
 #include <QLabel>
 
 
+
 class loginWindow;
 class analysisWindow;
 
@@ -37,7 +38,6 @@ private:
     QLabel *expenseAmount;
     QLabel *savingsAmount;
     QLabel *budgetAmount;
-
     loginWindow* login_window = nullptr;
     analysisWindow* analysis_window = nullptr;
 };
