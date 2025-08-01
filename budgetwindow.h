@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
+#include<QTimer>
 
 namespace Ui {
 class budgetWindow;
@@ -29,6 +30,9 @@ private:
     QSqlQueryModel *model;
     QString currentUserEmail;
      int currentUserId;
+    QTimer *refreshTimer;
+    void refreshBudgetData();
+
 };
 
 #endif // BUDGETWINDOW_H

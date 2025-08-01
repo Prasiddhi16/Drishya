@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QSqlDatabase>
+#include <QTimer>
+#include <QtCharts/QChartView>
+
 
 namespace Ui {
 class revWindow;
@@ -26,6 +29,10 @@ private:
     Ui::revWindow *ui;
     QString currentUserEmail;
      int currentUserId;
+    QTimer *refreshTimer;
+    QChartView *chartView;
+    void refreshChart();
+
 };
 
 #endif // REVWINDOW_H

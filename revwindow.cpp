@@ -11,21 +11,24 @@
 #include <QCloseEvent>
 #include <QCoreApplication>
 #include <QDir>
+#include <QTimer>
 
-revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
+revWindow::revWindow(const QString &userEmail, int userId, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::revWindow)
     , currentUserEmail(userEmail)
     , currentUserId(userId)
+    , refreshTimer(new QTimer(this))
+    , chartView(new QChartView(this))
 {
     ui->setupUi(this);
+
     QString connectionName = "qt_sql_monthly_connection";
     if (QSqlDatabase::contains(connectionName)) {
         QSqlDatabase::removeDatabase(connectionName);
     }
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
 
@@ -36,9 +39,34 @@ revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
         return;
     }
 
+    setCentralWidget(chartView);
+    this->showMaximized();
+
+
+    refreshChart();
+
+
+    connect(refreshTimer, &QTimer::timeout, this, &revWindow::refreshChart);
+    refreshTimer->start(15000);
+}
+
+void revWindow::refreshChart()
+{
+    QSqlDatabase db = QSqlDatabase::database("qt_sql_monthly_connection");
     QSqlQuery query(db);
-    query.prepare("SELECT expense_category, SUM(expense_amount) FROM records WHERE user_id = :uid GROUP BY expense_category");
+
+    query.prepare(R"(
+        SELECT expense_category, SUM(expense_amount)
+        FROM records
+        WHERE user_id = :uid
+          AND expense_amount > 0
+          AND strftime('%W', timestamp) = strftime('%W', 'now')
+          AND strftime('%Y', timestamp) = strftime('%Y', 'now')
+        GROUP BY expense_category
+    )");
+
     query.bindValue(":uid", currentUserId);
+
     if (!query.exec()) {
         qDebug() << "Query Error:" << query.lastError().text();
         return;
@@ -67,10 +95,15 @@ revWindow::revWindow(const QString &userEmail, int userId,QWidget *parent)
     chart->legend()->setVisible(true);
     chart->legend()->setAlignment(Qt::AlignBottom);
 
-    QChartView *chartView = new QChartView(chart, this);
+    chartView->setChart(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
-    setCentralWidget(chartView);
-    this->showMaximized();
+    for (auto slice : series->slices()) {
+        QString category = slice->label();
+        qreal percentage = slice->percentage() * 100.0;
+        slice->setLabel(QString("%1: %2%").arg(category).arg(percentage, 0, 'f', 1));
+        slice->setLabelVisible(true);
+    }
+
 }
 
 revWindow::~revWindow()
