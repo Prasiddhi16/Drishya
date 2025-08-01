@@ -43,8 +43,6 @@ private:
     QString currentUserEmail;
     int currentUserId;
 
-
-
     homeWindow    *home_window;
 
 

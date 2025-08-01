@@ -1,12 +1,11 @@
 #ifndef VISIONS_H
 #define VISIONS_H
 
-// Core Qt headers
 #include <QMainWindow>
 #include <QtSql>
 #include <QSqlDatabase>
 #include <QVector>
-#include <QUuid> // Needed for UUID generation for goal_id
+#include <QUuid>
 
 #include "GoalData.h"
 #include "profile.h"
@@ -28,7 +27,8 @@ class Visions : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr); // Added default parent value
+    // This is the original constructor. No database parameter.
+    explicit Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~Visions();
 
 public slots:
@@ -36,46 +36,19 @@ public slots:
 
 private slots:
     void onAddButtonClicked();
-
-
-   /* //Delete button slots
-    void on_delete_1_clicked();
-    void on_delete_2_clicked();
-    void on_delete_3_clicked();
-    void on_delete_4_clicked();
-    void on_delete_5_clicked();
-    void on_delete_6_clicked();
-
-    void on_edit1_clicked();
-    void on_edit2_clicked();
-    void on_edit3_clicked();
-    void on_edit4_clicked();
-    void on_edit5_clicked();
-<<<<<<< HEAD
-    void on_edit6_clicked();
-    void on_edit6_clicked();*/
-
-=======
-
-    void on_edit6_clicked();
-
-    void on_edit6_clicked();*/
-
-
-
->>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
     void on_toolButton_clicked();
     void openHome();
     void openRecordWindow();
     void openAnalytics();
-    //void openvisions();
     void openreview();
     void openhelp();
 
 private:
     Ui::Visions *ui;
     QVector<GoalData> goalDataList;
-    QSqlDatabase db;
+
+    QSqlDatabase db; // <-- This is now a member variable
+
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;
@@ -93,31 +66,13 @@ private:
     QList<QPushButton*> editButtons;
     QList<QPushButton*> deleteButtons;
 
-    // Add this method to initialize the lists above
     void setupUIElementLists();
-
-    // Database and data management methods
-    bool openDatabase();
-    void closeDatabase();
+    bool openDatabase(); // We will re-add this method
+     void closeDatabase();
     void createGoalsTable();
     void loadGoals();
-<<<<<<< HEAD
-    void saveGoal(const GoalData &data); // GoalData is now known
-    void editGoal(int goalIndex);
     void saveGoal(const GoalData &data);
-
-=======
->>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
-
-    void saveGoal(const GoalData &data); // GoalData is now known
     void editGoal(int goalIndex);
-
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ac638c5cd4b76cc354a49994963b3d3752ee5baa
     void deleteGoal(int goalIndex);
     int findNextAvailableSlot();
     void updateGoalUI(int goalIndex, const GoalData &data);
@@ -129,9 +84,6 @@ private:
     QLabel* getMonthLabel(int index);
     QProgressBar* getProgressBar(int index);
     QStackedWidget* getStackedWidget(int index);
-
-
 };
 
 #endif // VISIONS_H
-

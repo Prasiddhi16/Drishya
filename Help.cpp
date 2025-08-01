@@ -128,7 +128,7 @@ void Help::openAnalytics() {
 }
 
 void Help::openvisions() {
-    Visions *vision_win = new Visions(currentUserName, currentUserEmail, currentUserId, this);
+    Visions *vision_win = new Visions(currentUserName, currentUserEmail, currentUserId,this);
     vision_win->show();
     this->hide();
 }
