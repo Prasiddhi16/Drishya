@@ -354,7 +354,7 @@ public:
         sizePolicy5.setHeightForWidth(logout->sizePolicy().hasHeightForWidth());
         logout->setSizePolicy(sizePolicy5);
         logout->setMinimumSize(QSize(90, 0));
-        logout->setStyleSheet(QString::fromUtf8("border:none;"));
+        logout->setStyleSheet(QString::fromUtf8("border:none; text-align: left;"));
 
         gridLayout->addWidget(logout, 0, 2, 1, 1);
 

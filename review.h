@@ -20,6 +20,8 @@ class review : public QMainWindow
 public:
     explicit review(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~review();
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private slots:
     void on_btnCompare_clicked();

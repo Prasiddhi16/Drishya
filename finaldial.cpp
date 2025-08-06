@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QMessageBox>
 #include <QDebug>
+#include <QCloseEvent>
 
 finaldial::finaldial(bool isMarried,
                      const QString &employment,
@@ -21,7 +22,6 @@ finaldial::finaldial(bool isMarried,
 {
     ui->setupUi(this);
 
-
     ui->Label->setStyleSheet(
         "QLabel {"
         "  font-size: 16px;"
@@ -35,7 +35,7 @@ finaldial::finaldial(bool isMarried,
         "}"
         );
 
-    calculateTax(); // Automatically calculates on open
+    calculateTax();
 }
 
 finaldial::~finaldial() {
@@ -54,7 +54,7 @@ void finaldial::calculateTax() {
     }
 
     QSqlQuery query(db);
-    query.prepare("SELECT income_amount FROM records WHERE user_id = :uid");
+    query.prepare("SELECT SUM(income_amount) FROM records WHERE user_id = :uid");
     query.bindValue(":uid", userId);
 
     if (query.exec() && query.next()) {
@@ -67,7 +67,6 @@ void finaldial::calculateTax() {
     }
 
     db.close();
-
 
     double taxRate;
     if (isMarried && employment == "Employed" && isResident)
@@ -84,20 +83,20 @@ void finaldial::calculateTax() {
         taxRate = 0.15;
     else if (isMarried && employment == "Self-employed" && !isResident)
         taxRate = 0.20;
-
-
-    qDebug() << "isMarried:" << isMarried;
-    qDebug() << "employment:" << employment;
-    qDebug() << "isResident:" << isResident;
+    else
+        taxRate = 0.0;
 
     double taxToPay = incomeAmount * taxRate;
-
     ui->Label->setText(QString("Taxable Amount: Rs. %1").arg(taxToPay, 0, 'f', 2));
 }
 
 void finaldial::on_pushButton_clicked() {
-    review *review_win = new review(currentUserName, currentUserEmail, userId, this);
-      this->close();
-    review_win->show();
+    this->close();
 
+}
+
+void finaldial::closeEvent(QCloseEvent *event) {
+    review *review_win = new review(currentUserName, currentUserEmail, userId, nullptr);
+    review_win->show();
+    event->accept();
 }

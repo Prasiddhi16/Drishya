@@ -2,9 +2,14 @@
 #define SECDIALOG_H
 
 #include <QDialog>
-#include<taxdialog.h>
+#include <taxdialog.h>
+
 class thirdDialog;
 class taxDialog;
+
+namespace Ui {
+class secDialog;
+}
 
 class secDialog : public QDialog
 {
@@ -21,11 +26,14 @@ public:
 private slots:
     void on_eyes_clicked();
     void on_eno_clicked();
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 
 private:
-    class Ui_secDialog *ui;
+    Ui::secDialog *ui;  // ✅ Corrected UI type
     thirdDialog *thirddialog;
-        taxDialog *TaxdialogInstance;
+    taxDialog *TaxdialogInstance;
     QString currentUserName;
     QString currentUserEmail;
     int currentUserId;

@@ -125,7 +125,7 @@ qDebug() << "analysisWindow initialized with userId:" << currentUserId;    // re
     QString color = percentChange > 0 ? "#ffbbbb" : percentChange < 0 ? "#cceecc" : "#f5f5f5";
 
     ui->percentage_label->setText(labelText);
-    ui->percentage_label->setStyleSheet(QString("background-color: %1; border-radius: 8px; padding: 4px;").arg(color));
+    ui->percentage_label->setStyleSheet(QString("background-color: %1; border-radius: 8px; padding: 4px; color: black;").arg(color));
 }
 
 analysisWindow::~analysisWindow()
@@ -164,6 +164,7 @@ void analysisWindow::on_pushButton_clicked()
     budget_window = new budgetWindow(currentUserEmail,currentUserId, this);
     connect(budget_window, &budgetWindow::windowClosed, this, &analysisWindow::show);
     budget_window->showMaximized();
+
 }
 
 void analysisWindow::on_pushButton_2_clicked()

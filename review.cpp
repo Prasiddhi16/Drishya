@@ -19,7 +19,7 @@
 #include "visions.h"
 #include "analysiswindow.h"
 #include "homewindow.h"
-#include"Help.h"
+#include "Help.h"
 #include "expert.h"
 #include "compare.h"
 #include "graph.h"
@@ -56,6 +56,7 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
         QMessageBox::critical(this, "Database Error", "Failed to open database.");
         return;
     }
+
     QDate currentDate = QDate::currentDate();
     int currentMonth = currentDate.month();
     int currentYear = currentDate.year();
@@ -70,8 +71,8 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
         qDebug() << "Query Error:" << query.lastError().text();
     } else {
         while (query.next()) {
-            double income = query.value(0).toDouble();  // First column: income_amount
-            double expense = query.value(1).toDouble(); // Second column: expense_amount
+            double income = query.value(0).toDouble();
+            double expense = query.value(1).toDouble();
             QDateTime dt = QDateTime::fromString(query.value(2).toString(), "yyyy-MM-dd hh:mm:ss");
             QDate recordDate = dt.date();
 
@@ -103,25 +104,17 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     ui->progressExpenseBar->setStyleSheet(progressStyle);
     ui->progressSavingsBar->setStyleSheet(progressStyle);
 
-    // Progress bars
     ui->progressExpenseBar->setMinimum(0);
     ui->progressExpenseBar->setMaximum(100);
     ui->progressExpenseBar->setValue(expensePercent);
 
-  //  ui->progressExpenseBar->setStyleSheet("QProgressBar::chunk { background-color: #e74c3c; }");
-
     ui->progressSavingsBar->setMinimum(0);
     ui->progressSavingsBar->setMaximum(100);
     ui->progressSavingsBar->setValue(savingsPercent);
-  //  ui->progressSavingsBar->setStyleSheet("QProgressBar::chunk { background-color: #27ae60; }");
 
     ui->labelSavings->setText(" 🏦 Savings this month: Rs. " + QString::number(monthlySavings,'f',2));
-
     ui->labelExpense->setText(" 💵 Expense this month: Rs. " + QString::number(monthlyExpense,'f',2));
 
-
-
-    // Navigation panel
     QFrame *navPanel = new QFrame;
     navPanel->setFixedWidth(170);
     navPanel->setStyleSheet("background-color: #ffffff;");
@@ -155,6 +148,7 @@ review::review(const QString &userName, const QString &userEmail, int userId, QW
     connect(buttons[2], &QPushButton::clicked, this, &review::openAnalytics);
     connect(buttons[3], &QPushButton::clicked, this, &review::openvisions);
     connect(buttons[5], &QPushButton::clicked, this, &review::openhelp);
+
     QWidget *mainContainer = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout(mainContainer);
     mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -169,26 +163,26 @@ review::~review()
     delete ui;
 }
 
+void review::closeEvent(QCloseEvent *event)
+{
+    home_window = new homeWindow(currentUserName, currentUserEmail, currentUserId, nullptr);
+    home_window->show();
+    event->accept();
+}
+
 void review::on_btnCompare_clicked()
 {
-    hide();
     Compare = new compare(currentUserEmail, currentUserId, this);
     connect(Compare, &compare::windowClosed, this, &review::showMaximized);
-
     this->hide();
     Compare->show();
-
-
 }
 
 void review::on_btnExper_clicked()
 {
-    hide();
     Expert = new expert(currentUserEmail, currentUserId, this);
     connect(Expert, &expert::windowClosed, this, &review::showMaximized);
-
     this->hide();
-
     Expert->show();
 }
 
@@ -201,7 +195,6 @@ void review::on_btnExpense_clicked()
 void review::on_btnTax_clicked()
 {
     Taxdialog = new taxDialog(currentUserEmail, currentUserId, this);
-
     Taxdialog->show();
 }
 
@@ -209,7 +202,7 @@ void review::openHome()
 {
     home_window = new homeWindow(currentUserName, currentUserEmail, currentUserId, this);
     home_window->show();
-    this->close();
+    this->hide();
 }
 
 void review::openRecordWindow()
@@ -235,31 +228,24 @@ void review::openAnalytics()
 
 void review::on_toolButton_clicked()
 {
-
-
-
-     profile *p = new profile(currentUserId, currentUserEmail, this);
+    profile *p = new profile(currentUserId, currentUserEmail, this);
     p->setWindowFlags(Qt::Popup);
     QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
     p->move(globalPos);
     p->show();
-
 }
 
 void review::openhelp()
 {
-    Help *help_win =new Help(currentUserName, currentUserEmail, currentUserId, this);
+    Help *help_win = new Help(currentUserName, currentUserEmail, currentUserId, this);
     help_win->show();
+    this->hide();
 }
 
 void review::on_pushButton_clicked()
 {
-    History=new historypage(currentUserName, currentUserEmail, currentUserId, this);
+    History = new historypage(currentUserName, currentUserEmail, currentUserId, this);
     connect(History, &historypage::windowClosed, this, &review::showMaximized);
-
     History->show();
     this->hide();
-
 }
-
-

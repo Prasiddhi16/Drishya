@@ -2,10 +2,11 @@
 #define HISTORYPAGE_H
 
 #include <QMainWindow>
-#include <QSqlQueryModel>
-#include <QTableView>
 #include <QDateEdit>
 #include <QPushButton>
+#include <QTableView>
+#include <QSqlQueryModel>
+#include <QCloseEvent>
 
 class historypage : public QMainWindow
 {
@@ -15,13 +16,15 @@ public:
     explicit historypage(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~historypage();
 
-private slots:
-    void loadFilteredData();
+signals:
+    void windowClosed();
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 
-signals:
-    void windowClosed();
+private slots:
+    void loadFilteredData();
+
 private:
     QString currentUserName;
     QString currentUserEmail;
@@ -30,8 +33,8 @@ private:
     QDateEdit *startDateEdit;
     QDateEdit *endDateEdit;
     QPushButton *viewHistoryButton;
-    QSqlQueryModel *model;
     QTableView *tableView;
+    QSqlQueryModel *model;
 };
 
 #endif // HISTORYPAGE_H

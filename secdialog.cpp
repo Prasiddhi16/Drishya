@@ -1,15 +1,19 @@
+#include <QCloseEvent>
+#include "taxDialog.h"
 #include "secdialog.h"
 #include "ui_secdialog.h"
 #include "thirddialog.h"
 #include "taxDialog.h"
 #include <QMessageBox>
+#include <QDebug>
+
 secDialog::secDialog(const QString &userEmail,
                      int userId,
                      bool isMarried,
                      const QString &employment,
                      QWidget *parent)
     : QDialog(parent),
-    ui(new Ui_secDialog),
+    ui(new Ui::secDialog),
     currentUserEmail(userEmail),
     currentUserId(userId),
     isMarried(isMarried),
@@ -25,39 +29,35 @@ secDialog::~secDialog()
 
 void secDialog::on_eyes_clicked()
 {
-    QString employment;
-if (ui->radioButton->isChecked())        employment = "Employed";
-else if (ui->radioButton_2->isChecked()) employment = "Self-employed";
-else if (ui->radioButton_3->isChecked()) employment = "Unemployed";
+    QString selectedEmployment;
+    if (ui->radioButton->isChecked())        selectedEmployment = "Employed";
+    else if (ui->radioButton_2->isChecked()) selectedEmployment = "Self-employed";
+    else if (ui->radioButton_3->isChecked()) selectedEmployment = "Unemployed";
 
- if (ui->radioButton->isChecked() || ui->radioButton_2->isChecked() || ui->radioButton_3->isChecked()) {
-        thirddialog = new thirdDialog(currentUserEmail,currentUserId,isMarried,employment, this);
-        thirddialog->show();
-        hide();
-
+    if (!selectedEmployment.isEmpty()) {
+        thirdDialog *dialog = new thirdDialog(currentUserEmail, currentUserId, isMarried, selectedEmployment, this);
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dialog, &QDialog::finished, this, &QWidget::show);
+        this->hide();
+        dialog->show();
     } else {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Selection Required");
-        msgBox.setText("Please select an option");
-      msgBox.setIcon(QMessageBox::Warning);
 
-        QPushButton *okButton = msgBox.addButton("Got it!", QMessageBox::AcceptRole);
-        msgBox.setDefaultButton(okButton);
-
-        msgBox.setStyleSheet(
-            "QLabel { min-width: 200px; font-size: 13px; color: #222; }"
-            "QPushButton { font-size: 12px; padding: 4px 10px; background-color: #f0ad4e; border-radius: 4px; }"
-            );
-        msgBox.exec();
-
+        QMessageBox::information(this, "Information", "Please select an option.");
+        qDebug() << "User prompted to select an employment option.";
     }
 }
 
 void secDialog::on_eno_clicked()
 {
-    TaxdialogInstance = new taxDialog(currentUserEmail, currentUserId, this);
-    TaxdialogInstance->show();
-    hide();
+    taxDialog *dialog = new taxDialog(currentUserEmail, currentUserId, this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dialog, &QDialog::finished, this, &QWidget::show);
+    this->hide();
+    dialog->show();
 }
-
-
+void secDialog::closeEvent(QCloseEvent *event)
+{
+    taxDialog *dialog = new taxDialog(currentUserEmail, currentUserId, nullptr);
+    dialog->show();
+    event->accept();
+}
