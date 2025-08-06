@@ -80,25 +80,35 @@ void Insertt::on_Save_clicked()
         QMessageBox::warning(this, "Input Error", "Current balance cannot be greater than or equal to target amount.");
         return;
     }
+    QString newGoalNameLower = name.toLower();
+    for (const GoalData& existingGoal : existingGoalList) {
+        // Skip empty slots AND the current goal being edited
+        if (existingGoal.isEmpty() || existingGoal.id == currentGoalData.id) {
+            continue;
+        }
+        if (existingGoal.name.toLower() == newGoalNameLower) {
+            QMessageBox::warning(this, "Duplicate Goal Name",
+                                 "A goal with this name already exists. Please choose a different name.");
+            return;
+        }
+    }
 
     // 2. Create GoalData object to emit
-    // Crucially, we use the ID from currentGoalData.
-    // If currentGoalData was empty (new goal), its ID is empty, and Visions will generate a new UUID.
-    // If currentGoalData had an ID (editing existing goal), that ID is preserved.
     GoalData dataToEmit;
     dataToEmit.id = currentGoalData.id; // Preserve existing ID for edits
     dataToEmit.name = name;
     dataToEmit.incomeRequired = incomeRequired;
     dataToEmit.downpayment = downpayment;
     dataToEmit.duration = duration;
-    // slotIndex is managed by Visions, not set here
 
     // 3. Emit the signal and close the dialog
     emit goalSet(dataToEmit);
     QMessageBox::information(this, "Goal Set", "Your goal data has been saved.");
     accept(); // Close the dialog
 }
-
+void Insertt::setExistingGoals(const QList<GoalData>& goals) {
+    existingGoalList = goals;
+}
 
 void Insertt::on_cancel_clicked()
 {

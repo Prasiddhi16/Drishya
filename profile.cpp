@@ -136,14 +136,10 @@ void profile::loadUserData()
     query.bindValue(":userId", m_userId);
 
     if (query.exec() && query.next()) {
-        // Assuming you have QLabel widgets named label_username_about, label_email_about, label_dob_about
-        // on your "About You" page to display these values
         ui->hello->setText("Hello, " + (query.value("name").toString()) + "!");
         ui->aboutuser->setText(query.value("name").toString());
         ui->emailuser->setText(query.value("email").toString());
         ui->dobuser->setText(query.value("dob").toString());
-
-        // Assuming ui->user is a QLineEdit for editing the username on the "Edit Your Profile" page.
         ui->user->setText(query.value("name").toString());
     } else {
         qDebug() << "Failed to load user data:" << query.lastError().text();
@@ -171,7 +167,7 @@ void profile::on_saveChanges_clicked()
 
     bool changesMade = false;
 
-    // --- Username Change ---
+    //Username Change
     // Fetch current username to check if it's different
     QSqlQuery currentNameQuery(m_db);
     currentNameQuery.prepare("SELECT name FROM user WHERE id = :userId");
@@ -207,7 +203,7 @@ void profile::on_saveChanges_clicked()
         }
     }
 
-    // --- Password Change ---
+    //Password Change
     if (!currentPassword.isEmpty() || !newPassword.isEmpty() || !confirmPassword.isEmpty()) {
         if (currentPassword.isEmpty()) {
             QMessageBox::warning(this, "Missing Input", "Please enter your current password to change it.");

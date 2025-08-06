@@ -27,7 +27,6 @@ class Visions : public QMainWindow
     Q_OBJECT
 
 public:
-    // This is the original constructor. No database parameter.
     explicit Visions(const QString &userName, const QString &userEmail, int userId, QWidget *parent = nullptr);
     ~Visions();
 
@@ -47,7 +46,7 @@ private:
     Ui::Visions *ui;
     QVector<GoalData> goalDataList;
 
-    QSqlDatabase db; // <-- This is now a member variable
+    QSqlDatabase db;
 
     QString currentUserName;
     QString currentUserEmail;
@@ -67,7 +66,7 @@ private:
     QList<QPushButton*> deleteButtons;
 
     void setupUIElementLists();
-    bool openDatabase(); // We will re-add this method
+    bool openDatabase();
      void closeDatabase();
     void createGoalsTable();
     void loadGoals();

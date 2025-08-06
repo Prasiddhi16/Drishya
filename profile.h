@@ -24,7 +24,6 @@ public:
 
 private slots:
     void on_saveChanges_clicked();
-
     void on_revbutton_clicked();
     void on_logout_clicked();
 

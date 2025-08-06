@@ -52,7 +52,7 @@ Visions::Visions(const QString &userName, const QString &userEmail, int userId, 
     QWidget *central = new QWidget(this);
     QHBoxLayout *mainLayout = new QHBoxLayout(central);
 
-    // --- Navigation Panel ---
+    // Navigation Panel
     QFrame *navPanel = new QFrame;
     navPanel->setFixedWidth(170);
     navPanel->setStyleSheet("background-color: #ffffff;");
@@ -168,7 +168,7 @@ void Visions::setupUIElementLists() {
                   << ui->delete_4 << ui->delete_5 << ui->delete_6;
 }
 
-// --- Database Management ---
+// Database Management
 bool Visions::openDatabase() {
     QString dbPath = QDir(QCoreApplication::applicationDirPath()).absoluteFilePath("../centralized.db");
     db.setDatabaseName(dbPath);
@@ -206,7 +206,7 @@ void Visions::createGoalsTable() {
     }
 }
 
-// --- Goal Data Handling ---
+//Goal Data Handling
 void Visions::loadGoals() {
     qDebug() << "Entering loadGoals()...";
 
@@ -224,7 +224,7 @@ void Visions::loadGoals() {
         return;
     }
 
-    // Now, populate the goalDataList with the results
+    // populate the goalDataList with the results
     int currentSlot = 0;
     while (query.next() && currentSlot < MAX_GOAL_SLOTS) {
         GoalData data;
@@ -253,7 +253,7 @@ void Visions::saveGoal(const GoalData &data) {
         return;
     }
 
-    // STEP 1: Attempt to UPDATE the existing record first
+    //Attempt to UPDATE the existing record first
     QSqlQuery updateQuery(db);
     updateQuery.prepare("UPDATE goals SET "
                         "goal_name = :goal_name, "
@@ -282,7 +282,7 @@ void Visions::saveGoal(const GoalData &data) {
         return;
     }
 
-    // STEP 2: If no rows were affected by the update, it must be a new goal. So, INSERT it.
+    // If no rows were affected by the update, it must be a new goal. So, INSERT it.
     QSqlQuery insertQuery(db);
     insertQuery.prepare("INSERT INTO goals "
                         "(goal_id, user_id, goal_name, required_amount, downpayment, time_limit) "
@@ -340,7 +340,7 @@ void Visions::deleteGoal(int goalIndex) {
 
     qDebug() << "--- Deleting Goal from Slot:" << goalIndex << "---";
 
-    // --- Delete from database ---
+    // Delete from database
     QSqlQuery deleteQuery(db);
     deleteQuery.prepare("DELETE FROM goals WHERE goal_id = :id AND user_id = :userId");
     deleteQuery.bindValue(":id", goalIdToDelete);
@@ -364,7 +364,7 @@ void Visions::deleteGoal(int goalIndex) {
 }
 
 
-// --- UI Slot Handlers --
+// UI Slot Handlers
 void Visions::onAddButtonClicked() {
     QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
     if (!clickedButton) {
@@ -405,34 +405,27 @@ void Visions::onAddButtonClicked() {
         specificGoalName = "New Goal " + QString::number(identifiedSlotIndex_0_based + 1); // Generic fallback name
     }
 
-    // Now, check if the determined slot is already occupied
+    // check if the determined slot is already occupied
     if (identifiedSlotIndex_0_based != -1 && !goalDataList[identifiedSlotIndex_0_based].isEmpty()) {
         QMessageBox::information(this, "Slot Taken", "This goal slot is already taken. Please use 'Edit' or 'Delete' if you wish to change this goal.");
         return;
     }
-
-    // If we've reached here, either a specific slot was identified and is empty,
-    // or a generic empty slot was found.
     if (identifiedSlotIndex_0_based == -1) {
-        // This case should ideally not be reached if findNextAvailableSlot() works correctly
         QMessageBox::information(this, "Limit Reached", "Could not find an empty goal slot.");
         return;
     }
 
 
     Insertt *dialog = new Insertt(this);
+    dialog->setExistingGoals(goalDataList);
 
     // Create a GoalData object to pass.
-    // Set its 'name' field with the specificGoalName.
-    // Keep other fields at their default (empty) values for a new goal.
     GoalData newGoalDefaults; // Declaration of GoalData object
     newGoalDefaults.name = specificGoalName;
-    // The 'id' will still be empty, so Visions::onGoalSet will generate a UUID.
-    // 'incomeRequired', 'downpayment', 'duration' will be 0/empty.
+
 
     dialog->setGoalData(newGoalDefaults); // Pass the GoalData with the pre-set name
-
-    // Connect the dialog's signal to your handler in Visions
+    // Connect the dialog's signal to handler in Visions
     // Pass the 1-based slot index to onGoalSet
     connect(dialog, &Insertt::goalSet, this, [this, slotIndex_1_based = identifiedSlotIndex_0_based + 1](const GoalData &data){
         onGoalSet(slotIndex_1_based, data);
@@ -456,6 +449,7 @@ void Visions::editGoal(int goalIndex) {
     }
 
     Insertt *dialog = new Insertt(this);
+    dialog->setExistingGoals(goalDataList);
     dialog->setGoalData(currentData); // Pass existing data to the dialog for editing
 
     connect(dialog, &Insertt::goalSet, this, [this, goalIndex](const GoalData &newData){
@@ -654,12 +648,11 @@ QStackedWidget* Visions::getStackedWidget(int index) {
 }
 
 
-// --- Navigation methods ---
+//Navigation methods
 void Visions::on_toolButton_clicked()
 {
     // Use the member variables already available in Visions for the current user's ID and Email
     profile *p = new profile(currentUserId, currentUserEmail, this);
-
     p->setWindowFlags(Qt::Popup);
     QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
     p->move(globalPos);

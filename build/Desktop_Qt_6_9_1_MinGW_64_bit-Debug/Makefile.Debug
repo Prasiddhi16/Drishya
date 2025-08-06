@@ -544,7 +544,42 @@ debug/moc_analysiswindow.cpp: ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../profile.h \
@@ -589,7 +624,6 @@ debug/moc_analysiswindow.cpp: ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qchronotimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qproperty.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcollator.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineoption.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineparser.h \
@@ -673,7 +707,6 @@ debug/moc_analysiswindow.cpp: ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qurlquery.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvarianthash.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QHash \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantlist.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantmap.h \
@@ -702,10 +735,8 @@ debug/moc_analysiswindow.cpp: ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstyle.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlistview.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqltablemodel.h \
@@ -717,8 +748,6 @@ debug/moc_analysiswindow.cpp: ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\analysiswindow.h -o debug\moc_analysiswindow.cpp
@@ -932,6 +961,8 @@ debug/moc_budgetwindow.cpp: ../../budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\budgetwindow.h -o debug\moc_budgetwindow.cpp
@@ -2316,6 +2347,41 @@ debug/moc_revwindow.cpp: ../../revwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
 	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/ushma/OneDrive/Desktop/Drishya/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/ushma/OneDrive/Desktop/Drishya -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtCharts -IC:/Qt/6.9.1/mingw_64/include/QtOpenGLWidgets -IC:/Qt/6.9.1/mingw_64/include/QtWidgets -IC:/Qt/6.9.1/mingw_64/include/QtOpenGL -IC:/Qt/6.9.1/mingw_64/include/QtGui -IC:/Qt/6.9.1/mingw_64/include/QtSql -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\revwindow.h -o debug\moc_revwindow.cpp
@@ -6783,7 +6849,42 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../profile.h \
@@ -6828,7 +6929,6 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qchronotimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qproperty.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcollator.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineoption.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineparser.h \
@@ -6912,7 +7012,6 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qurlquery.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvarianthash.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QHash \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantlist.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantmap.h \
@@ -6941,10 +7040,8 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qstyle.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qtabbar.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qrubberband.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlistview.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqltablemodel.h \
@@ -6956,8 +7053,6 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextdocument.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		ui_analysiswindow.h \
 		../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QLabel \
@@ -6988,9 +7083,7 @@ debug/analysiswindow.o: ../../analysiswindow.cpp ../../analysiswindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QSizePolicy \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDate \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
@@ -7206,6 +7299,8 @@ debug/budgetwindow.o: ../../budgetwindow.cpp ../../budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		ui_budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquery.h \
@@ -7458,7 +7553,41 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquerymodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qabstractitemmodel.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../profile.h \
@@ -7503,7 +7632,6 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qchronotimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qproperty.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qpropertyprivate.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcollator.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineoption.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qcommandlineparser.h \
@@ -7587,7 +7715,6 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qurlquery.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvarianthash.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QHash \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QString \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantlist.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qvariantmap.h \
@@ -7618,7 +7745,6 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qrubberband.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlistview.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractitemview.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qcombobox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlrelationaltablemodel.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqltablemodel.h \
@@ -7629,8 +7755,6 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qlineedit.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextcursor.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextformat.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qtextoption.h \
 		../../RecordWindow.h \
 		../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVector \
@@ -7656,40 +7780,12 @@ debug/homewindow.o: ../../homewindow.cpp ../../homewindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QSizePolicy \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDebug \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QPainter \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QSettings \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/QBarSet \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/qbarset.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/QBarSeries \
@@ -9752,24 +9848,22 @@ debug/revwindow.o: ../../revwindow.cpp ../../revwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsql-config.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qtsqlexports.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qmetaobject.h \
-		ui_revwindow.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QPieSeries \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qpieseries.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpen.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QPieSlice \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qpieslice.h \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
@@ -9779,9 +9873,8 @@ debug/revwindow.o: ../../revwindow.cpp ../../revwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
-		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
@@ -9790,6 +9883,11 @@ debug/revwindow.o: ../../revwindow.cpp ../../revwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qframe.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		ui_revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QPieSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qpieseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QPieSlice \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qpieslice.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/qsqlquery.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
@@ -11338,7 +11436,36 @@ debug/RecordWindow.o: ../../RecordWindow.cpp ../../RecordWindow.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../Help.h \
@@ -13711,7 +13838,36 @@ debug/Help.o: ../../Help.cpp ../../Help.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QPushButton \
@@ -13724,7 +13880,6 @@ debug/Help.o: ../../Help.cpp ../../Help.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgridlayout.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QHBoxLayout \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QWidget \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QSizePolicy \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlError \
@@ -15024,7 +15179,35 @@ debug/review.o: ../../review.cpp ../../review.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/qpicture.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../homewindow.h \
@@ -16048,7 +16231,36 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		../../analysiswindow.h \
 		../../budgetwindow.h \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQueryModel \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		../../revwindow.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartView \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractAxis \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractaxis.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChartGlobal \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchartglobal.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtcharts-config.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qtchartsexports.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QPen \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QAbstractSeries \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qabstractseries.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QChart \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qchart.h \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/QLegend \
+		C:/Qt/6.9.1/mingw_64/include/QtCharts/qlegend.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsWidget \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainterpath.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/QBrush \
+		C:/Qt/6.9.1/mingw_64/include/QtCore/QMargins \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGraphicsView \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsview.h \
+		C:/Qt/6.9.1/mingw_64/include/QtGui/qpainter.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
+		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../weeklywindow.h \
 		../../monthlywindow.h \
 		../../RecordWindow.h \
@@ -16069,7 +16281,6 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qpushbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qabstractbutton.h \
 		C:/Qt/6.9.1/mingw_64/include/QtGui/QPixmap \
-		C:/Qt/6.9.1/mingw_64/include/QtGui/QFont \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QSizePolicy \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDebug \
 		C:/Qt/6.9.1/mingw_64/include/QtSql/QSqlQuery \
@@ -16077,7 +16288,6 @@ debug/visions.o: ../../visions.cpp ../../visions.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QGroupBox \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qgroupbox.h \
 		C:/Qt/6.9.1/mingw_64/include/QtWidgets/QScrollArea \
-		C:/Qt/6.9.1/mingw_64/include/QtWidgets/qscrollarea.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QDir \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QCoreApplication \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QSettings
