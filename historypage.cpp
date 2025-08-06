@@ -36,7 +36,6 @@ historypage::historypage(const QString &userName, const QString &userEmail, int 
         }
     }
 
-
     startDateEdit = new QDateEdit(QDate::currentDate().addMonths(-1));
     startDateEdit->setDisplayFormat("yyyy/MM/dd");
     startDateEdit->setStyleSheet("color:white");
@@ -89,17 +88,24 @@ historypage::~historypage() {}
 
 void historypage::loadFilteredData()
 {
-    if (startDateEdit->date() > endDateEdit->date()) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Warning");
-        msgBox.setText("Start date cant be later than  end date!");
-        msgBox.setStyleSheet(
-            "QMessageBox { background-color: #2C3E50; color: white; }"
-            "QLabel { color: white; }"
-            "QPushButton { background-color: #ADD8E6; color: black; border-radius: 5px; padding: 6px 12px; }"
-            );
-        msgBox.exec();
+    if (!startDateEdit || !endDateEdit) {
+        qDebug() << "Date edits not initialized!";
         return;
+    }
+
+    if (startDateEdit->date() > endDateEdit->date()) {
+        QMessageBox *msgBox = new QMessageBox(this);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setWindowTitle("No Records");
+        msgBox->setText("Start date cant be later than the end date.");
+        msgBox->setStyleSheet(
+            "QLabel { color: white; }"
+            "QMessageBox { background-color: #2C3E50; }"
+            "QPushButton { color: black; background-color: #ADD8E6; border-radius: 5px; padding: 6px 12px; }"
+            );
+        msgBox->exec();
+        return;
+
     }
 
     QString startDate = startDateEdit->date().toString("yyyy-MM-dd");
@@ -117,7 +123,7 @@ void historypage::loadFilteredData()
         return;
     }
 
-    model->setQuery(std::move(query));
+    model->setQuery(query); // ✅ No std::move
 
     // Hide unwanted columns
     int idColumn = model->record().indexOf("id");
@@ -140,18 +146,20 @@ void historypage::loadFilteredData()
     model->setHeaderData(10, Qt::Horizontal, "Time");
 
     if (model->rowCount() == 0) {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("No Records");
-        msgBox.setText("No history found for the selected date range.");
-        msgBox.setStyleSheet(
-            "QMessageBox { background-color: #2C3E50; color: white; }"
+        QMessageBox *msgBox = new QMessageBox(this);
+        msgBox->setIcon(QMessageBox::Information);
+        msgBox->setWindowTitle("No Records");
+        msgBox->setText("No history found for the selected date range.");
+        msgBox->setStyleSheet(
             "QLabel { color: white; }"
-            "QPushButton { background-color: #ADD8E6; color: black; border-radius: 5px; padding: 6px 12px; }"
+            "QMessageBox { background-color: #2C3E50; }"
+            "QPushButton { color: black; background-color: #ADD8E6; border-radius: 5px; padding: 6px 12px; }"
             );
-        msgBox.exec();
+        msgBox->exec();
 
     }
 }
+
 void historypage::closeEvent(QCloseEvent *event)
 {
     emit windowClosed();

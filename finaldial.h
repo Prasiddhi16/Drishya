@@ -2,6 +2,7 @@
 #define FINALDIAL_H
 
 #include <QDialog>
+#include <QCloseEvent>
 
 namespace Ui {
 class finaldial;
@@ -18,6 +19,9 @@ public:
                        QWidget *parent = nullptr);
     ~finaldial();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
     void calculateTax();
     void on_pushButton_clicked();
@@ -30,7 +34,6 @@ private:
     int userId;
     QString currentUserName;
     QString currentUserEmail;
-
 };
 
 #endif // FINALDIAL_H

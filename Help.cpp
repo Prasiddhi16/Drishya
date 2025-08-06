@@ -5,7 +5,7 @@
 #include "review.h"
 #include "homewindow.h"
 #include "analysiswindow.h"
-
+#include<QPixmap>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -102,6 +102,11 @@ Help::Help(QString username, QString email, int userId, QWidget *parent)
     mainLayout->addWidget(originalCentral, 4);
 
     setCentralWidget(mainWidget);
+
+    QPixmap pix(":/img/img/profileicon.png");
+    ui->toolButton->setIcon(QIcon(pix));
+    ui->toolButton->setIconSize(ui->toolButton->size());
+
 }
 
 Help::~Help() {
@@ -138,3 +143,18 @@ void Help::openreview() {
     review_win->show();
     this->hide();
 }
+void Help::on_toolButton_clicked()
+{
+
+    int userId = 0;
+    QString userEmail = "";
+
+
+    profile *p = new profile(currentUserId, currentUserEmail, this);
+    p->setWindowFlags(Qt::Popup);
+    QPoint globalPos = ui->toolButton->mapToGlobal(QPoint(0,ui->toolButton->height()));
+    p->move(globalPos);
+    p->show();
+    qDebug() << "[PageX] QSettings - userId:" << userId << ", userEmail:" << userEmail;
+}
+

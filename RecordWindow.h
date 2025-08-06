@@ -28,8 +28,6 @@ private slots:
     void on_toolButton_clicked();
     void openHome();
      void openAnalytics();
-
-
     void openhelp();
 
     void openvisions();

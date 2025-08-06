@@ -24,6 +24,7 @@ private slots:
     void openreview();
     void openvisions();
     void openRecordWindow();
+    void on_toolButton_clicked();
 
 private:
     Ui::Help *ui;

@@ -56,9 +56,7 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
         return;
     }
 
-    // Map week-of-month -> total expense
     QMap<int, double> weeklyTotals;
-
     QDate monthStart = QDate::fromString(currentMonth + "-01", "yyyy-MM-dd");
 
     while (query.next()) {
@@ -76,37 +74,44 @@ weeklyWindow::weeklyWindow(const QString &userEmail, int userId, QWidget *parent
     QStringList weekLabels;
     qreal maxExpense = 0.0;
 
-    for (int week = 1; week <= weeklyTotals.lastKey(); ++week) {
-        double total = weeklyTotals.value(week, 0.0);
-        maxExpense = qMax(maxExpense, total);
+    if (!weeklyTotals.isEmpty()) {
+        for (int week = 1; week <= weeklyTotals.lastKey(); ++week) {
+            double total = weeklyTotals.value(week, 0.0);
+            maxExpense = qMax(maxExpense, total);
 
-        QString label = QString("Week %1").arg(week);
-        weekLabels << label;
-        barSet->append(total);
+            QString label = QString("Week %1").arg(week);
+            weekLabels << label;
+            barSet->append(total);
+        }
+
+        barSet->setColor(Qt::blue);
+        series->append(barSet);
     }
 
-    barSet->setColor(Qt::blue);
-    series->append(barSet);
-
     QChart *chart = new QChart();
-    chart->addSeries(series);
     chart->setTitle(QString("Weekly Expense – %1").arg(QDate::currentDate().toString("MMMM yyyy")));
     chart->setAnimationOptions(QChart::SeriesAnimations);
 
-    QBarCategoryAxis *axisX = new QBarCategoryAxis();
-    axisX->append(weekLabels);
-    chart->addAxis(axisX, Qt::AlignBottom);
-    series->attachAxis(axisX);
+    if (!weeklyTotals.isEmpty()) {
+        chart->addSeries(series);
 
-    QValueAxis *axisY = new QValueAxis();
-    axisY->setLabelFormat("Rs. %d");
-    axisY->setTitleText("Total Expense");
-    axisY->setRange(0, maxExpense + 10000);
-    chart->addAxis(axisY, Qt::AlignLeft);
-    series->attachAxis(axisY);
+        QBarCategoryAxis *axisX = new QBarCategoryAxis();
+        axisX->append(weekLabels);
+        chart->addAxis(axisX, Qt::AlignBottom);
+        series->attachAxis(axisX);
 
-    chart->legend()->setVisible(true);
-    chart->legend()->setAlignment(Qt::AlignBottom);
+        QValueAxis *axisY = new QValueAxis();
+        axisY->setLabelFormat("Rs. %d");
+        axisY->setTitleText("Total Expense");
+        axisY->setRange(0, maxExpense + 10000);
+        chart->addAxis(axisY, Qt::AlignLeft);
+        series->attachAxis(axisY);
+
+        chart->legend()->setVisible(true);
+        chart->legend()->setAlignment(Qt::AlignBottom);
+    } else {
+        chart->setTitle("No data available for this month.");
+    }
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);

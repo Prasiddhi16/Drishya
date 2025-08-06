@@ -367,7 +367,7 @@ public:
         label_16->setText(QCoreApplication::translate("RecordWindow", "Review  :", nullptr));
         review->setText(QString());
         label_12->setText(QCoreApplication::translate("RecordWindow", "Timestamp", nullptr));
-        addRecordButton->setText(QCoreApplication::translate("RecordWindow", "Add record", nullptr));
+        addRecordButton->setText(QCoreApplication::translate("RecordWindow", "Add Record", nullptr));
         label_2->setText(QCoreApplication::translate("RecordWindow", "FINANCE RECORD", nullptr));
         label->setText(QString());
         toolButton->setText(QCoreApplication::translate("RecordWindow", "...", nullptr));

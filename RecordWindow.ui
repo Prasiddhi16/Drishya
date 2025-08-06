@@ -579,7 +579,7 @@ color: red;
     font-family: &quot;Consolas&quot;;</string>
      </property>
      <property name="text">
-      <string>Add record</string>
+      <string>Add Record</string>
      </property>
     </widget>
    </widget>

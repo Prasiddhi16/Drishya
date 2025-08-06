@@ -156,6 +156,10 @@ void RecordWindow::addRecord()
     QString expenseAmountStr = ui->expenseAmount->text().trimmed();
     QString expenseCategory = ui->expenseCategory->currentText().trimmed();
     QString expenseCurrency = ui->expenseCurrency->currentText().trimmed();
+    if (incomeAmountStr.isEmpty() && expenseAmountStr.isEmpty()) {
+        QMessageBox::warning(this, "Missing Data", "Please fill up either the Income or the Expenses section.");
+        return;
+    }
 
     QString reference = ui->referenceNumber->text().trimmed();
     QString review = ui->review->text().trimmed();
